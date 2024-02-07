@@ -114,6 +114,6 @@ public class Player {
 	
 	// Drawing Batch
 	public void draw(SpriteBatch batch) {
-		batch.draw(entityTexture, xCoords, yCoords, entityHeight, entityWidth);
+		batch.draw(entityTexture, xCoords, yCoords,entityWidth, entityHeight);
 	}
 }
