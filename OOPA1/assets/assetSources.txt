@@ -1,0 +1,41 @@
+# To be used later for references to trace back image/audio sources
+
+
+"Textures"
+==============
+[Player Entities]
+
+# Pac-Man (50x50)
+
+// https://www.pngwing.com/en/free-png-zvovz
+
+
+[Non-player Entities]
+
+# Red Ghost (50x50)
+
+// https://www.pngwing.com/en/free-png-bidrp
+
+# Blue Ghost (50x50)
+
+// https://www.pngwing.com/en/free-png-zvoql
+
+# Yellow Ghost (50x50)
+
+// https://www.pngwing.com/en/free-png-bybal
+
+# Green Ghost (50x50)
+
+// https://www.pngwing.com/en/free-png-igcvk
+
+# Yellow Pellet / Power Up Pellet (Different Scaling - Normal: 15x15; Power: 20x20)
+
+// https://www.pngwing.com/en/free-png-bqvgc
+
+
+"Audio"
+=============
+
+# Power-up Siren SFX
+
+// https://www.youtube.com/watch?v=XgTaPJRa4PE
