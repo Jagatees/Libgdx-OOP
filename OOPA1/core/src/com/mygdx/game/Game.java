@@ -12,15 +12,11 @@ public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 
-	AudioManager audioManager = new AudioManager();
-
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		audioManager.loadSoundEffect(JUMP, "SoundEffect/mouseClick.mp3");
-		audioManager.play(JUMP);
 	}
 
 	@Override

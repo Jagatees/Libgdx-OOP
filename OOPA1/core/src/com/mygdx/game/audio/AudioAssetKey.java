@@ -1,6 +1,6 @@
 package com.mygdx.game.audio;
 
 public enum AudioAssetKey {
-    JUMP,
+    MOUSE_CLICK,
     BACKGROUND_MUSIC,
 }

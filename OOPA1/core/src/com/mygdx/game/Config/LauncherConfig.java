@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.Config;
 
 public class LauncherConfig {
     private int SCREEN_WIDTH, SCREEN_HEIGHT;
