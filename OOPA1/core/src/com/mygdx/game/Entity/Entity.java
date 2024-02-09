@@ -4,38 +4,38 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Entity implements objectMovement {
 
-    protected float xCoords;
-    protected float yCoords;
-    protected float speed;
-    protected String state;
+    protected float xCords, yCords, speed;
+    protected EntityState state; // Assuming an enum is used for state management
     protected boolean isAI;
 
-    Entity(float xCoords, float yCoords, float speed, String state, boolean isAI) {
+    Entity(float xCords, float yCords, float speed, EntityState state, boolean isAI) {
+        setxCords(xCords);
+        setyCords(yCords);
+        setSpeed(speed);
+        setState(state);
+        setisAI(isAI);
+    }
 
-        this.xCoords = xCoords;
-        this.yCoords = yCoords;
-        this.speed = speed;
-        this.state = state;
-        this.isAI = isAI;
-
+    public enum EntityState {
+        CHASE, PRESENT
     }
 
     // Getter & Setters for (x,y) coordinates
 
-    public float getxCoords() {
-        return xCoords;
+    public float getxCords() {
+        return xCords;
     }
 
-    void setxCoords(float x) {
-        xCoords = x;
+    void setxCords(float x) {
+        xCords = x;
     }
 
-    public float getyCoords() {
-        return yCoords;
+    public float getyCords() {
+        return yCords;
     }
 
-    void setyCoords(float y) {
-        yCoords = y;
+    void setyCords(float y) {
+        yCords = y;
     }
 
     // Getter & Setters for Speed
@@ -50,12 +50,12 @@ public abstract class Entity implements objectMovement {
 
     // Getter & Setters for State
 
-    public String getState() {
+    public EntityState getState() {
         return state;
     }
 
-    void setState(String newState) {
-        state = newState;
+    public void setState(EntityState state) {
+        this.state = state;
     }
 
     // Getter & Setters for isAI
@@ -87,5 +87,6 @@ public abstract class Entity implements objectMovement {
             userControlledMovement();
         }
     }
+
 
 }

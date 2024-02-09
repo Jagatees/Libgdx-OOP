@@ -12,8 +12,8 @@ public class nonPlayer extends Entity {
     private boolean isWall;
 
 
-    public nonPlayer(String nonPlayerAsset, float xCoords, float yCoords, float speed, String state, boolean isAI, boolean isWall) {
-        super(xCoords, yCoords, speed, state, isAI);
+    public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed, EntityState state, boolean isAI, boolean isWall) {
+        super(xCords, yCords, speed, state, isAI);
         this.entityTexture = new Texture(Gdx.files.internal(nonPlayerAsset));
         this.entityHeight = entityTexture.getHeight();
         this.entityWidth = entityTexture.getWidth();
@@ -53,7 +53,7 @@ public class nonPlayer extends Entity {
     // Drawing Batch
     public void draw(SpriteBatch batch) {
         // batch.draw(entityTexture, xCoords, yCoords, entityWidth / 2, entityHeight / 2, entityWidth, entityHeight, scale, scale, 0, 0, 0, entityTexture.getWidth(), entityTexture.getHeight(), false, false);
-        batch.draw(entityTexture, xCoords, yCoords, entityHeight, entityWidth);
+        batch.draw(entityTexture, xCords, yCords, entityHeight, entityWidth);
     }
 
     public void movement() {

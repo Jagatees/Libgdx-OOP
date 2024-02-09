@@ -12,8 +12,8 @@ public class Player extends Entity {
     private int score;
     private int numLives;
 
-    public Player(String playerAsset, float xCoords, float yCoords, float speed, String state, boolean isAI, int score, int numLives) {
-        super(xCoords, yCoords, speed, state, isAI);
+    public Player(String playerAsset, float xCords, float yCords, float speed, EntityState state, boolean isAI, int score, int numLives) {
+        super(xCords, yCords, speed, state, isAI);
         this.entityTexture = new Texture(Gdx.files.internal(playerAsset));
         this.entityHeight = entityTexture.getHeight();
         this.entityWidth = entityTexture.getWidth();
@@ -74,7 +74,7 @@ public class Player extends Entity {
 
     // Drawing Batch
     public void draw(SpriteBatch batch) {
-        batch.draw(entityTexture, xCoords, yCoords, entityHeight, entityWidth);
+        batch.draw(entityTexture, xCords, yCords, entityHeight, entityWidth);
     }
 
     public void movement() {
