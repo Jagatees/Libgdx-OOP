@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Entity.Entity;
+import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.nonPlayer;
 import com.mygdx.game.audio.AudioManager;
@@ -27,6 +28,10 @@ public class Game extends ApplicationAdapter {
 	float yMin = 2.0f;
 	float yMax = 400.0f;
 
+	// Entity Manger
+	EntityManager entityManager = new EntityManager();
+
+
 
 
 	@Override
@@ -45,23 +50,25 @@ public class Game extends ApplicationAdapter {
 
 		normalPellet = new nonPlayer("assets/entity/normalPellet.png", 400, 100, 0, Entity.EntityState.PRESENT, false, false);
 		powerPellet = new nonPlayer("assets/entity/powerPellet.png", 430, 100, 0, Entity.EntityState.PRESENT, false, false);
+
+		entityManager.addEntity(pacman);
+		entityManager.addEntity(redGhost);
+		entityManager.addEntity(blueGhost);
+		entityManager.addEntity(yellowGhost);
+		entityManager.addEntity(greenGhost);
+		entityManager.addEntity(normalPellet);
+		entityManager.addEntity(powerPellet);
+
+
 	}
+
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 1);
-
-		// Render //
 		batch.begin();
 
-		pacman.draw(batch);
-		redGhost.draw(batch);
-		blueGhost.draw(batch);
-		yellowGhost.draw(batch);
-		greenGhost.draw(batch);
-		normalPellet.draw(batch);
-		powerPellet.draw(batch);
-
+		entityManager.render(batch);
 
 		batch.end();
 

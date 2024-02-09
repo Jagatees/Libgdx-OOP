@@ -22,6 +22,18 @@ public class Player extends Entity {
         this.numLives = numLives;
     }
 
+    @Override
+    public void render(SpriteBatch batch) {
+        super.render(batch);
+        batch.draw(entityTexture, xCords, yCords, entityHeight, entityWidth);
+    }
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+    }
+
+
+
     // Getter & Setters for Players
 
     public Texture getTexture() {
@@ -70,11 +82,6 @@ public class Player extends Entity {
 
     void setLives(int newLifeCount) {
         numLives = newLifeCount;
-    }
-
-    // Drawing Batch
-    public void draw(SpriteBatch batch) {
-        batch.draw(entityTexture, xCords, yCords, entityHeight, entityWidth);
     }
 
     public void movement() {

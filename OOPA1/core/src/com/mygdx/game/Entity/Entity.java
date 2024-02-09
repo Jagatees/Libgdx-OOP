@@ -8,6 +8,10 @@ public abstract class Entity implements objectMovement {
     protected EntityState state; // Assuming an enum is used for state management
     protected boolean isAI;
 
+    public enum EntityState {
+        CHASE, PRESENT
+    }
+
     Entity(float xCords, float yCords, float speed, EntityState state, boolean isAI) {
         setxCords(xCords);
         setyCords(yCords);
@@ -16,8 +20,15 @@ public abstract class Entity implements objectMovement {
         setisAI(isAI);
     }
 
-    public enum EntityState {
-        CHASE, PRESENT
+
+
+
+    public void update(float deltaTime) {
+        // Implement logic updates here
+    }
+
+    public void render(SpriteBatch spriteBatch) {
+        // Implement rendering logic here
     }
 
     // Getter & Setters for (x,y) coordinates
@@ -70,14 +81,6 @@ public abstract class Entity implements objectMovement {
         isAI = newisAI;
     }
 
-    // Overloading for drawMethod from individual sub-class
-
-    public void draw(SpriteBatch batch) {
-        // Do nothing, sub-class will handle this according to their own logic
-    }
-
-    //
-
     public void movement() {
         if (isAI) {
             AIControlledMovement();
@@ -87,6 +90,8 @@ public abstract class Entity implements objectMovement {
             userControlledMovement();
         }
     }
+
+
 
 
 }

@@ -18,11 +18,20 @@ public class nonPlayer extends Entity {
         this.entityHeight = entityTexture.getHeight();
         this.entityWidth = entityTexture.getWidth();
         this.isWall = isWall;
+    }
 
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch) {
+        super.render(spriteBatch);
+        spriteBatch.draw(entityTexture, xCords, yCords, entityHeight, entityWidth);
     }
 
     // Getter & Setters for Players
-
     public Texture getTexture() {
         return entityTexture;
     }
@@ -31,9 +40,7 @@ public class nonPlayer extends Entity {
         entityTexture = tex;
     }
 
-
     // Getter & Setters for Height, Width
-
     public float getHeight() {
         return entityHeight;
     }
@@ -50,11 +57,7 @@ public class nonPlayer extends Entity {
         entityWidth = width;
     }
 
-    // Drawing Batch
-    public void draw(SpriteBatch batch) {
-        // batch.draw(entityTexture, xCoords, yCoords, entityWidth / 2, entityHeight / 2, entityWidth, entityHeight, scale, scale, 0, 0, 0, entityTexture.getWidth(), entityTexture.getHeight(), false, false);
-        batch.draw(entityTexture, xCords, yCords, entityHeight, entityWidth);
-    }
+
 
     public void movement() {
         if (isAI && !isWall) {
