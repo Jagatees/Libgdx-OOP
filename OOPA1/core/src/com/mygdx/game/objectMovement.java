@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
-public class objectMovement {
-
+public interface objectMovement {
+	public void AIControlledMovement();
+	public void userControlledMovement();
 }

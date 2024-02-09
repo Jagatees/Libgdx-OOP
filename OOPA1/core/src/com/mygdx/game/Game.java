@@ -16,11 +16,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
 	private Stage stage;
-	private Label label;
 	
-	// Test (jun)
 	private Player pacman;
 	private nonPlayer redGhost;
 	private nonPlayer blueGhost;
@@ -29,10 +26,7 @@ public class Game extends ApplicationAdapter {
 	
 	// To be added to List<Entity> later
 	private nonPlayer normalPellet;
-	private nonPlayer powerPellet;
-
-	testaudio testaudio = new testaudio();
-	
+	private nonPlayer powerPellet;	
 	
 	// Test random X & Y coordinates for nonPlayer entities
 	
@@ -46,25 +40,10 @@ public class Game extends ApplicationAdapter {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 
-		// Create a Label with text
-		Label.LabelStyle labelStyle = new Label.LabelStyle();
-		labelStyle.font = new BitmapFont(); // Use a BitmapFont or any other font
-		labelStyle.fontColor = Color.WHITE; // Set font color
-
-		label = new Label("Hello, LibGDX!", labelStyle);
-		label.setPosition(100, 100); // Set the position of the label
-		label.setAlignment(Align.center);
-
-		// Add the label to the stage
-		stage.addActor(label);
-
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		
-		testaudio.playSoundEffect();
 		
 		// Creation of PacMan object
-		pacman = new Player("pacman.png", 300, 100, 10, "Normal", false);
+		pacman = new Player("pacman.png", 300, 100, 10, "Normal", false, 0, 3);
 		
 		
 		// Random position (commented out first for testing)
@@ -81,13 +60,14 @@ public class Game extends ApplicationAdapter {
 		
 		// Test creation 1 by 1 - to be added into EntityList later
 		
-		redGhost = new nonPlayer("redGhost.png", 500, 100, 10, "Chase", true);
-		blueGhost = new nonPlayer("blueGhost.png", 600, 100, 10, "Chase", true);
-		yellowGhost = new nonPlayer("yellowGhost.png", 700, 100, 10, "Chase", true);
-		greenGhost = new nonPlayer("greenGhost.png", 800, 100, 10, "Chase", true);
+		redGhost = new nonPlayer("redGhost.png", 500, 100, 10, "Chase", true, false);
+		blueGhost = new nonPlayer("blueGhost.png", 600, 100, 10, "Chase", true, false);
+		yellowGhost = new nonPlayer("yellowGhost.png", 700, 100, 10, "Chase", true, false);
+		greenGhost = new nonPlayer("greenGhost.png", 800, 100, 10, "Chase", true, false);
 		
-		normalPellet = new nonPlayer("normalPellet.png", 400, 100, 0, "Present", false);
-		powerPellet = new nonPlayer("powerPellet.png", 430, 100, 0, "Present", false);
+		
+		normalPellet = new nonPlayer("normalPellet.png", 400, 100, 0, "Present", false, false);
+		powerPellet = new nonPlayer("powerPellet.png", 430, 100, 0, "Present", false, false);
 	}
 
 	@Override
@@ -95,7 +75,6 @@ public class Game extends ApplicationAdapter {
 		ScreenUtils.clear(0,0,0.2f,1);
 
 		batch.begin();
-		batch.draw(img, 0, 0);
 		
 		// Drawing of PacMan
 		pacman.draw(batch);
@@ -121,9 +100,7 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 		stage.dispose();
-		testaudio.dispose();
 
 	}
 }

@@ -4,33 +4,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Player {
+public class Player extends Entity {
 	
 	private Texture entityTexture;
 	private float entityHeight;
 	private float entityWidth;
-	private float xCoords;
-	private float yCoords;
-	private float speed;
+	private int score;
+	private int numLives;
 	
-	// State & isAI will be protected in parent Entity class
-	
-	protected String state;
-	protected boolean isAI;
-	
-	Player (String playerAsset, float xCoords, float yCoords, float speed, String state, boolean isAI) {
-		
+	Player (String playerAsset, float xCoords, float yCoords, float speed, String state, boolean isAI, int score, int numLives) {
+		super(xCoords, yCoords, speed, state, isAI);
 		this.entityTexture = new Texture(Gdx.files.internal(playerAsset));
 		this.entityHeight = entityTexture.getHeight();
 		this.entityWidth = entityTexture.getWidth();
 		
-		// These will be inherited from parent Entity class later
-		
-		this.xCoords = xCoords;
-		this.yCoords = yCoords;
-		this.speed = speed;
-		this.state = state;
-		this.isAI = isAI;
+		this.score = score;
+		this.numLives = numLives;
 	}
 	
 	// Getter & Setters for Players
@@ -62,58 +51,45 @@ public class Player {
 		entityWidth = width;
 	}
 	
-	// Getter & Setters for (x,y) coordinates
 	
-	public float getxCoords() {
-		return xCoords;
+	// Getters & Setters for Score
+	
+	public int getScore() {
+		return score;
 	}
 	
-	void setxCoords(float x) {
-		xCoords = x;
+	void setScore(int newScore) {
+		score = newScore;
 	}
 	
-	public float getyCoords() {
-		return yCoords;
+	
+	// Getters & Setters for No. of Lives
+	public int getLives() {
+		return numLives;
 	}
 	
-	void setyCoords(float y) {
-		yCoords = y;
-	}
-	
-	// Getter & Setters for Speed
-	
-	public float getSpeed() {
-		return speed;
-	}
-	
-	void setSpeed(float newSpeed) {
-		speed = newSpeed;
-	}
- 	
-	// Getter & Setters for State
-	
-	public String getState() {
-		return state;
-	}
-	
-	void setState(String newState) {
-		state = newState;
-	}
-	
-	// Getter & Setters for isAI
-	
-	public boolean getisAI() {
-		return isAI;
-	}
-	
-	// Probably not required to change state of isAI
-	
-	void setisAI(boolean newisAI) {
-		isAI = newisAI;
+	void setLives(int newLifeCount) {
+		numLives = newLifeCount;
 	}
 	
 	// Drawing Batch
 	public void draw(SpriteBatch batch) {
 		batch.draw(entityTexture, xCoords, yCoords, entityHeight, entityWidth);
+	}
+	
+	public void movement() {
+		if (!isAI) {
+			userControlledMovement();
+		}
+	}
+	
+	@Override
+	public void AIControlledMovement() {
+		// Do nothing, as non-player but methods needs to be implemented
+	}
+	
+	@Override
+	public void userControlledMovement() {
+		// Actions for User Controls
 	}
 }
