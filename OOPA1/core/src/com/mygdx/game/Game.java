@@ -1,11 +1,14 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
+import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
 import com.mygdx.game.audio.AudioManager;
 import static com.mygdx.game.audio.AudioAssetKey.*;
@@ -30,6 +33,7 @@ public class Game extends ApplicationAdapter {
 
 	// Entity Manger
 	EntityManager entityManager = new EntityManager();
+	PlayerController playerController;
 
 
 
@@ -39,6 +43,8 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		audioManager.loadSoundEffect(MOUSE_CLICK, "assets/SoundEffect/mouseClick.mp3");
 		// audioManager.play(MOUSE_CLICK);
+
+
 
 		// Creation of PacMan object
 		pacman = new Player("assets/entity/pacman.png", 300, 100, 10, Entity.EntityState.CHASE, false, 0, 3);
@@ -59,6 +65,9 @@ public class Game extends ApplicationAdapter {
 		entityManager.addEntity(normalPellet);
 		entityManager.addEntity(powerPellet);
 
+		// Add this After Player is created ONLY
+		playerController = new PlayerController(entityManager.getEntity(Player.class));
+
 
 	}
 
@@ -66,11 +75,22 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 1);
+
+
 		batch.begin();
-
 		entityManager.render(batch);
-
 		batch.end();
+
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			playerController.right();
+		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			playerController.left();
+		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			playerController.up();
+		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			playerController.down();
+		}
+
 
 	}
 	

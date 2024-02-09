@@ -8,6 +8,7 @@ import java.util.List;
 public class EntityManager {
     private List<Entity> entities = new ArrayList<>();
 
+
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
@@ -18,5 +19,14 @@ public class EntityManager {
         }
     }
 
+    // Method to get the first entity of a specific type
+    public <T extends Entity> T getEntity(Class<T> type) {
+        for (Entity entity : entities) {
+            if (type.isInstance(entity)) {
+                return type.cast(entity);
+            }
+        }
+        return null; // or throw an exception if you prefer
+    }
 
 }
