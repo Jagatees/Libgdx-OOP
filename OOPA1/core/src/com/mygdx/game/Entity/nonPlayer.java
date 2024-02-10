@@ -12,8 +12,9 @@ public class nonPlayer extends Entity {
     private boolean isWall;
 
 
-    public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed, EntityState state, boolean isAI, boolean isWall) {
-        super(xCords, yCords, speed, state, isAI);
+    public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed,
+                     EntityState state, boolean isAI, boolean isWall, float width, float height) {
+        super(xCords, yCords, speed, state, isAI, width, height);
         this.entityTexture = new Texture(Gdx.files.internal(nonPlayerAsset));
         this.entityHeight = entityTexture.getHeight();
         this.entityWidth = entityTexture.getWidth();
@@ -28,7 +29,7 @@ public class nonPlayer extends Entity {
     @Override
     public void render(SpriteBatch spriteBatch) {
         super.render(spriteBatch);
-        spriteBatch.draw(entityTexture, xCords, yCords, entityHeight, entityWidth);
+        spriteBatch.draw(entityTexture, xCords, yCords, getWidth(), getHeight());
     }
 
     // Getter & Setters for Players
@@ -40,22 +41,7 @@ public class nonPlayer extends Entity {
         entityTexture = tex;
     }
 
-    // Getter & Setters for Height, Width
-    public float getHeight() {
-        return entityHeight;
-    }
 
-    void setHeight(float height) {
-        entityHeight = height;
-    }
-
-    public float getWidth() {
-        return entityWidth;
-    }
-
-    void setWidth(float width) {
-        entityWidth = width;
-    }
 
 
 

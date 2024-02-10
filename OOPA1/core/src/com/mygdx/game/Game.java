@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Entity.Entity;
@@ -10,7 +9,7 @@ import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
-
+import com.mygdx.game.Input.InputManager;
 
 
 public class Game extends ApplicationAdapter {
@@ -24,6 +23,8 @@ public class Game extends ApplicationAdapter {
 	private nonPlayer greenGhost;
 	private nonPlayer normalPellet;
 	private nonPlayer powerPellet;
+	private nonPlayer wall;
+
 	float xMin = 0.0f;
 	float xMax = 500.0f;
 	float yMin = 2.0f;
@@ -32,6 +33,8 @@ public class Game extends ApplicationAdapter {
 	// Entity Manger
 	EntityManager entityManager = new EntityManager();
 	PlayerController playerController;
+	InputManager inputHandler;
+
 
 
 
@@ -43,15 +46,15 @@ public class Game extends ApplicationAdapter {
 
 
 		// Creation of PacMan object
-		pacman = new Player("assets/entity/pacman.png", 300, 100, 10, Entity.EntityState.CHASE, false, 0, 3);
-		redGhost = new nonPlayer("assets/entity/redGhost.png", 500, 100, 10, Entity.EntityState.CHASE, true, false);
-		blueGhost = new nonPlayer("assets/entity/blueGhost.png", 600, 100, 10, Entity.EntityState.CHASE, true, false);
-		yellowGhost = new nonPlayer("assets/entity/yellowGhost.png", 700, 100, 10, Entity.EntityState.CHASE, true, false);
-		greenGhost = new nonPlayer("assets/entity/greenGhost.png", 800, 100, 10, Entity.EntityState.CHASE, true, false);
+		pacman = new Player("assets/entity/pacman.png", 300, 100, 10, Entity.EntityState.CHASE, false, 0, 3, 50, 50);
+		redGhost = new nonPlayer("assets/entity/redGhost.png", 500, 100, 10, Entity.EntityState.CHASE, true, false, 50, 50);
+		blueGhost = new nonPlayer("assets/entity/blueGhost.png", 600, 100, 10, Entity.EntityState.CHASE, true, false, 50, 50);
+		yellowGhost = new nonPlayer("assets/entity/yellowGhost.png", 700, 100, 10, Entity.EntityState.CHASE, true, false, 50, 50);
+		greenGhost = new nonPlayer("assets/entity/greenGhost.png", 800, 100, 10, Entity.EntityState.CHASE, true, false, 50, 50);
+		wall = new nonPlayer("assets/wall.jpg", 900, 100,0 , Entity.EntityState.CHASE, false, true, 100, 100);
 
-
-		normalPellet = new nonPlayer("assets/entity/normalPellet.png", 400, 100, 0, Entity.EntityState.PRESENT, false, false);
-		powerPellet = new nonPlayer("assets/entity/powerPellet.png", 430, 100, 0, Entity.EntityState.PRESENT, false, false);
+		normalPellet = new nonPlayer("assets/entity/normalPellet.png", 400, 100, 0, Entity.EntityState.PRESENT, false, false, 50, 50);
+		powerPellet = new nonPlayer("assets/entity/powerPellet.png", 430, 100, 0, Entity.EntityState.PRESENT, false, false, 50, 50);
 
 		// Add Entity
 		entityManager.addEntity(pacman);
@@ -61,9 +64,13 @@ public class Game extends ApplicationAdapter {
 		entityManager.addEntity(greenGhost);
 		entityManager.addEntity(normalPellet);
 		entityManager.addEntity(powerPellet);
+		entityManager.addEntity(wall);
 
-		// Player Controller
+
 		playerController = new PlayerController(entityManager.getEntity(Player.class));
+		inputHandler = new InputManager(playerController);
+		Gdx.input.setInputProcessor( inputHandler);
+
 
 	}
 
@@ -77,14 +84,16 @@ public class Game extends ApplicationAdapter {
 		entityManager.render(batch);
 		batch.end();
 
-
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			playerController.right();
-		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+		if (inputHandler.isMovingLeft()) {
 			playerController.left();
-		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+		}
+		if (inputHandler.isMovingRight()) {
+			playerController.right();
+		}
+		if (inputHandler.isMovingUp()) {
 			playerController.up();
-		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+		}
+		if (inputHandler.isMovingDown()) {
 			playerController.down();
 		}
 

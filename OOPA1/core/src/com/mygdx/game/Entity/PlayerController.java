@@ -3,9 +3,11 @@ package com.mygdx.game.Entity;
 import com.badlogic.gdx.Gdx;
 
 public class PlayerController{
+
     private Player player;
     private float newX;
     private float newy;
+
 
 
     public PlayerController(Player player) {

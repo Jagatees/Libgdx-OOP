@@ -7,17 +7,21 @@ public abstract class Entity implements objectMovement {
     protected float xCords, yCords, speed;
     protected EntityState state; // Assuming an enum is used for state management
     protected boolean isAI;
+    protected float width, height;
 
     public enum EntityState {
         CHASE, PRESENT
     }
 
-    Entity(float xCords, float yCords, float speed, EntityState state, boolean isAI) {
+    Entity(float xCords, float yCords, float speed, EntityState state,
+           boolean isAI, float width, float height) {
         setxCords(xCords);
         setyCords(yCords);
         setSpeed(speed);
         setState(state);
         setisAI(isAI);
+        setWidth(width);
+        setHeight(height);
     }
 
 
@@ -91,7 +95,27 @@ public abstract class Entity implements objectMovement {
         }
     }
 
+    public boolean isAI() {
+        return isAI;
+    }
 
+    public void setAI(boolean AI) {
+        isAI = AI;
+    }
 
+    public float getWidth() {
+        return width;
+    }
 
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
 }
