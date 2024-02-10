@@ -7,8 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class nonPlayer extends Entity {
 
     private Texture entityTexture;
-    private float entityHeight;
-    private float entityWidth;
+
     private boolean isWall;
 
 
@@ -16,8 +15,6 @@ public class nonPlayer extends Entity {
                      EntityState state, boolean isAI, boolean isWall, float width, float height) {
         super(xCords, yCords, speed, state, isAI, width, height);
         this.entityTexture = new Texture(Gdx.files.internal(nonPlayerAsset));
-        this.entityHeight = entityTexture.getHeight();
-        this.entityWidth = entityTexture.getWidth();
         this.isWall = isWall;
     }
 

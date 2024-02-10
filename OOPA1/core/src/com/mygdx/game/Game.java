@@ -2,7 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
@@ -35,6 +38,7 @@ public class Game extends ApplicationAdapter {
 	PlayerController playerController;
 	InputManager inputHandler;
 
+	ShapeRenderer shapeRenderer; // Add this line
 
 
 
@@ -42,6 +46,7 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		shapeRenderer = new ShapeRenderer(); // Initialize the ShapeRenderer
 
 
 
@@ -56,20 +61,15 @@ public class Game extends ApplicationAdapter {
 		normalPellet = new nonPlayer("assets/entity/normalPellet.png", 400, 100, 0, Entity.EntityState.PRESENT, false, false, 50, 50);
 		powerPellet = new nonPlayer("assets/entity/powerPellet.png", 430, 100, 0, Entity.EntityState.PRESENT, false, false, 50, 50);
 
-		// Add Entity
 		entityManager.addEntity(pacman);
-		entityManager.addEntity(redGhost);
-		entityManager.addEntity(blueGhost);
-		entityManager.addEntity(yellowGhost);
-		entityManager.addEntity(greenGhost);
-		entityManager.addEntity(normalPellet);
-		entityManager.addEntity(powerPellet);
 		entityManager.addEntity(wall);
 
 
 		playerController = new PlayerController(entityManager.getEntity(Player.class));
 		inputHandler = new InputManager(playerController);
 		Gdx.input.setInputProcessor( inputHandler);
+
+
 
 
 	}
@@ -98,10 +98,21 @@ public class Game extends ApplicationAdapter {
 		}
 
 
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // Start drawing lines
+		shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red
+
+		shapeRenderer.rect(pacman.getxCords(), pacman.getyCords(), pacman.getWidth(), pacman.getHeight());
+		shapeRenderer.rect(wall.getxCords(), wall.getyCords(), wall.getWidth(), wall.getHeight());
+
+		shapeRenderer.end();
+
+
 	}
-	
+
 	@Override
 	public void dispose () {
 		batch.dispose();
+		shapeRenderer.dispose(); // Dispose of the ShapeRenderer
+
 	}
 }

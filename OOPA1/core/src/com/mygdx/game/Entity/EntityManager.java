@@ -13,6 +13,10 @@ public class EntityManager {
         entities.add(entity);
     }
 
+    public List<Entity> getEntity(){
+        return entities;
+    }
+
     public void render(SpriteBatch spriteBatch) {
         for (Entity entity : entities) {
             entity.render(spriteBatch);
