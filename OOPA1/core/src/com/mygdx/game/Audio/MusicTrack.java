@@ -1,6 +1,5 @@
-package com.mygdx.game.audio;
+package com.mygdx.game.Audio;
 
-import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 

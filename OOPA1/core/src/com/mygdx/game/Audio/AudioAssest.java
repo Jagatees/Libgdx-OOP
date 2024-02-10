@@ -1,4 +1,4 @@
-package com.mygdx.game.audio;
+package com.mygdx.game.Audio;
 
 public interface AudioAssest {
     void play();
