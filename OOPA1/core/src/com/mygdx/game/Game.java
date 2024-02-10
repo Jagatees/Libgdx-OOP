@@ -2,43 +2,28 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
-import com.mygdx.game.Input.InputManager;
 
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 
-	// Entity Folder
 	private Player pacman;
-	private nonPlayer redGhost;
-	private nonPlayer blueGhost;
-	private nonPlayer yellowGhost;
-	private nonPlayer greenGhost;
-	private nonPlayer normalPellet;
-	private nonPlayer powerPellet;
 	private nonPlayer wall;
 
-	float xMin = 0.0f;
-	float xMax = 500.0f;
-	float yMin = 2.0f;
-	float yMax = 400.0f;
 
-	// Entity Manger
 	EntityManager entityManager = new EntityManager();
 	PlayerController playerController;
-	InputManager inputHandler;
-
-	ShapeRenderer shapeRenderer; // Add this line
+	ShapeRenderer shapeRenderer;
 
 
 
@@ -46,28 +31,15 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		shapeRenderer = new ShapeRenderer(); // Initialize the ShapeRenderer
+		shapeRenderer = new ShapeRenderer();
 
-
-
-		// Creation of PacMan object
-		pacman = new Player("assets/entity/pacman.png", 300, 100, 10, Entity.EntityState.CHASE, false, 0, 3, 50, 50);
-		redGhost = new nonPlayer("assets/entity/redGhost.png", 500, 100, 10, Entity.EntityState.CHASE, true, false, 50, 50);
-		blueGhost = new nonPlayer("assets/entity/blueGhost.png", 600, 100, 10, Entity.EntityState.CHASE, true, false, 50, 50);
-		yellowGhost = new nonPlayer("assets/entity/yellowGhost.png", 700, 100, 10, Entity.EntityState.CHASE, true, false, 50, 50);
-		greenGhost = new nonPlayer("assets/entity/greenGhost.png", 800, 100, 10, Entity.EntityState.CHASE, true, false, 50, 50);
-		wall = new nonPlayer("assets/wall.jpg", 900, 100,0 , Entity.EntityState.CHASE, false, true, 100, 100);
-
-		normalPellet = new nonPlayer("assets/entity/normalPellet.png", 400, 100, 0, Entity.EntityState.PRESENT, false, false, 50, 50);
-		powerPellet = new nonPlayer("assets/entity/powerPellet.png", 430, 100, 0, Entity.EntityState.PRESENT, false, false, 50, 50);
+		pacman = new Player("assets/entity/pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50);
+		wall = new nonPlayer("assets/wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100);
 
 		entityManager.addEntity(pacman);
 		entityManager.addEntity(wall);
 
-
 		playerController = new PlayerController(entityManager.getEntity(Player.class));
-		inputHandler = new InputManager(playerController);
-		Gdx.input.setInputProcessor( inputHandler);
 
 
 
@@ -79,23 +51,10 @@ public class Game extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 1);
 
-
 		batch.begin();
 		entityManager.render(batch);
 		batch.end();
 
-		if (inputHandler.isMovingLeft()) {
-			playerController.left();
-		}
-		if (inputHandler.isMovingRight()) {
-			playerController.right();
-		}
-		if (inputHandler.isMovingUp()) {
-			playerController.up();
-		}
-		if (inputHandler.isMovingDown()) {
-			playerController.down();
-		}
 
 
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // Start drawing lines
@@ -106,8 +65,59 @@ public class Game extends ApplicationAdapter {
 
 		shapeRenderer.end();
 
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			if (!checkFutureCollision(Input.Keys.RIGHT)) {
+				playerController.right();
+			}
+		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			if (!checkFutureCollision(Input.Keys.LEFT)) {
+				playerController.left();
+			}
+		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			if (!checkFutureCollision(Input.Keys.UP)) {
+				playerController.up();
+			}
+		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			if (!checkFutureCollision(Input.Keys.DOWN)) {
+				playerController.down();
+			}
+		}
+
+
 
 	}
+
+	private boolean checkFutureCollision(int direction) {
+		float futureX = pacman.getxCords();
+		float futureY = pacman.getyCords();
+		float speed = pacman.getSpeed(); // Assuming there's a method to get Pacman's speed
+
+		switch (direction) {
+			case Input.Keys.LEFT:
+				futureX -= speed;
+				break;
+			case Input.Keys.RIGHT:
+				futureX += speed;
+				break;
+			case Input.Keys.UP:
+				futureY += speed;
+				break;
+			case Input.Keys.DOWN:
+				futureY -= speed;
+				break;
+		}
+
+		// Assuming the checkCollision method checks if two entities would overlap
+		return checkCollision(futureX, futureY, pacman.getWidth(), pacman.getHeight(), wall.getxCords(), wall.getyCords(), wall.getWidth(), wall.getHeight());
+	}
+
+	private boolean checkCollision(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2) {
+		return x1 < x2 + width2 &&
+				x1 + width1 > x2 &&
+				y1 < y2 + height2 &&
+				y1 + height1 > y2;
+	}
+
 
 	@Override
 	public void dispose () {

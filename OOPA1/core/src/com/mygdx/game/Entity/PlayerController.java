@@ -49,6 +49,11 @@ public class PlayerController{
         getPlayer().setyCords(newy);
     }
 
+    public void stop(){
+        getPlayer().setxCords(getPlayer().xCords);
+        getPlayer().setyCords(getPlayer().yCords);
+    }
+
 
 
 }

@@ -10,7 +10,7 @@ public abstract class Entity implements objectMovement {
     protected float width, height;
 
     public enum EntityState {
-        CHASE, PRESENT
+        NULL,
     }
 
     Entity(float xCords, float yCords, float speed, EntityState state,

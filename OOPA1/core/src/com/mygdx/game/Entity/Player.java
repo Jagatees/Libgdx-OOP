@@ -12,13 +12,13 @@ public class Player extends Entity {
                   EntityState state, boolean isAI, int score, int numLives,
                   float width, float height) {
         super(xCords, yCords, speed, state, isAI, width, height);
-        this.entityTexture = new Texture(Gdx.files.internal(playerAsset));
+        setTexture(new Texture(Gdx.files.internal(playerAsset)));
     }
 
     @Override
     public void render(SpriteBatch batch) {
         super.render(batch);
-        batch.draw(entityTexture, xCords, yCords, getWidth(), getHeight());
+        batch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
     }
     @Override
     public void update(float deltaTime) {
