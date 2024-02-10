@@ -13,8 +13,8 @@ public class EntityManager {
         entities.add(entity);
     }
 
-    public List<Entity> getEntity(){
-        return entities;
+    public List<Entity> getEntities() {
+        return new ArrayList<>(entities); // Return a copy to prevent external modifications
     }
 
     public void render(SpriteBatch spriteBatch) {

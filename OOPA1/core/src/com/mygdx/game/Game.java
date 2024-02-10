@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Collision.CollisionManager;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
@@ -20,10 +21,11 @@ public class Game extends ApplicationAdapter {
 	private Player pacman;
 	private nonPlayer wall;
 
-
 	EntityManager entityManager = new EntityManager();
 	PlayerController playerController;
 	ShapeRenderer shapeRenderer;
+	CollisionManager collisionManager = new CollisionManager();
+
 
 
 
@@ -42,8 +44,6 @@ public class Game extends ApplicationAdapter {
 		playerController = new PlayerController(entityManager.getEntity(Player.class));
 
 
-
-
 	}
 
 
@@ -54,8 +54,6 @@ public class Game extends ApplicationAdapter {
 		batch.begin();
 		entityManager.render(batch);
 		batch.end();
-
-
 
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // Start drawing lines
 		shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red
@@ -82,10 +80,8 @@ public class Game extends ApplicationAdapter {
 				playerController.down();
 			}
 		}
-
-
-
 	}
+
 
 	private boolean checkFutureCollision(int direction) {
 		float futureX = pacman.getxCords();
@@ -108,14 +104,8 @@ public class Game extends ApplicationAdapter {
 		}
 
 		// Assuming the checkCollision method checks if two entities would overlap
-		return checkCollision(futureX, futureY, pacman.getWidth(), pacman.getHeight(), wall.getxCords(), wall.getyCords(), wall.getWidth(), wall.getHeight());
-	}
+		return collisionManager.checkCollision(futureX, futureY, pacman.getWidth(), pacman.getHeight(), wall.getxCords(), wall.getyCords(), wall.getWidth(), wall.getHeight());
 
-	private boolean checkCollision(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2) {
-		return x1 < x2 + width2 &&
-				x1 + width1 > x2 &&
-				y1 < y2 + height2 &&
-				y1 + height1 > y2;
 	}
 
 
