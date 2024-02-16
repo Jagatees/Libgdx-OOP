@@ -22,6 +22,7 @@ public class Game extends ApplicationAdapter {
 
 	private Player pacman;
 	private nonPlayer wall;
+	private nonPlayer testGhost;
 
 	EntityManager entityManager = new EntityManager();
 	PlayerController playerController;
@@ -36,12 +37,18 @@ public class Game extends ApplicationAdapter {
 
 		pacman = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50);
 		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100);
+		
+		// Test ease of creation of entity
+		testGhost = new nonPlayer("redGhost.png", 200, 200, 100, Entity.EntityState.NULL, true, false, 100, 100);
 
 		entityManager.addEntity(pacman);
 		entityManager.addEntity(wall);
 		entityManager.addEntity(wall);
 		entityManager.addEntity(wall);
-
+		
+		// Test ease of addition of entity, and to test whether AIControlledMovement() works
+		// Tested with "A" input - to be removed in nonPlayer.java after AI Movement is implemented
+		entityManager.addEntity(testGhost);
 
 		playerController = new PlayerController(entityManager.getEntity(Player.class));
 
@@ -56,6 +63,8 @@ public class Game extends ApplicationAdapter {
 		batch.begin();
 		entityManager.render(batch);
 		batch.end();
+		
+		// entityManager.movement(testGhost);
 
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // Start drawing lines
 		shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red

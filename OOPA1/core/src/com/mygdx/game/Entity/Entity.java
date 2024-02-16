@@ -23,14 +23,25 @@ public abstract class Entity implements objectMovement {
         setWidth(width);
         setHeight(height);
     }
+    
+    Entity(float xCords, float yCords, float speed, EntityState state,
+            boolean isAI, boolean isWall, float width, float height) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setSpeed(speed);
+         setState(state);
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+     }
 
-
+    
     protected void update(float deltaTime) {
         // Implement logic updates here
     }
-
+    
+    // Method overriding will handle this portion
     protected void render(SpriteBatch spriteBatch) {
-        // Implement rendering logic here
     }
 
     // Getter & Setters for (x,y) coordinates
