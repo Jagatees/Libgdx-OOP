@@ -13,17 +13,22 @@ public class EntityManager {
         entities.add(entity);
     }
 
-    public List<Entity> getEntities() {
-        return new ArrayList<>(entities); // Return a copy to prevent external modifications
-    }
-
     public void render(SpriteBatch spriteBatch) {
         for (Entity entity : entities) {
             entity.render(spriteBatch);
         }
     }
 
-    // Method to get the first entity of a specific type
+    public <T extends Entity> List<T> getEntitiesOfType(Class<T> type) {
+        List<T> matchingEntities = new ArrayList<>();
+        for (Entity entity : entities) {
+            if (type.isInstance(entity)) {
+                matchingEntities.add(type.cast(entity));
+            }
+        }
+        return matchingEntities;
+    }
+
     public <T extends Entity> T getEntity(Class<T> type) {
         for (Entity entity : entities) {
             if (type.isInstance(entity)) {

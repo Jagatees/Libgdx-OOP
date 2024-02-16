@@ -14,6 +14,8 @@ import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
 
+import java.util.List;
+
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -27,9 +29,6 @@ public class Game extends ApplicationAdapter {
 	CollisionManager collisionManager = new CollisionManager();
 
 
-
-
-
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -40,6 +39,9 @@ public class Game extends ApplicationAdapter {
 
 		entityManager.addEntity(pacman);
 		entityManager.addEntity(wall);
+		entityManager.addEntity(wall);
+		entityManager.addEntity(wall);
+
 
 		playerController = new PlayerController(entityManager.getEntity(Player.class));
 
@@ -64,26 +66,27 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer.end();
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			if (!checkFutureCollision(Input.Keys.RIGHT)) {
+			if (!checkFutureCollision(Input.Keys.RIGHT, pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
 				playerController.right();
 			}
 		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			if (!checkFutureCollision(Input.Keys.LEFT)) {
+			if (!checkFutureCollision(Input.Keys.LEFT , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
 				playerController.left();
 			}
 		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			if (!checkFutureCollision(Input.Keys.UP)) {
+			if (!checkFutureCollision(Input.Keys.UP , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
 				playerController.up();
 			}
 		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			if (!checkFutureCollision(Input.Keys.DOWN)) {
+			if (!checkFutureCollision(Input.Keys.DOWN , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
 				playerController.down();
 			}
 		}
 	}
 
 
-	private boolean checkFutureCollision(int direction) {
+
+	private boolean checkFutureCollision(int direction, Player pacman, List<nonPlayer> entities) {
 		float futureX = entityManager.getxCords(pacman);
 		float futureY = entityManager.getyCords(pacman);
 		float speed = entityManager.getSpeed(pacman); // Assuming there's a method to get Pacman's speed
@@ -103,9 +106,13 @@ public class Game extends ApplicationAdapter {
 				break;
 		}
 
-		// Assuming the checkCollision method checks if two entities would overlap
-		return collisionManager.checkCollision(futureX, futureY, entityManager.getWidth(pacman), entityManager.getHeight(pacman), entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
+		for (Entity entity : entities) {
+			if (collisionManager.checkCollision(futureX, futureY, entityManager.getWidth(pacman), entityManager.getHeight(pacman), entityManager.getxCords(entity), entityManager.getyCords(entity), entityManager.getWidth(entity), entityManager.getHeight(entity))) {
+				return true; // Collision detected
+			}
+		}
 
+		return false; // No collision detected
 	}
 
 
