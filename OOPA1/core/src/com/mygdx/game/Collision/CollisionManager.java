@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
+import com.mygdx.game.Entity.nonPlayer;
 
 public class CollisionManager {
 
@@ -15,7 +16,10 @@ public class CollisionManager {
     }
 
 
+    public void checkResponse(Entity.EntityType type, Entity.EntityType type1) {
 
+
+    }
 }
 
 

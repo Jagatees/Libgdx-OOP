@@ -5,16 +5,25 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class Entity implements objectMovement {
 
     protected float xCords, yCords, speed;
-    protected EntityState state; // Assuming an enum is used for state management
+    protected EntityState entityState;
+    protected EntityType entityType;
     protected boolean isAI;
     protected float width, height;
+
+    public enum EntityType {
+        EMPTY,
+        PLAYER,
+        ENEMY,
+        WALL,
+        ITEM,
+    }
 
     public enum EntityState {
         NULL,
     }
 
     Entity(float xCords, float yCords, float speed, EntityState state,
-           boolean isAI, float width, float height) {
+           boolean isAI, float width, float height, EntityType entityType) {
         setxCords(xCords);
         setyCords(yCords);
         setSpeed(speed);
@@ -22,6 +31,7 @@ public abstract class Entity implements objectMovement {
         setisAI(isAI);
         setWidth(width);
         setHeight(height);
+        setEntityType(entityType);
     }
 
 
@@ -57,6 +67,22 @@ public abstract class Entity implements objectMovement {
         return speed;
     }
 
+    protected EntityState getEntityState() {
+        return entityState;
+    }
+
+    protected void setEntityState(EntityState entityState) {
+        this.entityState = entityState;
+    }
+
+    protected EntityType getEntityType() {
+        return entityType;
+    }
+
+    protected void setEntityType(EntityType entityType) {
+        this.entityType = entityType;
+    }
+
     void setSpeed(float newSpeed) {
         speed = newSpeed;
     }
@@ -64,11 +90,11 @@ public abstract class Entity implements objectMovement {
     // Getter & Setters for State
 
     protected EntityState getState() {
-        return state;
+        return entityState;
     }
 
     void setState(EntityState state) {
-        this.state = state;
+        this.entityState = state;
     }
 
     // Getter & Setters for isAI

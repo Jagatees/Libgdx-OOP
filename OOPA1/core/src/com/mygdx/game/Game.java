@@ -22,6 +22,7 @@ public class Game extends ApplicationAdapter {
 
 	private Player pacman;
 	private nonPlayer wall;
+	private nonPlayer wall2;
 
 	EntityManager entityManager = new EntityManager();
 	PlayerController playerController;
@@ -34,13 +35,13 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 
-		pacman = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50);
-		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100);
+		pacman = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50, Entity.EntityType.PLAYER);
+		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.WALL);
+		wall2 = new nonPlayer("wall.jpg", 900, 300,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.EMPTY);
 
 		entityManager.addEntity(pacman);
 		entityManager.addEntity(wall);
-		entityManager.addEntity(wall);
-		entityManager.addEntity(wall);
+		entityManager.addEntity(wall2);
 
 
 		playerController = new PlayerController(entityManager.getEntity(Player.class));
@@ -62,6 +63,8 @@ public class Game extends ApplicationAdapter {
 
 		shapeRenderer.rect(entityManager.getxCords(pacman), entityManager.getyCords(pacman), entityManager.getWidth(pacman), entityManager.getHeight(pacman));
 		shapeRenderer.rect(entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
+		shapeRenderer.rect(entityManager.getxCords(wall2), entityManager.getyCords(wall2), entityManager.getWidth(wall2), entityManager.getHeight(wall2));
+
 
 		shapeRenderer.end();
 
@@ -89,7 +92,7 @@ public class Game extends ApplicationAdapter {
 	private boolean checkFutureCollision(int direction, Player pacman, List<nonPlayer> entities) {
 		float futureX = entityManager.getxCords(pacman);
 		float futureY = entityManager.getyCords(pacman);
-		float speed = entityManager.getSpeed(pacman); // Assuming there's a method to get Pacman's speed
+		float speed = entityManager.getSpeed(pacman);
 
 		switch (direction) {
 			case Input.Keys.LEFT:
@@ -108,18 +111,18 @@ public class Game extends ApplicationAdapter {
 
 		for (Entity entity : entities) {
 			if (collisionManager.checkCollision(futureX, futureY, entityManager.getWidth(pacman), entityManager.getHeight(pacman), entityManager.getxCords(entity), entityManager.getyCords(entity), entityManager.getWidth(entity), entityManager.getHeight(entity))) {
-				return true; // Collision detected
+				collisionManager.checkResponse(entityManager.getType(pacman), entityManager.getType(entity));
+				return true;
 			}
 		}
 
-		return false; // No collision detected
+		return false;
 	}
 
 
 	@Override
 	public void dispose () {
 		batch.dispose();
-		shapeRenderer.dispose(); // Dispose of the ShapeRenderer
-
+		shapeRenderer.dispose();
 	}
 }

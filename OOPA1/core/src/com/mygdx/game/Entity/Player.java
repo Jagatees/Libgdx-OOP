@@ -10,8 +10,8 @@ public class Player extends Entity {
 
     public Player(String playerAsset, float xCords, float yCords, float speed,
                   EntityState state, boolean isAI, int score, int numLives,
-                  float width, float height) {
-        super(xCords, yCords, speed, state, isAI, width, height);
+                  float width, float height, EntityType entityType) {
+        super(xCords, yCords, speed, state, isAI, width, height, entityType);
         setTexture(new Texture(Gdx.files.internal(playerAsset)));
     }
 
