@@ -25,19 +25,17 @@ public abstract class Entity implements objectMovement {
     }
 
 
-
-
-    public void update(float deltaTime) {
+    protected void update(float deltaTime) {
         // Implement logic updates here
     }
 
-    public void render(SpriteBatch spriteBatch) {
+    protected void render(SpriteBatch spriteBatch) {
         // Implement rendering logic here
     }
 
     // Getter & Setters for (x,y) coordinates
 
-    public float getxCords() {
+    protected float getxCords() {
         return xCords;
     }
 
@@ -45,7 +43,7 @@ public abstract class Entity implements objectMovement {
         xCords = x;
     }
 
-    public float getyCords() {
+    protected float getyCords() {
         return yCords;
     }
 
@@ -55,7 +53,7 @@ public abstract class Entity implements objectMovement {
 
     // Getter & Setters for Speed
 
-    public float getSpeed() {
+    protected float getSpeed() {
         return speed;
     }
 
@@ -65,17 +63,17 @@ public abstract class Entity implements objectMovement {
 
     // Getter & Setters for State
 
-    public EntityState getState() {
+    protected EntityState getState() {
         return state;
     }
 
-    public void setState(EntityState state) {
+    void setState(EntityState state) {
         this.state = state;
     }
 
     // Getter & Setters for isAI
 
-    public boolean getisAI() {
+    protected boolean getisAI() {
         return isAI;
     }
 
@@ -85,7 +83,7 @@ public abstract class Entity implements objectMovement {
         isAI = newisAI;
     }
 
-    public void movement() {
+    protected void movement() {
         if (isAI) {
             AIControlledMovement();
         }
@@ -95,27 +93,27 @@ public abstract class Entity implements objectMovement {
         }
     }
 
-    public boolean isAI() {
+    protected boolean isAI() {
         return isAI;
     }
 
-    public void setAI(boolean AI) {
+    protected void setAI(boolean AI) {
         isAI = AI;
     }
 
-    public float getWidth() {
+    protected float getWidth() {
         return width;
     }
 
-    public void setWidth(float width) {
+    protected void setWidth(float width) {
         this.width = width;
     }
 
-    public float getHeight() {
+    protected float getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    protected void setHeight(float height) {
         this.height = height;
     }
 }

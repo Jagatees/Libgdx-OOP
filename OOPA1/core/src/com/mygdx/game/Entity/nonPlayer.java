@@ -18,27 +18,27 @@ public class nonPlayer extends Entity {
         setWall(isWall);
     }
 
-    public boolean isWall() {
+    protected boolean isWall() {
         return isWall;
     }
 
-    public void setWall(boolean wall) {
+    protected void setWall(boolean wall) {
         isWall = wall;
     }
 
     @Override
-    public void update(float deltaTime) {
+    protected void update(float deltaTime) {
         super.update(deltaTime);
     }
 
     @Override
-    public void render(SpriteBatch spriteBatch) {
+    protected void render(SpriteBatch spriteBatch) {
         super.render(spriteBatch);
         spriteBatch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
     }
 
     // Getter & Setters for Players
-    public Texture getTexture() {
+    protected Texture getTexture() {
         return entityTexture;
     }
 
@@ -46,11 +46,7 @@ public class nonPlayer extends Entity {
         entityTexture = tex;
     }
 
-
-
-
-
-    public void movement() {
+    protected void movement() {
         if (isAI && !isWall) {
             AIControlledMovement();
         }

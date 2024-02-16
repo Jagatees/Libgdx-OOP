@@ -32,5 +32,27 @@ public class EntityManager {
         }
         return null; // or throw an exception if you prefer
     }
+    
+    // Methods required to let Game.java see & communicate between different managers
+    
+    public float getxCords(Entity entity) {
+		return entity.getxCords();
+    }
+    
+    public float getyCords(Entity entity) {
+    	return entity.getyCords();
+    }
+    
+    public float getWidth(Entity entity) {
+    	return entity.getWidth(); 
+    }
+    
+    public float getHeight(Entity entity) {
+    	return entity.getHeight();
+    }
+    
+    public float getSpeed(Entity entity) {
+    	return entity.getSpeed();
+    }
 
 }

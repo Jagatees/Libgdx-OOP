@@ -35,8 +35,8 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 
-		pacman = new Player("assets/entity/pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50);
-		wall = new nonPlayer("assets/wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100);
+		pacman = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50);
+		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100);
 
 		entityManager.addEntity(pacman);
 		entityManager.addEntity(wall);
@@ -58,8 +58,8 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // Start drawing lines
 		shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red
 
-		shapeRenderer.rect(pacman.getxCords(), pacman.getyCords(), pacman.getWidth(), pacman.getHeight());
-		shapeRenderer.rect(wall.getxCords(), wall.getyCords(), wall.getWidth(), wall.getHeight());
+		shapeRenderer.rect(entityManager.getxCords(pacman), entityManager.getyCords(pacman), entityManager.getWidth(pacman), entityManager.getHeight(pacman));
+		shapeRenderer.rect(entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
 
 		shapeRenderer.end();
 
@@ -84,9 +84,9 @@ public class Game extends ApplicationAdapter {
 
 
 	private boolean checkFutureCollision(int direction) {
-		float futureX = pacman.getxCords();
-		float futureY = pacman.getyCords();
-		float speed = pacman.getSpeed(); // Assuming there's a method to get Pacman's speed
+		float futureX = entityManager.getxCords(pacman);
+		float futureY = entityManager.getyCords(pacman);
+		float speed = entityManager.getSpeed(pacman); // Assuming there's a method to get Pacman's speed
 
 		switch (direction) {
 			case Input.Keys.LEFT:
@@ -104,7 +104,7 @@ public class Game extends ApplicationAdapter {
 		}
 
 		// Assuming the checkCollision method checks if two entities would overlap
-		return collisionManager.checkCollision(futureX, futureY, pacman.getWidth(), pacman.getHeight(), wall.getxCords(), wall.getyCords(), wall.getWidth(), wall.getHeight());
+		return collisionManager.checkCollision(futureX, futureY, entityManager.getWidth(pacman), entityManager.getHeight(pacman), entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
 
 	}
 

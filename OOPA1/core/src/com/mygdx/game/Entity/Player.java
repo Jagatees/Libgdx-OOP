@@ -16,16 +16,16 @@ public class Player extends Entity {
     }
 
     @Override
-    public void render(SpriteBatch batch) {
+    protected void render(SpriteBatch batch) {
         super.render(batch);
         batch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
     }
     @Override
-    public void update(float deltaTime) {
+    protected void update(float deltaTime) {
         super.update(deltaTime);
     }
 
-    public Texture getTexture() {
+    protected Texture getTexture() {
         return entityTexture;
     }
 
@@ -33,7 +33,7 @@ public class Player extends Entity {
         entityTexture = tex;
     }
 
-    public void movement() {
+    protected void movement() {
         if (!isAI) {
             userControlledMovement();
         }
