@@ -43,8 +43,8 @@ public class PlayerController {
 
     private boolean checkFutureCollision(int direction) {
         float futureX = player.getxCords();
-        float futureY = player.getyCords();
-        float speed = player.getSpeed() * Gdx.graphics.getDeltaTime();
+        float futureY = player.getyCords() ;
+        float speed = (player.getSpeed() + 50) * Gdx.graphics.getDeltaTime();
 
         switch (direction) {
             case Input.Keys.LEFT:
