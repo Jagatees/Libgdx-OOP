@@ -19,7 +19,7 @@ public class EntityManager {
         }
     }
 
-    public <T extends Entity> List<T> getEntitiesOfType(Class<T> type) {
+    public <T extends Entity> List<T> getEntitiesOfTypeList(Class<T> type) {
         List<T> matchingEntities = new ArrayList<>();
         for (Entity entity : entities) {
             if (type.isInstance(entity)) {

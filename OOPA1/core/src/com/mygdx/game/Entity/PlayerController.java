@@ -22,7 +22,7 @@ public class PlayerController{
         this.entityManager = entityManager;
         this.player = entityManager.getEntity(Player.class);
         this.collisionManager = collisionManager;
-        this.entities = entityManager.getEntitiesOfType(nonPlayer.class);
+        this.entities = entityManager.getEntitiesOfTypeList(nonPlayer.class);
     }
 
     Player getPlayer(){
@@ -63,16 +63,16 @@ public class PlayerController{
                 break;
         }
 
-        // Check collision with each entity
         for (nonPlayer entity : entities) {
             if (collisionManager.checkCollision(futureX, futureY, player.getWidth(), player.getHeight(),
                     entityManager.getxCords(entity), entityManager.getyCords(entity), entityManager.getWidth(entity), entityManager.getHeight(entity))) {
-                // Optional: handle collision specifics, e.g., updating game state or player status
-                return true; // Collision detected
+                // Later one handle if some collision happen
+                return true;
             }
+
         }
 
-        return false; // No collision detected
+        return false; // no hit
     }
 
 

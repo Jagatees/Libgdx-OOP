@@ -83,35 +83,6 @@ public class Game extends ApplicationAdapter {
 
 
 
-	private boolean checkFutureCollision(int direction, Player pacman, List<nonPlayer> entities) {
-		float futureX = entityManager.getxCords(pacman);
-		float futureY = entityManager.getyCords(pacman);
-		float speed = entityManager.getSpeed(pacman);
-
-		switch (direction) {
-			case Input.Keys.LEFT:
-				futureX -= speed;
-				break;
-			case Input.Keys.RIGHT:
-				futureX += speed;
-				break;
-			case Input.Keys.UP:
-				futureY += speed;
-				break;
-			case Input.Keys.DOWN:
-				futureY -= speed;
-				break;
-		}
-
-		for (Entity entity : entities) {
-			if (collisionManager.checkCollision(futureX, futureY, entityManager.getWidth(pacman), entityManager.getHeight(pacman), entityManager.getxCords(entity), entityManager.getyCords(entity), entityManager.getWidth(entity), entityManager.getHeight(entity))) {
-				collisionManager.checkResponse(entityManager.getType(pacman), entityManager.getType(entity));
-				return true;
-			}
-		}
-
-		return false;
-	}
 
 
 	@Override
