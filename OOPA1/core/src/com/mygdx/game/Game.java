@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Canvas.UIManager;
 import com.mygdx.game.Collision.CollisionManager;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
@@ -32,6 +33,9 @@ public class Game extends ApplicationAdapter {
 	// Not suppose to be here
 	private PlayerController playerController;
 
+	private UIManager uiManager;
+
+
 
 	@Override
 	public void create () {
@@ -51,6 +55,9 @@ public class Game extends ApplicationAdapter {
 
 		playerController = new PlayerController(pacman, entityManager, collisionManager);
 		pacman.setPlayerController(playerController);
+
+		uiManager = new UIManager();
+
 	}
 
 
@@ -72,15 +79,22 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer.end();
 		entityManager.movement(pacman);
 		entityManager.movement(enemy);
+
+		uiManager.draw();
+
 	}
 
 
-
+	public void resize(int width, int height) {
+		uiManager.resize(width, height);
+	}
 
 
 	@Override
 	public void dispose () {
 		batch.dispose();
 		shapeRenderer.dispose();
+		uiManager.dispose();
+
 	}
 }
