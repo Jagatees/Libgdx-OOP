@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Collision.CollisionManager;
@@ -14,6 +13,7 @@ import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
+import com.mygdx.game.InputOutput.InputOutputManger;
 
 import java.util.List;
 
@@ -25,12 +25,10 @@ public class Game extends ApplicationAdapter {
 	private Player enemy;
 
 	private nonPlayer wall;
-
-
+	ShapeRenderer shapeRenderer;
 
 	EntityManager entityManager = new EntityManager();
-	CollisionManager collisionManager = new CollisionManager();
-	ShapeRenderer shapeRenderer;
+	PlayerController playerController;
 
 
 	@Override
@@ -45,6 +43,8 @@ public class Game extends ApplicationAdapter {
 		entityManager.addEntity(pacman);
 		entityManager.addEntity(wall);
 		entityManager.addEntity(enemy);
+
+		playerController = new PlayerController(pacman);
 
 	}
 
@@ -68,59 +68,59 @@ public class Game extends ApplicationAdapter {
 
 		// Inside your game loop
 		pacman.update(Gdx.graphics.getDeltaTime());
-		collisionManager.generalCollision(entityManager.getAllEntities());
 
 
-//		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-//			if (!checkFutureCollision(Input.Keys.RIGHT, pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
-//				playerController.right();
-//			}
-//		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-//			if (!checkFutureCollision(Input.Keys.LEFT , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
-//				playerController.left();
-//			}
-//		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-//			if (!checkFutureCollision(Input.Keys.UP , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
-//				playerController.up();
-//			}
-//		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-//			if (!checkFutureCollision(Input.Keys.DOWN , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
-//				playerController.down();
-//			}
-//		}
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			if (!checkFutureCollision(Input.Keys.RIGHT, pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
+				playerController.right();
+			}
+		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			if (!checkFutureCollision(Input.Keys.LEFT , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
+				playerController.left();
+			}
+		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			if (!checkFutureCollision(Input.Keys.UP , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
+				playerController.up();
+			}
+		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			if (!checkFutureCollision(Input.Keys.DOWN , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
+				playerController.down();
+			}
+		}
 	}
 
 
 
-//	private boolean checkFutureCollision(int direction, Player pacman, List<nonPlayer> entities) {
-//		float futureX = entityManager.getxCords(pacman);
-//		float futureY = entityManager.getyCords(pacman);
-//		float speed = entityManager.getSpeed(pacman);
-//
-//		switch (direction) {
-//			case Input.Keys.LEFT:
-//				futureX -= speed;
-//				break;
-//			case Input.Keys.RIGHT:
-//				futureX += speed;
-//				break;
-//			case Input.Keys.UP:
-//				futureY += speed;
-//				break;
-//			case Input.Keys.DOWN:
-//				futureY -= speed;
-//				break;
-//		}
-//
-//		for (Entity entity : entities) {
-//			if (collisionManager.checkCollision(futureX, futureY, entityManager.getWidth(pacman), entityManager.getHeight(pacman), entityManager.getxCords(entity), entityManager.getyCords(entity), entityManager.getWidth(entity), entityManager.getHeight(entity))) {
-//				collisionManager.checkResponse(entityManager.getType(pacman), entityManager.getType(entity));
-//				return true;
-//			}
-//		}
-//
-//		return false;
-//	}
+	private boolean checkFutureCollision(int direction, Player pacman, List<nonPlayer> entities) {
+		float futureX = entityManager.getxCords(pacman);
+		float futureY = entityManager.getyCords(pacman);
+		float speed = entityManager.getSpeed(pacman);
+
+		switch (direction) {
+			case Input.Keys.LEFT:
+				futureX -= speed;
+				break;
+			case Input.Keys.RIGHT:
+				futureX += speed;
+				break;
+			case Input.Keys.UP:
+				futureY += speed;
+				break;
+			case Input.Keys.DOWN:
+				futureY -= speed;
+				break;
+		}
+
+		for (Entity entity : entities) {
+			CollisionManager collisionManager = null;
+			if (collisionManager.checkCollision(futureX, futureY, entityManager.getWidth(pacman), entityManager.getHeight(pacman), entityManager.getxCords(entity), entityManager.getyCords(entity), entityManager.getWidth(entity), entityManager.getHeight(entity))) {
+				collisionManager.checkResponse(entityManager.getType(pacman), entityManager.getType(entity));
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 
 	@Override

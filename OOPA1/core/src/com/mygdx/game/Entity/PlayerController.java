@@ -1,6 +1,8 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Net;
 import com.mygdx.game.Collision.CollisionManager;
 import com.mygdx.game.InputOutput.InputOutputManger;
 
@@ -18,22 +20,22 @@ public class PlayerController{
     public PlayerController(Player player) {
         this.player = player;
         this.inputManager = new InputOutputManger();
-        this.collisionManager = new CollisionManager(); // Initialize CollisionManager
-
+        this.collisionManager = new CollisionManager();
+        this.entityManager = new EntityManager();
     }
 
     Player getPlayer(){
         return this.player;
     }
 
-    public void update() {
-        if(inputManager.isLeftPressed()) {
+    public void handleInput() {
+        if (inputManager.isLeftPressedBool()) {
             left();
-        } else if(inputManager.isRightPressed()) {
+        } else if (inputManager.isRightPressedBool()) {
             right();
-        } else if(inputManager.isUpPressed()) {
+        } else if (inputManager.isUpPressedBool()) {
             up();
-        } else if(inputManager.isDownPressed()) {
+        } else if (inputManager.isDownPressedBool()) {
             down();
         } else {
             stop();
@@ -41,8 +43,7 @@ public class PlayerController{
     }
 
 
-
-    public void right() {
+    public void right(){
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         newX = getPlayer().getxCords();
         newX += moveAmount;
@@ -71,6 +72,9 @@ public class PlayerController{
         newy -= moveAmount;
         getPlayer().setyCords(newy);
     }
+
+
+
 
     public void stop(){
         getPlayer().setxCords(getPlayer().xCords);

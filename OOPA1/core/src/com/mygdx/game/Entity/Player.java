@@ -26,7 +26,7 @@ public class Player extends Entity {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        playerController.update();
+        playerController.handleInput();
     }
 
     protected Texture getTexture() {
@@ -50,6 +50,6 @@ public class Player extends Entity {
 
     @Override
     public void userControlledMovement() {
-        playerController.update();
+        playerController.handleInput();
     }
 }
