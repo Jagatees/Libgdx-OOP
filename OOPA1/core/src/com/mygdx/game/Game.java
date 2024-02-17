@@ -68,15 +68,7 @@ public class Game extends ApplicationAdapter {
 
 		shapeRenderer.end();
 
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			playerController.move(Input.Keys.RIGHT);
-		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			playerController.move(Input.Keys.LEFT);
-		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			playerController.move(Input.Keys.UP);
-		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			playerController.move(Input.Keys.DOWN);
-		}
+
 
 
 	}
