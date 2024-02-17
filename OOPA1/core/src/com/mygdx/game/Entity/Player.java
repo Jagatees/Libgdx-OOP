@@ -43,21 +43,29 @@ public class Player extends Entity {
         }
     }
 
+    public PlayerController getPlayerController() {
+        return playerController;
+    }
+
     @Override
     public void AIControlledMovement() {
         // Do nothing, as non-player but methods needs to be implemented
     }
 
+    public void setPlayerController(PlayerController playerController) {
+        this.playerController = playerController;
+    }
+
     @Override
     public void userControlledMovement() {
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            playerController.move(Input.Keys.RIGHT);
+            getPlayerController().move(Input.Keys.RIGHT);
         } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            playerController.move(Input.Keys.LEFT);
+            getPlayerController().move(Input.Keys.LEFT);
         } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            playerController.move(Input.Keys.UP);
+            getPlayerController().move(Input.Keys.UP);
         } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            playerController.move(Input.Keys.DOWN);
+            getPlayerController().move(Input.Keys.DOWN);
         }
     }
 }

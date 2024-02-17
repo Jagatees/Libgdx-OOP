@@ -14,8 +14,6 @@ import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
 
-import java.util.List;
-
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -44,8 +42,8 @@ public class Game extends ApplicationAdapter {
 		entityManager.addEntity(wall2);
 
 
-		playerController = new PlayerController(entityManager.getEntity(Player.class), entityManager, collisionManager);
-
+		playerController = new PlayerController(pacman, entityManager, collisionManager);
+		pacman.setPlayerController(playerController); // Assuming you add a setter for playerController in Player
 
 	}
 
@@ -67,8 +65,17 @@ public class Game extends ApplicationAdapter {
 
 
 		shapeRenderer.end();
+		pacman.userControlledMovement();
 
-
+//		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+//			playerController.move(Input.Keys.RIGHT);
+//		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+//			playerController.move(Input.Keys.LEFT);
+//		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+//			playerController.move(Input.Keys.UP);
+//		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+//			playerController.move(Input.Keys.DOWN);
+//		}
 
 
 	}
