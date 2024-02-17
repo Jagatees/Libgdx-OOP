@@ -13,7 +13,6 @@ import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
-import com.mygdx.game.InputOutput.InputOutputManger;
 
 import java.util.List;
 
@@ -22,13 +21,13 @@ public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 
 	private Player pacman;
-	private Player enemy;
-
 	private nonPlayer wall;
-	ShapeRenderer shapeRenderer;
+	private nonPlayer wall2;
 
 	EntityManager entityManager = new EntityManager();
 	PlayerController playerController;
+	ShapeRenderer shapeRenderer;
+	CollisionManager collisionManager = new CollisionManager();
 
 
 	@Override
@@ -37,26 +36,17 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer = new ShapeRenderer();
 
 		pacman = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50, Entity.EntityType.PLAYER);
-<<<<<<< HEAD
-		enemy = new Player("blueGhost.png", 900, 500,0 , Entity.EntityState.NULL, true, 0, 3,50, 50, Entity.EntityType.PLAYER);
-		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NONPLAYER);
-=======
 		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.WALL);
 		wall2 = new nonPlayer("wall.jpg", 900, 300,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.EMPTY);
->>>>>>> parent of acb741f (Reafactor : Remove Game State)
 
 		entityManager.addEntity(pacman);
 		entityManager.addEntity(wall);
-		entityManager.addEntity(enemy);
+		entityManager.addEntity(wall2);
 
-		playerController = new PlayerController(pacman);
 
-<<<<<<< HEAD
-=======
 		playerController = new PlayerController(entityManager.getEntity(Player.class));
 
 
->>>>>>> parent of acb741f (Reafactor : Remove Game State)
 	}
 
 
@@ -73,14 +63,10 @@ public class Game extends ApplicationAdapter {
 
 		shapeRenderer.rect(entityManager.getxCords(pacman), entityManager.getyCords(pacman), entityManager.getWidth(pacman), entityManager.getHeight(pacman));
 		shapeRenderer.rect(entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
-		shapeRenderer.rect(entityManager.getxCords(enemy), entityManager.getyCords(enemy), entityManager.getWidth(enemy), entityManager.getHeight(enemy));
+		shapeRenderer.rect(entityManager.getxCords(wall2), entityManager.getyCords(wall2), entityManager.getWidth(wall2), entityManager.getHeight(wall2));
 
 
 		shapeRenderer.end();
-
-		// Inside your game loop
-		pacman.update(Gdx.graphics.getDeltaTime());
-
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			if (!checkFutureCollision(Input.Keys.RIGHT, pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
@@ -124,7 +110,6 @@ public class Game extends ApplicationAdapter {
 		}
 
 		for (Entity entity : entities) {
-			CollisionManager collisionManager = null;
 			if (collisionManager.checkCollision(futureX, futureY, entityManager.getWidth(pacman), entityManager.getHeight(pacman), entityManager.getxCords(entity), entityManager.getyCords(entity), entityManager.getWidth(entity), entityManager.getHeight(entity))) {
 				collisionManager.checkResponse(entityManager.getType(pacman), entityManager.getType(entity));
 				return true;

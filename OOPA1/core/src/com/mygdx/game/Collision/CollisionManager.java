@@ -5,10 +5,6 @@ import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.nonPlayer;
-import com.mygdx.game.InputOutput.InputOutputManger;
-
-import java.util.List;
-
 
 public class CollisionManager {
 
@@ -19,11 +15,11 @@ public class CollisionManager {
                 y1 + height1 > y2;
     }
 
-    public void checkResponse(Entity.EntityType type1, Entity.EntityType type2) {
-        System.out.println(type1 + " hit " + type2);
+
+    public void checkResponse(Entity.EntityType type, Entity.EntityType type1) {
+        System.out.println("This "+ type + "hit" + type1);
+
     }
-
-
 }
 
 

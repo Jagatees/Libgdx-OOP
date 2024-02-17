@@ -8,6 +8,7 @@ import java.util.List;
 public class EntityManager {
     private List<Entity> entities = new ArrayList<>();
 
+
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
@@ -16,11 +17,6 @@ public class EntityManager {
         for (Entity entity : entities) {
             entity.render(spriteBatch);
         }
-    }
-
-    // Method to return a copy of the list of all entities
-    public List<Entity> getAllEntities() {
-        return new ArrayList<>(entities);
     }
 
     public <T extends Entity> List<T> getEntitiesOfType(Class<T> type) {
@@ -42,37 +38,29 @@ public class EntityManager {
         return null;
     }
 
-    public List<Entity> getAllEntitiesExcept(Entity exception) {
-        List<Entity> filteredEntities = new ArrayList<>();
-        for (Entity entity : entities) {
-            if (!entity.equals(exception)) {
-                filteredEntities.add(entity);
-            }
-        }
-        return filteredEntities;
-    }
 
     public float getxCords(Entity entity) {
-        return entity.getxCords();
+		return entity.getxCords();
     }
-
+    
     public float getyCords(Entity entity) {
-        return entity.getyCords();
+    	return entity.getyCords();
     }
-
+    
     public float getWidth(Entity entity) {
-        return entity.getWidth();
+    	return entity.getWidth(); 
     }
-
+    
     public float getHeight(Entity entity) {
-        return entity.getHeight();
+    	return entity.getHeight();
     }
 
     public float getSpeed(Entity entity) {
-        return entity.getSpeed();
+    	return entity.getSpeed();
     }
 
     public Entity.EntityType getType(Entity entity) {
         return entity.getEntityType();
     }
+
 }
