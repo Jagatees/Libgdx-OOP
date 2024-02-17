@@ -59,6 +59,11 @@ public class EntityManager {
     	return entity.getSpeed();
     }
 
+    public void movement(Entity entity) {
+       entity.movement();
+    }
+
+
     public Entity.EntityType getType(Entity entity) {
         return entity.getEntityType();
     }

@@ -13,7 +13,6 @@ public class CollisionManager {
     }
 
 
-
     public void checkResponse(Entity.EntityType type, Entity.EntityType type1) {
         System.out.println(type + "-" + type1);
 

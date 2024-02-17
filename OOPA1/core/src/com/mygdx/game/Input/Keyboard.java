@@ -5,12 +5,6 @@ import com.badlogic.gdx.Input;
 
 public class Keyboard {
 
-    public boolean isKeyPressed(int keycode) {
-        return Gdx.input.isKeyPressed(keycode);
-    }
-
-    public int getKeyState(int keycode) {
-        return isKeyPressed(keycode) ? 1 : 0;
-    }
-
+        // Do this class last since it is very simple
+        // for now i call it hardcodeed where every i call it
 }

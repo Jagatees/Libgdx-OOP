@@ -1,6 +1,7 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Entity implements objectMovement {
 
@@ -9,13 +10,11 @@ public abstract class Entity implements objectMovement {
     protected EntityType entityType;
     protected boolean isAI;
     protected float width, height;
+    private Rectangle collisionBounds; // Collision bounds for the player
+
 
     public enum EntityType {
-        EMPTY,
-        PLAYER,
-        ENEMY,
-        WALL,
-        ITEM,
+        NULL,
     }
 
     public enum EntityState {
@@ -32,8 +31,19 @@ public abstract class Entity implements objectMovement {
         setWidth(width);
         setHeight(height);
         setEntityType(entityType);
+
+        collisionBounds = new Rectangle(xCords, yCords, width, height);
+
     }
 
+    public Rectangle getCollisionBounds() {
+        return collisionBounds;
+    }
+
+    // Method to update collision bounds position
+    protected void updateCollisionBoundsPosition() {
+        collisionBounds.setPosition(xCords, yCords);
+    }
 
     protected void update(float deltaTime) {
         // Implement logic updates here

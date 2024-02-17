@@ -11,8 +11,7 @@ public class Player extends Entity {
     private PlayerController playerController;
 
     public Player(String playerAsset, float xCords, float yCords, float speed,
-                  EntityState state, boolean isAI, int score, int numLives,
-                  float width, float height, EntityType entityType) {
+                  EntityState state, boolean isAI, float width, float height, EntityType entityType) {
         super(xCords, yCords, speed, state, isAI, width, height, entityType);
         setTexture(new Texture(Gdx.files.internal(playerAsset)));
     }
@@ -36,9 +35,9 @@ public class Player extends Entity {
     }
 
     protected void movement() {
-        if (!isAI) {
+        if (!getisAI()) {
             userControlledMovement();
-        } else if (isAI) {
+        } else if (getisAI()) {
             AIControlledMovement();
         }
     }
@@ -49,7 +48,9 @@ public class Player extends Entity {
 
     @Override
     public void AIControlledMovement() {
-        // Do nothing, as non-player but methods needs to be implemented
+        float moveAmount = 10 * Gdx.graphics.getDeltaTime();
+        float newX = this.getxCords() + moveAmount;
+        this.setxCords(newX);
     }
 
     public void setPlayerController(PlayerController playerController) {

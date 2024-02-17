@@ -17,34 +17,40 @@ import com.mygdx.game.Entity.nonPlayer;
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
+	private ShapeRenderer shapeRenderer;
 
+	// Entity
 	private Player pacman;
-	private nonPlayer wall;
-	private nonPlayer wall2;
+	private Player enemy;
 
-	EntityManager entityManager = new EntityManager();
-	PlayerController playerController;
-	ShapeRenderer shapeRenderer;
-	CollisionManager collisionManager = new CollisionManager();
+	private nonPlayer wall;
+
+	// Manager
+	private EntityManager entityManager ;
+	private CollisionManager collisionManager;
+
+	// Not suppose to be here
+	private PlayerController playerController;
 
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
+		collisionManager = new CollisionManager();
+		entityManager = new EntityManager();
 
-		pacman = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50, Entity.EntityType.PLAYER);
-		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.WALL);
-		wall2 = new nonPlayer("wall.jpg", 900, 300,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.EMPTY);
+		pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL);
+		wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
+
+		enemy = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, true,  50, 50, Entity.EntityType.NULL);
 
 		entityManager.addEntity(pacman);
+		entityManager.addEntity(enemy);
 		entityManager.addEntity(wall);
-		entityManager.addEntity(wall2);
-
 
 		playerController = new PlayerController(pacman, entityManager, collisionManager);
-		pacman.setPlayerController(playerController); // Assuming you add a setter for playerController in Player
-
+		pacman.setPlayerController(playerController);
 	}
 
 
@@ -61,23 +67,11 @@ public class Game extends ApplicationAdapter {
 
 		shapeRenderer.rect(entityManager.getxCords(pacman), entityManager.getyCords(pacman), entityManager.getWidth(pacman), entityManager.getHeight(pacman));
 		shapeRenderer.rect(entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
-		shapeRenderer.rect(entityManager.getxCords(wall2), entityManager.getyCords(wall2), entityManager.getWidth(wall2), entityManager.getHeight(wall2));
-
+		shapeRenderer.rect(entityManager.getxCords(enemy), entityManager.getyCords(enemy), entityManager.getWidth(enemy), entityManager.getHeight(enemy));
 
 		shapeRenderer.end();
-		pacman.userControlledMovement();
-
-//		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-//			playerController.move(Input.Keys.RIGHT);
-//		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-//			playerController.move(Input.Keys.LEFT);
-//		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-//			playerController.move(Input.Keys.UP);
-//		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-//			playerController.move(Input.Keys.DOWN);
-//		}
-
-
+		entityManager.movement(pacman);
+		entityManager.movement(enemy);
 	}
 
 
