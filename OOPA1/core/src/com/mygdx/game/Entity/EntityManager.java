@@ -1,12 +1,14 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Collision.CollisionManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EntityManager {
     private List<Entity> entities = new ArrayList<>();
+    private CollisionManager collisionManager;
 
 
     public void addEntity(Entity entity) {
@@ -17,6 +19,11 @@ public class EntityManager {
         for (Entity entity : entities) {
             entity.render(spriteBatch);
         }
+    }
+
+    // Method to return the list of all entities
+    public List<Entity> getAllEntities() {
+        return new ArrayList<>(entities); // Return a copy of the list to prevent external modifications
     }
 
     public <T extends Entity> List<T> getEntitiesOfType(Class<T> type) {
@@ -36,6 +43,15 @@ public class EntityManager {
             }
         }
         return null;
+    }
+
+    public boolean checkPlayerCollision(Player player) {
+        for (Entity entity : entities) {
+            if (entity != player && collisionManager.checkCollision(player, entity)) {
+                return true; // Collision detected
+            }
+        }
+        return false; // No collision detected
     }
 
 
