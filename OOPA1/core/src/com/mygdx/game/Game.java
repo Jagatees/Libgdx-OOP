@@ -37,8 +37,13 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer = new ShapeRenderer();
 
 		pacman = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50, Entity.EntityType.PLAYER);
+<<<<<<< HEAD
 		enemy = new Player("blueGhost.png", 900, 500,0 , Entity.EntityState.NULL, true, 0, 3,50, 50, Entity.EntityType.PLAYER);
 		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NONPLAYER);
+=======
+		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.WALL);
+		wall2 = new nonPlayer("wall.jpg", 900, 300,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.EMPTY);
+>>>>>>> parent of acb741f (Reafactor : Remove Game State)
 
 		entityManager.addEntity(pacman);
 		entityManager.addEntity(wall);
@@ -46,6 +51,12 @@ public class Game extends ApplicationAdapter {
 
 		playerController = new PlayerController(pacman);
 
+<<<<<<< HEAD
+=======
+		playerController = new PlayerController(entityManager.getEntity(Player.class));
+
+
+>>>>>>> parent of acb741f (Reafactor : Remove Game State)
 	}
 
 
@@ -63,6 +74,7 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer.rect(entityManager.getxCords(pacman), entityManager.getyCords(pacman), entityManager.getWidth(pacman), entityManager.getHeight(pacman));
 		shapeRenderer.rect(entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
 		shapeRenderer.rect(entityManager.getxCords(enemy), entityManager.getyCords(enemy), entityManager.getWidth(enemy), entityManager.getHeight(enemy));
+
 
 		shapeRenderer.end();
 
