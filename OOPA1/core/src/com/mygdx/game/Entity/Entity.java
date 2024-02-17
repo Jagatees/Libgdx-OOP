@@ -13,9 +13,7 @@ public abstract class Entity implements objectMovement {
     public enum EntityType {
         EMPTY,
         PLAYER,
-        ENEMY,
-        WALL,
-        ITEM,
+        NONPLAYER,
     }
 
     public enum EntityState {

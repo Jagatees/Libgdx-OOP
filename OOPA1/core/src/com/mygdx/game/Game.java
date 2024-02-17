@@ -36,7 +36,7 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer = new ShapeRenderer();
 
 		pacman = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, false, 0, 3, 50, 50, Entity.EntityType.PLAYER);
-		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.WALL);
+		wall = new nonPlayer("wall.jpg", 900, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NONPLAYER);
 		wall2 = new nonPlayer("wall.jpg", 900, 300,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.EMPTY);
 
 		entityManager.addEntity(pacman);
@@ -45,8 +45,6 @@ public class Game extends ApplicationAdapter {
 
 
 		playerController = new PlayerController(entityManager.getEntity(Player.class));
-
-
 	}
 
 
@@ -64,7 +62,6 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer.rect(entityManager.getxCords(pacman), entityManager.getyCords(pacman), entityManager.getWidth(pacman), entityManager.getHeight(pacman));
 		shapeRenderer.rect(entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
 		shapeRenderer.rect(entityManager.getxCords(wall2), entityManager.getyCords(wall2), entityManager.getWidth(wall2), entityManager.getHeight(wall2));
-
 
 		shapeRenderer.end();
 
