@@ -44,7 +44,7 @@ public class Game extends ApplicationAdapter {
 		entityManager.addEntity(wall2);
 
 
-		playerController = new PlayerController(entityManager.getEntity(Player.class));
+		playerController = new PlayerController(entityManager.getEntity(Player.class), entityManager, collisionManager);
 
 
 	}
@@ -69,22 +69,16 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer.end();
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			if (!checkFutureCollision(Input.Keys.RIGHT, pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
-				playerController.right();
-			}
+			playerController.move(Input.Keys.RIGHT);
 		} else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			if (!checkFutureCollision(Input.Keys.LEFT , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
-				playerController.left();
-			}
+			playerController.move(Input.Keys.LEFT);
 		} else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			if (!checkFutureCollision(Input.Keys.UP , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
-				playerController.up();
-			}
+			playerController.move(Input.Keys.UP);
 		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			if (!checkFutureCollision(Input.Keys.DOWN , pacman, entityManager.getEntitiesOfType(nonPlayer.class))) {
-				playerController.down();
-			}
+			playerController.move(Input.Keys.DOWN);
 		}
+
+
 	}
 
 

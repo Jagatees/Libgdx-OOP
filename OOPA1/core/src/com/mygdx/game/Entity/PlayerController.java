@@ -1,6 +1,10 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.mygdx.game.Collision.CollisionManager;
+
+import java.util.List;
 
 public class PlayerController{
 
@@ -8,14 +12,67 @@ public class PlayerController{
     private float newX;
     private float newy;
 
+    private CollisionManager collisionManager;
+    private EntityManager entityManager;
+    private List<nonPlayer> entities;
 
 
-    public PlayerController(Player player) {
+    public PlayerController(Player player, EntityManager entityManager, CollisionManager collisionManager) {
         this.player = player;
+        this.entityManager = entityManager;
+        this.player = entityManager.getEntity(Player.class);
+        this.collisionManager = collisionManager;
+        this.entities = entityManager.getEntitiesOfType(nonPlayer.class);
     }
 
     Player getPlayer(){
         return this.player;
+    }
+
+
+
+    public void move(int direction) {
+        if (!checkFutureCollision(direction)) {
+            switch (direction) {
+                case Input.Keys.LEFT: left(); break;
+                case Input.Keys.RIGHT: right(); break;
+                case Input.Keys.UP: up(); break;
+                case Input.Keys.DOWN: down(); break;
+            }
+        }
+    }
+
+    private boolean checkFutureCollision(int direction) {
+        float futureX = entityManager.getxCords(getPlayer());
+        float futureY = entityManager.getyCords(getPlayer());
+        float speed = entityManager.getSpeed(getPlayer());
+
+        // Calculate future position based on direction
+        switch (direction) {
+            case Input.Keys.LEFT:
+                futureX -= speed;
+                break;
+            case Input.Keys.RIGHT:
+                futureX += speed;
+                break;
+            case Input.Keys.UP:
+                futureY += speed;
+                break;
+            case Input.Keys.DOWN:
+                futureY -= speed;
+                break;
+        }
+
+        // Check collision with each entity
+        for (nonPlayer entity : entities) {
+            if (collisionManager.checkCollision(futureX, futureY, player.getWidth(), player.getHeight(),
+                    entityManager.getxCords(entity), entityManager.getyCords(entity), entityManager.getWidth(entity), entityManager.getHeight(entity))) {
+                // Optional: handle collision specifics, e.g., updating game state or player status
+                return true; // Collision detected
+            }
+        }
+
+        return false; // No collision detected
     }
 
 
