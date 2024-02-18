@@ -4,12 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Canvas.UIManager;
-import com.mygdx.game.Collision.CollisionManager;
+import com.mygdx.game.Canvas.TextRendererScreenTwo;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
-import com.mygdx.game.Entity.Player;
-import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
 
 public class MainScene implements Scene{
@@ -19,26 +16,33 @@ public class MainScene implements Scene{
     private EntityManager entityManager;
 
     private nonPlayer wall;
-    private UIManager uiManager;
+
+    private TextRendererScreenTwo textRendererScreenTwo;
 
 
     public MainScene() {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         entityManager = new EntityManager();
-        uiManager = new UIManager();
+
+        wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
+
+
+        entityManager.addEntity(wall);
+
+        textRendererScreenTwo = new TextRendererScreenTwo();
+
     }
 
     @Override
     public void create() {
-        wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
-        uiManager.setScreen("Main");
-
-        entityManager.addEntity(wall);
+        // Additional setup if needed
     }
 
     @Override
     public void render() {
+        System.out.println("Rendering Main Scene");
+
         ScreenUtils.clear(1, 0, 0, 1);
 
         batch.begin();
@@ -52,7 +56,8 @@ public class MainScene implements Scene{
 
         shapeRenderer.end();
 
-        uiManager.render();
+        textRendererScreenTwo.draw();
+
     }
 
     @Override
@@ -64,7 +69,7 @@ public class MainScene implements Scene{
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
-        uiManager.dispose();
+        textRendererScreenTwo.dispose();
     }
 
 }

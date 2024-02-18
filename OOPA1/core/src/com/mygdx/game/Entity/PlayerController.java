@@ -61,6 +61,7 @@ public class PlayerController {
                 break;
         }
 
+        // Do it here
         for (nonPlayer entity : entitiesNonPlayer) {
             if (collisionManager.checkCollision(
                     futureX, futureY,
