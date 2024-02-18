@@ -6,7 +6,7 @@ import com.mygdx.game.Canvas.CanvasManager;
 import com.mygdx.game.Canvas.MainMeunCanvas;
 
 
-public class MainScene implements Scene{
+public class MainScene extends TemplateScene{
 
     private SpriteBatch batch = new SpriteBatch();
     private CanvasManager canvasManager;

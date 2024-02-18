@@ -12,7 +12,7 @@ import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
 
-public class GameScene implements Scene {
+public class GameScene extends TemplateScene {
 
 
     private SpriteBatch batch;

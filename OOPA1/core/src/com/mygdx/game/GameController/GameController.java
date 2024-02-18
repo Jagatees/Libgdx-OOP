@@ -2,13 +2,13 @@ package com.mygdx.game.GameController;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Scenes.MainScene;
-import com.mygdx.game.Scenes.Scene;
 import com.mygdx.game.Scenes.SceneManager;
 
 public class GameController {
 
     private static GameController instance;
     private SceneManager sceneManager;
+
 
     public GameController() {
 
