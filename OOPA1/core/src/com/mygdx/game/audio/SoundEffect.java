@@ -1,9 +1,10 @@
-package com.mygdx.game.Audio;
+package com.mygdx.game.audio;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.mygdx.game.audio.AudioAssest;
 
-public class SoundEffect implements  AudioAssest{
+public class SoundEffect implements AudioAssest {
 
     private Sound sound;
     private float volume;

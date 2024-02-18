@@ -1,7 +1,8 @@
-package com.mygdx.game.Audio;
+package com.mygdx.game.audio;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.mygdx.game.audio.AudioAssest;
 
 public class MusicTrack implements AudioAssest {
     private Music music;

@@ -1,4 +1,5 @@
-package com.mygdx.game.Audio;
+package com.mygdx.game.audio;
+
 
 import java.util.HashMap;
 import java.util.Map;
