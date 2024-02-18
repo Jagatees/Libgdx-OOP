@@ -4,12 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Canvas.UIManager;
-import com.mygdx.game.Collision.CollisionManager;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
-import com.mygdx.game.Entity.Player;
-import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
 
 public class MainScene implements Scene{
@@ -19,7 +15,6 @@ public class MainScene implements Scene{
     private EntityManager entityManager;
 
     private nonPlayer wall;
-//    private UIManager uiManager;
 
 
     public MainScene() {
@@ -32,9 +27,6 @@ public class MainScene implements Scene{
 
         entityManager.addEntity(wall);
 
-
-//        uiManager = new UIManager();
-//        uiManager.setScreen("Main");
     }
 
     @Override
@@ -44,6 +36,8 @@ public class MainScene implements Scene{
 
     @Override
     public void render() {
+        System.out.println("Rendering Main Scene");
+
         ScreenUtils.clear(1, 0, 0, 1);
 
         batch.begin();
@@ -57,7 +51,6 @@ public class MainScene implements Scene{
 
         shapeRenderer.end();
 
-//        uiManager.render();
     }
 
     @Override
@@ -69,7 +62,6 @@ public class MainScene implements Scene{
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
-//        uiManager.dispose();
     }
 
 }

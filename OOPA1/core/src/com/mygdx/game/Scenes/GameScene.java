@@ -4,9 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Canvas.GameScreen;
-import com.mygdx.game.Canvas.Screen;
-import com.mygdx.game.Canvas.UIManager;
 import com.mygdx.game.Collision.CollisionManager;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
@@ -22,7 +19,6 @@ public class GameScene implements Scene {
     private Player pacman;
     private Player enemy;
     private nonPlayer wall;
-//    private UIManager uiManager;
 
 
     public GameScene() {
@@ -42,17 +38,18 @@ public class GameScene implements Scene {
         PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
         pacman.setPlayerController(playerController);
 
-//        uiManager = new UIManager();
-//        uiManager.setScreen("Game");
+
     }
 
     @Override
     public void create() {
-        // Additional setup if needed
+
     }
 
     @Override
     public void render() {
+        System.out.println("Rendering Game Scene");
+
         ScreenUtils.clear(1, 0, 0, 1);
 
         batch.begin();
@@ -68,7 +65,6 @@ public class GameScene implements Scene {
 
         shapeRenderer.end();
 
-//        uiManager.render();
     }
 
     @Override
@@ -81,7 +77,6 @@ public class GameScene implements Scene {
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
-//        uiManager.dispose();
     }
 
 
