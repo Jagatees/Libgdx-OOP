@@ -1,10 +1,12 @@
 package com.mygdx.game.Scenes;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Canvas.TextRendererScreen;
+import com.mygdx.game.Canvas.CanvasManager;
+import com.mygdx.game.Canvas.GameCanvas;
 import com.mygdx.game.Collision.CollisionManager;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
@@ -21,6 +23,8 @@ public class GameScene implements Scene {
     private nonPlayer enemy;
     private nonPlayer wall;
     private SceneManager sceneManager;
+    private CanvasManager canvasManager;
+
 
 
 
@@ -41,6 +45,9 @@ public class GameScene implements Scene {
         PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
         pacman.setPlayerController(playerController);
         this.sceneManager = sceneManager;
+
+        canvasManager = new CanvasManager(sceneManager);
+        canvasManager.setCanvas(new GameCanvas(sceneManager));
 
     }
 
@@ -67,6 +74,10 @@ public class GameScene implements Scene {
 
         shapeRenderer.end();
 
+        float delta = Gdx.graphics.getDeltaTime();
+        canvasManager.render(delta);
+        canvasManager.update(delta);
+
     }
 
     @Override
@@ -79,6 +90,7 @@ public class GameScene implements Scene {
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
+        canvasManager.dispose();
     }
 
 

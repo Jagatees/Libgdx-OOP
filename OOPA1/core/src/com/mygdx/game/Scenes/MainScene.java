@@ -6,8 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Canvas.CanvasManager;
-import com.mygdx.game.Canvas.GameMenuScreen;
-import com.mygdx.game.Canvas.TextRendererScreenTwo;
+import com.mygdx.game.Canvas.MainMeunCanvas;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.nonPlayer;
@@ -26,7 +25,7 @@ public class MainScene implements Scene{
         wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
         entityManager.addEntity(wall);
         canvasManager = new CanvasManager(sceneManager);
-        canvasManager.setCanvas(new GameMenuScreen(sceneManager));
+        canvasManager.setCanvas(new MainMeunCanvas(sceneManager));
 
     }
 
