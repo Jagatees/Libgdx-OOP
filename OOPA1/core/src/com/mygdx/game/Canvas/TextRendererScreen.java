@@ -27,7 +27,7 @@ public class TextRendererScreen  {
         // textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture("button-down.png")));
 
         // Create and configure a text button
-        TextButton textButton = new TextButton("Click me!", textButtonStyle);
+        TextButton textButton = new TextButton("Game Meun", textButtonStyle);
         textButton.setPosition(100, 100); // Position the button
         textButton.setSize(200, 50); // Set the size of the button
         textButton.addListener(new ChangeListener() {
