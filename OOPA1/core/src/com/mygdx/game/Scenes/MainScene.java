@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Canvas.TextRendererScreenTwo;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.nonPlayer;
@@ -16,6 +17,8 @@ public class MainScene implements Scene{
 
     private nonPlayer wall;
 
+    private TextRendererScreenTwo textRendererScreenTwo;
+
 
     public MainScene() {
         batch = new SpriteBatch();
@@ -26,6 +29,8 @@ public class MainScene implements Scene{
 
 
         entityManager.addEntity(wall);
+
+        textRendererScreenTwo = new TextRendererScreenTwo();
 
     }
 
@@ -51,6 +56,8 @@ public class MainScene implements Scene{
 
         shapeRenderer.end();
 
+        textRendererScreenTwo.draw();
+
     }
 
     @Override
@@ -62,6 +69,7 @@ public class MainScene implements Scene{
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
+        textRendererScreenTwo.dispose();
     }
 
 }
