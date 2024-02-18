@@ -1,9 +1,7 @@
 package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Canvas.CanvasManager;
 import com.mygdx.game.Canvas.GameCanvas;
@@ -15,13 +13,16 @@ import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
 
 public class GameScene implements Scene {
+
+
     private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
+    private Player pacman;
+    private nonPlayer enemy, wall;
+
+
+    // Manager
     private EntityManager entityManager;
     private CollisionManager collisionManager;
-    private Player pacman;
-    private nonPlayer enemy;
-    private nonPlayer wall;
     private SceneManager sceneManager;
     private CanvasManager canvasManager;
 
@@ -30,7 +31,6 @@ public class GameScene implements Scene {
 
     public GameScene(SceneManager sceneManager) {
         batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
         entityManager = new EntityManager();
 
@@ -52,31 +52,12 @@ public class GameScene implements Scene {
     }
 
     @Override
-    public void create() {
-
-    }
-
-    @Override
     public void render() {
-
     	ScreenUtils.clear((float) 0.8, (float) 0.8, (float) 0.8, 1);
 
         batch.begin();
         entityManager.render(batch);
         batch.end();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // Start drawing lines
-        shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red
-
-        shapeRenderer.rect(entityManager.getxCords(pacman), entityManager.getyCords(pacman), entityManager.getWidth(pacman), entityManager.getHeight(pacman));
-        shapeRenderer.rect(entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
-        shapeRenderer.rect(entityManager.getxCords(enemy), entityManager.getyCords(enemy), entityManager.getWidth(enemy), entityManager.getHeight(enemy));
-
-        shapeRenderer.end();
-
-        float delta = Gdx.graphics.getDeltaTime();
-        canvasManager.render(delta);
-        canvasManager.update(delta);
 
     }
 
@@ -84,13 +65,21 @@ public class GameScene implements Scene {
     public void update(float delta) {
         entityManager.movement(pacman);
         entityManager.movement(enemy);
+
+        canvasManager.render(delta);
+        canvasManager.update(delta);
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        shapeRenderer.dispose();
         canvasManager.dispose();
+    }
+
+
+    @Override
+    public void create() {
+
     }
 
 
