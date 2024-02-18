@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.AI.AIController;
 import com.mygdx.game.Canvas.CanvasManager;
 import com.mygdx.game.Canvas.GameCanvas;
 import com.mygdx.game.Collision.CollisionManager;
@@ -22,6 +23,10 @@ public class GameScene implements Scene {
     private Player pacman;
     private nonPlayer enemy;
     private nonPlayer wall;
+    private nonPlayer wall2;
+    private nonPlayer wall3;
+    private nonPlayer wall4;
+    private nonPlayer wall5;
     private SceneManager sceneManager;
     private CanvasManager canvasManager;
 
@@ -37,13 +42,28 @@ public class GameScene implements Scene {
         pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL);
         wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
         enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL);
-
+        
+        wall2 = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
+        wall3 = new nonPlayer("wall.jpg", 300, 0,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
+        wall4 = new nonPlayer("wall.jpg", 300, 175,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
+        wall5 = new nonPlayer("wall.jpg", 185, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
+        
+        
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
         entityManager.addEntity(wall);
+        entityManager.addEntity(wall2);
+        entityManager.addEntity(wall3);
+        entityManager.addEntity(wall4);
+        entityManager.addEntity(wall5);
+        
 
         PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
         pacman.setPlayerController(playerController);
+        
+        AIController aiController = new AIController(enemy, entityManager, collisionManager);
+        enemy.setAIController(aiController);
+        
         this.sceneManager = sceneManager;
 
         canvasManager = new CanvasManager(sceneManager);

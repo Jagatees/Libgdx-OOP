@@ -7,7 +7,8 @@ import java.util.List;
 
 public class EntityManager {
     private List<Entity> entities = new ArrayList<>();
-
+    private float aiNewX;
+    private float aiNewY;
 
     public void addEntity(Entity entity) {
         entities.add(entity);
@@ -54,6 +55,14 @@ public class EntityManager {
     public float getHeight(Entity entity) {
     	return entity.getHeight();
     }
+    
+    public void setAIXCords(nonPlayer entity, float aiNewX) {
+    	entity.setxCords(aiNewX);
+    }
+    
+    public void setAIYCords(nonPlayer entity, float aiNewY) {
+    	entity.setyCords(aiNewY);
+    }
 
     public float getSpeed(Entity entity) {
     	return entity.getSpeed();
@@ -67,5 +76,4 @@ public class EntityManager {
     public Entity.EntityType getType(Entity entity) {
         return entity.getEntityType();
     }
-
 }
