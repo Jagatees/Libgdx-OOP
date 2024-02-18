@@ -2,6 +2,7 @@ package com.mygdx.game.GameController;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Scenes.MainScene;
+import com.mygdx.game.Scenes.Scene;
 import com.mygdx.game.Scenes.SceneManager;
 
 public class GameController {
@@ -29,7 +30,7 @@ public class GameController {
 
     public void startGame(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
-        sceneManager.setScene(new MainScene(sceneManager));
+        sceneManager.setScene(new MainScene(this.sceneManager));
     }
     public void closeGame() {
         Gdx.app.exit();
