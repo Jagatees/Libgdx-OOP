@@ -38,7 +38,7 @@ public class MainScene implements Scene{
 
     @Override
     public void render() {
-        ScreenUtils.clear(1, 0, 0, 1);
+        ScreenUtils.clear((float) 0.8, (float) 0.8, (float) 0.8, 1);
 
         batch.begin();
         entityManager.render(batch);
