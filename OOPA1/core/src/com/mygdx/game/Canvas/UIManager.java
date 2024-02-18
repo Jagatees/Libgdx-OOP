@@ -19,6 +19,8 @@ public class UIManager {
 
     public UIManager() {
         screens = new HashMap<>();
+        addScreen("Game", new GameScreen());
+        addScreen("Main", new MainScreen());
     }
 
     public void addScreen(String name, Screen screen) {
