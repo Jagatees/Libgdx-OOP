@@ -1,9 +1,12 @@
 package com.mygdx.game.Scenes;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Canvas.CanvasManager;
+import com.mygdx.game.Canvas.GameMenuScreen;
 import com.mygdx.game.Canvas.TextRendererScreenTwo;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
@@ -11,30 +14,20 @@ import com.mygdx.game.Entity.nonPlayer;
 
 public class MainScene implements Scene{
 
-    private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
-    private EntityManager entityManager;
+    private SpriteBatch batch = new SpriteBatch();
+    private ShapeRenderer shapeRenderer = new ShapeRenderer(); // REMOVE THE SHAPE RENDER THIS IS ONLY FOR TESTING
+    private EntityManager entityManager = new EntityManager();
     private nonPlayer wall;
-    private TextRendererScreenTwo textRendererScreenTwo;
-    private SceneManager sceneManager;
+    private CanvasManager canvasManager;
+
+
 
     public MainScene(SceneManager sceneManager) {
-        batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-        entityManager = new EntityManager();
-
         wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
-
-
         entityManager.addEntity(wall);
+        canvasManager = new CanvasManager(sceneManager);
+        canvasManager.setCanvas(new GameMenuScreen(sceneManager));
 
-        textRendererScreenTwo = new TextRendererScreenTwo(sceneManager);
-
-    }
-
-    @Override
-    public void create() {
-        // Additional setup if needed
     }
 
     @Override
@@ -45,14 +38,28 @@ public class MainScene implements Scene{
         entityManager.render(batch);
         batch.end();
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // Start drawing lines
-        shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red
-
+        // REMOVE THE SHAPE RENDER THIS IS ONLY FOR TESTING
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.RED);
         shapeRenderer.rect(entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
-
         shapeRenderer.end();
+        // REMOVE THE SHAPE RENDER THIS IS ONLY FOR TESTING
+        float delta = Gdx.graphics.getDeltaTime();
+        canvasManager.render(delta);
+        canvasManager.update(delta);
 
-        textRendererScreenTwo.draw();
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        shapeRenderer.dispose();
+        canvasManager.dispose();
+    }
+
+
+    @Override
+    public void create() {
 
     }
 
@@ -61,11 +68,5 @@ public class MainScene implements Scene{
 
     }
 
-    @Override
-    public void dispose() {
-        batch.dispose();
-        shapeRenderer.dispose();
-        textRendererScreenTwo.dispose();
-    }
 
 }

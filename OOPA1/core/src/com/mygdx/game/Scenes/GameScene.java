@@ -20,8 +20,9 @@ public class GameScene implements Scene {
     private Player pacman;
     private nonPlayer enemy;
     private nonPlayer wall;
-    private TextRendererScreen textRendererScreen;
     private SceneManager sceneManager;
+
+
 
     public GameScene(SceneManager sceneManager) {
         batch = new SpriteBatch();
@@ -39,7 +40,6 @@ public class GameScene implements Scene {
 
         PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
         pacman.setPlayerController(playerController);
-        textRendererScreen = new TextRendererScreen();
         this.sceneManager = sceneManager;
 
     }
@@ -67,7 +67,6 @@ public class GameScene implements Scene {
 
         shapeRenderer.end();
 
-        textRendererScreen.draw();
     }
 
     @Override
@@ -80,7 +79,6 @@ public class GameScene implements Scene {
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
-        textRendererScreen.dispose();
     }
 
 

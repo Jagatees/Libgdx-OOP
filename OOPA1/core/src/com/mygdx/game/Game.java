@@ -3,6 +3,7 @@ package com.mygdx.game;
 // Import statements for libGDX framework and game scene management
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.Scenes.GameScene;
 import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.SceneManager;
 
