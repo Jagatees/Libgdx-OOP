@@ -51,10 +51,8 @@ public class UIManager {
         }
     }
 
-    public void resize(int width, int height) {
-        if (currentScreen != null) {
-            currentScreen.resize(width, height);
-        }
+    public static Screen getCurrentScreen() {
+        return currentScreen;
     }
 
     public void dispose() {

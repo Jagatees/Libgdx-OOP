@@ -19,27 +19,22 @@ public class MainScene implements Scene{
     private EntityManager entityManager;
 
     private nonPlayer wall;
-//    private UIManager uiManager;
+    private UIManager uiManager;
 
 
     public MainScene() {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         entityManager = new EntityManager();
-
-        wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
-
-
-        entityManager.addEntity(wall);
-
-
-//        uiManager = new UIManager();
-//        uiManager.setScreen("Main");
+        uiManager = new UIManager();
     }
 
     @Override
     public void create() {
-        // Additional setup if needed
+        wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
+        uiManager.setScreen("Main");
+
+        entityManager.addEntity(wall);
     }
 
     @Override
@@ -57,7 +52,7 @@ public class MainScene implements Scene{
 
         shapeRenderer.end();
 
-//        uiManager.render();
+        uiManager.render();
     }
 
     @Override
@@ -69,7 +64,7 @@ public class MainScene implements Scene{
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
-//        uiManager.dispose();
+        uiManager.dispose();
     }
 
 }

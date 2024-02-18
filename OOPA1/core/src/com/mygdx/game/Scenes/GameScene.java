@@ -22,14 +22,21 @@ public class GameScene implements Scene {
     private Player pacman;
     private Player enemy;
     private nonPlayer wall;
-//    private UIManager uiManager;
-
+    private UIManager uiManager;
+    private  PlayerController playerController;
 
     public GameScene() {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
         entityManager = new EntityManager();
+        uiManager = new UIManager();
+    }
+
+    @Override
+    public void create() {
+
+        playerController = new PlayerController(pacman, entityManager, collisionManager);
 
         pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL);
         wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
@@ -39,16 +46,11 @@ public class GameScene implements Scene {
         entityManager.addEntity(enemy);
         entityManager.addEntity(wall);
 
-        PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
         pacman.setPlayerController(playerController);
 
-//        uiManager = new UIManager();
-//        uiManager.setScreen("Game");
-    }
 
-    @Override
-    public void create() {
-        // Additional setup if needed
+        uiManager.setScreen("Game");
+
     }
 
     @Override
@@ -68,7 +70,7 @@ public class GameScene implements Scene {
 
         shapeRenderer.end();
 
-//        uiManager.render();
+        uiManager.render();
     }
 
     @Override
@@ -81,7 +83,7 @@ public class GameScene implements Scene {
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
-//        uiManager.dispose();
+        uiManager.dispose();
     }
 
 

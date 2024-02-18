@@ -28,6 +28,8 @@ public class GameScreen implements Screen{
 
     @Override
     public void render() {
+        Gdx.gl.glClearColor(1, 1, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
         stage.act();
@@ -37,11 +39,6 @@ public class GameScreen implements Screen{
     @Override
     public void update(float delta) {
         // Add game logic and update code here
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
     }
 
     @Override
