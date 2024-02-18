@@ -4,9 +4,9 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.GameController.GameController;
-import com.mygdx.game.Scenes.GameScene;
-import com.mygdx.game.Scenes.MainScene;
+import com.mygdx.game.Input.Keyboard;
 import com.mygdx.game.Scenes.SceneManager;
+
 
 
 /**
@@ -17,11 +17,13 @@ import com.mygdx.game.Scenes.SceneManager;
 public class Game extends ApplicationAdapter {
 
 	private GameController gameController;
+	private Keyboard keyboard ;
 
 	@Override
 	public void create() {
 		gameController = GameController.getInstance();
 		gameController.startGame(new SceneManager());
+		keyboard = new Keyboard();
 	}
 
 	@Override
@@ -32,6 +34,11 @@ public class Game extends ApplicationAdapter {
 
 	private void update(float deltaTime) {
 		gameController.update(deltaTime);
+
+		int pressedKey = keyboard.getKeyPressed();
+		if (pressedKey != -1) {
+			System.out.println("Key pressed: " + pressedKey);
+		}
 	}
 
 	@Override
