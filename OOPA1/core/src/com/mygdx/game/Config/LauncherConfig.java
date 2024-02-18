@@ -6,6 +6,8 @@ public class LauncherConfig {
     private String ICON_16, ICON_32, ICON_48;
 
 
+
+
     public LauncherConfig() {
         LauncherConfig(1280, 720, "OOPA1", "icon16.png", "icon32.png", "icon48.png");
     }

@@ -3,6 +3,7 @@ package com.mygdx.game;
 // Import statements for libGDX framework and game scene management
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.GameController.GameController;
 import com.mygdx.game.Scenes.GameScene;
 import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.SceneManager;
@@ -15,46 +16,26 @@ import com.mygdx.game.Scenes.SceneManager;
  */
 public class Game extends ApplicationAdapter {
 
-	/** SceneManager instance to manage transitions and states of various scenes */
-	private final SceneManager sceneManager = new SceneManager();
+	private GameController gameController;
 
-	/**
-	 * @Description :
-	 * @Param :
-	 * @Return :
-	 */
 	@Override
 	public void create() {
-		sceneManager.setScene(new MainScene(sceneManager));
+		gameController = GameController.getInstance();
+		gameController.startGame(new SceneManager());
 	}
 
-	/**
-	 * @Description :
-	 * @Param :
-	 * @Return :
-	 */
 	@Override
 	public void render() {
-		sceneManager.render();
+		gameController.render();
 		update(Gdx.graphics.getDeltaTime());
 	}
 
-	/**
-	 * @Description :
-	 * @Param :
-	 * @Return :
-	 */
 	private void update(float deltaTime) {
-		sceneManager.update(deltaTime);
+		gameController.update(deltaTime);
 	}
 
-	/**
-	 * @Description :
-	 * @Param :
-	 * @Return :
-	 */
 	@Override
 	public void dispose() {
-		sceneManager.dispose();
+		gameController.dispose();
 	}
 }

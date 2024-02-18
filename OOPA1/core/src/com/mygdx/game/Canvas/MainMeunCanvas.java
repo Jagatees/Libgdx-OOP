@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.GameController.GameController;
 import com.mygdx.game.Scenes.GameScene;
 import com.mygdx.game.Scenes.SceneManager;
 
@@ -18,8 +19,8 @@ public class MainMeunCanvas implements Canvas{
     private SceneManager sceneManager;
     private Stage stage;
     private TextButton startGameButton;
-    private TextButton optionsButton;
     private TextButton exitGameButton;
+    private GameController gameController;
 
 
     public MainMeunCanvas(SceneManager sceneManager) {
@@ -33,13 +34,12 @@ public class MainMeunCanvas implements Canvas{
         startGameButton = createButton("Start Game", 600, 450);
         stage.addActor(startGameButton);
 
-        optionsButton = createButton("Options", 600, 375);
-        stage.addActor(optionsButton);
-
-        exitGameButton = createButton("Exit Game", 600, 300);
+        exitGameButton = createButton("Exit Game", 600, 375);
         stage.addActor(exitGameButton);
 
         this.sceneManager = sceneManager;
+        this.gameController = new GameController();
+
     }
 
     private TextButton createButton(String buttonText, float x, float y) {
@@ -58,14 +58,10 @@ public class MainMeunCanvas implements Canvas{
             @Override
             public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
                 if (actor == startGameButton) {
-                    Gdx.app.log("UIManager", "Start button clicked!");
                     sceneManager.setScene(new GameScene(sceneManager));
-                } else if (actor == optionsButton) {
-                    // Options action
-                    Gdx.app.log("UIManager", "Options button clicked!");
-                } else if (actor == exitGameButton) {
-                    // Exit game action
-                    Gdx.app.log("UIManager", "Exit Game button clicked!");
+                }
+                else if (actor == exitGameButton) {
+                    gameController.closeGame();
                 }
             }
         });
