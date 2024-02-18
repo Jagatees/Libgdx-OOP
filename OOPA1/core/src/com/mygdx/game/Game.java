@@ -2,11 +2,13 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Canvas.GameOverScreen;
+import com.mygdx.game.Canvas.GameScreen;
+import com.mygdx.game.Canvas.MainMeunScreen;
 import com.mygdx.game.Canvas.UIManager;
 import com.mygdx.game.Collision.CollisionManager;
 import com.mygdx.game.Entity.Entity;
@@ -14,9 +16,13 @@ import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
+import com.mygdx.game.Scenes.GameScene;
+import com.mygdx.game.Scenes.SceneManager;
+
+import jdk.tools.jmod.Main;
 
 
-public class Game extends ApplicationAdapter {
+public class Game extends ApplicationAdapter  {
 	SpriteBatch batch;
 	private ShapeRenderer shapeRenderer;
 
@@ -37,8 +43,17 @@ public class Game extends ApplicationAdapter {
 
 
 
+	private SceneManager sceneManager;
+
+
+
+
 	@Override
 	public void create () {
+
+		sceneManager = new SceneManager();
+		sceneManager.setScene(new GameScene());
+
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		collisionManager = new CollisionManager();
@@ -57,6 +72,11 @@ public class Game extends ApplicationAdapter {
 		pacman.setPlayerController(playerController);
 
 		uiManager = new UIManager();
+		uiManager.addScreen("1", new GameScreen());
+		uiManager.addScreen("2", new GameOverScreen());
+		uiManager.addScreen("3", new MainMeunScreen());
+
+		uiManager.setScreen("3");
 
 	}
 
@@ -64,6 +84,9 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 1);
+
+		UIManager.render();
+
 
 		batch.begin();
 		entityManager.render(batch);
@@ -80,8 +103,11 @@ public class Game extends ApplicationAdapter {
 		entityManager.movement(pacman);
 		entityManager.movement(enemy);
 
-		uiManager.draw();
+		// Render the current scene
+		sceneManager.render();
 
+		// Update the current scene
+		sceneManager.update(Gdx.graphics.getDeltaTime());
 	}
 
 
@@ -95,6 +121,6 @@ public class Game extends ApplicationAdapter {
 		batch.dispose();
 		shapeRenderer.dispose();
 		uiManager.dispose();
-
+		sceneManager.dispose();
 	}
 }

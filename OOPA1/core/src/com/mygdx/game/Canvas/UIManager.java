@@ -7,46 +7,65 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.Entity.EntityManager;
+import com.mygdx.game.Entity.Player;
+
+import java.util.HashMap;
 
 public class UIManager {
-    private Stage stage;
-    private TextButton startButton;
+    private HashMap<String, Screen> screens;
+    private static Screen currentScreen;
+
 
     public UIManager() {
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        screens = new HashMap<>();
+    }
 
-        // Create a font for the button text
-        BitmapFont font = new BitmapFont();
+    // Method to change screen based on certain conditions (e.g., player death)
+    public void changeScreenOnPlayerDeath(EntityManager entityManager, Player player) {
+        if (entityManager.getxCords(player) > 100) {
+            setScreen("GameScreen");
 
-        // Create a TextButton with the font
-        startButton = new TextButton("Start Game", new TextButton.TextButtonStyle(null, null, null, font));
+        }
+    }
 
-        // Set button position
-        startButton.setPosition(100, 100);
+    public void addScreen(String name, Screen screen) {
+        screens.put(name, screen);
+    }
 
-        // Add a click listener to the button
-        startButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // Handle button click event
-                System.out.println("Start button clicked!");
+    public void setScreen(String name) {
+        if (screens.containsKey(name)) {
+            if (currentScreen != null) {
+                currentScreen.dispose();
             }
-        });
+            currentScreen = screens.get(name);
+            currentScreen.create();
+        } else {
+            throw new IllegalArgumentException("Screen with name " + name + " does not exist.");
+        }
+    }
 
-        // Add the button to the stage
-        stage.addActor(startButton);
+    public static void render() {
+        if (currentScreen != null) {
+            currentScreen.render();
+        }
+    }
+
+    public void update(float delta) {
+        if (currentScreen != null) {
+            currentScreen.update(delta);
+        }
     }
 
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-    }
-    public void draw() {
-        stage.act();
-        stage.draw();
+        if (currentScreen != null) {
+            currentScreen.resize(width, height);
+        }
     }
 
     public void dispose() {
-        stage.dispose();
+        for (Screen screen : screens.values()) {
+            screen.dispose();
+        }
     }
 }
