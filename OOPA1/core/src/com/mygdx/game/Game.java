@@ -19,8 +19,8 @@ public class Game extends ApplicationAdapter {
 
 	/**
 	 * @Description :
-	 * @param :
-	 * @return :
+	 * @Param :
+	 * @Return :
 	 */
 	@Override
 	public void create() {
@@ -29,8 +29,8 @@ public class Game extends ApplicationAdapter {
 
 	/**
 	 * @Description :
-	 * @param :
-	 * @return :
+	 * @Param :
+	 * @Return :
 	 */
 	@Override
 	public void render() {
@@ -40,8 +40,8 @@ public class Game extends ApplicationAdapter {
 
 	/**
 	 * @Description :
-	 * @param :
-	 * @return :
+	 * @Param :
+	 * @Return :
 	 */
 	private void update(float deltaTime) {
 		sceneManager.update(deltaTime);
@@ -49,8 +49,8 @@ public class Game extends ApplicationAdapter {
 
 	/**
 	 * @Description :
-	 * @param :
-	 * @return :
+	 * @Param :
+	 * @Return :
 	 */
 	@Override
 	public void dispose() {
