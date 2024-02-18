@@ -18,7 +18,7 @@ public class GameScene implements Scene {
     private EntityManager entityManager;
     private CollisionManager collisionManager;
     private Player pacman;
-    private Player enemy;
+    private nonPlayer enemy;
     private nonPlayer wall;
     private TextRendererScreen textRendererScreen;
 
@@ -31,7 +31,7 @@ public class GameScene implements Scene {
 
         pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL);
         wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
-        enemy = new Player("pacman.png", 300, 100, 10, Entity.EntityState.NULL, true,  50, 50, Entity.EntityType.NULL);
+        enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL);
 
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
