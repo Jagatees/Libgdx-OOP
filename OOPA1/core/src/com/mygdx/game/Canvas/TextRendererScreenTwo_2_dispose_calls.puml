@@ -1,0 +1,176 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "com.mygdx.game.Canvas.TextRendererScreenTwo#dispose()",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "com.mygdx.game.Canvas.TextRendererScreenTwo",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_104370703 { 
+   	label=mygdx
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1554244721 { 
+   	label=game
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   subgraph cluster_1061483388 { 
+   	label=MainScene
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   MainScene1662065271XXXdispose0[
+	label="+ dispose()"
+	style=filled
+	fillcolor=white
+	tooltip="MainScene
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1974046462 { 
+   	label=Game
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Game670316286XXXdispose0[
+	label="+ dispose()"
+	style=filled
+	fillcolor=white
+	tooltip="Game
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_51759126 { 
+   	label=TextRendererScreenTwo
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   TextRendererScreenTwo1202427496XXXdispose0[
+	label="+ dispose()"
+	style=filled
+	fillcolor=white
+	tooltip="TextRendererScreenTwo
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_84904008 { 
+   	label=SceneManager
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   SceneManager1662065271XXXdispose0[
+	label="+ dispose()"
+	style=filled
+	fillcolor=white
+	tooltip="SceneManager
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+} 
+
+'edges    
+Game670316286XXXdispose0 -> SceneManager1662065271XXXdispose0;
+MainScene1662065271XXXdispose0 -> TextRendererScreenTwo1202427496XXXdispose0;
+SceneManager1662065271XXXdispose0 -> MainScene1662065271XXXdispose0;
+    
+}
+@enduml

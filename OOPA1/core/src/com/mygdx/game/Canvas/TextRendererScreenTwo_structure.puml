@@ -1,0 +1,326 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.mygdx.game.Canvas.TextRendererScreenTwo",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_104370703 { 
+   	label=mygdx
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1554244721 { 
+   	label=game
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   CollisionManager1933980638[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CollisionManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ checkCollision(x1: float, y1: float, width1: float, height1: float, x2: float, y2: float, width2: float, height2: float): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ checkResponse(type: EntityType, type1: EntityType)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+EntityManager1271858419[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)EntityManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   entities: List&lt;Entity&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addEntity(entity: Entity)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getEntitiesOfTypeList(type: Class&lt;T&gt;): List&lt;T&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getEntity(type: Class&lt;T&gt;): T</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getHeight(entity: Entity): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getSpeed(entity: Entity): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getType(entity: Entity): EntityType</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getWidth(entity: Entity): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getxCords(entity: Entity): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getyCords(entity: Entity): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ movement(entity: Entity)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ render(spriteBatch: SpriteBatch)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Game670316286[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Game</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   keyboard: Keyboard [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sceneManager: SceneManager [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ create()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ dispose()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ render()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+GameScene1662065271[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GameScene</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   batch: SpriteBatch [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   collisionManager: CollisionManager [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   enemy: nonPlayer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   entityManager: EntityManager [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   pacman: Player [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sceneManager: SceneManager [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   shapeRenderer: ShapeRenderer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   textRendererScreen: TextRendererScreen [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   wall: nonPlayer [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ create()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ dispose()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ render()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ update(delta: float)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+MainScene1662065271[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MainScene</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   batch: SpriteBatch [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   entityManager: EntityManager [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sceneManager: SceneManager [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   shapeRenderer: ShapeRenderer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   textRendererScreenTwo: TextRendererScreenTwo [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   wall: nonPlayer [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ create()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ dispose()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ render()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ update(delta: float)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Player1271858419[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Player</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   entityTexture: Texture [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   playerController: PlayerController [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ AIControlledMovement()</TD></TR>
+<TR><TD ALIGN="LEFT" ># movement()</TD></TR>
+<TR><TD ALIGN="LEFT" ># render(batch: SpriteBatch)</TD></TR>
+<TR><TD ALIGN="LEFT" ># update(deltaTime: float)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ userControlledMovement()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SceneManager1662065271[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SceneManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   currentScene: Scene [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ dispose()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ render()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ update(delta: float)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TextRendererScreen1202427496[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TextRendererScreen</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   stage: Stage [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ dispose()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ draw()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TextRendererScreenTwo1202427496[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TextRendererScreenTwo</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   exitGameButton: TextButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   optionsButton: TextButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sceneManager: SceneManager [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   stage: Stage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   startGameButton: TextButton [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- createButton(buttonText: String, x: float, y: float): TextButton</TD></TR>
+<TR><TD ALIGN="LEFT" >+ dispose()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ draw()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+nonPlayer1271858419[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)nonPlayer</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   currentDirection: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   directionChangeTimer: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   entityTexture: Texture [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   isWall: boolean [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ AIControlledMovement()</TD></TR>
+<TR><TD ALIGN="LEFT" ># movement()</TD></TR>
+<TR><TD ALIGN="LEFT" ># render(spriteBatch: SpriteBatch)</TD></TR>
+<TR><TD ALIGN="LEFT" ># update(deltaTime: float)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ userControlledMovement()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+Game670316286 -> SceneManager1662065271[label="sceneManager
+[0..1]"];
+GameScene1662065271 -> CollisionManager1933980638[label="collisionManager
+[0..1]"];
+GameScene1662065271 -> EntityManager1271858419[label="entityManager
+[0..1]"];
+GameScene1662065271 -> Player1271858419[label="pacman
+[0..1]"];
+GameScene1662065271 -> SceneManager1662065271[label="sceneManager
+[0..1]"];
+GameScene1662065271 -> TextRendererScreen1202427496[label="textRendererScreen
+[0..1]"];
+GameScene1662065271 -> nonPlayer1271858419[label="enemy
+[0..1]"];
+GameScene1662065271 -> nonPlayer1271858419[label="wall
+[0..1]"];
+MainScene1662065271 -> EntityManager1271858419[label="entityManager
+[0..1]"];
+MainScene1662065271 -> GameScene1662065271[arrowhead=none];
+MainScene1662065271 -> SceneManager1662065271[label="sceneManager
+[0..1]"];
+MainScene1662065271 -> TextRendererScreenTwo1202427496[label="textRendererScreenTwo
+[0..1]"];
+MainScene1662065271 -> nonPlayer1271858419[label="wall
+[0..1]"];
+SceneManager1662065271 -> GameScene1662065271[arrowhead=none];
+SceneManager1662065271 -> MainScene1662065271[arrowhead=none];
+SceneManager1662065271 -> MainScene1662065271[label="currentScene
+[0..1]", arrowhead=none];
+TextRendererScreenTwo1202427496 -> SceneManager1662065271[label="sceneManager
+[0..1]"];
+    
+}
+@enduml
