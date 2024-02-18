@@ -1,60 +1,115 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.mygdx.game.Collision.CollisionManager;
+import java.util.List;
 
-public class PlayerController{
+public class PlayerController {
 
     private Player player;
-    private float newX;
-    private float newy;
+    private CollisionManager collisionManager;
+    private EntityManager entityManager;
+    private List<nonPlayer> entitiesNonPlayer;
+    private List<Player> entitiesPlayer;
 
 
-
-    public PlayerController(Player player) {
+    public PlayerController(Player player, EntityManager entityManager, CollisionManager collisionManager) {
         this.player = player;
+        this.entityManager = entityManager;
+        this.collisionManager = collisionManager;
+        this.entitiesNonPlayer = entityManager.getEntitiesOfTypeList(nonPlayer.class);
+        this.entitiesPlayer = entityManager.getEntitiesOfTypeList(Player.class);
     }
 
-    Player getPlayer(){
-        return this.player;
+    public void move(int direction) {
+        if (!checkFutureCollision(direction)) {
+            switch (direction) {
+                case Input.Keys.LEFT:
+                    left();
+                    break;
+                case Input.Keys.RIGHT:
+                    right();
+                    break;
+                case Input.Keys.UP:
+                    up();
+                    break;
+                case Input.Keys.DOWN:
+                    down();
+                    break;
+            }
+        }
     }
 
+    private boolean checkFutureCollision(int direction) {
+        float futureX = player.getxCords();
+        float futureY = player.getyCords() ;
+        float speed = (player.getSpeed() + 50) * Gdx.graphics.getDeltaTime();
 
+        switch (direction) {
+            case Input.Keys.LEFT:
+                futureX -= speed;
+                break;
+            case Input.Keys.RIGHT:
+                futureX += speed;
+                break;
+            case Input.Keys.UP:
+                futureY += speed;
+                break;
+            case Input.Keys.DOWN:
+                futureY -= speed;
+                break;
+        }
 
-    public void right(){
+        for (nonPlayer entity : entitiesNonPlayer) {
+            if (collisionManager.checkCollision(
+                    futureX, futureY,
+                    entityManager.getWidth(player), entityManager.getHeight(player),
+                    entityManager.getxCords(entity), entityManager.getyCords(entity),
+                    entityManager.getWidth(entity), entityManager.getHeight(entity))) {
+
+                collisionManager.checkResponse(player.getEntityType(), entity.getEntityType());
+                return true;
+            }
+        }
+
+        for (Player otherPlayer : entitiesPlayer) {
+            if (otherPlayer != player && collisionManager.checkCollision(
+                    futureX, futureY,
+                    entityManager.getWidth(player), entityManager.getHeight(player),
+                    entityManager.getxCords(otherPlayer), entityManager.getyCords(otherPlayer),
+                    entityManager.getWidth(otherPlayer), entityManager.getHeight(otherPlayer))) {
+
+                collisionManager.checkResponse(player.getEntityType(), otherPlayer.getEntityType());
+                return true;
+            }
+        }
+
+        return false; // no hit
+    }
+
+    public void right() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        newX = getPlayer().getxCords();
-        newX += moveAmount;
-        getPlayer().setxCords(newX);
+        float newX = player.getxCords() + moveAmount;
+        player.setxCords(newX);
     }
 
-    public void left(){
+    public void left() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        newX = getPlayer().getxCords();
-        newX -= moveAmount;
-        getPlayer().setxCords(newX);
+        float newX = player.getxCords() - moveAmount;
+        player.setxCords(newX);
     }
 
-    public void up(){
+    public void up() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        newy = getPlayer().getyCords();
-        newy += moveAmount;
-        getPlayer().setyCords(newy);
+        float newY = player.getyCords() + moveAmount;
+        player.setyCords(newY);
     }
 
-
-    public void down(){
+    public void down() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        newy = getPlayer().getyCords();
-        newy -= moveAmount;
-        getPlayer().setyCords(newy);
+        float newY = player.getyCords() - moveAmount;
+        player.setyCords(newY);
     }
-
-    public void stop(){
-        getPlayer().setxCords(getPlayer().xCords);
-        getPlayer().setyCords(getPlayer().yCords);
-    }
-
-
 
 }
-
