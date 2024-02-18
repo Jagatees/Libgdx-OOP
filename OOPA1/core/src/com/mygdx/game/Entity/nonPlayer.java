@@ -1,19 +1,20 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class nonPlayer extends Entity {
 
     private Texture entityTexture;
-
     private boolean isWall;
 
+
+
+
     public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed,
-                     EntityState state, boolean isAI, boolean isWall, float width, float height) {
-        super(xCords, yCords, speed, state, isAI, width, height);
+                     EntityState state, boolean isAI, boolean isWall, float width, float height, EntityType entityType) {
+        super(xCords, yCords, speed, state, isAI, width, height, entityType);
         setTexture(new Texture(Gdx.files.internal(nonPlayerAsset)));
         setWall(isWall);
     }
@@ -47,7 +48,7 @@ public class nonPlayer extends Entity {
     }
 
     protected void movement() {
-        if (isAI) {
+        if (isAI && !isWall) {
             AIControlledMovement();
         }
     }
@@ -55,12 +56,6 @@ public class nonPlayer extends Entity {
     @Override
     public void AIControlledMovement() {
         // Actions for AI Controls
-    	
-    	// Example AI Movement (Check if object is AI, and shift x to 700 upon A)
-    	// To be removed
-    	if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-    		super.setxCords(700);
-    	}
     }
 
     @Override

@@ -1,20 +1,27 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Entity implements objectMovement {
 
     protected float xCords, yCords, speed;
-    protected EntityState state; // Assuming an enum is used for state management
+    protected EntityState entityState;
+    protected EntityType entityType;
     protected boolean isAI;
     protected float width, height;
+
+
+    public enum EntityType {
+        NULL,
+    }
 
     public enum EntityState {
         NULL,
     }
 
     Entity(float xCords, float yCords, float speed, EntityState state,
-           boolean isAI, float width, float height) {
+           boolean isAI, float width, float height, EntityType entityType) {
         setxCords(xCords);
         setyCords(yCords);
         setSpeed(speed);
@@ -22,26 +29,17 @@ public abstract class Entity implements objectMovement {
         setisAI(isAI);
         setWidth(width);
         setHeight(height);
+        setEntityType(entityType);
     }
-    
-    Entity(float xCords, float yCords, float speed, EntityState state,
-            boolean isAI, boolean isWall, float width, float height) {
-         setxCords(xCords);
-         setyCords(yCords);
-         setSpeed(speed);
-         setState(state);
-         setisAI(isAI);
-         setWidth(width);
-         setHeight(height);
-     }
 
-    
+
+
     protected void update(float deltaTime) {
         // Implement logic updates here
     }
-    
-    // Method overriding will handle this portion
+
     protected void render(SpriteBatch spriteBatch) {
+        // Implement rendering logic here
     }
 
     // Getter & Setters for (x,y) coordinates
@@ -68,6 +66,22 @@ public abstract class Entity implements objectMovement {
         return speed;
     }
 
+    protected EntityState getEntityState() {
+        return entityState;
+    }
+
+    protected void setEntityState(EntityState entityState) {
+        this.entityState = entityState;
+    }
+
+    protected EntityType getEntityType() {
+        return entityType;
+    }
+
+    protected void setEntityType(EntityType entityType) {
+        this.entityType = entityType;
+    }
+
     void setSpeed(float newSpeed) {
         speed = newSpeed;
     }
@@ -75,11 +89,11 @@ public abstract class Entity implements objectMovement {
     // Getter & Setters for State
 
     protected EntityState getState() {
-        return state;
+        return entityState;
     }
 
     void setState(EntityState state) {
-        this.state = state;
+        this.entityState = state;
     }
 
     // Getter & Setters for isAI
