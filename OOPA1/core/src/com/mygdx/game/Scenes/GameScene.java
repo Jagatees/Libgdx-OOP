@@ -26,7 +26,6 @@ public class GameScene implements Scene {
     private nonPlayer wall2;
     private nonPlayer wall3;
     private nonPlayer wall4;
-    private nonPlayer wall5;
     private SceneManager sceneManager;
     private CanvasManager canvasManager;
 
@@ -40,14 +39,13 @@ public class GameScene implements Scene {
         entityManager = new EntityManager();
 
         pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL);
-        wall = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
         enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL);
-        
-        wall2 = new nonPlayer("wall.jpg", 400, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
-        wall3 = new nonPlayer("wall.jpg", 300, 0,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
-        wall4 = new nonPlayer("wall.jpg", 300, 175,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
-        wall5 = new nonPlayer("wall.jpg", 185, 100,0 , Entity.EntityState.NULL, false, true, 100, 100, Entity.EntityType.NULL);
-        
+
+        wall = new nonPlayer("wall.jpg", -50, 0,0 , Entity.EntityState.NULL, false, true, 80, 1000, Entity.EntityType.NULL);
+        wall2 = new nonPlayer("wall.jpg", 500, 0,0 , Entity.EntityState.NULL, false, true, 80, 1000, Entity.EntityType.NULL);
+        wall3 = new nonPlayer("wall.jpg", 0, -50,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL);
+        wall4 = new nonPlayer("wall.jpg", 0, 500,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL);
+
         
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
@@ -55,7 +53,7 @@ public class GameScene implements Scene {
         entityManager.addEntity(wall2);
         entityManager.addEntity(wall3);
         entityManager.addEntity(wall4);
-        entityManager.addEntity(wall5);
+
         
 
         PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
