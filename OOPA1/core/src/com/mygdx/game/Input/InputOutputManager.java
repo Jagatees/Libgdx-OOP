@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.Input;
 
 import com.mygdx.game.Input.Keyboard;
 import com.mygdx.game.audio.AudioManager;

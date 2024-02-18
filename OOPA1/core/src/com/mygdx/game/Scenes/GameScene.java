@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.AI.AIController;
+import com.mygdx.game.Entity.AIController;
 import com.mygdx.game.Canvas.CanvasManager;
 import com.mygdx.game.Canvas.GameCanvas;
 import com.mygdx.game.Collision.CollisionManager;
