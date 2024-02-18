@@ -50,7 +50,6 @@ public class GameScene implements Scene {
 
     @Override
     public void render() {
-        System.out.println("Rendering Game Scene");
 
         ScreenUtils.clear(1, 0, 0, 1);
 

@@ -14,11 +14,8 @@ public class MainScene implements Scene{
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private EntityManager entityManager;
-
     private nonPlayer wall;
-
     private TextRendererScreenTwo textRendererScreenTwo;
-
 
     public MainScene() {
         batch = new SpriteBatch();
@@ -41,8 +38,6 @@ public class MainScene implements Scene{
 
     @Override
     public void render() {
-        System.out.println("Rendering Main Scene");
-
         ScreenUtils.clear(1, 0, 0, 1);
 
         batch.begin();

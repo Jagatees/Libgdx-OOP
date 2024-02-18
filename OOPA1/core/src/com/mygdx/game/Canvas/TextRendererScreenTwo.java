@@ -2,58 +2,81 @@ package com.mygdx.game.Canvas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.Scenes.GameScene;
+import com.mygdx.game.Scenes.MainScene;
+import com.mygdx.game.Scenes.SceneManager;
 
 public class TextRendererScreenTwo {
 
     private Stage stage;
+    private TextButton startGameButton;
+    private TextButton optionsButton;
+    private TextButton exitGameButton;
+
 
     public TextRendererScreenTwo() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-        // Create a minimal skin
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = new BitmapFont();
         textButtonStyle.fontColor = Color.WHITE;
 
-        // Optionally set other style properties
-        // textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture("button-up.png")));
-        // textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture("button-down.png")));
+        startGameButton = createButton("Start Game", 600, 450);
+        stage.addActor(startGameButton);
 
-        // Create and configure a text button
-        TextButton textButton = new TextButton("Main Scene", textButtonStyle);
-        textButton.setPosition(100, 100); // Position the button
-        textButton.setSize(200, 50); // Set the size of the button
-        textButton.addListener(new ChangeListener() {
+        optionsButton = createButton("Options", 600, 375);
+        stage.addActor(optionsButton);
+
+        exitGameButton = createButton("Exit Game", 600, 300);
+        stage.addActor(exitGameButton);
+    }
+
+    private TextButton createButton(String buttonText, float x, float y) {
+        NinePatch patch = new NinePatch(new Texture("color/black.jpg"), 3, 3, 3, 3); // Adjust the 3s to match your NinePatch borders
+        NinePatchDrawable background = new NinePatchDrawable(patch);
+
+        TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
+        buttonStyle.font = new BitmapFont();
+        buttonStyle.fontColor = Color.WHITE;
+        buttonStyle.up = background; // Use the NinePatchDrawable as the button background
+
+        TextButton button = new TextButton(buttonText, buttonStyle);
+        button.setPosition(x, y);
+        button.setSize(200, 50);
+        button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
-                Gdx.app.log("UIManager", "Button clicked!");
-                // Add what you want to do when the button is clicked
+                if (actor == startGameButton) {
+                    Gdx.app.log("UIManager", "Start button clicked!");
+                } else if (actor == optionsButton) {
+                    // Options action
+                    Gdx.app.log("UIManager", "Options button clicked!");
+                } else if (actor == exitGameButton) {
+                    // Exit game action
+                    Gdx.app.log("UIManager", "Exit Game button clicked!");
+                }
             }
         });
 
-        // Add the button to the stage
-        stage.addActor(textButton);
+        return button;
     }
 
-    /**
-     * Call this method in your render loop.
-     */
+
     public void draw() {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
 
-    /**
-     * Disposes of the resources used by this UIManager.
-     */
     public void dispose() {
         stage.dispose();
     }
-
 }
