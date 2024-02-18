@@ -37,13 +37,13 @@ public class AIController {
 		directionChangeTimer += Gdx.graphics.getDeltaTime();
 
 		// Check if it's time to change direction
-		if (directionChangeTimer >= 2.0f) {
+		if (directionChangeTimer >= 1.0f) {
 			directionChangeTimer = 0; // Reset timer
 			currentDirection = MathUtils.random(1, 4); // Choose a new direction randomly
 		}
 
 		// Move in the current direction
-		float moveAmount = entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime();
+        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
 		if (!checkFutureCollision(currentDirection)) {
 			// Move in the current direction if no collision is detected
 			moveNonPlayer(currentDirection, moveAmount);
@@ -57,6 +57,7 @@ public class AIController {
 
 	private void moveNonPlayer(int direction, float moveAmount) {
 		// This method moves the nonPlayer in the given direction by the moveAmount
+        System.out.println(moveAmount);
 		switch (direction) {
 			case 1: // UP
 				entityManager.setAIYCords(nonPlayer, entityManager.getyCords(nonPlayer) + moveAmount);
