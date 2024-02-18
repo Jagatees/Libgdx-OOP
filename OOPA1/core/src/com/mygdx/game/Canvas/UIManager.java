@@ -21,14 +21,6 @@ public class UIManager {
         screens = new HashMap<>();
     }
 
-    // Method to change screen based on certain conditions (e.g., player death)
-    public void changeScreenOnPlayerDeath(EntityManager entityManager, Player player) {
-        if (entityManager.getxCords(player) > 100) {
-            setScreen("GameScreen");
-
-        }
-    }
-
     public void addScreen(String name, Screen screen) {
         screens.put(name, screen);
     }

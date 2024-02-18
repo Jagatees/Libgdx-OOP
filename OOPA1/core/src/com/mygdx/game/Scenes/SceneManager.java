@@ -23,6 +23,7 @@ public class SceneManager {
         }
     }
 
+
     public void dispose() {
         if (currentScene != null) {
             currentScene.dispose();
