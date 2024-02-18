@@ -17,13 +17,11 @@ import com.mygdx.game.Scenes.SceneManager;
 public class Game extends ApplicationAdapter {
 
 	private GameController gameController;
-	private Keyboard keyboard ;
 
 	@Override
 	public void create() {
 		gameController = GameController.getInstance();
 		gameController.startGame(new SceneManager());
-		keyboard = new Keyboard();
 	}
 
 	@Override
@@ -34,11 +32,6 @@ public class Game extends ApplicationAdapter {
 
 	private void update(float deltaTime) {
 		gameController.update(deltaTime);
-
-		int pressedKey = keyboard.getKeyPressed();
-		if (pressedKey != -1) {
-			System.out.println("Key pressed: " + pressedKey);
-		}
 	}
 
 	@Override

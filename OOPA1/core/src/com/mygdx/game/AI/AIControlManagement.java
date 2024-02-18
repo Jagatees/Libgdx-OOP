@@ -1,4 +1,4 @@
-package com.mygdx.game.Entity;
+package com.mygdx.game.AI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,9 +12,9 @@ import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.nonPlayer;
 
-public class AIController {
+public class AIControlManagement {
 	
-	private nonPlayer nonPlayer;
+	private com.mygdx.game.Entity.nonPlayer nonPlayer;
     private CollisionManager collisionManager;
     private EntityManager entityManager;
     private List<nonPlayer> entitiesNonPlayer;
@@ -22,7 +22,7 @@ public class AIController {
     private int currentDirection = MathUtils.random(1,4);
     private float directionChangeTimer;
 
-    public AIController(nonPlayer nonPlayer, EntityManager entityManager, CollisionManager collisionManager) {
+    public AIControlManagement(nonPlayer nonPlayer, EntityManager entityManager, CollisionManager collisionManager) {
     	this.nonPlayer = nonPlayer;
         this.entityManager = entityManager;
         this.collisionManager = collisionManager;

@@ -3,12 +3,13 @@ package com.mygdx.game.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.AI.AIControlManagement;
 
 public class nonPlayer extends Entity {
 
     private Texture entityTexture;
     private boolean isWall;
-    private AIController AIController;
+    private com.mygdx.game.AI.AIControlManagement AIControlManagement;
 
     public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed,
                      EntityState state, boolean isAI, boolean isWall, float width, float height, EntityType entityType) {
@@ -51,17 +52,17 @@ public class nonPlayer extends Entity {
         }
     }
     
-    public AIController getAIController() {
-        return AIController;
+    public AIControlManagement getAIController() {
+        return AIControlManagement;
     }
     
-    public void setAIController(AIController aiController) {
-        this.AIController = aiController;
+    public void setAIController(AIControlManagement aiControlManagement) {
+        this.AIControlManagement = aiControlManagement;
     }
     
     @Override
     public void AIControlledMovement() {
-    	AIController.aiMove();
+    	AIControlManagement.aiMove();
     }
 
     @Override
