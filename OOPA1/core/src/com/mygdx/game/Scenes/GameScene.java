@@ -21,9 +21,9 @@ public class GameScene implements Scene {
     private nonPlayer enemy;
     private nonPlayer wall;
     private TextRendererScreen textRendererScreen;
+    private SceneManager sceneManager;
 
-
-    public GameScene() {
+    public GameScene(SceneManager sceneManager) {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
@@ -40,6 +40,7 @@ public class GameScene implements Scene {
         PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
         pacman.setPlayerController(playerController);
         textRendererScreen = new TextRendererScreen();
+        this.sceneManager = sceneManager;
 
     }
 

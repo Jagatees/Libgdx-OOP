@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Scenes.GameScene;
-import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.SceneManager;
 
 public class TextRendererScreenTwo {
@@ -21,8 +20,10 @@ public class TextRendererScreenTwo {
     private TextButton optionsButton;
     private TextButton exitGameButton;
 
+    private SceneManager sceneManager;
 
-    public TextRendererScreenTwo() {
+
+    public TextRendererScreenTwo(SceneManager sceneManager) {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
@@ -38,6 +39,8 @@ public class TextRendererScreenTwo {
 
         exitGameButton = createButton("Exit Game", 600, 300);
         stage.addActor(exitGameButton);
+
+        this.sceneManager = sceneManager;
     }
 
     private TextButton createButton(String buttonText, float x, float y) {
@@ -57,6 +60,7 @@ public class TextRendererScreenTwo {
             public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
                 if (actor == startGameButton) {
                     Gdx.app.log("UIManager", "Start button clicked!");
+                    sceneManager.setScene(new GameScene(sceneManager));
                 } else if (actor == optionsButton) {
                     // Options action
                     Gdx.app.log("UIManager", "Options button clicked!");

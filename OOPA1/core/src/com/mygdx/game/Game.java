@@ -8,7 +8,6 @@ import com.mygdx.game.Scenes.GameScene;
 import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.SceneManager;
 
-import org.w3c.dom.Text;
 
 
 public class Game extends ApplicationAdapter {
@@ -20,15 +19,15 @@ public class Game extends ApplicationAdapter {
 	public void create() {
 		sceneManager = new SceneManager();
 		keyboard = new Keyboard();
-		sceneManager.setScene(new MainScene());
+		sceneManager.setScene(new MainScene(sceneManager));
 	}
 
 	@Override
 	public void render() {
 		if (keyboard.isKeyPressedBool(Input.Keys.NUM_1)) {
-			sceneManager.setScene(new MainScene());
+			sceneManager.setScene(new MainScene(sceneManager));
 		} else if (keyboard.isKeyPressedBool(Input.Keys.NUM_2)) {
-			sceneManager.setScene(new GameScene());
+			sceneManager.setScene(new GameScene(sceneManager));
 		}
 
 		sceneManager.render();

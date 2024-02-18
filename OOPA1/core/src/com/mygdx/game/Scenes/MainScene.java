@@ -16,8 +16,9 @@ public class MainScene implements Scene{
     private EntityManager entityManager;
     private nonPlayer wall;
     private TextRendererScreenTwo textRendererScreenTwo;
+    private SceneManager sceneManager;
 
-    public MainScene() {
+    public MainScene(SceneManager sceneManager) {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         entityManager = new EntityManager();
@@ -27,7 +28,7 @@ public class MainScene implements Scene{
 
         entityManager.addEntity(wall);
 
-        textRendererScreenTwo = new TextRendererScreenTwo();
+        textRendererScreenTwo = new TextRendererScreenTwo(sceneManager);
 
     }
 
