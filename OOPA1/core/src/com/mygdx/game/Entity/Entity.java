@@ -1,6 +1,8 @@
 package com.mygdx.game.Entity;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Entity implements objectMovement {
@@ -10,6 +12,7 @@ public abstract class Entity implements objectMovement {
     protected EntityType entityType;
     protected boolean isAI;
     protected float width, height;
+    protected Color color;
 
 
     public enum EntityType {
@@ -19,7 +22,8 @@ public abstract class Entity implements objectMovement {
     public enum EntityState {
         NULL,
     }
-
+    
+    // Constructor overloading for different types of Entity
     Entity(float xCords, float yCords, float speed, EntityState state,
            boolean isAI, float width, float height, EntityType entityType) {
         setxCords(xCords);
@@ -31,7 +35,15 @@ public abstract class Entity implements objectMovement {
         setHeight(height);
         setEntityType(entityType);
     }
-
+    
+   
+    Entity(String color, float xCords, float yCords, float width, float height, EntityType entityType) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(entityType);
+     }
 
 
     protected void update(float deltaTime) {
@@ -39,9 +51,15 @@ public abstract class Entity implements objectMovement {
     }
 
     protected void render(SpriteBatch spriteBatch) {
-        // Implement rendering logic here
+        // Subclass to take over
     }
 
+    
+    protected void render(ShapeRenderer shape) {
+    	// Subclass to take over
+    }
+    
+    
     // Getter & Setters for (x,y) coordinates
 
     protected float getxCords() {

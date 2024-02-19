@@ -1,6 +1,7 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.AI.AIControlManagement;
 
 import java.util.ArrayList;
@@ -20,7 +21,13 @@ public class EntityManager {
             entity.render(spriteBatch);
         }
     }
-
+    
+    public void render(ShapeRenderer shape) {
+    	for (Entity entity : entities) {
+    		entity.render(shape);
+    	}
+    }
+ 
     public <T extends Entity> List<T> getEntitiesOfTypeList(Class<T> type) {
         List<T> matchingEntities = new ArrayList<>();
         for (Entity entity : entities) {
