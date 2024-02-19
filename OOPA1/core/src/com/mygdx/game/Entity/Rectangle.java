@@ -10,9 +10,11 @@ public class Rectangle extends Entity {
 	private ShapeRenderer Rectangle;
 	
 
-    public Rectangle(String color, float xCords, float yCords, float width, float height, EntityType entityType) {
-    	super(xCords, yCords, width, height, entityType);
-    }
+    public Rectangle(String playerAsset, float xCords, float yCords, float speed,
+					 EntityState state, boolean isAI, float width, float height, EntityType entityType) {
+		super(xCords, yCords, speed, state, isAI, width, height, entityType);
+
+	}
 
 	
 	protected void render(ShapeRenderer shape) {
