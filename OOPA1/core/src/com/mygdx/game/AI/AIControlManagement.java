@@ -147,9 +147,8 @@ public class AIControlManagement {
                     entityManager.getWidth(nonPlayer), entityManager.getHeight(nonPlayer),
                     entityManager.getxCords(entity), entityManager.getyCords(entity),
                     entityManager.getWidth(entity), entityManager.getHeight(entity))) {
-            	
-            	// To be excluded for now <Fix>
-//                collisionManager.checkResponse(nonPlayer, entity);
+
+                collisionManager.checkResponse(entityManager.getType(nonPlayer), entityManager.getType(entity));
                 return true;
             }
         }
@@ -161,8 +160,7 @@ public class AIControlManagement {
                     entityManager.getxCords(othernonPlayers), entityManager.getyCords(othernonPlayers),
                     entityManager.getWidth(othernonPlayers), entityManager.getHeight(othernonPlayers))) {
             	
-            	// To be excluded for now <Fix>
-                //collisionManager.checkResponse(nonPlayer.getEntityType(), otherPlayer.getEntityType());
+                collisionManager.checkResponse(entityManager.getType(nonPlayer), entityManager.getType(othernonPlayers));
                 return true;
             }
         }

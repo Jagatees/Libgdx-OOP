@@ -74,7 +74,7 @@ public class PlayerControllerManagement {
                     entityManager.getxCords(entity), entityManager.getyCords(entity),
                     entityManager.getWidth(entity), entityManager.getHeight(entity))) {
 
-//                collisionManager.checkResponse(player.getEntityType(), entity.getEntityType());
+                collisionManager.checkResponse(entityManager.getType(player), entityManager.getType(entity));
                 return true;
             }
         }
@@ -87,7 +87,7 @@ public class PlayerControllerManagement {
                     entityManager.getxCords(otherPlayer), entityManager.getyCords(otherPlayer),
                     entityManager.getWidth(otherPlayer), entityManager.getHeight(otherPlayer))) {
 
-//                collisionManager.checkResponse(player.getEntityType(), otherPlayer.getEntityType());
+                collisionManager.checkResponse(entityManager.getType(player), entityManager.getType(otherPlayer));
                 return true;
             }
         }
