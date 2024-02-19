@@ -3,6 +3,7 @@ package com.mygdx.game.Canvas;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -28,25 +29,14 @@ public class GameCanvas implements Canvas {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = new BitmapFont();
-        textButtonStyle.fontColor = Color.YELLOW;
-
-        TextButton textButton = new TextButton("Game Menu", textButtonStyle);
-        textButton.setPosition(100, 100);
-        textButton.setSize(200, 50);
-
-        textButton.addListener(new ChangeListener() {
+        stage.addActor(UIElements.createTextButton("Go Back", 600, 450, 50, 50, Color.RED , new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
-                if (actor == textButton) {
-                    sceneManager.setScene(new MainScene(sceneManager));
-                }
+            public void changed(ChangeEvent event, Actor actor) {
+                sceneManager.setScene(new MainScene(sceneManager));
             }
-        });
+        }));
 
-        stage.addActor(textButton);
+
     }
 
     /**

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -22,64 +23,36 @@ public class MainMenuCanvas implements Canvas{
 
     private SceneManager sceneManager;
     private Stage stage;
-    private TextButton startGameButton;
-    private TextButton exitGameButton;
     private SimulationLifecycleManagement simulationLifecycleManagement;
-
 
     public MainMenuCanvas(SceneManager sceneManager) {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = new BitmapFont();
-        textButtonStyle.fontColor = Color.WHITE;
-
-        startGameButton = createButton("Start Game", 600, 450);
-        stage.addActor(startGameButton);
-
-        exitGameButton = createButton("Exit Game", 600, 375);
-        stage.addActor(exitGameButton);
-
         this.sceneManager = sceneManager;
         this.simulationLifecycleManagement = new SimulationLifecycleManagement();
 
-    }
 
-
-    /**
-     * Creates a button with specified text and position.
-     * @param buttonText Text displayed on the button.
-     * @param x Horizontal position of the button.
-     * @param y Vertical position of the button.
-     * @return Configured TextButton instance.
-     */
-    private TextButton createButton(String buttonText, float x, float y) {
-        NinePatch patch = new NinePatch(new Texture("color/black.jpg"), 3, 3, 3, 3); // Adjust the 3s to match your NinePatch borders
-        NinePatchDrawable background = new NinePatchDrawable(patch);
-
-        TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
-        buttonStyle.font = new BitmapFont();
-        buttonStyle.fontColor = Color.WHITE;
-        buttonStyle.up = background; // Use the NinePatchDrawable as the button background
-
-        TextButton button = new TextButton(buttonText, buttonStyle);
-        button.setPosition(x, y);
-        button.setSize(200, 50);
-        button.addListener(new ChangeListener() {
+        stage.addActor(UIElements.createLabel("Main Menu", 600, 600, Color.BLACK)); // Assuming 'stage' is your Scene2D stage
+        stage.addActor(UIElements.createTextButton("Start Simulation", 600, 450, 50, 50, Color.RED , new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
-                if (actor == startGameButton) {
-                    sceneManager.setScene(new GameScene(sceneManager));
-                }
-                else if (actor == exitGameButton) {
-                    simulationLifecycleManagement.closeGame();
-                }
+            public void changed(ChangeEvent event, Actor actor) {
+                sceneManager.setScene(new GameScene(sceneManager));
             }
-        });
+        }));
 
-        return button;
+
+        stage.addActor(UIElements.createTextButton("Exit Simulation", 600, 350, 50 , 50, Color.RED , new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                simulationLifecycleManagement.closeGame();
+            }
+        }));
+
+
+
+
     }
+
 
     /**
      * Renders the current canvas if it is not null, passing along the delta time for frame-rate-independent rendering.
@@ -99,6 +72,7 @@ public class MainMenuCanvas implements Canvas{
      */
     @Override
     public void update(float delta) {
+
     }
 
     /**

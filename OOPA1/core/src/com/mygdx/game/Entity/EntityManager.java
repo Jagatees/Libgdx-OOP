@@ -156,4 +156,6 @@ public class EntityManager {
     public void setColor(nonPlayer entity, Color newColor) {
     	entity.setColor(newColor);
     }
+
+
 }
