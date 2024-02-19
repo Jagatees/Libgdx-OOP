@@ -30,8 +30,7 @@ public class EntityManager {
                 
             } else if (entity.getRenderType() == Entity.RenderType.SHAPE) {
                 shapeRenderer.begin(ShapeRenderer.ShapeType.Filled); // Start drawing lines
-                Color color = ((nonPlayer)entity).getColor();
-                shapeRenderer.setColor(color); // Set the color for rendering
+                shapeRenderer.setColor(getColor((nonPlayer) entity)); // Set the color for rendering
                 entity.render(shapeRenderer);
                 shapeRenderer.rect(entity.getxCords(),entity.getyCords(),entity.getWidth(),entity.getHeight());
                 shapeRenderer.end();

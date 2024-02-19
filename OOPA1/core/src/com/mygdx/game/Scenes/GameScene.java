@@ -33,6 +33,8 @@ public class GameScene implements Scene {
 
     /** Game Entity */
     private Player pacman;
+    private nonPlayer pacman2;
+
     private nonPlayer enemy;
     private nonPlayer wall;
     private nonPlayer wall2;
@@ -54,17 +56,20 @@ public class GameScene implements Scene {
 
         pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
+        pacman2 = new nonPlayer("blueGhost.png", 30, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
 
         wall = new nonPlayer("wall.jpg", -50, 0,0 , Entity.EntityState.NULL, false, true, 80, 1000, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         wall2 = new nonPlayer("wall.jpg", 500, 0,0 , Entity.EntityState.NULL, false, true, 80, 1000, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         wall3 = new nonPlayer("wall.jpg", 0, -50,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         wall4 = new nonPlayer("wall.jpg", 0, 500,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
 
-        boxPlayer = new nonPlayer(Color.RED, 200, 200, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
+        boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
         boxPlayer2 = new nonPlayer(Color.BLACK, 300, 300, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
 
 
         entityManager.addEntity(pacman);
+        entityManager.addEntity(pacman2);
+
         entityManager.addEntity(enemy);
         entityManager.addEntity(wall);
         entityManager.addEntity(wall2);

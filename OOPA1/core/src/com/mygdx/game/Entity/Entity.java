@@ -15,6 +15,8 @@ public abstract class Entity implements objectMovement {
     protected boolean isAI;
     protected float width, height;
 
+    protected Color color;
+
 
     public enum EntityType {
         NULL,
@@ -30,7 +32,23 @@ public abstract class Entity implements objectMovement {
     
     // Constructor for Entity
     Entity(float xCords, float yCords, float speed, EntityState state,
-           boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
+           boolean isAI, float width, float height, EntityType entityType,
+           RenderType renderType, Color color) {
+        setxCords(xCords);
+        setyCords(yCords);
+        setSpeed(speed);
+        setState(state);
+        setisAI(isAI);
+        setWidth(width);
+        setHeight(height);
+        setEntityType(entityType);
+        setRenderType(renderType);
+        setColor(color);
+    }
+
+    Entity(float xCords, float yCords, float speed, EntityState state,
+           boolean isAI, float width, float height, EntityType entityType,
+           RenderType renderType) {
         setxCords(xCords);
         setyCords(yCords);
         setSpeed(speed);
@@ -163,4 +181,11 @@ public abstract class Entity implements objectMovement {
     }
 
 
+    protected Color getColor() {
+        return color;
+    }
+
+    protected void setColor(Color color) {
+        this.color = color;
+    }
 }

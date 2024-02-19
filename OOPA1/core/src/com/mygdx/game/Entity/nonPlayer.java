@@ -11,7 +11,6 @@ public class nonPlayer extends Entity {
     private Texture entityTexture;
     private boolean isWall;
     private AIControlManagement AIControlManagement;
-    private Color color;
 
     // Method overloading to accept either SpriteBatch or ShapeRenderer arguments 
     public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed,
@@ -23,7 +22,7 @@ public class nonPlayer extends Entity {
     
     public nonPlayer(Color color, float xCords, float yCords, float speed,
 			 EntityState state, boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
-    	super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType);
+    	super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType, color);
         setColor(color);
 
     }
@@ -47,14 +46,6 @@ public class nonPlayer extends Entity {
         spriteBatch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
     }
     
-
-	protected Color getColor() {
-		return color;
-	}
-	
-	void setColor(Color color) {
-		this.color = color;;
-	}
 
     // Getter & Setters for Players
     protected Texture getTexture() {
