@@ -12,6 +12,11 @@ import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.nonPlayer;
 
+
+/**
+ * Manages the AI controls and behaviors for non-player entities within the game,
+ * including movement and collision detection.
+ */
 public class AIControlManagement {
 	
 	private com.mygdx.game.Entity.nonPlayer nonPlayer;
@@ -22,6 +27,13 @@ public class AIControlManagement {
     private int currentDirection = MathUtils.random(1,4);
     private float directionChangeTimer;
 
+    /**
+     * Constructs an AIControlManagement instance.
+     *
+     * @param nonPlayer The non-player entity to be controlled by AI.
+     * @param entityManager The manager for all entities in the game.
+     * @param collisionManager The manager for handling collisions.
+     */
     public AIControlManagement(nonPlayer nonPlayer, EntityManager entityManager, CollisionManager collisionManager) {
     	this.nonPlayer = nonPlayer;
         this.entityManager = entityManager;
@@ -31,6 +43,9 @@ public class AIControlManagement {
     }
 
 
+    /**
+     * Controls the AI movement, including direction changes and collision avoidance.
+     */
 	public void aiMove() {
 		// Actions for AI Controls
 		// Update timer
@@ -55,6 +70,12 @@ public class AIControlManagement {
 		}
 	}
 
+    /**
+     * Moves the non-player entity in the specified direction by the given amount.
+     *
+     * @param direction The direction to move.
+     * @param moveAmount The amount to move.
+     */
 	private void moveNonPlayer(int direction, float moveAmount) {
 		// This method moves the nonPlayer in the given direction by the moveAmount
         System.out.println(moveAmount);
@@ -76,6 +97,12 @@ public class AIControlManagement {
 
     private int lastDirection = -1; // Initialize with an invalid direction
 
+    /**
+     * Selects a new direction for movement, excluding the direction that caused a collision.
+     *
+     * @param excludedDirection The direction to be excluded.
+     * @return A new direction different from the excluded one.
+     */
     private int getNewDirection(int excludedDirection) {
         List<Integer> possibleDirections = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
         possibleDirections.remove((Integer) excludedDirection); // Exclude the current direction
@@ -87,7 +114,12 @@ public class AIControlManagement {
         return newDirection;
     }
 
-
+    /**
+     * Checks if moving in the given direction would cause a collision.
+     *
+     * @param direction The direction to check for a future collision.
+     * @return true if a collision would occur, false otherwise.
+     */
 	private boolean checkFutureCollision(int direction) {
         float futureX = entityManager.getxCords(nonPlayer);
         float futureY = entityManager.getyCords(nonPlayer);
