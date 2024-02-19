@@ -1,4 +1,4 @@
-package com.mygdx.game.Entity;
+/*
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -10,9 +10,9 @@ public class Rectangle extends Entity {
 	private ShapeRenderer Rectangle;
 	
 
-    public Rectangle(String playerAsset, float xCords, float yCords, float speed,
+    public Rectangle(String color, float xCords, float yCords, float speed,
 					 EntityState state, boolean isAI, float width, float height, EntityType entityType) {
-		super(xCords, yCords, speed, state, isAI, width, height, entityType);
+		super(color, xCords, yCords, speed, state, isAI, width, height, entityType);
 
 	}
 
@@ -24,6 +24,14 @@ public class Rectangle extends Entity {
 		shape.rect(xCords, yCords, width, height);
 		
 		shape.end();
+	}
+	
+	protected Color getColor() {
+		return color;
+	}
+	
+	void setColor(String rectColor) {
+		color = Color.valueOf(rectColor);;
 	}
 
 	@Override
@@ -37,3 +45,5 @@ public class Rectangle extends Entity {
 	}
 	
 }
+
+*/

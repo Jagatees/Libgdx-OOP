@@ -61,7 +61,7 @@ public class PlayerController {
                 break;
         }
 
-        // Do it here
+     // Collision Detection for Non-Player Entities Entities
         for (nonPlayer entity : entitiesNonPlayer) {
             if (collisionManager.checkCollision(
                     futureX, futureY,
@@ -73,7 +73,8 @@ public class PlayerController {
                 return true;
             }
         }
-
+        
+        // Collision Detection for Player Entities
         for (Player otherPlayer : entitiesPlayer) {
             if (otherPlayer != player && collisionManager.checkCollision(
                     futureX, futureY,

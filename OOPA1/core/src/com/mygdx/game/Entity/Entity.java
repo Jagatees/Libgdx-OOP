@@ -36,10 +36,16 @@ public abstract class Entity implements objectMovement {
         setEntityType(entityType);
     }
     
-   
-    Entity(String color, float xCords, float yCords, float width, float height, EntityType entityType) {
+    
+    Entity(Color color, float xCords, float yCords, float speed, EntityState state,
+            boolean isAI, float width, float height, EntityType entityType) {
+    	
+    	 this.color = color;
          setxCords(xCords);
          setyCords(yCords);
+         setSpeed(speed);
+         setState(state);
+         setisAI(isAI);
          setWidth(width);
          setHeight(height);
          setEntityType(entityType);

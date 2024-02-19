@@ -1,9 +1,13 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.AI.AIControlManagement;
+import com.mygdx.game.Entity.Entity.EntityState;
+import com.mygdx.game.Entity.Entity.EntityType;
 
 public class nonPlayer extends Entity {
 
@@ -16,6 +20,12 @@ public class nonPlayer extends Entity {
         super(xCords, yCords, speed, state, isAI, width, height, entityType);
         setTexture(new Texture(Gdx.files.internal(nonPlayerAsset)));
         setWall(isWall);
+    }
+    
+    public nonPlayer(Color color, float xCords, float yCords, float speed,
+			 EntityState state, boolean isAI, float width, float height, EntityType entityType) {
+    	super(color, xCords, yCords, speed, state, isAI, width, height, entityType);
+    	setColor(color);
     }
 
     protected boolean isWall() {
@@ -36,6 +46,25 @@ public class nonPlayer extends Entity {
         super.render(spriteBatch);
         spriteBatch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
     }
+    
+    @Override
+	protected void render(ShapeRenderer shape) {
+		super.render(shape);
+		shape.begin(ShapeRenderer.ShapeType.Line);
+		shape.setColor(color);
+		
+		shape.rect(xCords, yCords, width, height);
+		
+		shape.end();
+	}
+	
+	protected Color getColor() {
+		return color;
+	}
+	
+	void setColor(Color rectColor) {
+		color = rectColor;;
+	}
 
     // Getter & Setters for Players
     protected Texture getTexture() {

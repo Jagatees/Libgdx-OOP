@@ -28,6 +28,8 @@ public class GameScene implements Scene {
     private nonPlayer wall4;
     private SceneManager sceneManager;
     private CanvasManager canvasManager;
+    
+    private nonPlayer rect;
 
 
 
@@ -46,6 +48,7 @@ public class GameScene implements Scene {
         wall3 = new nonPlayer("wall.jpg", 0, -50,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL);
         wall4 = new nonPlayer("wall.jpg", 0, 500,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL);
 
+        rect = new nonPlayer(Color.RED, 300, 150, 0, Entity.EntityState.NULL, false, 100, 100, Entity.EntityType.NULL);
         
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
@@ -53,6 +56,8 @@ public class GameScene implements Scene {
         entityManager.addEntity(wall2);
         entityManager.addEntity(wall3);
         entityManager.addEntity(wall4);
+        
+        entityManager.addEntity(rect);
 
         
 
@@ -61,7 +66,7 @@ public class GameScene implements Scene {
         
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
         entityManager.setAIController(enemy, aiControlManagement);
-        
+            
         this.sceneManager = sceneManager;
 
         canvasManager = new CanvasManager(sceneManager);
@@ -82,7 +87,12 @@ public class GameScene implements Scene {
         batch.begin();
         entityManager.render(batch);
         batch.end();
-
+        
+        entityManager.render(shapeRenderer);
+        
+        
+        // Used for testing collision
+        /*
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // Start drawing lines
         shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red
 
@@ -91,6 +101,8 @@ public class GameScene implements Scene {
         shapeRenderer.rect(entityManager.getxCords(enemy), entityManager.getyCords(enemy), entityManager.getWidth(enemy), entityManager.getHeight(enemy));
 
         shapeRenderer.end();
+        
+        */
 
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
