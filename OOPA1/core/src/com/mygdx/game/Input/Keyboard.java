@@ -12,13 +12,18 @@ public class Keyboard {
         return Gdx.input.isKeyPressed(keycode) ? 1 : 0;
     }
 
-    protected int getKeyPressed() {
-        for (int keycode = Input.Keys.A; keycode <= Input.Keys.Z; keycode++) {
-            if (Gdx.input.isKeyPressed(keycode)) {
-                return keycode; // Return the first pressed key found
-            }
+    // New method to get directional input
+    protected Integer getDirectionalInput() {
+        if (isKeyPressedBool(Input.Keys.LEFT)) {
+            return Input.Keys.LEFT;
+        } else if (isKeyPressedBool(Input.Keys.RIGHT)) {
+            return Input.Keys.RIGHT;
+        } else if (isKeyPressedBool(Input.Keys.UP)) {
+            return Input.Keys.UP;
+        } else if (isKeyPressedBool(Input.Keys.DOWN)) {
+            return Input.Keys.DOWN;
         }
-        return -1;
+        return null; // No directional input detected
     }
 
 }

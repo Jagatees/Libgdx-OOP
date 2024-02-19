@@ -21,25 +21,45 @@ public class Game extends ApplicationAdapter {
 	/** Init the simulation lifecycle manger and pass in the SceneManager */
 	@Override
 	public void create() {
-		simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
-		simulationLifecycleManagement.startGame(sceneManager);
+		try {
+			simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
+			simulationLifecycleManagement.startGame(sceneManager);
+		} catch (Exception e) {
+			Gdx.app.error("Game", "Error initializing game", e);
+			// Handle initialization error (e.g., log the error, attempt a safe fallback, etc.)
+		}
 	}
 
 	/** Render the SLM */
 	@Override
 	public void render() {
-		simulationLifecycleManagement.render();
-		update(Gdx.graphics.getDeltaTime());
+		try {
+			simulationLifecycleManagement.render();
+			update(Gdx.graphics.getDeltaTime());
+		} catch (Exception e) {
+			Gdx.app.error("Game", "Error during rendering", e);
+			// Handle rendering error (e.g., log the error, attempt to recover, etc.)
+		}
 	}
 
 	/** Update SLM */
 	private void update(float deltaTime) {
-		simulationLifecycleManagement.update(deltaTime);
+		try {
+			simulationLifecycleManagement.update(deltaTime);
+		} catch (Exception e) {
+			Gdx.app.error("Game", "Error during update", e);
+			// Handle update error (e.g., log the error, try to recover if possible, etc.)
+		}
 	}
 
 	/** Dispose SLM */
 	@Override
 	public void dispose() {
-		simulationLifecycleManagement.dispose();
+		try {
+			simulationLifecycleManagement.dispose();
+		} catch (Exception e) {
+			Gdx.app.error("Game", "Error disposing resources", e);
+			// Handle disposal error (e.g., log the error, clean up as much as possible, etc.)
+		}
 	}
 }

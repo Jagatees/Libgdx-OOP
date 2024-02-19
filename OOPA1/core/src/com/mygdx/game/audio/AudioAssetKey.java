@@ -6,6 +6,6 @@ package com.mygdx.game.audio;
  * audio resources, such as sound effects and background music.
  */
 public enum AudioAssetKey {
-    MOUSE_CLICK,
-    BACKGROUND_MUSIC,
+    DEAFULT_ONE,
+    DEAFULT_TWO,
 }

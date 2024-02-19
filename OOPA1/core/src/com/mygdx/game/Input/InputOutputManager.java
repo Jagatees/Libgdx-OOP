@@ -1,5 +1,6 @@
 package com.mygdx.game.Input;
 
+import com.badlogic.gdx.Input;
 import com.mygdx.game.Input.Keyboard;
 import com.mygdx.game.audio.AudioManager;
 
@@ -22,10 +23,20 @@ public class InputOutputManager {
      * @param keyboard The Keyboard instance to be used for input handling.
      * @param audioManager The AudioManager instance to be used for audio management.
      */
-    public InputOutputManager(Keyboard keyboard, AudioManager audioManager) {
-        this.keyboard = keyboard;
-        this.audioManager = audioManager;
+    public InputOutputManager() {
+        this.keyboard = new Keyboard();
+        this.audioManager = AudioManager.getInstance();
     }
+
+
+    public int getIntKey(int x){
+        return this.keyboard.isKeyPressedInt(x);
+    }
+
+    public boolean getIntKey2(int x){
+        return this.keyboard.isKeyPressedBool(x);
+    }
+
 
     /**
      * Returns the audio manager associated with this InputOutputManager.
@@ -44,5 +55,7 @@ public class InputOutputManager {
     public Keyboard getKeyboard() {
         return keyboard;
     }
+
+
 
 }

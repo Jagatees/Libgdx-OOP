@@ -6,6 +6,9 @@ import com.mygdx.game.Collision.CollisionManager;
 import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.nonPlayer;
+import com.mygdx.game.Input.InputOutputManager;
+import com.mygdx.game.Input.Keyboard;
+import com.mygdx.game.audio.AudioManager;
 
 import java.util.List;
 
@@ -16,7 +19,7 @@ public class PlayerControllerManagement implements EntityController {
     private EntityManager entityManager;
     private List<nonPlayer> entitiesNonPlayer;
     private List<Player> entitiesPlayer;
-
+    private InputOutputManager inputOutputManager ;
 
     public PlayerControllerManagement(Player player, EntityManager entityManager, CollisionManager collisionManager) {
         this.player = player;
@@ -24,6 +27,7 @@ public class PlayerControllerManagement implements EntityController {
         this.collisionManager = collisionManager;
         this.entitiesNonPlayer = entityManager.getEntitiesOfTypeList(nonPlayer.class);
         this.entitiesPlayer = entityManager.getEntitiesOfTypeList(Player.class);
+        this.inputOutputManager = new InputOutputManager();
     }
 
     public void move(int direction) {
