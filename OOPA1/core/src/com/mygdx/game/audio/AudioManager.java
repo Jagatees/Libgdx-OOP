@@ -9,6 +9,7 @@ import java.util.Map;
  * Allows for loading, playing, stopping, and disposing of audio assets.
  */
 public class AudioManager {
+    private static AudioManager instance; // Singleton instance
     private Map<AudioAssetKey, AudioAsset> audioAssets;
 
     /**
@@ -70,7 +71,7 @@ public class AudioManager {
      * @param key The key of the audio asset for which to set the volume.
      * @param volume The volume level to set, typically between 0 (silent) and 1 (maximum volume).
      */
-    public void setVolume(String key, float volume) {
+    public void setVolume(AudioAssetKey key, float volume) {
         if (audioAssets.containsKey(key)) {
             audioAssets.get(key).setVolume(volume);
         }
@@ -84,5 +85,13 @@ public class AudioManager {
         for (AudioAsset asset : audioAssets.values()) {
             asset.dispose();
         }
+    }
+
+    // Static method to get the singleton instance
+    public static synchronized AudioManager getInstance() {
+        if (instance == null) {
+            instance = new AudioManager();
+        }
+        return instance;
     }
 }

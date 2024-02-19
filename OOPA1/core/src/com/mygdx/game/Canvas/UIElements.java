@@ -21,8 +21,7 @@ public class UIElements {
         pixmap.setColor(backgroundColor);
         pixmap.fill();
 
-        // Convert the Pixmap to a Texture and then to a Drawable
-        Texture texture = new Texture(pixmap); // Don't forget to dispose of this texture when you're done with it!
+        Texture texture = new Texture(pixmap);
         pixmap.dispose(); // We're done with the pixmap, dispose it.
         Drawable drawable = new TextureRegionDrawable(texture);
 
