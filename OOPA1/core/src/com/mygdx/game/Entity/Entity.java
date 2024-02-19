@@ -28,6 +28,7 @@ public abstract class Entity implements objectMovement {
         SHAPE, SPRITE
     }
     
+    // Constructor for Entity
     Entity(float xCords, float yCords, float speed, EntityState state,
            boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
         setxCords(xCords);
@@ -40,15 +41,16 @@ public abstract class Entity implements objectMovement {
         setEntityType(entityType);
         setRenderType(renderType);
     }
-
-    public void setRenderType(Entity.RenderType renderType) {
+    
+    // Setter to change the RenderType
+    protected void setRenderType(Entity.RenderType renderType) {
         this.renderType = renderType;
     }
-
-    public RenderType getRenderType() {
+    
+    // Getter to retrieve RenderType (to be used in rendering of objects)
+    protected RenderType getRenderType() {
        return renderType;
     }
-
 
     protected void update(float deltaTime) {
         // Implement logic updates here
@@ -58,7 +60,6 @@ public abstract class Entity implements objectMovement {
         // Subclass to take over
     }
 
-    
     protected void render(ShapeRenderer shape) {
     	// Subclass to take over
     }
@@ -87,7 +88,32 @@ public abstract class Entity implements objectMovement {
     protected float getSpeed() {
         return speed;
     }
+    
+    void setSpeed(float newSpeed) {
+        speed = newSpeed;
+    }
+    
+    // Getter & Setter to retrieve Entity's Width
 
+    protected float getWidth() {
+        return width;
+    }
+
+    protected void setWidth(float width) {
+        this.width = width;
+    }
+    
+    // Getter & Setter to retrieve Entity's Height
+    
+    protected float getHeight() {
+        return height;
+    }
+
+    protected void setHeight(float height) {
+        this.height = height;
+    }
+    
+    // Getter & Setter for Current Entity State (to be used in Game Implementation)
     protected EntityState getEntityState() {
         return entityState;
     }
@@ -95,7 +121,8 @@ public abstract class Entity implements objectMovement {
     protected void setEntityState(EntityState entityState) {
         this.entityState = entityState;
     }
-
+    
+    // Getter & Setter for Entity Type (for identification and checking)
     protected EntityType getEntityType() {
         return entityType;
     }
@@ -104,11 +131,7 @@ public abstract class Entity implements objectMovement {
         this.entityType = entityType;
     }
 
-    void setSpeed(float newSpeed) {
-        speed = newSpeed;
-    }
-
-    // Getter & Setters for State
+    // Getter & Setters for Entity State
 
     protected EntityState getState() {
         return entityState;
@@ -118,18 +141,17 @@ public abstract class Entity implements objectMovement {
         this.entityState = state;
     }
 
-    // Getter & Setters for isAI
+    // Getter & Setters for isAI, to be used for differentiating whether object is an AI or not
 
     protected boolean getisAI() {
         return isAI;
     }
-
-    // Probably not required to change state of isAI
-
+    
     void setisAI(boolean newisAI) {
         isAI = newisAI;
     }
-
+    
+    // Movement Method, to check whether if it is AI & calls the respective methods accordingly
     protected void movement() {
         if (isAI) {
             AIControlledMovement();
@@ -140,27 +162,5 @@ public abstract class Entity implements objectMovement {
         }
     }
 
-    protected boolean isAI() {
-        return isAI;
-    }
 
-    protected void setAI(boolean AI) {
-        isAI = AI;
-    }
-
-    protected float getWidth() {
-        return width;
-    }
-
-    protected void setWidth(float width) {
-        this.width = width;
-    }
-
-    protected float getHeight() {
-        return height;
-    }
-
-    protected void setHeight(float height) {
-        this.height = height;
-    }
 }

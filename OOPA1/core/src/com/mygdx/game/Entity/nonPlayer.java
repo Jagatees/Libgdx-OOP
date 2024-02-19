@@ -13,7 +13,7 @@ public class nonPlayer extends Entity {
 
     private Texture entityTexture;
     private boolean isWall;
-    private com.mygdx.game.AI.AIControlManagement AIControlManagement;
+    private AIControlManagement AIControlManagement;
     private Color color;
 
     public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed,
@@ -82,7 +82,7 @@ public class nonPlayer extends Entity {
     }
     
     @Override
-    public void AIControlledMovement() {
+	public void AIControlledMovement() {
     	AIControlManagement.aiMove();
     }
 
