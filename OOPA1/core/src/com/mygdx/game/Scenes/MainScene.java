@@ -16,11 +16,10 @@ public class MainScene extends TemplateScene{
 
     /**
      * Constructor for MainScene. Initializes the canvas manager and sets up the main menu canvas.
-     * @param sceneManager Reference to the global scene manager for transitioning between scenes.
      */
-    public MainScene(SceneManager sceneManager) {
-        canvasManager = new CanvasManager(sceneManager);
-        canvasManager.setCanvas(new MainMenuCanvas(sceneManager));
+    public MainScene() {
+        canvasManager = new CanvasManager();
+        canvasManager.setCanvas(new MainMenuCanvas());
     }
 
     /**

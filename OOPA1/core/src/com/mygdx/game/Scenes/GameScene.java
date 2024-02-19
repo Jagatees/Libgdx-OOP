@@ -28,7 +28,6 @@ public class GameScene implements Scene {
     /** Manager */
     private EntityManager entityManager;
     private CollisionManager collisionManager;
-    private SceneManager sceneManager;
     private CanvasManager canvasManager;
 
     /** Game Entity */
@@ -46,9 +45,8 @@ public class GameScene implements Scene {
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
-     * @param sceneManager Manages transitions between scenes.
      */
-    public GameScene(SceneManager sceneManager) {
+    public GameScene() {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
@@ -84,11 +82,9 @@ public class GameScene implements Scene {
         
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
         entityManager.setAIController(enemy, aiControlManagement);
-            
-        this.sceneManager = sceneManager;
 
-        canvasManager = new CanvasManager(sceneManager);
-        canvasManager.setCanvas(new GameCanvas(sceneManager));
+        canvasManager = new CanvasManager();
+        canvasManager.setCanvas(new GameCanvas());
 
     }
 

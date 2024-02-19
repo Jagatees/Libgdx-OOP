@@ -11,6 +11,19 @@ public class SceneManager {
 
     /*** Holds the currently active scene, managing its lifecycle.*/
     private Scene currentScene;
+    private static SceneManager instance;
+
+
+    private SceneManager() {
+        // Private constructor to prevent instantiation
+    }
+
+    public static synchronized SceneManager getInstance() {
+        if (instance == null) {
+            instance = new SceneManager();
+        }
+        return instance;
+    }
 
     /**
      * Sets the current scene, disposes of the existing scene if one is active,

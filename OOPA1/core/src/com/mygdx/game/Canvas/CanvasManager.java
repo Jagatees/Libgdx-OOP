@@ -13,10 +13,9 @@ public class CanvasManager {
     /**
      * Constructs a CanvasManager with a reference to the game's scene manager.
      *
-     * @param sceneManager The SceneManager that handles scene transitions and management.
      */
-    public CanvasManager(SceneManager sceneManager) {
-        this.sceneManager = sceneManager;
+    public CanvasManager() {
+        this.sceneManager = SceneManager.getInstance();
     }
 
     /**

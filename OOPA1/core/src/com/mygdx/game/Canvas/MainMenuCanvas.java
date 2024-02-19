@@ -20,10 +20,10 @@ public class MainMenuCanvas implements Canvas{
     private Stage stage;
     private SimulationLifecycleManagement simulationLifecycleManagement;
 
-    public MainMenuCanvas(SceneManager sceneManager) {
+    public MainMenuCanvas() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        this.sceneManager = sceneManager;
+        this.sceneManager = SceneManager.getInstance();
         this.simulationLifecycleManagement = new SimulationLifecycleManagement();
 
 
@@ -31,7 +31,7 @@ public class MainMenuCanvas implements Canvas{
         stage.addActor(UIElements.createTextButton("Start Simulation", 600, 450, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                sceneManager.setScene(new GameScene(sceneManager));
+                sceneManager.setScene(new GameScene());
             }
         }));
 

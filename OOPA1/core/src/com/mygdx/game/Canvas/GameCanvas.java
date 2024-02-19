@@ -23,16 +23,15 @@ public class GameCanvas implements Canvas {
      * Constructs a GameCanvas with a reference to the SceneManager for scene transitions.
      * Initializes UI components like buttons and sets their behavior.
      *
-     * @param sceneManager The SceneManager used to switch scenes upon UI interactions.
      */
-    public GameCanvas(SceneManager sceneManager) {
+    public GameCanvas() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(UIElements.createTextButton("Go Back", 600, 450, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                sceneManager.setScene(new MainScene(sceneManager));
+                SceneManager.getInstance().setScene(new MainScene());
             }
         }));
 

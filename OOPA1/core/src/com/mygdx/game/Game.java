@@ -16,12 +16,13 @@ public class Game extends ApplicationAdapter {
 
 	/** Manages the SLM, including initialization, execution, and termination. */
 	private SimulationLifecycleManagement simulationLifecycleManagement;
+	private SceneManager sceneManager = SceneManager.getInstance();
 
 	/** Init the simulation lifecycle manger and pass in the SceneManager */
 	@Override
 	public void create() {
 		simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
-		simulationLifecycleManagement.startGame(new SceneManager());
+		simulationLifecycleManagement.startGame(sceneManager);
 	}
 
 	/** Render the SLM */

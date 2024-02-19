@@ -62,7 +62,7 @@ public class SimulationLifecycleManagement {
      */
     public void startGame(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
-        sceneManager.setScene(new MainScene(this.sceneManager));
+        sceneManager.setScene(new MainScene());
     }
 
     /**
