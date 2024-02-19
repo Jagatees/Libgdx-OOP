@@ -1,6 +1,6 @@
 package com.mygdx.game.audio;
 
-public interface AudioAssest {
+public interface AudioAsset {
     void play();
     void stop();
     void dispose();
