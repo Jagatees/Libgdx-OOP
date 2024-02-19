@@ -19,7 +19,7 @@ import com.mygdx.game.Entity.nonPlayer;
  */
 public class AIControlManagement implements EntityController {
 	
-	private com.mygdx.game.Entity.nonPlayer nonPlayer;
+	private nonPlayer nonPlayer;
     private CollisionManager collisionManager;
     private EntityManager entityManager;
     private List<nonPlayer> entitiesNonPlayer;
