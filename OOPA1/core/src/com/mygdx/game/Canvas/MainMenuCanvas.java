@@ -14,7 +14,7 @@ import com.mygdx.game.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Scenes.GameScene;
 import com.mygdx.game.Scenes.SceneManager;
 
-public class MainMeunCanvas implements Canvas{
+public class MainMenuCanvas implements Canvas{
 
     private SceneManager sceneManager;
     private Stage stage;
@@ -23,7 +23,7 @@ public class MainMeunCanvas implements Canvas{
     private SimulationLifecycleManagement simulationLifecycleManagement;
 
 
-    public MainMeunCanvas(SceneManager sceneManager) {
+    public MainMenuCanvas(SceneManager sceneManager) {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 

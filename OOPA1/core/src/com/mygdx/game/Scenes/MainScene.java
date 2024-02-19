@@ -3,7 +3,7 @@ package com.mygdx.game.Scenes;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Canvas.CanvasManager;
-import com.mygdx.game.Canvas.MainMeunCanvas;
+import com.mygdx.game.Canvas.MainMenuCanvas;
 
 
 public class MainScene extends TemplateScene{
@@ -13,7 +13,7 @@ public class MainScene extends TemplateScene{
 
     public MainScene(SceneManager sceneManager) {
         canvasManager = new CanvasManager(sceneManager);
-        canvasManager.setCanvas(new MainMeunCanvas(sceneManager));
+        canvasManager.setCanvas(new MainMenuCanvas(sceneManager));
     }
 
     @Override
