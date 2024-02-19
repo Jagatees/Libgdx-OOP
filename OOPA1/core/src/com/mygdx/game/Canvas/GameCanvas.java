@@ -28,8 +28,8 @@ public class GameCanvas implements Canvas{
         textButtonStyle.fontColor = Color.YELLOW;
 
         TextButton textButton = new TextButton("Game Menu", textButtonStyle);
-        textButton.setPosition(100, 100); // Position the button
-        textButton.setSize(200, 50); // Set the size of the button
+        textButton.setPosition(100, 100);
+        textButton.setSize(200, 50);
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {

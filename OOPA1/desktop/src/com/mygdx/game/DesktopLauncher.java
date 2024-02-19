@@ -11,9 +11,9 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config;
 		config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setWindowIcon(launcherConfig.getICON_16(), launcherConfig.getICON_32(), launcherConfig.getICON_48());
-		config.setTitle(launcherConfig.getGAME_TITLE());
-		config.setWindowedMode(launcherConfig.getSCREEN_WIDTH(), launcherConfig.getSCREEN_HEIGHT());
+		config.setWindowIcon(launcherConfig.getIcon16(), launcherConfig.getIcon32(), launcherConfig.getIcon48());
+		config.setTitle(launcherConfig.getGameTitle());
+		config.setWindowedMode(launcherConfig.getScreenWidth(), launcherConfig.getScreenHeight());
 		new Lwjgl3Application(new Game(), config);
 	}
 }
