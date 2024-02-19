@@ -131,14 +131,6 @@ public abstract class Entity implements objectMovement {
         this.height = height;
     }
     
-    // Getter & Setter for Current Entity State (to be used in Game Implementation)
-    protected EntityState getEntityState() {
-        return entityState;
-    }
-
-    protected void setEntityState(EntityState entityState) {
-        this.entityState = entityState;
-    }
     
     // Getter & Setter for Entity Type (for identification and checking)
     protected EntityType getEntityType() {
@@ -149,7 +141,7 @@ public abstract class Entity implements objectMovement {
         this.entityType = entityType;
     }
 
-    // Getter & Setters for Entity State
+    // Getter & Setters for Entity State (to be used for game implementation)
 
     protected EntityState getState() {
         return entityState;
