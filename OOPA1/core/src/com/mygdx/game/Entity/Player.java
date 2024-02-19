@@ -42,17 +42,17 @@ public class Player extends Entity {
         }
     }
 
-    public PlayerController getPlayerController() {
+    protected PlayerController getPlayerController() {
         return playerController;
+    }
+    
+    protected void setPlayerController(PlayerController playerController) {
+        this.playerController = playerController;
     }
 
     @Override
     public void AIControlledMovement() {
     	// Implementation in nonPlayer class
-    }
-
-    public void setPlayerController(PlayerController playerController) {
-        this.playerController = playerController;
     }
 
     @Override

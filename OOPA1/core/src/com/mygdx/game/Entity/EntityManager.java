@@ -1,6 +1,7 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.AI.AIControlManagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,12 +57,31 @@ public class EntityManager {
     	return entity.getHeight();
     }
     
+    // Primarily needed for AI Controller
     public void setAIXCords(nonPlayer entity, float aiNewX) {
     	entity.setxCords(aiNewX);
     }
     
     public void setAIYCords(nonPlayer entity, float aiNewY) {
     	entity.setyCords(aiNewY);
+    }
+    
+    // Primary Getters & Setters for PlayerController & AIController
+    
+    public PlayerController getPlayerController(Player entity) {
+        return entity.getPlayerController();
+    }
+    
+    public void setPlayerController(Player entity, PlayerController playerController) {
+        entity.setPlayerController(playerController);
+    }
+    
+    public AIControlManagement getAIController(nonPlayer entity) {
+        return entity.getAIController();
+    }
+    
+    public void setAIController(nonPlayer entity, AIControlManagement aiControlManagement) {
+    	entity.setAIController(aiControlManagement);
     }
 
     public float getSpeed(Entity entity) {

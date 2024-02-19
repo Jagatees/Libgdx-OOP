@@ -57,10 +57,10 @@ public class GameScene implements Scene {
         
 
         PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
-        pacman.setPlayerController(playerController);
+        entityManager.setPlayerController(pacman, playerController);
         
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
-        enemy.setAIController(aiControlManagement);
+        entityManager.setAIController(enemy, aiControlManagement);
         
         this.sceneManager = sceneManager;
 

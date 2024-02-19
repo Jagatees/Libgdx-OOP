@@ -89,25 +89,25 @@ public class PlayerController {
         return false; // no hit
     }
 
-    public void right() {
+    private void right() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newX = player.getxCords() + moveAmount;
         player.setxCords(newX);
     }
 
-    public void left() {
+    private void left() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newX = player.getxCords() - moveAmount;
         player.setxCords(newX);
     }
 
-    public void up() {
+    private void up() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newY = player.getyCords() + moveAmount;
         player.setyCords(newY);
     }
 
-    public void down() {
+    private void down() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newY = player.getyCords() - moveAmount;
         player.setyCords(newY);

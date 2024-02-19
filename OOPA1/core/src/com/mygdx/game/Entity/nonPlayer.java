@@ -52,11 +52,11 @@ public class nonPlayer extends Entity {
         }
     }
     
-    public AIControlManagement getAIController() {
+    protected AIControlManagement getAIController() {
         return AIControlManagement;
     }
     
-    public void setAIController(AIControlManagement aiControlManagement) {
+    protected void setAIController(AIControlManagement aiControlManagement) {
         this.AIControlManagement = aiControlManagement;
     }
     
