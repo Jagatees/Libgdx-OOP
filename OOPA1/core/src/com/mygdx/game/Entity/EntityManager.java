@@ -10,13 +10,12 @@ import java.util.List;
 
 public class EntityManager {
     private List<Entity> entities = new ArrayList<>();
-    private float aiNewX;
-    private float aiNewY;
+
 
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
-    
+
     public void render(SpriteBatch spriteBatch, ShapeRenderer shapeRenderer) {
         for (Entity entity : entities) {
             if (entity.getRenderType() == Entity.RenderType.SPRITE) {
