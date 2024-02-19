@@ -61,12 +61,12 @@ public class AIControlManagement implements EntityController {
         float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
 		if (!checkFutureCollision(currentDirection)) {
 			// Move in the current direction if no collision is detected
-			moveNonPlayer(currentDirection, moveAmount);
+			moveNonPlayer(currentDirection);
 		} else {
 			// If a collision is detected, get a new direction that is not the one that caused the collision
 			currentDirection = getNewDirection(currentDirection);
 			// Then move in the new direction
-			moveNonPlayer(currentDirection, moveAmount);
+			moveNonPlayer(currentDirection);
 		}
 	}
 
@@ -74,11 +74,8 @@ public class AIControlManagement implements EntityController {
      * Moves the non-player entity in the specified direction by the given amount.
      *
      * @param direction The direction to move.
-     * @param moveAmount The amount to move.
      */
-	private void moveNonPlayer(int direction, float moveAmount) {
-		// This method moves the nonPlayer in the given direction by the moveAmount
-        System.out.println(moveAmount);
+	private void moveNonPlayer(int direction) {
         switch (direction) {
             case 1: // UP
                 up();

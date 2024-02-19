@@ -59,7 +59,7 @@ public class GameScene implements Scene {
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
         entityManager.addEntity(boxPlayer);
-        
+
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement(pacman, entityManager, collisionManager);
         entityManager.setPlayerController(pacman, playerControllerManagement);
         
