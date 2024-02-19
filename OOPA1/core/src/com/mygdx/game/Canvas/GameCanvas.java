@@ -28,7 +28,7 @@ public class GameCanvas implements Canvas {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-        stage.addActor(UIElements.createTextButton("Go Back", 600, 450, 50, 50, Color.RED , new ChangeListener() {
+        stage.addActor(UIElements.createTextButton("Go Back", 1212, 650, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SceneManager.getInstance().setScene(new MainScene());

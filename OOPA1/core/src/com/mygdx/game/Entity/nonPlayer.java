@@ -21,10 +21,10 @@ public class nonPlayer extends Entity {
     }
     
     public nonPlayer(Color color, float xCords, float yCords, float speed,
-			 EntityState state, boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
+			 EntityState state, boolean isAI, boolean isWall, float width, float height, EntityType entityType, RenderType renderType) {
     	super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType, color);
         setColor(color);
-
+        setWall(isWall);
     }
 
     protected boolean isWall() {

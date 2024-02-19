@@ -34,6 +34,7 @@ public class GameScene implements Scene {
     private Player pacman;
     private nonPlayer enemy;
     private nonPlayer boxPlayer;
+    private nonPlayer boxPlayer2;
 
 
     /**
@@ -48,7 +49,9 @@ public class GameScene implements Scene {
         pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
 
-        boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
+        boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false,false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
+        boxPlayer2 = new nonPlayer(Color.GRAY, 200, 300, 10, Entity.EntityState.NULL, true,false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
+
 
         // For Presentation Purpose <Delete>
         createWall("wall.jpg", 0, 0, 8, 100, 0, true);
@@ -59,12 +62,16 @@ public class GameScene implements Scene {
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
         entityManager.addEntity(boxPlayer);
+        entityManager.addEntity(boxPlayer2);
 
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement(pacman, entityManager, collisionManager);
         entityManager.setPlayerController(pacman, playerControllerManagement);
         
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
         entityManager.setAIController(enemy, aiControlManagement);
+
+        AIControlManagement aiControlManagement2 = new AIControlManagement(boxPlayer2, entityManager, collisionManager);
+        entityManager.setAIController(boxPlayer2, aiControlManagement2);
 
         canvasManager = new CanvasManager();
         canvasManager.setCanvas(new GameCanvas());
@@ -110,6 +117,8 @@ public class GameScene implements Scene {
     public void update(float delta) {
         entityManager.movement(pacman);
         entityManager.movement(enemy);
+        entityManager.movement(boxPlayer2);
+
     }
 
     @Override
