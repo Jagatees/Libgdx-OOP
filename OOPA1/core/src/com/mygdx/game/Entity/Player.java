@@ -28,8 +28,17 @@ public class Player extends Entity {
 
     @Override
     protected void render(SpriteBatch batch) {
-        super.render(batch);
+    	batch.begin();
         batch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
+        batch.end();
+    }
+    
+    @Override
+    protected void render(ShapeRenderer shape) {
+    	shape.begin(ShapeRenderer.ShapeType.Filled); // Start drawing lines
+        shape.setColor(getColor()); // Set the color for rendering
+        shape.rect(getxCords(),getyCords(),getWidth(),getHeight());
+        shape.end();
     }
 
     @Override

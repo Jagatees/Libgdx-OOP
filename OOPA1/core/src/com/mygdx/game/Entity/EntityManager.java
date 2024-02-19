@@ -24,16 +24,10 @@ public class EntityManager {
     	// Applies the rendering codes accordingly
         for (Entity entity : entities) {
             if (entity.getRenderType() == Entity.RenderType.SPRITE) {
-                spriteBatch.begin();
                 entity.render(spriteBatch);
-                spriteBatch.end();
                 
             } else if (entity.getRenderType() == Entity.RenderType.SHAPE) {
-                shapeRenderer.begin(ShapeRenderer.ShapeType.Filled); // Start drawing lines
-                shapeRenderer.setColor(getColor((nonPlayer) entity)); // Set the color for rendering
                 entity.render(shapeRenderer);
-                shapeRenderer.rect(entity.getxCords(),entity.getyCords(),entity.getWidth(),entity.getHeight());
-                shapeRenderer.end();
             }
         }
     }

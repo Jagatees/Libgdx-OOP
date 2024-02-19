@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Controller.AIControlManagement;
 
 public class nonPlayer extends Entity {
@@ -41,9 +42,17 @@ public class nonPlayer extends Entity {
     }
 
     @Override
-    protected void render(SpriteBatch spriteBatch) {
-        super.render(spriteBatch);
-        spriteBatch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
+    protected void render(SpriteBatch batch) {
+        batch.begin();
+        batch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
+        batch.end();
+    }
+    
+    protected void render(ShapeRenderer shape) {
+    	shape.begin(ShapeRenderer.ShapeType.Filled); // Start drawing lines
+        shape.setColor(getColor()); // Set the color for rendering
+        shape.rect(getxCords(),getyCords(),getWidth(),getHeight());
+        shape.end();
     }
     
 
@@ -77,6 +86,7 @@ public class nonPlayer extends Entity {
 
     @Override
     public void userControlledMovement() {
-        // Implementation in Player class, but methods still needs to be present here due to interface
+        // Implementation in Player class, but methods still
+    	// needs to be presenthere due to interface
     }
 }
