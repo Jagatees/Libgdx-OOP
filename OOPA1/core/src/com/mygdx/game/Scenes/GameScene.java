@@ -15,26 +15,37 @@ import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Entity.PlayerController;
 import com.mygdx.game.Entity.nonPlayer;
 
+
+/**
+ * The GameScene file a like clone of the TemplateScene as that is the Base version
+ */
 public class GameScene implements Scene {
+
+    /** Rendering */
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
+
+    /** Manager */
     private EntityManager entityManager;
     private CollisionManager collisionManager;
+    private SceneManager sceneManager;
+    private CanvasManager canvasManager;
+
+    /** Game Entity */
     private Player pacman;
     private nonPlayer enemy;
     private nonPlayer wall;
     private nonPlayer wall2;
     private nonPlayer wall3;
     private nonPlayer wall4;
-    private SceneManager sceneManager;
-    private CanvasManager canvasManager;
-
-
     private nonPlayer boxPlayer;
     private nonPlayer boxPlayer2;
 
 
-
+    /**
+     * Constructor for GameScene, initializes game components, entities, and managers.
+     * @param sceneManager Manages transitions between scenes.
+     */
     public GameScene(SceneManager sceneManager) {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
@@ -63,7 +74,6 @@ public class GameScene implements Scene {
         entityManager.addEntity(boxPlayer2);
 
         
-
         PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
         entityManager.setPlayerController(pacman, playerController);
         
@@ -77,11 +87,9 @@ public class GameScene implements Scene {
 
     }
 
-    @Override
-    public void create() {
-
-    }
-
+    /**
+     * Render method called every frame to draw the scene's entities and background.
+     */
     @Override
     public void render() {
 
@@ -94,6 +102,11 @@ public class GameScene implements Scene {
 
     }
 
+
+    /**
+     * Update method to process game logic updates based on the time since the last frame.
+     * @param delta Time passed since the last frame, in seconds.
+     */
     @Override
     public void update(float delta) {
         entityManager.movement(pacman);
@@ -107,5 +120,12 @@ public class GameScene implements Scene {
         canvasManager.dispose();
     }
 
+    /**
+     * Dispose method to clean up resources when the scene is no longer in use.
+     */
+    @Override
+    public void create() {
+
+    }
 
 }
