@@ -1,6 +1,7 @@
 package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -27,8 +28,10 @@ public class GameScene implements Scene {
     private nonPlayer wall4;
     private SceneManager sceneManager;
     private CanvasManager canvasManager;
-    
 
+
+    private nonPlayer boxPlayer;
+    private nonPlayer boxPlayer2;
 
 
 
@@ -38,13 +41,16 @@ public class GameScene implements Scene {
         collisionManager = new CollisionManager();
         entityManager = new EntityManager();
 
-        pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL);
-        enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL);
+        pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
+        enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
 
-        wall = new nonPlayer("wall.jpg", -50, 0,0 , Entity.EntityState.NULL, false, true, 80, 1000, Entity.EntityType.NULL);
-        wall2 = new nonPlayer("wall.jpg", 500, 0,0 , Entity.EntityState.NULL, false, true, 80, 1000, Entity.EntityType.NULL);
-        wall3 = new nonPlayer("wall.jpg", 0, -50,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL);
-        wall4 = new nonPlayer("wall.jpg", 0, 500,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL);
+        wall = new nonPlayer("wall.jpg", -50, 0,0 , Entity.EntityState.NULL, false, true, 80, 1000, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
+        wall2 = new nonPlayer("wall.jpg", 500, 0,0 , Entity.EntityState.NULL, false, true, 80, 1000, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
+        wall3 = new nonPlayer("wall.jpg", 0, -50,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
+        wall4 = new nonPlayer("wall.jpg", 0, 500,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
+
+        boxPlayer = new nonPlayer(Color.BLACK, 200, 200, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
+        boxPlayer2 = new nonPlayer(Color.BLACK, 300, 300, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
 
 
         entityManager.addEntity(pacman);
@@ -53,7 +59,8 @@ public class GameScene implements Scene {
         entityManager.addEntity(wall2);
         entityManager.addEntity(wall3);
         entityManager.addEntity(wall4);
-        
+        entityManager.addEntity(boxPlayer);
+        entityManager.addEntity(boxPlayer2);
 
         
 
@@ -79,25 +86,7 @@ public class GameScene implements Scene {
     public void render() {
 
     	ScreenUtils.clear((float) 0.8, (float) 0.8, (float) 0.8, 1);
-
-        batch.begin();
-        entityManager.render(batch);
-        batch.end();
-        
-
-        
-        // Used for testing collision
-        /*
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // Start drawing lines
-        shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red
-
-        shapeRenderer.rect(entityManager.getxCords(pacman), entityManager.getyCords(pacman), entityManager.getWidth(pacman), entityManager.getHeight(pacman));
-        shapeRenderer.rect(entityManager.getxCords(wall), entityManager.getyCords(wall), entityManager.getWidth(wall), entityManager.getHeight(wall));
-        shapeRenderer.rect(entityManager.getxCords(enemy), entityManager.getyCords(enemy), entityManager.getWidth(enemy), entityManager.getHeight(enemy));
-
-        shapeRenderer.end();
-        
-        */
+        entityManager.render(batch, shapeRenderer);
 
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);

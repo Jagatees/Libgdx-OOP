@@ -14,18 +14,20 @@ public class nonPlayer extends Entity {
     private Texture entityTexture;
     private boolean isWall;
     private com.mygdx.game.AI.AIControlManagement AIControlManagement;
+    private Color color;
 
     public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed,
-                     EntityState state, boolean isAI, boolean isWall, float width, float height, EntityType entityType) {
-        super(xCords, yCords, speed, state, isAI, width, height, entityType);
+                     EntityState state, boolean isAI, boolean isWall, float width, float height, EntityType entityType, RenderType renderType) {
+        super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType);
         setTexture(new Texture(Gdx.files.internal(nonPlayerAsset)));
         setWall(isWall);
     }
     
     public nonPlayer(Color color, float xCords, float yCords, float speed,
-			 EntityState state, boolean isAI, float width, float height, EntityType entityType) {
-    	super(color, xCords, yCords, speed, state, isAI, width, height, entityType);
-    	setColor(color);
+			 EntityState state, boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
+    	super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType);
+        setColor(color);
+
     }
 
     protected boolean isWall() {
@@ -52,8 +54,8 @@ public class nonPlayer extends Entity {
 		return color;
 	}
 	
-	void setColor(Color rectColor) {
-		color = rectColor;;
+	void setColor(Color color) {
+		this.color = color;;
 	}
 
     // Getter & Setters for Players

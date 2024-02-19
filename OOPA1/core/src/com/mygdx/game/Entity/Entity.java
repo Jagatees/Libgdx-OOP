@@ -10,9 +10,10 @@ public abstract class Entity implements objectMovement {
     protected float xCords, yCords, speed;
     protected EntityState entityState;
     protected EntityType entityType;
+    protected RenderType renderType;
+
     protected boolean isAI;
     protected float width, height;
-    protected Color color;
 
 
     public enum EntityType {
@@ -22,9 +23,13 @@ public abstract class Entity implements objectMovement {
     public enum EntityState {
         NULL,
     }
+
+    public enum RenderType {
+        SHAPE, SPRITE
+    }
     
     Entity(float xCords, float yCords, float speed, EntityState state,
-           boolean isAI, float width, float height, EntityType entityType) {
+           boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
         setxCords(xCords);
         setyCords(yCords);
         setSpeed(speed);
@@ -33,22 +38,16 @@ public abstract class Entity implements objectMovement {
         setWidth(width);
         setHeight(height);
         setEntityType(entityType);
+        setRenderType(renderType);
     }
-    
-    
-    Entity(Color color, float xCords, float yCords, float speed, EntityState state,
-            boolean isAI, float width, float height, EntityType entityType) {
-    	
-    	 this.color = color;
-         setxCords(xCords);
-         setyCords(yCords);
-         setSpeed(speed);
-         setState(state);
-         setisAI(isAI);
-         setWidth(width);
-         setHeight(height);
-         setEntityType(entityType);
-     }
+
+    public void setRenderType(Entity.RenderType renderType) {
+        this.renderType = renderType;
+    }
+
+    public RenderType getRenderType() {
+       return renderType;
+    }
 
 
     protected void update(float deltaTime) {

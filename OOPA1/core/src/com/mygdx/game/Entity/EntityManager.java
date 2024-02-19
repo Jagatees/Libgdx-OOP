@@ -1,5 +1,6 @@
 package com.mygdx.game.Entity;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.AI.AIControlManagement;
@@ -15,17 +16,21 @@ public class EntityManager {
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
-
-    public void render(SpriteBatch spriteBatch) {
-        for (Entity entity : entities) {
-            entity.render(spriteBatch);
-        }
-    }
     
-    public void render(ShapeRenderer shape) {
-    	for (Entity entity : entities) {
-    		entity.render(shape);
-    	}
+    public void render(SpriteBatch spriteBatch, ShapeRenderer shapeRenderer) {
+        for (Entity entity : entities) {
+            if (entity.getRenderType() == Entity.RenderType.SPRITE) {
+                spriteBatch.begin();
+                entity.render(spriteBatch);
+                spriteBatch.end();
+            } else if (entity.getRenderType() == Entity.RenderType.SHAPE){
+                shapeRenderer.begin(ShapeRenderer.ShapeType.Filled); // Start drawing lines
+                shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red
+                entity.render(shapeRenderer);
+                shapeRenderer.rect(entity.getxCords(),entity.getyCords(),entity.getWidth(),entity.getHeight());
+                shapeRenderer.end();
+            }
+        }
     }
  
     public <T extends Entity> List<T> getEntitiesOfTypeList(Class<T> type) {
