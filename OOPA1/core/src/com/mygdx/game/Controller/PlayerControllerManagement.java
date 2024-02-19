@@ -1,4 +1,4 @@
-package com.mygdx.game.PlayerController;
+package com.mygdx.game.Controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -9,7 +9,7 @@ import com.mygdx.game.Entity.nonPlayer;
 
 import java.util.List;
 
-public class PlayerControllerManagement {
+public class PlayerControllerManagement implements EntityController {
 
     private Player player;
     private CollisionManager collisionManager;
@@ -45,7 +45,8 @@ public class PlayerControllerManagement {
         }
     }
 
-    private boolean checkFutureCollision(int direction) {
+    @Override
+    public boolean checkFutureCollision(int direction) {
 
         float futureX =  entityManager.getxCords(player);
         float futureY =  entityManager.getyCords(player) ;
@@ -95,28 +96,30 @@ public class PlayerControllerManagement {
         return false; // no hit
     }
 
-    private void right() {
+    public void right() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newX =  entityManager.getxCords(player) + moveAmount;
         entityManager.setxCords(player, newX);
     }
 
-    private void left() {
+    public void left() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newX =  entityManager.getxCords(player) - moveAmount;
         entityManager.setxCords(player, newX);
     }
 
-    private void up() {
+    public void up() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newY =  entityManager.getyCords(player) + moveAmount;
         entityManager.setyCords(player, newY);
     }
 
-    private void down() {
+    public void down() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newY =  entityManager.getyCords(player) - moveAmount;
         entityManager.setyCords(player, newY);
     }
+
+
 
 }

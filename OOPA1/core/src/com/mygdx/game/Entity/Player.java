@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.PlayerController.PlayerControllerManagement;
+import com.mygdx.game.Controller.PlayerControllerManagement;
 
 public class Player extends Entity {
 

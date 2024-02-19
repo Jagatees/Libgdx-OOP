@@ -1,4 +1,4 @@
-package com.mygdx.game.AI;
+package com.mygdx.game.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ import com.mygdx.game.Entity.nonPlayer;
  * Manages the AI controls and behaviors for non-player entities within the game,
  * including movement and collision detection.
  */
-public class AIControlManagement {
+public class AIControlManagement implements EntityController {
 	
 	private com.mygdx.game.Entity.nonPlayer nonPlayer;
     private CollisionManager collisionManager;
@@ -79,20 +79,20 @@ public class AIControlManagement {
 	private void moveNonPlayer(int direction, float moveAmount) {
 		// This method moves the nonPlayer in the given direction by the moveAmount
         System.out.println(moveAmount);
-		switch (direction) {
-			case 1: // UP
-				entityManager.setAIYCords(nonPlayer, entityManager.getyCords(nonPlayer) + moveAmount);
-				break;
-			case 2: // DOWN
-				entityManager.setAIYCords(nonPlayer, entityManager.getyCords(nonPlayer) - moveAmount );
-				break;
-			case 3: // LEFT
-				entityManager.setAIXCords(nonPlayer, entityManager.getxCords(nonPlayer) - moveAmount);
-				break;
-			case 4: // RIGHT
-				entityManager.setAIXCords(nonPlayer, entityManager.getxCords(nonPlayer) + moveAmount);
-				break;
-		}
+        switch (direction) {
+            case 1: // UP
+                up();
+                break;
+            case 2: // DOWN
+                down();
+                break;
+            case 3: // LEFT
+                left();
+                break;
+            case 4: // RIGHT
+                right();
+                break;
+        }
 	}
 
     private int lastDirection = -1; // Initialize with an invalid direction
@@ -114,13 +114,35 @@ public class AIControlManagement {
         return newDirection;
     }
 
+    public void left() {
+        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
+        entityManager.setAIXCords(nonPlayer, entityManager.getxCords(nonPlayer) - moveAmount);
+    }
+
+    @Override
+    public void right() {
+        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
+        entityManager.setAIXCords(nonPlayer, entityManager.getxCords(nonPlayer) + moveAmount);
+    }
+
+    @Override
+    public void up() {
+        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
+        entityManager.setAIYCords(nonPlayer, entityManager.getyCords(nonPlayer) + moveAmount);
+    }
+
+    @Override
+    public void down() {
+        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
+        entityManager.setAIYCords(nonPlayer, entityManager.getyCords(nonPlayer) - moveAmount);
+    }
     /**
      * Checks if moving in the given direction would cause a collision.
      *
      * @param direction The direction to check for a future collision.
      * @return true if a collision would occur, false otherwise.
      */
-	private boolean checkFutureCollision(int direction) {
+	public boolean checkFutureCollision(int direction) {
         float futureX = entityManager.getxCords(nonPlayer);
         float futureY = entityManager.getyCords(nonPlayer);
         float speed = (entityManager.getSpeed(nonPlayer) + 150) * Gdx.graphics.getDeltaTime();
