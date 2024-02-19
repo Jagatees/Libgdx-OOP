@@ -10,7 +10,6 @@ import com.mygdx.game.Controller.PlayerControllerManagement;
 
 public class Player extends Entity {
 
-    private Texture entityTexture;
     private PlayerControllerManagement playerControllerManagement;
 
     // Method overloading to accept either SpriteBatch or ShapeRenderer arguments 

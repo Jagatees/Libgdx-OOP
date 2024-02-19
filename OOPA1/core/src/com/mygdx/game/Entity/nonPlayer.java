@@ -9,7 +9,6 @@ import com.mygdx.game.Controller.AIControlManagement;
 
 public class nonPlayer extends Entity {
 
-    private Texture entityTexture;
     private boolean isWall;
     private AIControlManagement AIControlManagement;
 
