@@ -3,8 +3,7 @@ package com.mygdx.game;
 // Import statements for libGDX framework and game scene management
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.GameController.GameController;
-import com.mygdx.game.Input.Keyboard;
+import com.mygdx.game.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Scenes.SceneManager;
 
 
@@ -16,26 +15,26 @@ import com.mygdx.game.Scenes.SceneManager;
  */
 public class Game extends ApplicationAdapter {
 
-	private GameController gameController;
+	private SimulationLifecycleManagement simulationLifecycleManagement;
 
 	@Override
 	public void create() {
-		gameController = GameController.getInstance();
-		gameController.startGame(new SceneManager());
+		simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
+		simulationLifecycleManagement.startGame(new SceneManager());
 	}
 
 	@Override
 	public void render() {
-		gameController.render();
+		simulationLifecycleManagement.render();
 		update(Gdx.graphics.getDeltaTime());
 	}
 
 	private void update(float deltaTime) {
-		gameController.update(deltaTime);
+		simulationLifecycleManagement.update(deltaTime);
 	}
 
 	@Override
 	public void dispose() {
-		gameController.dispose();
+		simulationLifecycleManagement.dispose();
 	}
 }

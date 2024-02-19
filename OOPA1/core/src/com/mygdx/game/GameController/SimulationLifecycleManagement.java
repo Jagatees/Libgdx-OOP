@@ -4,18 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.SceneManager;
 
-public class GameController {
+public class SimulationLifecycleManagement {
 
-    private static GameController instance;
+    private static SimulationLifecycleManagement instance;
     private SceneManager sceneManager;
 
 
-    public GameController() {
+    public SimulationLifecycleManagement() {
 
     }
-    public static GameController getInstance() {
+    public static SimulationLifecycleManagement getInstance() {
         if (instance == null) {
-            instance = new GameController();
+            instance = new SimulationLifecycleManagement();
         }
         return instance;
     }
