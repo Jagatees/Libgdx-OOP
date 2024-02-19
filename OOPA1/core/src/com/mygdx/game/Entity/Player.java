@@ -14,10 +14,10 @@ public class Player extends Entity {
     private PlayerControllerManagement playerControllerManagement;
 
     // Method overloading to accept either SpriteBatch or ShapeRenderer arguments 
-    public Player(String playerAsset, float xCords, float yCords, float speed, EntityState state, boolean isAI, float width, float height, EntityType entityType,
+    public Player(String tex, float xCords, float yCords, float speed, EntityState state, boolean isAI, float width, float height, EntityType entityType,
                   RenderType renderType) {
-        super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType);
-        setTexture(new Texture(Gdx.files.internal(playerAsset)));
+        super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType, tex);
+        // setTexture(new Texture(Gdx.files.internal(tex)));
     }
 
     public Player(Color color, float xCords, float yCords, float speed, EntityState state, boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
@@ -44,14 +44,6 @@ public class Player extends Entity {
     @Override
     protected void update(float deltaTime) {
         super.update(deltaTime);
-    }
-
-    protected Texture getTexture() {
-        return entityTexture;
-    }
-
-    void setTexture(Texture tex) {
-        entityTexture = tex;
     }
 
     protected void movement() {

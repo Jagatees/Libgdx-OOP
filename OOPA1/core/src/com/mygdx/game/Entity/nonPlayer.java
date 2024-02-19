@@ -14,10 +14,10 @@ public class nonPlayer extends Entity {
     private AIControlManagement AIControlManagement;
 
     // Method overloading to accept either SpriteBatch or ShapeRenderer arguments 
-    public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed,
+    public nonPlayer(String tex, float xCords, float yCords, float speed,
                      EntityState state, boolean isAI, boolean isWall, float width, float height, EntityType entityType, RenderType renderType) {
-        super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType);
-        setTexture(new Texture(Gdx.files.internal(nonPlayerAsset)));
+        super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType, tex);
+        // setTexture(new Texture(Gdx.files.internal(nonPlayerAsset)));
         setWall(isWall);
     }
     
@@ -53,16 +53,6 @@ public class nonPlayer extends Entity {
         shape.setColor(getColor()); // Set the color for rendering
         shape.rect(getxCords(),getyCords(),getWidth(),getHeight());
         shape.end();
-    }
-    
-
-    // Getter & Setters for Players
-    protected Texture getTexture() {
-        return entityTexture;
-    }
-
-    void setTexture(Texture tex) {
-        entityTexture = tex;
     }
 
     protected void movement() {

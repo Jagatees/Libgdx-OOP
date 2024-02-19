@@ -1,6 +1,8 @@
 package com.mygdx.game.Entity;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -14,7 +16,8 @@ public abstract class Entity implements objectMovement {
 
     protected boolean isAI;
     protected float width, height;
-
+    
+    protected Texture objectTexture;
     protected Color color;
 
 
@@ -48,7 +51,7 @@ public abstract class Entity implements objectMovement {
 
     Entity(float xCords, float yCords, float speed, EntityState state,
            boolean isAI, float width, float height, EntityType entityType,
-           RenderType renderType) {
+           RenderType renderType, String fileName) {
         setxCords(xCords);
         setyCords(yCords);
         setSpeed(speed);
@@ -58,6 +61,7 @@ public abstract class Entity implements objectMovement {
         setHeight(height);
         setEntityType(entityType);
         setRenderType(renderType);
+        setTexture(new Texture(Gdx.files.internal(fileName)));
     }
     
     // Setter to change the RenderType
@@ -82,6 +86,15 @@ public abstract class Entity implements objectMovement {
     	// Subclass to take over
     }
     
+    // Getter & Setter for Texture
+    
+    protected Texture getTexture() {
+    	return objectTexture;
+    }
+    
+    void setTexture(Texture newTexture) {
+    	objectTexture = newTexture;
+    }
     
     // Getter & Setters for (x,y) coordinates
 
