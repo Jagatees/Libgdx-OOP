@@ -60,7 +60,7 @@ public class GameScene implements Scene {
         wall3 = new nonPlayer("wall.jpg", 0, -50,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         wall4 = new nonPlayer("wall.jpg", 0, 500,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
 
-        boxPlayer = new nonPlayer(Color.BLACK, 200, 200, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
+        boxPlayer = new nonPlayer(Color.RED, 200, 200, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
         boxPlayer2 = new nonPlayer(Color.BLACK, 300, 300, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
 
 

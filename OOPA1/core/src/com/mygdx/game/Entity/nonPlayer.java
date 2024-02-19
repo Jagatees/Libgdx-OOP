@@ -16,6 +16,7 @@ public class nonPlayer extends Entity {
     private AIControlManagement AIControlManagement;
     private Color color;
 
+    // Method overloading to accept either SpriteBatch or ShapeRenderer arguments 
     public nonPlayer(String nonPlayerAsset, float xCords, float yCords, float speed,
                      EntityState state, boolean isAI, boolean isWall, float width, float height, EntityType entityType, RenderType renderType) {
         super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType);

@@ -26,9 +26,11 @@ public class EntityManager {
                 spriteBatch.begin();
                 entity.render(spriteBatch);
                 spriteBatch.end();
-            } else if (entity.getRenderType() == Entity.RenderType.SHAPE){
+                
+            } else if (entity.getRenderType() == Entity.RenderType.SHAPE) {
                 shapeRenderer.begin(ShapeRenderer.ShapeType.Filled); // Start drawing lines
-                shapeRenderer.setColor(Color.RED); // Set the color of the bounding box to red
+                Color color = ((nonPlayer)entity).getColor();
+                shapeRenderer.setColor(color); // Set the color for rendering
                 entity.render(shapeRenderer);
                 shapeRenderer.rect(entity.getxCords(),entity.getyCords(),entity.getWidth(),entity.getHeight());
                 shapeRenderer.end();
@@ -149,5 +151,15 @@ public class EntityManager {
     // Getter to retrieve the Entity Type of a particular Entity object
     public Entity.EntityType getType(Entity entity) {
         return entity.getEntityType();
+    }
+    
+    // Getter & Setter for ShapeRenderer objects (only accepts nonPlayer)
+    
+    public Color getColor(nonPlayer entity) {
+    	return entity.getColor();
+    }
+    
+    public void setColor(nonPlayer entity, Color newColor) {
+    	entity.setColor(newColor);
     }
 }

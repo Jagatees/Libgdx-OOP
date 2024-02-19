@@ -11,7 +11,8 @@ public class Player extends Entity {
     private Texture entityTexture;
     private PlayerController playerController;
     private Color color;
-
+    
+    // Method overloading to accept either SpriteBatch or ShapeRenderer arguments 
     public Player(String playerAsset, float xCords, float yCords, float speed, EntityState state, boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
         super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType);
         setTexture(new Texture(Gdx.files.internal(playerAsset)));
@@ -19,18 +20,22 @@ public class Player extends Entity {
 
     public Player(Color color, float xCords, float yCords, float speed, EntityState state, boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
         super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType);
+        
+        // Calling of setter, to set color for the ShapeRenderer shape
         setColor(color);
     }
-
+    
+    // Setter for color
     private void setColor(Color color) {
         this.color = color;
     }
-
+    
     @Override
     protected void render(SpriteBatch batch) {
         super.render(batch);
         batch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
     }
+    
     @Override
     protected void update(float deltaTime) {
         super.update(deltaTime);
