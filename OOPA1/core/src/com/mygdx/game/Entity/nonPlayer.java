@@ -47,17 +47,7 @@ public class nonPlayer extends Entity {
         spriteBatch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
     }
     
-    @Override
-	protected void render(ShapeRenderer shape) {
-		super.render(shape);
-		shape.begin(ShapeRenderer.ShapeType.Line);
-		shape.setColor(color);
-		
-		shape.rect(xCords, yCords, width, height);
-		
-		shape.end();
-	}
-	
+
 	protected Color getColor() {
 		return color;
 	}

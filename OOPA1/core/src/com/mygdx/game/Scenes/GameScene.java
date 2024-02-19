@@ -1,7 +1,6 @@
 package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -29,7 +28,6 @@ public class GameScene implements Scene {
     private SceneManager sceneManager;
     private CanvasManager canvasManager;
     
-    private nonPlayer rect;
 
 
 
@@ -48,8 +46,7 @@ public class GameScene implements Scene {
         wall3 = new nonPlayer("wall.jpg", 0, -50,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL);
         wall4 = new nonPlayer("wall.jpg", 0, 500,0 , Entity.EntityState.NULL, false, true, 1000, 80, Entity.EntityType.NULL);
 
-        rect = new nonPlayer(Color.RED, 300, 150, 0, Entity.EntityState.NULL, false, 100, 100, Entity.EntityType.NULL);
-        
+
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
         entityManager.addEntity(wall);
@@ -57,7 +54,6 @@ public class GameScene implements Scene {
         entityManager.addEntity(wall3);
         entityManager.addEntity(wall4);
         
-        entityManager.addEntity(rect);
 
         
 
@@ -88,8 +84,7 @@ public class GameScene implements Scene {
         entityManager.render(batch);
         batch.end();
         
-        entityManager.render(shapeRenderer);
-        
+
         
         // Used for testing collision
         /*

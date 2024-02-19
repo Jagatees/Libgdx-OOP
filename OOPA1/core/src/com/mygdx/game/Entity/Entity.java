@@ -23,7 +23,6 @@ public abstract class Entity implements objectMovement {
         NULL,
     }
     
-    // Constructor overloading for different types of Entity
     Entity(float xCords, float yCords, float speed, EntityState state,
            boolean isAI, float width, float height, EntityType entityType) {
         setxCords(xCords);
