@@ -5,11 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.PlayerController.PlayerControllerManagement;
 
 public class Player extends Entity {
 
     private Texture entityTexture;
-    private PlayerController playerController;
+    private PlayerControllerManagement playerControllerManagement;
     private Color color;
     
     // Method overloading to accept either SpriteBatch or ShapeRenderer arguments 
@@ -57,12 +58,12 @@ public class Player extends Entity {
         }
     }
 
-    protected PlayerController getPlayerController() {
-        return playerController;
+    protected PlayerControllerManagement getPlayerController() {
+        return playerControllerManagement;
     }
     
-    protected void setPlayerController(PlayerController playerController) {
-        this.playerController = playerController;
+    protected void setPlayerController(PlayerControllerManagement playerControllerManagement) {
+        this.playerControllerManagement = playerControllerManagement;
     }
 
     @Override

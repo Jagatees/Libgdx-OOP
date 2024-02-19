@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.AI.AIControlManagement;
+import com.mygdx.game.PlayerController.PlayerControllerManagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,12 +116,12 @@ public class EntityManager {
     }
     
     // Primary Getter & Setter for PlayerController (to be used for Player objects ONLY)
-    public PlayerController getPlayerController(Player entity) {
+    public PlayerControllerManagement getPlayerController(Player entity) {
         return entity.getPlayerController();
     }
     
-    public void setPlayerController(Player entity, PlayerController playerController) {
-        entity.setPlayerController(playerController);
+    public void setPlayerController(Player entity, PlayerControllerManagement playerControllerManagement) {
+        entity.setPlayerController(playerControllerManagement);
     }
     
     // Primary Getter & Setter for AIController (to be used for AI/nonPlayer objects ONLY)

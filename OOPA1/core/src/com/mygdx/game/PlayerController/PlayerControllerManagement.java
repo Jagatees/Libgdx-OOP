@@ -1,11 +1,15 @@
-package com.mygdx.game.Entity;
+package com.mygdx.game.PlayerController;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.Collision.CollisionManager;
+import com.mygdx.game.Entity.EntityManager;
+import com.mygdx.game.Entity.Player;
+import com.mygdx.game.Entity.nonPlayer;
+
 import java.util.List;
 
-public class PlayerController {
+public class PlayerControllerManagement {
 
     private Player player;
     private CollisionManager collisionManager;
@@ -14,7 +18,7 @@ public class PlayerController {
     private List<Player> entitiesPlayer;
 
 
-    public PlayerController(Player player, EntityManager entityManager, CollisionManager collisionManager) {
+    public PlayerControllerManagement(Player player, EntityManager entityManager, CollisionManager collisionManager) {
         this.player = player;
         this.entityManager = entityManager;
         this.collisionManager = collisionManager;
@@ -42,9 +46,10 @@ public class PlayerController {
     }
 
     private boolean checkFutureCollision(int direction) {
-        float futureX = player.getxCords();
-        float futureY = player.getyCords() ;
-        float speed = (player.getSpeed() + 125) * Gdx.graphics.getDeltaTime();
+
+        float futureX =  entityManager.getxCords(player);
+        float futureY =  entityManager.getyCords(player) ;
+        float speed = ( entityManager.getSpeed(player) + 125) * Gdx.graphics.getDeltaTime();
 
         switch (direction) {
             case Input.Keys.LEFT:
@@ -69,7 +74,7 @@ public class PlayerController {
                     entityManager.getxCords(entity), entityManager.getyCords(entity),
                     entityManager.getWidth(entity), entityManager.getHeight(entity))) {
 
-                collisionManager.checkResponse(player.getEntityType(), entity.getEntityType());
+//                collisionManager.checkResponse(player.getEntityType(), entity.getEntityType());
                 return true;
             }
         }
@@ -82,7 +87,7 @@ public class PlayerController {
                     entityManager.getxCords(otherPlayer), entityManager.getyCords(otherPlayer),
                     entityManager.getWidth(otherPlayer), entityManager.getHeight(otherPlayer))) {
 
-                collisionManager.checkResponse(player.getEntityType(), otherPlayer.getEntityType());
+//                collisionManager.checkResponse(player.getEntityType(), otherPlayer.getEntityType());
                 return true;
             }
         }
@@ -92,26 +97,26 @@ public class PlayerController {
 
     private void right() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        float newX = player.getxCords() + moveAmount;
-        player.setxCords(newX);
+        float newX =  entityManager.getxCords(player) + moveAmount;
+        entityManager.setxCords(player, newX);
     }
 
     private void left() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        float newX = player.getxCords() - moveAmount;
-        player.setxCords(newX);
+        float newX =  entityManager.getxCords(player) - moveAmount;
+        entityManager.setxCords(player, newX);
     }
 
     private void up() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        float newY = player.getyCords() + moveAmount;
-        player.setyCords(newY);
+        float newY =  entityManager.getyCords(player) + moveAmount;
+        entityManager.setyCords(player, newY);
     }
 
     private void down() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        float newY = player.getyCords() - moveAmount;
-        player.setyCords(newY);
+        float newY =  entityManager.getyCords(player) - moveAmount;
+        entityManager.setyCords(player, newY);
     }
 
 }

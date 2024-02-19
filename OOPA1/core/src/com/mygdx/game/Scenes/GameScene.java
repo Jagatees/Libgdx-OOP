@@ -12,7 +12,7 @@ import com.mygdx.game.Collision.CollisionManager;
 import com.mygdx.game.Entity.Entity;
 import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
-import com.mygdx.game.Entity.PlayerController;
+import com.mygdx.game.PlayerController.PlayerControllerManagement;
 import com.mygdx.game.Entity.nonPlayer;
 
 
@@ -74,8 +74,8 @@ public class GameScene implements Scene {
         entityManager.addEntity(boxPlayer2);
 
         
-        PlayerController playerController = new PlayerController(pacman, entityManager, collisionManager);
-        entityManager.setPlayerController(pacman, playerController);
+        PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement(pacman, entityManager, collisionManager);
+        entityManager.setPlayerController(pacman, playerControllerManagement);
         
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
         entityManager.setAIController(enemy, aiControlManagement);
