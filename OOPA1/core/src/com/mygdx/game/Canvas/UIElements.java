@@ -14,6 +14,13 @@ public class UIElements {
 
     private static final BitmapFont defaultFont = new BitmapFont();
 
+
+
+
+
+
+
+
     public static TextButton createTextButton(String text, float x, float y, int width , int height, Color backgroundColor, ChangeListener actionListener) {
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
         pixmap.setColor(backgroundColor);
@@ -35,7 +42,26 @@ public class UIElements {
     }
 
 
+
+    public static Label createLabel(Color color) {
+        return createLabelwithallInput("Button", 100 ,100, color);
+    }
+
+    public static Label createLabel(float x, float y) {
+        return createLabelwithallInput("Button", x ,y, Color.BLACK);
+    }
+    public static Label createLabel(String text, float x, float y) {
+        return createLabelwithallInput(text, x ,y, Color.BLACK);
+    }
+    public static Label createLabel(String text) {
+        return createLabelwithallInput(text, 100 ,100, Color.BLACK);
+    }
+
     public static Label createLabel(String text, float x, float y, Color fontColor) {
+        return createLabelwithallInput(text, x ,y, fontColor);
+    }
+
+    private static Label createLabelwithallInput(String text, float x, float y, Color fontColor) {
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = defaultFont;
         style.fontColor = fontColor;

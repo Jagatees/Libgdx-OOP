@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Scenes.GameScene;
 import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.SceneManager;
@@ -32,6 +33,13 @@ public class GameCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SceneManager.getInstance().setScene(new MainScene());
+            }
+        }));
+
+        stage.addActor(UIElements.createTextButton("End Game", 1212, 580, 50, 50, Color.RED , new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                SimulationLifecycleManagement.getInstance().closeGame();
             }
         }));
 

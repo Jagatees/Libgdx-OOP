@@ -24,7 +24,7 @@ public class InputOutputManager {
      * @param audioManager The AudioManager instance to be used for audio management.
      */
     public InputOutputManager() {
-        this.keyboard = new Keyboard();
+        this.keyboard =  Keyboard.getInstance();
         this.audioManager = AudioManager.getInstance();
     }
 

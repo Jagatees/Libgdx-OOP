@@ -7,12 +7,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Controller.PlayerControllerManagement;
+import com.mygdx.game.Input.Keyboard;
 
 public class Player extends Entity {
 
     private PlayerControllerManagement playerControllerManagement;
 
-    // Method overloading to accept either SpriteBatch or ShapeRenderer arguments 
+    // Method overloading to accept either SpriteBatch or ShapeRenderer arguments
     public Player(String tex, float xCords, float yCords, float speed, EntityState state, boolean isAI, float width, float height, EntityType entityType,
                   RenderType renderType) {
         super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType, tex);
@@ -68,13 +69,13 @@ public class Player extends Entity {
 
     @Override
     public void userControlledMovement() {
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        if (Keyboard.getInstance().isKeyPressedBool(Input.Keys.RIGHT)) {
             getPlayerController().move(Input.Keys.RIGHT);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        } else if (Keyboard.getInstance().isKeyPressedBool(Input.Keys.LEFT)) {
             getPlayerController().move(Input.Keys.LEFT);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        } else if (Keyboard.getInstance().isKeyPressedBool(Input.Keys.UP)) {
             getPlayerController().move(Input.Keys.UP);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        } else if (Keyboard.getInstance().isKeyPressedBool(Input.Keys.DOWN)) {
             getPlayerController().move(Input.Keys.DOWN);
         }
     }
