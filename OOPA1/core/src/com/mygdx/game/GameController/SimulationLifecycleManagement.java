@@ -2,6 +2,7 @@ package com.mygdx.game.GameController;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Scenes.MainScene;
+import com.mygdx.game.Scenes.Scene;
 import com.mygdx.game.Scenes.SceneManager;
 
 /**
@@ -21,6 +22,7 @@ public class SimulationLifecycleManagement {
      * Private constructor to prevent instantiation from outside the class.
      */
     public SimulationLifecycleManagement() {
+        sceneManager = SceneManager.getInstance();
 
     }
 
@@ -58,11 +60,13 @@ public class SimulationLifecycleManagement {
      * Starts the game by setting the initial scene. This method should be called once
      * when the game is first started.
      *
-     * @param sceneManager The SceneManager instance to use for scene transitions.
      */
-    public void startGame(SceneManager sceneManager) {
-        this.sceneManager = sceneManager;
+
+    public void startGame() {
         sceneManager.setScene(new MainScene());
+    }
+    public void startGame(Scene scene) {
+        sceneManager.setScene(scene);
     }
 
     /**

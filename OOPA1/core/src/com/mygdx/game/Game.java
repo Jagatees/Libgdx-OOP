@@ -4,6 +4,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.GameController.SimulationLifecycleManagement;
+import com.mygdx.game.Scenes.GameScene;
+import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.SceneManager;
 
 
@@ -23,7 +25,7 @@ public class Game extends ApplicationAdapter {
 	public void create() {
 		try {
 			simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
-			simulationLifecycleManagement.startGame(sceneManager);
+			simulationLifecycleManagement.startGame(new MainScene());
 		} catch (Exception e) {
 			Gdx.app.error("Game", "Error initializing game", e);
 			// Handle initialization error (e.g., log the error, attempt a safe fallback, etc.)

@@ -16,11 +16,6 @@ public class UIElements {
 
 
 
-
-
-
-
-
     public static TextButton createTextButton(String text, float x, float y, int width , int height, Color backgroundColor, ChangeListener actionListener) {
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
         pixmap.setColor(backgroundColor);

@@ -1,21 +1,29 @@
 package com.mygdx.game.Canvas;
 
-import com.mygdx.game.Scenes.SceneManager;
+
+import java.util.List;
 
 /**
  * Manages the active canvas within the game, facilitating switching between different canvases
  * (e.g., UI screens, game views) and ensuring proper resource management.
  */
 public class CanvasManager {
+    private static CanvasManager instance;
     private Canvas currentCanvas;
-    private SceneManager sceneManager;
 
     /**
      * Constructs a CanvasManager with a reference to the game's scene manager.
      *
      */
     public CanvasManager() {
-        this.sceneManager = SceneManager.getInstance();
+
+    }
+
+    public static synchronized CanvasManager getInstance() {
+        if (instance == null) {
+            instance = new CanvasManager();
+        }
+        return instance;
     }
 
     /**

@@ -20,20 +20,12 @@ public class InputOutputManager {
     private AudioManager audioManager;
 
 
-
-
-
-
-
-
     public static synchronized InputOutputManager getInstance() {
         if (instance == null) {
             instance = new InputOutputManager();
         }
         return instance;
     }
-
-
 
     /**
      * Constructs an InputOutputManager with specified keyboard and audio manager instances.

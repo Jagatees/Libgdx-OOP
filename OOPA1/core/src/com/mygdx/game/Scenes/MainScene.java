@@ -3,6 +3,7 @@ package com.mygdx.game.Scenes;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Canvas.CanvasManager;
+import com.mygdx.game.Canvas.GameCanvas;
 import com.mygdx.game.Canvas.MainMenuCanvas;
 
 
@@ -18,7 +19,7 @@ public class MainScene extends TemplateScene{
      * Constructor for MainScene. Initializes the canvas manager and sets up the main menu canvas.
      */
     public MainScene() {
-        canvasManager = new CanvasManager();
+        canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new MainMenuCanvas());
     }
 

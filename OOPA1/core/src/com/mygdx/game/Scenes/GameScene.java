@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Canvas.MainMenuCanvas;
 import com.mygdx.game.Controller.AIControlManagement;
 import com.mygdx.game.Canvas.CanvasManager;
 import com.mygdx.game.Canvas.GameCanvas;
@@ -23,7 +24,7 @@ import com.mygdx.game.audio.AudioManager;
 /**
  * The GameScene file a like clone of the TemplateScene as that is the Base version
  */
-public class GameScene implements Scene {
+public class GameScene extends TemplateScene {
 
     /** Rendering */
     private SpriteBatch batch;
@@ -32,8 +33,8 @@ public class GameScene implements Scene {
     /** Manager */
     private EntityManager entityManager;
     private CollisionManager collisionManager;
-    private CanvasManager canvasManager;
     private InputOutputManager inputOutputManager;
+    private CanvasManager canvasManager;
 
 
     /** Game Entity */
@@ -90,14 +91,10 @@ public class GameScene implements Scene {
         
         AIControlManagement aiControlManagement2 = new AIControlManagement(boxPlayer2, entityManager, collisionManager);
         entityManager.setAIController(boxPlayer2, aiControlManagement2);
-        
-        
-        // Test removal of entity
-        // entityManager.removeEntity(enemy);
-        
+
         canvasManager = new CanvasManager();
         canvasManager.setCanvas(new GameCanvas());
-        
+
     }
 
     // For Presentation Purpose <Delete>
