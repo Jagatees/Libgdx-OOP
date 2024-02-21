@@ -140,6 +140,11 @@ public class AIControlManagement implements EntityController {
      * @return true if a collision would occur, false otherwise.
      */
 	public boolean checkFutureCollision(int direction) {
+		
+		if (entityManager.getisRemoved(nonPlayer)) { 
+			return false;
+		}
+		
         float futureX = entityManager.getxCords(nonPlayer);
         float futureY = entityManager.getyCords(nonPlayer);
         float speed = (entityManager.getSpeed(nonPlayer) + 150) * Gdx.graphics.getDeltaTime();
@@ -161,27 +166,31 @@ public class AIControlManagement implements EntityController {
 
         // Do it here
         for (Player entity : entitiesPlayer) {
-            if (collisionManager.checkCollision(
-                    futureX, futureY,
-                    entityManager.getWidth(nonPlayer), entityManager.getHeight(nonPlayer),
-                    entityManager.getxCords(entity), entityManager.getyCords(entity),
-                    entityManager.getWidth(entity), entityManager.getHeight(entity))) {
-
-                collisionManager.checkResponse(entityManager.getType(nonPlayer), entityManager.getType(entity));
-                return true;
-            }
+        	if (!entityManager.getisRemoved(entity)) {
+	            if (collisionManager.checkCollision(
+	                    futureX, futureY,
+	                    entityManager.getWidth(nonPlayer), entityManager.getHeight(nonPlayer),
+	                    entityManager.getxCords(entity), entityManager.getyCords(entity),
+	                    entityManager.getWidth(entity), entityManager.getHeight(entity))) {
+	
+	                collisionManager.checkResponse(entityManager.getType(nonPlayer), entityManager.getType(entity));
+	                return true;
+	            }
+        	}
         }
         
         for (nonPlayer othernonPlayers : entitiesNonPlayer) {
-            if (othernonPlayers != nonPlayer && collisionManager.checkCollision(
-                    futureX, futureY,
-                    entityManager.getWidth(nonPlayer), entityManager.getHeight(nonPlayer),
-                    entityManager.getxCords(othernonPlayers), entityManager.getyCords(othernonPlayers),
-                    entityManager.getWidth(othernonPlayers), entityManager.getHeight(othernonPlayers))) {
-            	
-                collisionManager.checkResponse(entityManager.getType(nonPlayer), entityManager.getType(othernonPlayers));
-                return true;
-            }
+        	if (!entityManager.getisRemoved(othernonPlayers)) {
+	            if (othernonPlayers != nonPlayer && collisionManager.checkCollision(
+	                    futureX, futureY,
+	                    entityManager.getWidth(nonPlayer), entityManager.getHeight(nonPlayer),
+	                    entityManager.getxCords(othernonPlayers), entityManager.getyCords(othernonPlayers),
+	                    entityManager.getWidth(othernonPlayers), entityManager.getHeight(othernonPlayers))) {
+	            	
+	                collisionManager.checkResponse(entityManager.getType(nonPlayer), entityManager.getType(othernonPlayers));
+	                return true;
+	            }
+        	}
         }
 
         return false; // no hit

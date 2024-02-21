@@ -162,8 +162,16 @@ public class EntityManager {
     	entity.setColor(newColor);
     }
     
+    // Method to remove entity
     public void removeEntity(Entity entity) {
     	entities.remove(entity);
+    	entity.setisRemoved(true);
+    }
+    
+    // Getter to check entity is indeed removed, to be used by other classes
+    
+    public boolean getisRemoved(Entity entity) {
+    	return entity.getisRemoved();
     }
 
 

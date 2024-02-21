@@ -67,27 +67,27 @@ public class GameScene implements Scene {
         
         
         // Testing of Update for Player
-        entityManager.update(pacman, 5);
+        // entityManager.update(pacman, 5);
         
         // Testing of Update for nonPlayer
-        entityManager.update(enemy, 5);
+        // entityManager.update(enemy, 5);
         
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement(pacman, entityManager, collisionManager);
         entityManager.setPlayerController(pacman, playerControllerManagement);
         
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
         entityManager.setAIController(enemy, aiControlManagement);
-
+        
         AIControlManagement aiControlManagement2 = new AIControlManagement(boxPlayer2, entityManager, collisionManager);
         entityManager.setAIController(boxPlayer2, aiControlManagement2);
         
         
-        // Test removal of entity. To be fixed: Object still exists at the x and y, collision detected
-        // entityManager.removeEntity(pacman);
+        // Test removal of entity
+        // entityManager.removeEntity(enemy);
         
         canvasManager = new CanvasManager();
         canvasManager.setCanvas(new GameCanvas());
-
+        
     }
 
     // For Presentation Purpose <Delete>
@@ -132,7 +132,10 @@ public class GameScene implements Scene {
         entityManager.movement(boxPlayer2);
 
     }
-
+    
+    /**
+     * Dispose method to clean up resources when the scene is no longer in use.
+     */
     @Override
     public void dispose() {
         batch.dispose();
@@ -140,9 +143,6 @@ public class GameScene implements Scene {
         canvasManager.dispose();
     }
 
-    /**
-     * Dispose method to clean up resources when the scene is no longer in use.
-     */
     @Override
     public void create() {
 

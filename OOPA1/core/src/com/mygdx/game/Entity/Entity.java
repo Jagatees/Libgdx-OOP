@@ -20,7 +20,8 @@ public abstract class Entity implements objectMovement {
     protected Texture objectTexture;
     protected Color color;
 
-
+    private boolean isRemoved = false;
+    
     public enum EntityType {
         NULL,
     }
@@ -192,5 +193,14 @@ public abstract class Entity implements objectMovement {
 
     protected void setColor(Color color) {
         this.color = color;
+    }
+    
+    // Getter to retrieve whether entity is removed
+    protected boolean getisRemoved() {
+    	return isRemoved;
+    }
+    
+    protected void setisRemoved(boolean removed) {
+    	isRemoved = removed;
     }
 }

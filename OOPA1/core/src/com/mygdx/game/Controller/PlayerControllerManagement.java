@@ -51,7 +51,11 @@ public class PlayerControllerManagement implements EntityController {
 
     @Override
     public boolean checkFutureCollision(int direction) {
-
+    	
+		if (entityManager.getisRemoved(player)) { 
+			return false;
+		}
+		
         float futureX =  entityManager.getxCords(player);
         float futureY =  entityManager.getyCords(player) ;
         float speed = ( entityManager.getSpeed(player) + 125) * Gdx.graphics.getDeltaTime();
@@ -73,28 +77,32 @@ public class PlayerControllerManagement implements EntityController {
 
      // Collision Detection for Non-Player Entities Entities
         for (nonPlayer entity : entitiesNonPlayer) {
-            if (collisionManager.checkCollision(
-                    futureX, futureY,
-                    entityManager.getWidth(player), entityManager.getHeight(player),
-                    entityManager.getxCords(entity), entityManager.getyCords(entity),
-                    entityManager.getWidth(entity), entityManager.getHeight(entity))) {
-
-                collisionManager.checkResponse(entityManager.getType(player), entityManager.getType(entity));
-                return true;
-            }
+        	if (!entityManager.getisRemoved(entity)) {
+	            if (collisionManager.checkCollision(
+	                    futureX, futureY,
+	                    entityManager.getWidth(player), entityManager.getHeight(player),
+	                    entityManager.getxCords(entity), entityManager.getyCords(entity),
+	                    entityManager.getWidth(entity), entityManager.getHeight(entity))) {
+	
+	                collisionManager.checkResponse(entityManager.getType(player), entityManager.getType(entity));
+	                return true;
+	            }
+        	}
         }
         
         // Collision Detection for Player Entities
         for (Player otherPlayer : entitiesPlayer) {
-            if (otherPlayer != player && collisionManager.checkCollision(
-                    futureX, futureY,
-                    entityManager.getWidth(player), entityManager.getHeight(player),
-                    entityManager.getxCords(otherPlayer), entityManager.getyCords(otherPlayer),
-                    entityManager.getWidth(otherPlayer), entityManager.getHeight(otherPlayer))) {
-
-                collisionManager.checkResponse(entityManager.getType(player), entityManager.getType(otherPlayer));
-                return true;
-            }
+        	if (!entityManager.getisRemoved(otherPlayer)) {
+	            if (otherPlayer != player && collisionManager.checkCollision(
+	                    futureX, futureY,
+	                    entityManager.getWidth(player), entityManager.getHeight(player),
+	                    entityManager.getxCords(otherPlayer), entityManager.getyCords(otherPlayer),
+	                    entityManager.getWidth(otherPlayer), entityManager.getHeight(otherPlayer))) {
+	
+	                collisionManager.checkResponse(entityManager.getType(player), entityManager.getType(otherPlayer));
+	                return true;
+	            }
+        	}
         }
 
         return false; // no hit
