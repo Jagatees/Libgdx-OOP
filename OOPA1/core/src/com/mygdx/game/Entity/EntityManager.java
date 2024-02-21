@@ -137,6 +137,11 @@ public class EntityManager {
     	entity.setSpeed(newSpeed);
     }
     
+    // Entity update to be handled by subclass
+    public void update(Entity entity, float deltaTime) {
+    	entity.update(deltaTime);
+    }
+    
     // Entity movement to be handled by subclass
     public void movement(Entity entity) {
        entity.movement();
@@ -155,6 +160,10 @@ public class EntityManager {
     
     public void setColor(nonPlayer entity, Color newColor) {
     	entity.setColor(newColor);
+    }
+    
+    public void removeEntity(Entity entity) {
+    	entities.remove(entity);
     }
 
 

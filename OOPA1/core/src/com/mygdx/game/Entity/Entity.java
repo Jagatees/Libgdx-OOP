@@ -75,7 +75,7 @@ public abstract class Entity implements objectMovement {
     }
 
     protected void update(float deltaTime) {
-        // Implement logic updates here
+        // Subclasses to take over
     }
 
     protected void render(SpriteBatch spriteBatch) {

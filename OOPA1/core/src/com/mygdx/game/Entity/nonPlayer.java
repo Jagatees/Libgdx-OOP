@@ -37,7 +37,9 @@ public class nonPlayer extends Entity {
 
     @Override
     protected void update(float deltaTime) {
-        super.update(deltaTime);
+        System.out.println("NonPlayer Updated");
+        
+     // Actual update implementation to be implemented here in 2nd part
     }
 
     @Override
@@ -76,6 +78,6 @@ public class nonPlayer extends Entity {
     @Override
     public void userControlledMovement() {
         // Implementation in Player class, but methods still
-    	// needs to be presenthere due to interface
+    	// needs to be present here due to interface
     }
 }

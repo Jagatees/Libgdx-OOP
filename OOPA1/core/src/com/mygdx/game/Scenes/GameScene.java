@@ -1,6 +1,7 @@
 package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -46,7 +47,7 @@ public class GameScene implements Scene {
         collisionManager = new CollisionManager();
         entityManager = new EntityManager();
 
-        pacman = new Player("pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
+        pacman = new Player("pacman.png", 250, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
 
         boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false,false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
@@ -63,7 +64,14 @@ public class GameScene implements Scene {
         entityManager.addEntity(enemy);
         entityManager.addEntity(boxPlayer);
         entityManager.addEntity(boxPlayer2);
-
+        
+        
+        // Testing of Update for Player
+        entityManager.update(pacman, 5);
+        
+        // Testing of Update for nonPlayer
+        entityManager.update(enemy, 5);
+        
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement(pacman, entityManager, collisionManager);
         entityManager.setPlayerController(pacman, playerControllerManagement);
         
@@ -72,7 +80,11 @@ public class GameScene implements Scene {
 
         AIControlManagement aiControlManagement2 = new AIControlManagement(boxPlayer2, entityManager, collisionManager);
         entityManager.setAIController(boxPlayer2, aiControlManagement2);
-
+        
+        
+        // Test removal of entity. To be fixed: Object still exists at the x and y, collision detected
+        // entityManager.removeEntity(pacman);
+        
         canvasManager = new CanvasManager();
         canvasManager.setCanvas(new GameCanvas());
 

@@ -43,7 +43,9 @@ public class Player extends Entity {
 
     @Override
     protected void update(float deltaTime) {
-        super.update(deltaTime);
+        System.out.println("Example player updated.");
+        
+        // Actual update implementation to be implemented here in 2nd part
     }
 
     protected void movement() {
