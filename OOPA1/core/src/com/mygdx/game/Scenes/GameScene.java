@@ -15,6 +15,9 @@ import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Controller.PlayerControllerManagement;
 import com.mygdx.game.Entity.nonPlayer;
+import com.mygdx.game.Input.InputOutputManager;
+import com.mygdx.game.audio.AudioAssetKey;
+import com.mygdx.game.audio.AudioManager;
 
 
 /**
@@ -30,6 +33,8 @@ public class GameScene implements Scene {
     private EntityManager entityManager;
     private CollisionManager collisionManager;
     private CanvasManager canvasManager;
+    private InputOutputManager inputOutputManager;
+
 
     /** Game Entity */
     private Player pacman;
@@ -46,6 +51,11 @@ public class GameScene implements Scene {
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
         entityManager = new EntityManager();
+        inputOutputManager = InputOutputManager.getInstance();
+
+        inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEAFULT_ONE, "SoundEffect/default.mp3" , true);
+        inputOutputManager.getAudioManager().play(AudioAssetKey.DEAFULT_ONE);
+        inputOutputManager.getAudioManager().setVolume(AudioAssetKey.DEAFULT_ONE, 0.1f);
 
         pacman = new Player("pacman.png", 250, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);

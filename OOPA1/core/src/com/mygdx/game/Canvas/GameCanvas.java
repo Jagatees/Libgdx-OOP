@@ -9,9 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.GameController.SimulationLifecycleManagement;
+import com.mygdx.game.Input.InputOutputManager;
 import com.mygdx.game.Scenes.GameScene;
 import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.SceneManager;
+import com.mygdx.game.audio.AudioAssetKey;
 
 /**
  * Implements the Canvas interface to create a UI canvas for the game menu using scene2d UI elements.
@@ -19,6 +21,7 @@ import com.mygdx.game.Scenes.SceneManager;
 public class GameCanvas implements Canvas {
 
     private Stage stage;
+    private InputOutputManager inputOutputManager;
 
     /**
      * Constructs a GameCanvas with a reference to the SceneManager for scene transitions.
@@ -26,6 +29,9 @@ public class GameCanvas implements Canvas {
      *
      */
     public GameCanvas() {
+
+        inputOutputManager = InputOutputManager.getInstance();
+
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
@@ -33,6 +39,7 @@ public class GameCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SceneManager.getInstance().setScene(new MainScene());
+                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEAFULT_ONE);
             }
         }));
 
@@ -40,6 +47,7 @@ public class GameCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SimulationLifecycleManagement.getInstance().closeGame();
+                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEAFULT_ONE);
             }
         }));
 

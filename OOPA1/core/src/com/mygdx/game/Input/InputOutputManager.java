@@ -12,16 +12,31 @@ import com.mygdx.game.audio.AudioManager;
  */
 public class InputOutputManager {
 
+    private static InputOutputManager instance; // Singleton instance
+
     /** Instance of Keyboard for managing keyboard input */
     private Keyboard keyboard;
     /** Instance of AudioManager for managing audio output. */
     private AudioManager audioManager;
 
+
+
+
+
+
+
+
+    public static synchronized InputOutputManager getInstance() {
+        if (instance == null) {
+            instance = new InputOutputManager();
+        }
+        return instance;
+    }
+
+
+
     /**
      * Constructs an InputOutputManager with specified keyboard and audio manager instances.
-     *
-     * @param keyboard The Keyboard instance to be used for input handling.
-     * @param audioManager The AudioManager instance to be used for audio management.
      */
     public InputOutputManager() {
         this.keyboard =  Keyboard.getInstance();
