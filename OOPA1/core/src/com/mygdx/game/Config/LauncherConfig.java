@@ -13,7 +13,7 @@ public class LauncherConfig {
      * Constructor for LauncherConfig that sets default values.
      */
     public LauncherConfig() {
-        LauncherConfig(1280, 720, "OOPA1", "icon16.png", "icon32.png", "icon48.png");
+        LauncherConfig(1280, 720, "OOPA1", "configImage/icon16.png", "configImage/icon32.png", "configImage/icon48.png");
     }
 
     /**
