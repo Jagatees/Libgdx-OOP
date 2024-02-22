@@ -7,8 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.GameController.SimulationLifecycleManagement;
-import com.mygdx.game.Scenes.GameScene;
-import com.mygdx.game.Scenes.OptionScene;
 import com.mygdx.game.Scenes.SceneManager;
 
 /**
@@ -32,14 +30,8 @@ public class OptionsCanvas implements Canvas{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
             simulationLifecycleManagement.togglePause();
-
             }
         });
-
-
-
-
-
     }
 
 

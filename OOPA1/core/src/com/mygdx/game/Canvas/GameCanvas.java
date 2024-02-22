@@ -2,18 +2,12 @@ package com.mygdx.game.Canvas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Input.InputOutputManager;
-import com.mygdx.game.Scenes.GameScene;
-import com.mygdx.game.Scenes.MainScene;
-import com.mygdx.game.Scenes.OptionScene;
-import com.mygdx.game.Scenes.SceneManager;
 import com.mygdx.game.audio.AudioAssetKey;
 
 /**

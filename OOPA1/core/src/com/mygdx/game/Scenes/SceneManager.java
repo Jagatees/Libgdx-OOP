@@ -109,9 +109,6 @@ public class SceneManager {
                  return new MainScene();
              case "Game":
                  return new GameScene();
-             case "Options":
-                 return new OptionScene();
-             // Add more cases as needed for your game
          }
         return null; // Placeholder
     }
