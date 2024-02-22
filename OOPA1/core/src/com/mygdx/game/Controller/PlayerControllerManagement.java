@@ -112,7 +112,7 @@ public class PlayerControllerManagement implements EntityController {
     }
     
     
-    // These methods will signal entityManager to move the entity, movement handled by entityManager
+    // These methods will signal entityManager to move the entity, movement handled 
     public void up() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newY =  entityManager.getyCords(player) + moveAmount;
@@ -128,13 +128,13 @@ public class PlayerControllerManagement implements EntityController {
     public void left() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newX =  entityManager.getxCords(player) - moveAmount;
-        entityManager.signalMoveEntity(player, 4, newX);
+        entityManager.signalMoveEntity(player, 3, newX);
     }
     
     public void right() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newX =  entityManager.getxCords(player) + moveAmount;
-        entityManager.signalMoveEntity(player, 3, newX);
+        entityManager.signalMoveEntity(player, 4, newX);
     }
 
 }

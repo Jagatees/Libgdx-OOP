@@ -201,7 +201,7 @@ public class AIControlManagement implements EntityController {
     public void right() {
         float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
         float newX = entityManager.getxCords(nonPlayer) + moveAmount;
-        entityManager.signalMoveEntity(nonPlayer, 3, newX);
+        entityManager.signalMoveEntity(nonPlayer, 4, newX);
     }
 
 
