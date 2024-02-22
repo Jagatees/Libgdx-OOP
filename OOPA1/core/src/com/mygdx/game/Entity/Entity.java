@@ -35,6 +35,8 @@ public abstract class Entity implements objectMovement {
     }
     
     // Constructor for Entity
+    // Method overloading
+    
     Entity(float xCords, float yCords, float speed, EntityState state,
            boolean isAI, float width, float height, EntityType entityType,
            RenderType renderType, Color color) {
@@ -62,10 +64,11 @@ public abstract class Entity implements objectMovement {
         setHeight(height);
         setEntityType(entityType);
         setRenderType(renderType);
-        
-        
-        // Error handling while setting Texture
-        try {
+        textureErrorHandling(fileName);
+    }
+    
+    protected void textureErrorHandling(String fileName) {
+    	try {
         	setTexture(new Texture(Gdx.files.internal(fileName)));
         } catch (Exception e) {
         	e.printStackTrace();
