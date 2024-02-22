@@ -31,7 +31,7 @@ public class Game extends ApplicationAdapter {
 			simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
 			inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEFAULT_ONE, "SoundEffect/default.mp3" , true);
 			inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEFAULT_TWO, "SoundEffect/perfectNight.mp3" , true);
-			simulationLifecycleManagement.startGame(new MainScene());
+			simulationLifecycleManagement.startGame();
 		} catch (Exception e) {
 			Gdx.app.error("Game", "Error initializing game", e);
 			// Handle initialization error (e.g., log the error, attempt a safe fallback, etc.)

@@ -1,6 +1,9 @@
 package com.mygdx.game.Scenes;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Manages the current scene within the game, handling transitions between scenes
  * and delegating the lifecycle management (creation, rendering, updating, and disposal)
@@ -12,10 +15,13 @@ public class SceneManager {
     /*** Holds the currently active scene, managing its lifecycle.*/
     private Scene currentScene;
     private static SceneManager instance;
+    private Map<String, Scene> scenes;
+
 
 
     private SceneManager() {
         // Private constructor to prevent instantiation
+        scenes = new HashMap<>();
     }
 
     public static synchronized SceneManager getInstance() {
@@ -31,10 +37,22 @@ public class SceneManager {
      *
      * @param scene The new scene to set as the current scene.
      */
-    public void setScene(Scene scene) {
+    public void setScene(String sceneId) {
+        Scene scene = scenes.get(sceneId);
+        // Check if the scene already exists
+        if (scene == null) {
+            // If the scene does not exist, create it and add it to the map
+            // This assumes a method to create scenes based on an identifier
+            scene = createSceneById(sceneId);
+            scenes.put(sceneId, scene);
+        }
+
+        // Dispose of the current scene if one is active
         if (currentScene != null) {
             currentScene.dispose();
         }
+
+        // Set the new scene and initialize it
         currentScene = scene;
         currentScene.create();
     }
@@ -80,5 +98,21 @@ public class SceneManager {
         if (currentScene != null) {
             currentScene.dispose();
         }
+    }
+
+
+    private Scene createSceneById(String sceneId) {
+        // Implement scene creation logic here
+        // Example:
+         switch (sceneId) {
+             case "MainMenu":
+                 return new MainScene();
+             case "Game":
+                 return new GameScene();
+             case "Options":
+                 return new OptionScene();
+             // Add more cases as needed for your game
+         }
+        return null; // Placeholder
     }
 }

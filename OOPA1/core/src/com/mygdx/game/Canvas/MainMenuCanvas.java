@@ -31,7 +31,7 @@ public class MainMenuCanvas implements Canvas{
         UIElements.createTextButton(stage, "Start Simulation", 600, 450, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                sceneManager.setScene(new GameScene());
+                sceneManager.setScene("Game");
             }
         });
 

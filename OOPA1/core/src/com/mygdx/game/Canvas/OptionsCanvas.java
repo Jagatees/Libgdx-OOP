@@ -8,22 +8,38 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Scenes.GameScene;
+import com.mygdx.game.Scenes.OptionScene;
 import com.mygdx.game.Scenes.SceneManager;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
  * for starting the game and exiting the application.
  */
-public class EndGameCanvas implements Canvas {
+public class OptionsCanvas implements Canvas{
 
+    private SceneManager sceneManager;
     private Stage stage;
-    private CanvasManager canvasManager = CanvasManager.getInstance();
+    private SimulationLifecycleManagement simulationLifecycleManagement;
 
-    public EndGameCanvas() {
+    public OptionsCanvas() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+        this.sceneManager = SceneManager.getInstance();
+        this.simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
 
-        UIElements.createLabel(stage, 200, 200);
+
+        UIElements.createTextButton(stage, "Resume", 500, 500, 50, 50, Color.RED , new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+            simulationLifecycleManagement.togglePause();
+
+            }
+        });
+
+
+
+
+
     }
 
 

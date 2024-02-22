@@ -1,6 +1,10 @@
 package com.mygdx.game.GameController;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.mygdx.game.Canvas.CanvasManager;
+import com.mygdx.game.Canvas.MainMenuCanvas;
+import com.mygdx.game.Canvas.OptionsCanvas;
 import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.Scene;
 import com.mygdx.game.Scenes.SceneManager;
@@ -16,7 +20,11 @@ public class SimulationLifecycleManagement {
     private static SimulationLifecycleManagement instance;
     /** Manages the scenes within the game */
     private SceneManager sceneManager;
+    private boolean isPaused = false; // Pause flag
 
+    public boolean isPaused() {
+        return this.isPaused;
+    }
 
     /**
      * Private constructor to prevent instantiation from outside the class.
@@ -25,6 +33,15 @@ public class SimulationLifecycleManagement {
         sceneManager = SceneManager.getInstance();
 
     }
+
+
+    public void togglePause() {
+        System.out.println(this.isPaused);
+        this.isPaused = !this.isPaused;
+    }
+
+
+
 
     /**
      * Returns the singleton instance of the SimulationLifecycleManagement class,
@@ -44,6 +61,8 @@ public class SimulationLifecycleManagement {
      */
     public void render(){
         this.sceneManager.render();
+
+
     }
 
     /**
@@ -53,6 +72,12 @@ public class SimulationLifecycleManagement {
      * @param dt The time in seconds since the last update.
      */
     public void update(float dt){
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            // Trigger pause functionality here
+            SimulationLifecycleManagement.getInstance().togglePause();
+        }
+
         sceneManager.update(dt);
     }
 
@@ -63,11 +88,9 @@ public class SimulationLifecycleManagement {
      */
 
     public void startGame() {
-        sceneManager.setScene(new MainScene());
+        sceneManager.setScene("MainMenu");
     }
-    public void startGame(Scene scene) {
-        sceneManager.setScene(scene);
-    }
+
 
     /**
      * Closes the game by exiting the application. This method can be called to

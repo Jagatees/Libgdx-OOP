@@ -61,6 +61,10 @@ public class CanvasManager {
         }
     }
 
+    public Canvas getCurrentCanvas() {
+        return currentCanvas;
+    }
+
     /**
      * Disposes of the current canvas if it is not null, ensuring that all resources are properly released.
      * This method should be called when the canvas manager is being disposed of or when the game is closing.

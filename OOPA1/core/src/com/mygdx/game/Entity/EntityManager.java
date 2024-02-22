@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Controller.AIControlManagement;
 import com.mygdx.game.Controller.PlayerControllerManagement;
+import com.mygdx.game.GameController.SimulationLifecycleManagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,9 +134,13 @@ public class EntityManager {
     
     // Entity movement to be handled by subclass
     public void movement(Entity entity) {
-    	if (!getisRemoved(entity)) {
-    		entity.movement();
-    	}
+
+        if (!SimulationLifecycleManagement.getInstance().isPaused()){
+            if (!getisRemoved(entity)) {
+                entity.movement();
+            }
+        }
+
     }
 
     // Getter to retrieve the Entity Type of a particular Entity object

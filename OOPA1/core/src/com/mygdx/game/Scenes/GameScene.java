@@ -1,12 +1,14 @@
 package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Canvas.MainMenuCanvas;
+import com.mygdx.game.Canvas.OptionsCanvas;
 import com.mygdx.game.Controller.AIControlManagement;
 import com.mygdx.game.Canvas.CanvasManager;
 import com.mygdx.game.Canvas.GameCanvas;
@@ -16,6 +18,7 @@ import com.mygdx.game.Entity.EntityManager;
 import com.mygdx.game.Entity.Player;
 import com.mygdx.game.Controller.PlayerControllerManagement;
 import com.mygdx.game.Entity.nonPlayer;
+import com.mygdx.game.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Input.InputOutputManager;
 import com.mygdx.game.audio.AudioAssetKey;
 import com.mygdx.game.audio.AudioManager;
@@ -99,6 +102,8 @@ public class GameScene extends TemplateScene {
         canvasManager = new CanvasManager();
         canvasManager.setCanvas(new GameCanvas());
 
+
+
     }
 
     // For Presentation Purpose <Delete>
@@ -129,6 +134,8 @@ public class GameScene extends TemplateScene {
         canvasManager.render(delta);
         canvasManager.update(delta);
 
+
+
     }
 
     /**
@@ -141,6 +148,12 @@ public class GameScene extends TemplateScene {
         entityManager.movement(enemy);
         entityManager.movement(boxPlayer2);
 
+        // Check if the game is paused and switch canvas accordingly
+        if (SimulationLifecycleManagement.getInstance().isPaused() && !(canvasManager.getCurrentCanvas() instanceof OptionsCanvas)) {
+            canvasManager.setCanvas(new OptionsCanvas());
+        } else if (!SimulationLifecycleManagement.getInstance().isPaused() && !(canvasManager.getCurrentCanvas() instanceof GameCanvas)) {
+            canvasManager.setCanvas(new GameCanvas());
+        }
     }
     
     /**

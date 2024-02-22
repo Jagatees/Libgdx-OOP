@@ -12,6 +12,7 @@ import com.mygdx.game.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Input.InputOutputManager;
 import com.mygdx.game.Scenes.GameScene;
 import com.mygdx.game.Scenes.MainScene;
+import com.mygdx.game.Scenes.OptionScene;
 import com.mygdx.game.Scenes.SceneManager;
 import com.mygdx.game.audio.AudioAssetKey;
 
@@ -35,11 +36,14 @@ public class GameCanvas implements Canvas {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-        UIElements.createTextButton(stage, "Go Back", 1212, 650, 50, 50, Color.RED , new ChangeListener() {
+        UIElements.createTextButton(stage,  "Options", 1212, 650, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                SceneManager.getInstance().setScene(new MainScene());
+
+                SimulationLifecycleManagement.getInstance().togglePause();
                 inputOutputManager.getAudioManager().stop(AudioAssetKey.DEFAULT_TWO);
+                CanvasManager.getInstance().setCanvas(new OptionsCanvas());
+
             }
         });
 
