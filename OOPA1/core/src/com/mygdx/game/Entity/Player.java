@@ -22,7 +22,7 @@ public class Player extends Entity {
     public Player(Color color, float xCords, float yCords, float speed, EntityState state, boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
         super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType, color);
     }
-
+    
     @Override
     protected void update(float deltaTime) {
         System.out.println("Example player updated.");

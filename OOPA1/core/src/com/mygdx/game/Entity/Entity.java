@@ -70,6 +70,228 @@ public abstract class Entity implements objectMovement {
         textureErrorHandling(fileName);
     }
     
+    // If speed not used for creating object with Color
+    Entity(float xCords, float yCords, EntityState state,
+            boolean isAI, float width, float height, EntityType entityType,
+            RenderType renderType, Color color) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setSpeed(10); // Default to Speed 10
+         setState(state);
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(entityType);
+         setRenderType(renderType);
+         setColor(color);
+     }
+    
+    // If speed not used for creating object with fileName
+    Entity(float xCords, float yCords, EntityState state,
+            boolean isAI, float width, float height, EntityType entityType,
+            RenderType renderType, String fileName) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setSpeed(10); // Default to Speed 10
+         setState(state);
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(entityType);
+         setRenderType(renderType);
+         textureErrorHandling(fileName);
+     }
+    
+    // If x and y not used for creating object with Color
+    Entity(float speed, EntityState state,
+            boolean isAI, float width, float height, EntityType entityType,
+            RenderType renderType, Color color) {
+         setxCords((float) 500); // Default to x = 500
+         setyCords((float) 500); // Default to y = 500
+         setSpeed(speed);
+         setState(state);
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(entityType);
+         setRenderType(renderType);
+         setColor(color);
+     }
+    
+    // If x and y not used for creating object with Sprite
+    Entity(float speed, EntityState state,
+            boolean isAI, float width, float height, EntityType entityType,
+            RenderType renderType, String fileName) {
+         setxCords((float) 500);
+         setyCords((float) 500);
+         setSpeed(10); // Default to Speed 10
+         setState(state);
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(entityType);
+         setRenderType(renderType);
+         textureErrorHandling(fileName);
+     }
+    
+    // If state not defined with Color
+    Entity(float xCords, float yCords, float speed,
+            boolean isAI, float width, float height, EntityType entityType,
+            RenderType renderType, Color color) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setSpeed(speed);
+         setState(EntityState.NULL); // Default to EntityState.NULL
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(entityType);
+         setRenderType(renderType);
+         setColor(color);
+     }
+    
+    // If state not defined with fileName  
+    Entity(float xCords, float yCords, float speed,
+            boolean isAI, float width, float height, EntityType entityType,
+            RenderType renderType, String fileName) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setSpeed(speed);
+         setState(EntityState.NULL); // Default to EntityState.NULL
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(entityType);
+         setRenderType(renderType);
+         textureErrorHandling(fileName);
+     }
+    
+    
+    // If isAI not used for creating object with Color
+    Entity(float xCords, float yCords, float speed, EntityState state, 
+    		float width, float height, EntityType entityType, 
+    		RenderType renderType, Color color) {
+        setxCords(xCords);
+        setyCords(yCords);
+        setSpeed(speed);
+        setState(state);
+        setisAI(true); // Default to true if not set
+        setWidth(width);
+        setHeight(height);
+        setEntityType(entityType);
+        setRenderType(renderType);
+        setColor(color);
+    }
+    
+    // If isAI not used for creating object with fileName
+    Entity(float xCords, float yCords, float speed, EntityState state, 
+    		float width, float height, EntityType entityType, 
+    		RenderType renderType, String fileName) {
+        setxCords(xCords);
+        setyCords(yCords);
+        setSpeed(speed);
+        setState(state);
+        setisAI(true); // Default to true if not set
+        setWidth(width);
+        setHeight(height);
+        setEntityType(entityType);
+        setRenderType(renderType);
+        textureErrorHandling(fileName); 
+    }
+    
+    // If width and height not used for creating object with Color
+    Entity(float xCords, float yCords, float speed, EntityState state,
+           boolean isAI, EntityType entityType, RenderType renderType, Color color) {
+        setxCords(xCords);
+        setyCords(yCords);
+        setSpeed(speed);
+        setState(state);
+        setisAI(isAI);
+        setWidth(5); // Default to width of 5
+        setHeight(5); // Default to height of 5
+        setEntityType(entityType);
+        setRenderType(renderType);
+        setColor(color);
+    }
+    
+    // If width and height not used for creating object with Color
+    Entity(float xCords, float yCords, float speed, EntityState state,
+           boolean isAI, EntityType entityType, RenderType renderType, String fileName) {
+        setxCords(xCords);
+        setyCords(yCords);
+        setSpeed(speed);
+        setState(state);
+        setisAI(isAI);
+        setWidth(5); // Default to width of 5
+        setHeight(5); // Default to height of 5
+        setEntityType(entityType);
+        setRenderType(renderType);
+        textureErrorHandling(fileName); 
+    }
+
+    // If EntityType not used when creating object with Color    
+    Entity(float xCords, float yCords, float speed, EntityState state,
+            boolean isAI, float width, float height, RenderType renderType, Color color) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setSpeed(speed);
+         setState(state);
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(Entity.EntityType.OBJECT); // Default to Entity.EntityType.OBJECT
+         setRenderType(renderType);
+         setColor(color);
+     }
+    
+    // If EntityType not used when creating object with fileName
+    Entity(float xCords, float yCords, float speed, EntityState state,
+            boolean isAI, float width, float height, RenderType renderType, String fileName) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setSpeed(speed);
+         setState(state);
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(Entity.EntityType.OBJECT); // Default to Entity.EntityType.OBJECT
+         setRenderType(renderType);
+         textureErrorHandling(fileName);
+     }
+    
+    // If EntityType not used when creating object with Color   
+    Entity(float xCords, float yCords, float speed, EntityState state,
+            boolean isAI, float width, float height, EntityType entityType,
+            Color color) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setSpeed(speed);
+         setState(state);
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(entityType);
+         setRenderType(Entity.RenderType.SHAPE); // Default to SHAPE RenderType (logically correct)
+         setColor(color);
+     }
+
+     // If EntityType not used when creating object with fileName
+     Entity(float xCords, float yCords, float speed, EntityState state,
+            boolean isAI, float width, float height, EntityType entityType,
+           String fileName) {
+         setxCords(xCords);
+         setyCords(yCords);
+         setSpeed(speed);
+         setState(state);
+         setisAI(isAI);
+         setWidth(width);
+         setHeight(height);
+         setEntityType(entityType);
+         setRenderType(Entity.RenderType.SPRITE); // Default to SPRITE RenderType (logically correct)
+         textureErrorHandling(fileName);
+     }
+     
+    
     protected void textureErrorHandling(String fileName) {
     	try {
         	setTexture(new Texture(Gdx.files.internal(fileName)));
