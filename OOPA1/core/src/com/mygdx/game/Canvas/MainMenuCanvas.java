@@ -75,6 +75,5 @@ public class MainMenuCanvas implements Canvas{
      */
     @Override
     public void dispose() {
-        stage.dispose();
     }
 }

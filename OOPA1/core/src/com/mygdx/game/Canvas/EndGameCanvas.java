@@ -24,7 +24,6 @@ public class EndGameCanvas implements Canvas {
         Gdx.input.setInputProcessor(stage);
 
         UIElements.createLabel(stage, 200, 200);
-
     }
 
 
@@ -54,6 +53,5 @@ public class EndGameCanvas implements Canvas {
      */
     @Override
     public void dispose() {
-        stage.dispose();
     }
 }
