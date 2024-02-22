@@ -24,6 +24,9 @@ public abstract class Entity implements objectMovement {
     
     public enum EntityType {
         NULL,
+        PLAYER,
+        ENEMY,
+        OBJECT,
     }
 
     public enum EntityState {
