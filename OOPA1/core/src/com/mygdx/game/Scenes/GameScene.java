@@ -132,7 +132,6 @@ public class GameScene extends TemplateScene {
 
     }
 
-
     /**
      * Update method to process game logic updates based on the time since the last frame.
      * @param delta Time passed since the last frame, in seconds.
