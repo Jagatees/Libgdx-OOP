@@ -1,4 +1,4 @@
-# Game Engine using OOP Concepts
+# Libgdx Game Engine - OOP Concepts
 
 
 
