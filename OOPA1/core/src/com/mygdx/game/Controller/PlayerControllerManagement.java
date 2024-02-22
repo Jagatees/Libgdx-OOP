@@ -110,31 +110,29 @@ public class PlayerControllerManagement implements EntityController {
 
         return false; // no hit
     }
-
-    public void right() {
-        float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        float newX =  entityManager.getxCords(player) + moveAmount;
-        entityManager.setxCords(player, newX);
-    }
-
-    public void left() {
-        float moveAmount = 200 * Gdx.graphics.getDeltaTime();
-        float newX =  entityManager.getxCords(player) - moveAmount;
-        entityManager.setxCords(player, newX);
-    }
-
+    
     public void up() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newY =  entityManager.getyCords(player) + moveAmount;
-        entityManager.setyCords(player, newY);
+        entityManager.signalMoveEntity(player, 1, newY);
     }
 
     public void down() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newY =  entityManager.getyCords(player) - moveAmount;
-        entityManager.setyCords(player, newY);
+        entityManager.signalMoveEntity(player, 2, newY);
     }
-
-
+    
+    public void left() {
+        float moveAmount = 200 * Gdx.graphics.getDeltaTime();
+        float newX =  entityManager.getxCords(player) - moveAmount;
+        entityManager.signalMoveEntity(player, 4, newX);
+    }
+    
+    public void right() {
+        float moveAmount = 200 * Gdx.graphics.getDeltaTime();
+        float newX =  entityManager.getxCords(player) + moveAmount;
+        entityManager.signalMoveEntity(player, 3, newX);
+    }
 
 }

@@ -174,6 +174,22 @@ public class EntityManager {
     public boolean getisRemoved(Entity entity) {
     	return entity.getisRemoved();
     }
+    
+    
+    // Methods to let EntityManager handle entities movement instead of controllers
+    
+    public void signalMoveEntity(Entity entity, int direction, float newCords) {
+    	// Direction: 1 - Up, 2 - Down, 3 - Left, 4 - Right
+    	
+    	if (direction == 3 || direction == 4) {
+    		entity.setxCords(newCords);
+    	}
+    	
+    	else if (direction == 1 || direction == 2) {
+    		entity.setyCords(newCords);
+    	}
+
+    }
 
 
 }

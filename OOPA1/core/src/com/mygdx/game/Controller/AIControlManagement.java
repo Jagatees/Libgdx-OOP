@@ -111,28 +111,7 @@ public class AIControlManagement implements EntityController {
         return newDirection;
     }
 
-    public void left() {
-        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
-        entityManager.setAIXCords(nonPlayer, entityManager.getxCords(nonPlayer) - moveAmount);
-    }
-
-    @Override
-    public void right() {
-        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
-        entityManager.setAIXCords(nonPlayer, entityManager.getxCords(nonPlayer) + moveAmount);
-    }
-
-    @Override
-    public void up() {
-        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
-        entityManager.setAIYCords(nonPlayer, entityManager.getyCords(nonPlayer) + moveAmount);
-    }
-
-    @Override
-    public void down() {
-        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
-        entityManager.setAIYCords(nonPlayer, entityManager.getyCords(nonPlayer) - moveAmount);
-    }
+   
     /**
      * Checks if moving in the given direction would cause a collision.
      *
@@ -198,4 +177,32 @@ public class AIControlManagement implements EntityController {
 
         return false; // no hit
     }
+	
+
+    public void up() {
+        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
+        float newY = entityManager.getyCords(nonPlayer) + moveAmount;
+        entityManager.signalMoveEntity(nonPlayer, 1, newY);
+    }
+
+
+    public void down() {
+        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
+        float newY = entityManager.getyCords(nonPlayer) - moveAmount;
+        entityManager.signalMoveEntity(nonPlayer, 2, newY);
+    }
+    
+	public void left() {
+        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
+        float newX = entityManager.getxCords(nonPlayer) - moveAmount;
+        entityManager.signalMoveEntity(nonPlayer, 3, newX);
+    }
+
+    public void right() {
+        float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
+        float newX = entityManager.getxCords(nonPlayer) + moveAmount;
+        entityManager.signalMoveEntity(nonPlayer, 3, newX);
+    }
+
+
 }
