@@ -4,10 +4,11 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.GameController.SimulationLifecycleManagement;
+import com.mygdx.game.Input.InputOutputManager;
 import com.mygdx.game.Scenes.GameScene;
 import com.mygdx.game.Scenes.MainScene;
 import com.mygdx.game.Scenes.SceneManager;
-
+import com.mygdx.game.audio.AudioAssetKey;
 
 
 /**
@@ -19,12 +20,17 @@ public class Game extends ApplicationAdapter {
 	/** Manages the SLM, including initialization, execution, and termination. */
 	private SimulationLifecycleManagement simulationLifecycleManagement;
 	private SceneManager sceneManager = SceneManager.getInstance();
+	private InputOutputManager inputOutputManager = InputOutputManager.getInstance();
+
+
 
 	/** Init the simulation lifecycle manger and pass in the SceneManager */
 	@Override
 	public void create() {
 		try {
 			simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
+			inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEFAULT_ONE, "SoundEffect/default.mp3" , true);
+			inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEFAULT_TWO, "SoundEffect/perfectNight.mp3" , true);
 			simulationLifecycleManagement.startGame(new MainScene());
 		} catch (Exception e) {
 			Gdx.app.error("Game", "Error initializing game", e);
@@ -40,7 +46,6 @@ public class Game extends ApplicationAdapter {
 			update(Gdx.graphics.getDeltaTime());
 		} catch (Exception e) {
 			Gdx.app.error("Game", "Error during rendering", e);
-			// Handle rendering error (e.g., log the error, attempt to recover, etc.)
 		}
 	}
 

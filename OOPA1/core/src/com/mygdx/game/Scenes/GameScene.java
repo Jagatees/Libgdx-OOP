@@ -54,22 +54,21 @@ public class GameScene extends TemplateScene {
         entityManager = new EntityManager();
         inputOutputManager = InputOutputManager.getInstance();
 
-        inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEFAULT_ONE, "SoundEffect/default.mp3" , true);
-        inputOutputManager.getAudioManager().play(AudioAssetKey.DEFAULT_ONE);
-        inputOutputManager.getAudioManager().setVolume(AudioAssetKey.DEFAULT_ONE, 0.1f);
+        inputOutputManager.getAudioManager().play(AudioAssetKey.DEFAULT_TWO);
+        inputOutputManager.getAudioManager().setVolume(AudioAssetKey.DEFAULT_TWO, 0.1f);
 
-        pacman = new Player("pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
-        enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.ENEMY, Entity.RenderType.SPRITE);
+        pacman = new Player("entity/pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
+        enemy = new nonPlayer("entity/blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.ENEMY, Entity.RenderType.SPRITE);
 
         boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
         boxPlayer2 = new Player(Color.BROWN, 400, 100, 10, Entity.EntityState.NULL, false, 50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
 
 
         // For Presentation Purpose <Delete>
-        createWall("wall.jpg", 0, 0, 8, 100, 0, true);
-        createWall("wall.jpg", 100, 0, 12, 100, 0, false);
-        createWall("wall.jpg", 100, 650, 12, 100, 0, false);
-        createWall("wall.jpg", 1200, 0, 8, 100, 0, true);
+        createWall("entity/wall.jpg", 0, 0, 8, 100, 0, true);
+        createWall("entity/wall.jpg", 100, 0, 12, 100, 0, false);
+        createWall("entity/wall.jpg", 100, 650, 12, 100, 0, false);
+        createWall("entity/wall.jpg", 1200, 0, 8, 100, 0, true);
 
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
