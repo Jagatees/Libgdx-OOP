@@ -20,7 +20,7 @@ public class PlayerControllerManagement implements EntityController {
     private List<nonPlayer> entitiesNonPlayer;
     private List<Player> entitiesPlayer;
     private InputOutputManager inputOutputManager ;
-
+    
     public PlayerControllerManagement(Player player, EntityManager entityManager, CollisionManager collisionManager) {
         this.player = player;
         this.entityManager = entityManager;
@@ -111,6 +111,8 @@ public class PlayerControllerManagement implements EntityController {
         return false; // no hit
     }
     
+    
+    // These methods will signal entityManager to move the entity, movement handled by entityManager
     public void up() {
         float moveAmount = 200 * Gdx.graphics.getDeltaTime();
         float newY =  entityManager.getyCords(player) + moveAmount;

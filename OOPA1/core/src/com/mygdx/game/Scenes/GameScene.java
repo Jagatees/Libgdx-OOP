@@ -54,9 +54,9 @@ public class GameScene extends TemplateScene {
         entityManager = new EntityManager();
         inputOutputManager = InputOutputManager.getInstance();
 
-        inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEAFULT_ONE, "SoundEffect/default.mp3" , true);
-        inputOutputManager.getAudioManager().play(AudioAssetKey.DEAFULT_ONE);
-        inputOutputManager.getAudioManager().setVolume(AudioAssetKey.DEAFULT_ONE, 0.1f);
+        inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEFAULT_ONE, "SoundEffect/default.mp3" , true);
+        inputOutputManager.getAudioManager().play(AudioAssetKey.DEFAULT_ONE);
+        inputOutputManager.getAudioManager().setVolume(AudioAssetKey.DEFAULT_ONE, 0.1f);
 
         pacman = new Player("pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);

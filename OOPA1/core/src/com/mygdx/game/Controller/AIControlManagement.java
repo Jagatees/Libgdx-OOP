@@ -178,7 +178,7 @@ public class AIControlManagement implements EntityController {
         return false; // no hit
     }
 	
-
+	// These methods will signal entityManager to move the entity, movement handled by entityManager
     public void up() {
         float moveAmount = Math.min(entityManager.getSpeed(nonPlayer) * Gdx.graphics.getDeltaTime(), 0.2f);
         float newY = entityManager.getyCords(nonPlayer) + moveAmount;

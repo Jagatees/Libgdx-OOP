@@ -39,7 +39,7 @@ public class GameCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SceneManager.getInstance().setScene(new MainScene());
-                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEAFULT_ONE);
+                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEFAULT_ONE);
             }
         });
 
@@ -47,7 +47,7 @@ public class GameCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SimulationLifecycleManagement.getInstance().closeGame();
-                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEAFULT_ONE);
+                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEFAULT_ONE);
             }
         });
 
