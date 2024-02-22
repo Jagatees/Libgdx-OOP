@@ -37,8 +37,7 @@ public class CollisionManager {
      * @param type1 The type of the second entity involved in the collision.
      */
     public void checkResponse(Entity.EntityType type, Entity.EntityType type1) {
-        System.out.println(type + "-" + type1);
-
+        System.out.println("Entity " + type + " has Collided with Entity " + type1);
     }
 }
 

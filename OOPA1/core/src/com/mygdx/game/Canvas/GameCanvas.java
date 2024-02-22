@@ -78,6 +78,5 @@ public class GameCanvas implements Canvas {
      */
     @Override
     public void dispose() {
-        stage.dispose();
     }
 }
