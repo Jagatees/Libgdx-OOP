@@ -62,7 +62,19 @@ public abstract class Entity implements objectMovement {
         setHeight(height);
         setEntityType(entityType);
         setRenderType(renderType);
-        setTexture(new Texture(Gdx.files.internal(fileName)));
+        
+        
+        // Error handling while setting Texture
+        try {
+        	setTexture(new Texture(Gdx.files.internal(fileName)));
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	
+        	String errorMessage = "Failed to load texture: " + fileName + ", a default texture will be loaded";
+        	System.out.println(errorMessage);
+        	
+        	setTexture(new Texture(Gdx.files.internal("badlogic.jpg")));
+        }
     }
     
     // Setter to change the RenderType
@@ -79,12 +91,17 @@ public abstract class Entity implements objectMovement {
         // Subclasses to take over
     }
 
-    protected void render(SpriteBatch spriteBatch) {
-        // Subclass to take over
+    protected void render(SpriteBatch batch) {
+        batch.begin();
+        batch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
+        batch.end();
     }
 
     protected void render(ShapeRenderer shape) {
-    	// Subclass to take over
+    	shape.begin(ShapeRenderer.ShapeType.Filled); // Start drawing lines
+        shape.setColor(getColor()); // Set the color for rendering
+        shape.rect(getxCords(),getyCords(),getWidth(),getHeight());
+        shape.end();
     }
     
     // Getter & Setter for Texture

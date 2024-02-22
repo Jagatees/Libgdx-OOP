@@ -31,7 +31,6 @@ public class EntityManager {
             }
         }
     }
-   
     
     // Generic method to differentiate the entities of different types into different ArrayList
     public <T extends Entity> List<T> getEntitiesOfTypeList(Class<T> type) {

@@ -16,7 +16,6 @@ public class nonPlayer extends Entity {
     public nonPlayer(String tex, float xCords, float yCords, float speed,
                      EntityState state, boolean isAI, boolean isWall, float width, float height, EntityType entityType, RenderType renderType) {
         super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType, tex);
-        // setTexture(new Texture(Gdx.files.internal(nonPlayerAsset)));
         setWall(isWall);
     }
     
@@ -39,21 +38,7 @@ public class nonPlayer extends Entity {
     protected void update(float deltaTime) {
         System.out.println("NonPlayer Updated");
         
-     // Actual update implementation to be implemented here in 2nd part
-    }
-
-    @Override
-    protected void render(SpriteBatch batch) {
-        batch.begin();
-        batch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
-        batch.end();
-    }
-    
-    protected void render(ShapeRenderer shape) {
-    	shape.begin(ShapeRenderer.ShapeType.Filled); // Start drawing lines
-        shape.setColor(getColor()); // Set the color for rendering
-        shape.rect(getxCords(),getyCords(),getWidth(),getHeight());
-        shape.end();
+        // TODO: Implement actual update to nonPlayer during Part 2
     }
 
     protected void movement() {

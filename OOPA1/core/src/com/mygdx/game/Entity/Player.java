@@ -17,35 +17,17 @@ public class Player extends Entity {
     public Player(String tex, float xCords, float yCords, float speed, EntityState state, boolean isAI, float width, float height, EntityType entityType,
                   RenderType renderType) {
         super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType, tex);
-        // setTexture(new Texture(Gdx.files.internal(tex)));
     }
 
     public Player(Color color, float xCords, float yCords, float speed, EntityState state, boolean isAI, float width, float height, EntityType entityType, RenderType renderType) {
         super(xCords, yCords, speed, state, isAI, width, height, entityType, renderType, color);
-    }
-    
-    // Setter for color
-
-    @Override
-    protected void render(SpriteBatch batch) {
-    	batch.begin();
-        batch.draw(getTexture(), getxCords(), getyCords(), getWidth(), getHeight());
-        batch.end();
-    }
-    
-    @Override
-    protected void render(ShapeRenderer shape) {
-    	shape.begin(ShapeRenderer.ShapeType.Filled); // Start drawing lines
-        shape.setColor(getColor()); // Set the color for rendering
-        shape.rect(getxCords(),getyCords(),getWidth(),getHeight());
-        shape.end();
     }
 
     @Override
     protected void update(float deltaTime) {
         System.out.println("Example player updated.");
         
-        // Actual update implementation to be implemented here in 2nd part
+        // TODO: Implement actual update to nonPlayer during Part 2
     }
 
     protected void movement() {
