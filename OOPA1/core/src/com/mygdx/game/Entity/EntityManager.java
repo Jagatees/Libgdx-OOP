@@ -144,7 +144,9 @@ public class EntityManager {
     
     // Entity movement to be handled by subclass
     public void movement(Entity entity) {
-       entity.movement();
+    	if (!getisRemoved(entity)) {
+    		entity.movement();
+    	}
     }
 
     // Getter to retrieve the Entity Type of a particular Entity object

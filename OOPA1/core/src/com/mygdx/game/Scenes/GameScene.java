@@ -58,7 +58,7 @@ public class GameScene extends TemplateScene {
         inputOutputManager.getAudioManager().play(AudioAssetKey.DEAFULT_ONE);
         inputOutputManager.getAudioManager().setVolume(AudioAssetKey.DEAFULT_ONE, 0.1f);
 
-        pacman = new Player("pacman.png", 250, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
+        pacman = new Player("pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
 
         boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
@@ -89,6 +89,8 @@ public class GameScene extends TemplateScene {
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
         entityManager.setAIController(enemy, aiControlManagement);
         
+        
+        entityManager.removeEntity(boxPlayer2);
         
         // Limitation: Singleplayer, unless different controls configured as current keys controls both player entities
         
