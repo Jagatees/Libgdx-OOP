@@ -72,12 +72,6 @@ public class SimulationLifecycleManagement {
      * @param dt The time in seconds since the last update.
      */
     public void update(float dt){
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
-            // Trigger pause functionality here
-            SimulationLifecycleManagement.getInstance().togglePause();
-        }
-
         sceneManager.update(dt);
     }
 
