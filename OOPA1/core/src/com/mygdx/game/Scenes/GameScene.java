@@ -41,7 +41,7 @@ public class GameScene extends TemplateScene {
     private Player pacman;
     private nonPlayer enemy;
     private nonPlayer boxPlayer;
-    private nonPlayer boxPlayer2;
+    private Player boxPlayer2;
 
 
     /**
@@ -61,8 +61,8 @@ public class GameScene extends TemplateScene {
         pacman = new Player("pacman.png", 250, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
 
-        boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false,false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
-        boxPlayer2 = new nonPlayer(Color.GRAY, 200, 300, 10, Entity.EntityState.NULL, true,false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
+        boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
+        boxPlayer2 = new Player(Color.BROWN, 400, 100, 10, Entity.EntityState.NULL, false, 50, 50, Entity.EntityType.NULL, Entity.RenderType.SHAPE);
 
 
         // For Presentation Purpose <Delete>
@@ -89,8 +89,8 @@ public class GameScene extends TemplateScene {
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
         entityManager.setAIController(enemy, aiControlManagement);
         
-        AIControlManagement aiControlManagement2 = new AIControlManagement(boxPlayer2, entityManager, collisionManager);
-        entityManager.setAIController(boxPlayer2, aiControlManagement2);
+        PlayerControllerManagement playerControllerMgmt2 = new PlayerControllerManagement(boxPlayer2, entityManager, collisionManager);
+        entityManager.setPlayerController(boxPlayer2, playerControllerMgmt2);
 
         canvasManager = new CanvasManager();
         canvasManager.setCanvas(new GameCanvas());

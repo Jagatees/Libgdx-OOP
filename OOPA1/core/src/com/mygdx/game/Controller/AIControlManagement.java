@@ -141,6 +141,7 @@ public class AIControlManagement implements EntityController {
      */
 	public boolean checkFutureCollision(int direction) {
 		
+		// Ignore collision detection if entity is removed from Scene
 		if (entityManager.getisRemoved(nonPlayer)) { 
 			return false;
 		}
@@ -166,6 +167,8 @@ public class AIControlManagement implements EntityController {
 
         // Do it here
         for (Player entity : entitiesPlayer) {
+        	
+        	// // Only run the checks if entity is not removed, 2nd layer of check just in case
         	if (!entityManager.getisRemoved(entity)) {
 	            if (collisionManager.checkCollision(
 	                    futureX, futureY,

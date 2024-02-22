@@ -52,6 +52,7 @@ public class PlayerControllerManagement implements EntityController {
     @Override
     public boolean checkFutureCollision(int direction) {
     	
+    	// // Ignore collision detection if entity is removed from Scene
 		if (entityManager.getisRemoved(player)) { 
 			return false;
 		}

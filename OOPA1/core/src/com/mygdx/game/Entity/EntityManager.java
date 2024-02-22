@@ -154,11 +154,11 @@ public class EntityManager {
     
     // Getter & Setter for ShapeRenderer objects (only accepts nonPlayer)
     
-    public Color getColor(nonPlayer entity) {
+    public Color getColor(Entity entity) {
     	return entity.getColor();
     }
     
-    public void setColor(nonPlayer entity, Color newColor) {
+    public void setColor(Entity entity, Color newColor) {
     	entity.setColor(newColor);
     }
     
