@@ -27,21 +27,21 @@ public class MainMenuCanvas implements Canvas{
         this.simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
 
 
-        stage.addActor(UIElements.createLabel("Main Menu", 600, 600, Color.BLACK)); // Assuming 'stage' is your Scene2D stage
-        stage.addActor(UIElements.createTextButton("Start Simulation", 600, 450, 50, 50, Color.RED , new ChangeListener() {
+        UIElements.createLabel(stage, "Main Menu", 600, 600, Color.BLACK); // Assuming 'stage' is your Scene2D stage
+        UIElements.createTextButton(stage, "Start Simulation", 600, 450, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 sceneManager.setScene(new GameScene());
             }
-        }));
+        });
 
 
-        stage.addActor(UIElements.createTextButton("Exit Simulation", 600, 350, 50 , 50, Color.RED , new ChangeListener() {
+       UIElements.createTextButton(stage, "Exit Simulation", 600, 350, 50 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 simulationLifecycleManagement.closeGame();
             }
-        }));
+        });
 
 
 

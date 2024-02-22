@@ -23,10 +23,7 @@ public class EndGameCanvas implements Canvas {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-
-        stage.addActor(UIElements.createLabel(200, 200));
-
-
+        UIElements.createLabel(stage, 200, 200);
 
     }
 

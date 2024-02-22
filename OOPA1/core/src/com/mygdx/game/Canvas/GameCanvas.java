@@ -35,21 +35,21 @@ public class GameCanvas implements Canvas {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-        stage.addActor(UIElements.createTextButton("Go Back", 1212, 650, 50, 50, Color.RED , new ChangeListener() {
+        UIElements.createTextButton(stage, "Go Back", 1212, 650, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SceneManager.getInstance().setScene(new MainScene());
                 inputOutputManager.getAudioManager().stop(AudioAssetKey.DEAFULT_ONE);
             }
-        }));
+        });
 
-        stage.addActor(UIElements.createTextButton("End Game", 1212, 580, 50, 50, Color.RED , new ChangeListener() {
+        UIElements.createTextButton(stage, "End Game", 1212, 580, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SimulationLifecycleManagement.getInstance().closeGame();
                 inputOutputManager.getAudioManager().stop(AudioAssetKey.DEAFULT_ONE);
             }
-        }));
+        });
 
 
     }
