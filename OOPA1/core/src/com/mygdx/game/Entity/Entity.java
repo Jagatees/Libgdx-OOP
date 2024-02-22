@@ -192,15 +192,9 @@ public abstract class Entity implements objectMovement {
         isAI = newisAI;
     }
     
-    // Movement Method, to check whether if it is AI & calls the respective methods accordingly
+    // Movement Method (handled by subclasses own implementation and checks)
     protected void movement() {
-        if (isAI) {
-            AIControlledMovement();
-        }
-
-        else {
-            userControlledMovement();
-        }
+    	
     }
 
 

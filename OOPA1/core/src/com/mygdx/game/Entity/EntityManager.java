@@ -97,16 +97,6 @@ public class EntityManager {
 		entity.setHeight(newHeight);
     }
     
-    // Setters required for AI, takes in ONLY nonPlayer objects as argument, and
-    // amends the x & y coordinates for the nonPlayer object
-    public void setAIXCords(nonPlayer entity, float aiNewX) {
-    	entity.setxCords(aiNewX);
-    }
-    
-    public void setAIYCords(nonPlayer entity, float aiNewY) {
-    	entity.setyCords(aiNewY);
-    }
-    
     // Primary Getter & Setter for PlayerController (to be used for Player objects ONLY)
     public PlayerControllerManagement getPlayerController(Player entity) {
         return entity.getPlayerController();
