@@ -89,8 +89,11 @@ public class GameScene extends TemplateScene {
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
         entityManager.setAIController(enemy, aiControlManagement);
         
-        PlayerControllerManagement playerControllerMgmt2 = new PlayerControllerManagement(boxPlayer2, entityManager, collisionManager);
-        entityManager.setPlayerController(boxPlayer2, playerControllerMgmt2);
+        
+        // Limitation: Singleplayer, unless different controls configured as current keys controls both player entities
+        
+        // PlayerControllerManagement playerControllerMgmt2 = new PlayerControllerManagement(boxPlayer2, entityManager, collisionManager);
+        //entityManager.setPlayerController(boxPlayer2, playerControllerMgmt2);
 
         canvasManager = new CanvasManager();
         canvasManager.setCanvas(new GameCanvas());

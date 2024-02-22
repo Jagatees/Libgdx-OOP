@@ -78,6 +78,8 @@ public class PlayerControllerManagement implements EntityController {
 
      // Collision Detection for Non-Player Entities Entities
         for (nonPlayer entity : entitiesNonPlayer) {
+        	
+        	// Only run the checks if entity is not removed, 2nd layer of check just in case
         	if (!entityManager.getisRemoved(entity)) {
 	            if (collisionManager.checkCollision(
 	                    futureX, futureY,
