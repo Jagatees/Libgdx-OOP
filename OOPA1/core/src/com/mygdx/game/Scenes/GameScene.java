@@ -66,7 +66,8 @@ public class GameScene extends TemplateScene {
         boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
         boxPlayer2 = new Player(Color.BROWN, 400, 100, 10, Entity.EntityState.NULL, false, 50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
 
-
+        entityManager.getType(pacman);
+        
         // For Presentation Purpose <Delete>
         createWall("entity/wall.jpg", 0, 0, 8, 100, 0, true);
         createWall("entity/wall.jpg", 100, 0, 12, 100, 0, false);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Controller.AIControlManagement;
 import com.mygdx.game.Controller.PlayerControllerManagement;
+import com.mygdx.game.Entity.Entity.EntityType;
 import com.mygdx.game.GameController.SimulationLifecycleManagement;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class EntityManager {
     // Renders method for either SpriteBatch or ShapeRenderer
     public void render(SpriteBatch spriteBatch, ShapeRenderer shapeRenderer) {
     	
-    	// Checks for each entry in the ArrayLisst whether they're SPRITE or SHAPE
+    	// Checks for each entry in the ArrayList whether they're SPRITE or SHAPE
     	// Applies the rendering codes accordingly
         for (Entity entity : entities) {
             if (entity.getRenderType() == Entity.RenderType.SPRITE) {
@@ -142,13 +143,37 @@ public class EntityManager {
         }
 
     }
+    
+    // Getter & Setter to retrieve and set Entity state
+    public Entity.EntityState getState(Entity entity) {
+    	return entity.getState();
+    }
+    
+    public void setState(Entity entity, Entity.EntityState state) {
+    	entity.setState(state);
+    }
 
     // Getter to retrieve the Entity Type of a particular Entity object
     public Entity.EntityType getType(Entity entity) {
         return entity.getEntityType();
     }
     
-    // Getter & Setter for ShapeRenderer objects (only accepts nonPlayer)
+    // Setter to set the Entity Type
+    public void setType(Entity entity, Entity.EntityType type) {
+    	entity.setEntityType(type);
+    }
+    
+    // Getter & Setter for RenderType
+    
+    public Entity.RenderType getRenderType(Entity entity) {
+    	return entity.getRenderType();
+    }
+    
+    public void setRenderType(Entity entity, Entity.RenderType renderType) {
+    	entity.setRenderType(renderType);
+    }
+    
+    // Getter & Setter for ShapeRenderer objects
     
     public Color getColor(Entity entity) {
     	return entity.getColor();
