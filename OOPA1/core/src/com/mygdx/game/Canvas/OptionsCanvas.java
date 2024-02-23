@@ -7,7 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.GameController.SimulationLifecycleManagement;
+import com.mygdx.game.Input.InputOutputManager;
 import com.mygdx.game.Scenes.SceneManager;
+import com.mygdx.game.audio.AudioAssetKey;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
@@ -17,9 +19,11 @@ public class OptionsCanvas implements Canvas{
 
     private SceneManager sceneManager;
     private Stage stage;
+    private InputOutputManager inputOutputManager;
     private SimulationLifecycleManagement simulationLifecycleManagement;
 
     public OptionsCanvas() {
+    	inputOutputManager = InputOutputManager.getInstance();
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         this.sceneManager = SceneManager.getInstance();
@@ -29,7 +33,8 @@ public class OptionsCanvas implements Canvas{
         UIElements.createTextButton(stage, "Resume", 500, 500, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-            simulationLifecycleManagement.togglePause();
+            	inputOutputManager.getAudioManager().play(AudioAssetKey.DEFAULT_TWO);
+            	simulationLifecycleManagement.togglePause();
             }
         });
     }
