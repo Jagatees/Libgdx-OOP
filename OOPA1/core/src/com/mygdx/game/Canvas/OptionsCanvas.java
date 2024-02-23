@@ -17,7 +17,6 @@ import com.mygdx.game.audio.AudioAssetKey;
  */
 public class OptionsCanvas implements Canvas{
 
-    private SceneManager sceneManager;
     private Stage stage;
     private InputOutputManager inputOutputManager;
     private SimulationLifecycleManagement simulationLifecycleManagement;
@@ -26,7 +25,7 @@ public class OptionsCanvas implements Canvas{
     	inputOutputManager = InputOutputManager.getInstance();
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        this.sceneManager = SceneManager.getInstance();
+        SceneManager.getInstance();
         this.simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
 
 
