@@ -1,11 +1,13 @@
 package com.mygdx.game.Engine.GameController;
 
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
 import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Scenes.SceneManager;
+import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
 
 /**
@@ -72,26 +74,18 @@ public class SimulationLifecycleManagement {
     }
 
     /**
-     * Starts the game by setting the initial scene. This method should be called once
+     * Starts the game by setting the initial scene. This method should be called onces
      * when the game is first started.
      *
      */
 
     public void startGame() {
-        // InputouputManger init this two = Keyboard.getInstance(); & AudioManager.getInstance();
-        InputOutputManager.getInstance();
-        // canvase manger is for UI
-        CanvasManager.getInstance();
-        // Scene Manger  - will have UI & Enity manger
-        SceneManager.getInstance();
+        AudioManager.getInstance().loadMusicTrack(AudioAssetKey.BG_1, "SoundEffect/default.mp3", true);
 
+        AudioManager.getInstance().play(AudioAssetKey.BG_1);
+        AudioManager.getInstance().setVolume(AudioAssetKey.BG_1, 0.1f);
 
-
-        // Setting the Starting scene to <>
         SceneManager.getInstance().setScene("MainMeun");
-
-
-
     }
 
 

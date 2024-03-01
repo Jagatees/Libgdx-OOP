@@ -1,9 +1,10 @@
-package com.mygdx.game.HealthyGame;
+package com.mygdx.game.HealthyGame.Scene;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
+import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
 
 
 public class MainMeunScene extends TemplateScene {

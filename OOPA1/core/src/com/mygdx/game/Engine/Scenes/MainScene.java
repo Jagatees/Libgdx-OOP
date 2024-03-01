@@ -3,7 +3,7 @@ package com.mygdx.game.Engine.Scenes;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
-import com.mygdx.game.HealthyGame.MainMenuCanvas;
+import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
 
 
 public class MainScene extends TemplateScene{

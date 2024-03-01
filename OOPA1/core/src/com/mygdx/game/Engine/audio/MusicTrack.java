@@ -61,6 +61,11 @@ public class MusicTrack implements AudioAsset {
         music.setVolume(volume);
     }
 
+    @Override
+    public float getVolume() {
+        return this.volume;
+    }
+
     /**
      * Sets whether the music track should loop continuously.
      *

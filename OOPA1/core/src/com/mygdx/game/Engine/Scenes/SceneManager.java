@@ -1,7 +1,7 @@
 package com.mygdx.game.Engine.Scenes;
 
 
-import com.mygdx.game.HealthyGame.MainMeunScene;
+import com.mygdx.game.HealthyGame.Scene.MainMeunScene;
 
 import java.util.HashMap;
 import java.util.Map;

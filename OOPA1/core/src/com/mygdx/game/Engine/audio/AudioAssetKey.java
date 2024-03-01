@@ -6,6 +6,6 @@ package com.mygdx.game.Engine.audio;
  * audio resources, such as sound effects and background music.
  */
 public enum AudioAssetKey {
-    DEFAULT_ONE,
+    BG_1,
     DEFAULT_TWO,
 }

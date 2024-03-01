@@ -59,4 +59,9 @@ public class SoundEffect implements AudioAsset {
     public void setVolume(float volume) {
         this.volume = volume;
     }
+
+    @Override
+    public float getVolume() {
+        return this.volume;
+    }
 }

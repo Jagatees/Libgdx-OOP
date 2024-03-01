@@ -91,7 +91,7 @@ public class GameScene extends TemplateScene {
         // PlayerControllerManagement playerControllerMgmt2 = new PlayerControllerManagement(boxPlayer2, entityManager, collisionManager);
         //entityManager.setPlayerController(boxPlayer2, playerControllerMgmt2);
 
-        canvasManager = new CanvasManager();
+        canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new GameCanvas());
 
 

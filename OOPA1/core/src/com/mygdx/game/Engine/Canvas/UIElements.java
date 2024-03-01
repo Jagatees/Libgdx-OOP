@@ -1,12 +1,17 @@
 package com.mygdx.game.Engine.Canvas;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -15,6 +20,27 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class UIElements {
 
     private static final BitmapFont defaultFont = new BitmapFont();
+
+    static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json")); // Ensure you have this skin file in your assets
+
+
+    public static Slider SimpleSlider(Stage stage, float min, float max, float x ,float y, float initValue,ChangeListener actionListener) {
+        // Create a Slider with min, max, step values and a vertical orientation flag.
+        Slider slider = new Slider(min, max, 0.1f, false, skin);
+        slider.setValue(initValue);
+
+        // Set the slider position and size (optional)
+        slider.setPosition(x, y);
+        slider.setSize(200, 20);
+
+
+        // To listen for changes, you can add a ChangeListener to the slider
+        slider.addListener(actionListener);
+
+        stage.addActor(slider);
+
+        return slider;
+    }
 
 
     public static TextButton createTextButton(Stage stage, String text, float x, float y, int width , int height, Color backgroundColor, ChangeListener actionListener) {

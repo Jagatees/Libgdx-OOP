@@ -5,4 +5,6 @@ public interface AudioAsset {
     void stop();
     void dispose();
     void setVolume(float volume);
+
+    float getVolume();
 }

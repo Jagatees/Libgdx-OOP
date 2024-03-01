@@ -12,6 +12,7 @@ public class AudioManager {
     private static AudioManager instance; // Singleton instance
     private Map<AudioAssetKey, AudioAsset> audioAssets;
 
+
     /**
      * Constructor initializes the map for storing audio assets.
      */
@@ -94,4 +95,17 @@ public class AudioManager {
         }
         return instance;
     }
+
+
+    public float getVolume(AudioAssetKey key) {
+        if (audioAssets.containsKey(key)) {
+            return audioAssets.get(key).getVolume();
+        }
+        return -1; // Indicates that the asset was not found or does not support volume control
+    }
+
+
+
+
+
 }
