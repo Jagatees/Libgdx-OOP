@@ -1,25 +1,22 @@
-package com.mygdx.game.Engine.Scenes;
+package com.mygdx.game.HealthyGame;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
-import com.mygdx.game.HealthyGame.MainMenuCanvas;
+import com.mygdx.game.Engine.Scenes.TemplateScene;
 
 
-public class MainScene extends TemplateScene{
+public class MainMeunScene extends TemplateScene {
 
     /** Rendering */
     private SpriteBatch batch = new SpriteBatch();
 
-    /** Manager */
-    private CanvasManager canvasManager;
 
     /**
      * Constructor for MainScene. Initializes the canvas manager and sets up the main menu canvas.
      */
-    public MainScene() {
-        canvasManager = CanvasManager.getInstance();
-        canvasManager.setCanvas(new MainMenuCanvas());
+    public MainMeunScene() {
+        CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
     }
 
     /**
@@ -28,8 +25,8 @@ public class MainScene extends TemplateScene{
      */
     @Override
     public void update(float delta) {
-        canvasManager.render(delta);
-        canvasManager.update(delta);
+        CanvasManager.getInstance().render(delta);
+        CanvasManager.getInstance().update(delta);
     }
 
     /**
@@ -46,7 +43,7 @@ public class MainScene extends TemplateScene{
     @Override
     public void dispose() {
         batch.dispose();
-        canvasManager.dispose();
+        CanvasManager.getInstance().dispose();
     }
 
     /**

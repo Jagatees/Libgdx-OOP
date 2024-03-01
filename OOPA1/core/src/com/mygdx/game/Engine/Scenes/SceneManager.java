@@ -1,6 +1,8 @@
 package com.mygdx.game.Engine.Scenes;
 
 
+import com.mygdx.game.HealthyGame.MainMeunScene;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,10 +107,8 @@ public class SceneManager {
         // Implement scene creation logic here
         // Example:
          switch (sceneId) {
-             case "MainMenu":
-                 return new MainScene();
-             case "Game":
-                 return new GameScene();
+             case "MainMeun":
+                 return new MainMeunScene();
          }
         return null; // Placeholder
     }

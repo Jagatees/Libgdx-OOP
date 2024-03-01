@@ -1,4 +1,4 @@
-package com.mygdx.game.Engine.Canvas;
+package com.mygdx.game.HealthyGame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.Engine.Canvas.Canvas;
+import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 
@@ -13,32 +15,31 @@ import com.mygdx.game.Engine.Scenes.SceneManager;
  * Defines the canvas for the main menu, including UI elements like buttons
  * for starting the game and exiting the application.
  */
-public class MainMenuCanvas implements Canvas{
+public class MainMenuCanvas implements Canvas {
 
-    private SceneManager sceneManager;
-    private Stage stage;
-    private SimulationLifecycleManagement simulationLifecycleManagement;
+    private Stage stage = new Stage(new ScreenViewport());
 
     public MainMenuCanvas() {
-        stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        this.sceneManager = SceneManager.getInstance();
-        this.simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
 
 
-        UIElements.createLabel(stage, "Main Menu", 600, 600, Color.BLACK); // Assuming 'stage' is your Scene2D stage
-        UIElements.createTextButton(stage, "Start Simulation", 600, 450, 50, 50, Color.RED , new ChangeListener() {
+        UIElements.createLabel(stage, "GAME TITLE", 600, 600, Color.RED);
+        UIElements.createTextButton(stage, "Start Game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                sceneManager.setScene("Game");
+
             }
         });
 
-
-       UIElements.createTextButton(stage, "Exit Simulation", 600, 350, 50 , 50, Color.RED , new ChangeListener() {
+       UIElements.createTextButton(stage, "Options", 600, 350, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                simulationLifecycleManagement.closeGame();
+            }
+        });
+
+        UIElements.createTextButton(stage, "Close Game", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
             }
         });
 

@@ -32,7 +32,6 @@ public class GameScene extends TemplateScene {
     /** Manager */
     private EntityManager entityManager;
     private CollisionManager collisionManager;
-    private InputOutputManager inputOutputManager;
     private CanvasManager canvasManager;
 
 
@@ -51,10 +50,8 @@ public class GameScene extends TemplateScene {
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
         entityManager = new EntityManager();
-        inputOutputManager = InputOutputManager.getInstance();
 
-        inputOutputManager.getAudioManager().play(AudioAssetKey.DEFAULT_TWO);
-        inputOutputManager.getAudioManager().setVolume(AudioAssetKey.DEFAULT_TWO, 0.1f);
+
 
         pacman = new Player("entity/pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("entity/blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.ENEMY, Entity.RenderType.SPRITE);

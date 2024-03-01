@@ -1,7 +1,12 @@
 package com.mygdx.game.Engine.GameController;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.Engine.Canvas.CanvasManager;
+import com.mygdx.game.Engine.Collision.CollisionManager;
+import com.mygdx.game.Engine.Entity.EntityManager;
+import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Scenes.SceneManager;
+import com.mygdx.game.Engine.audio.AudioManager;
 
 /**
  * Manages the lifecycle of the simulation or game, including starting, updating, rendering,
@@ -30,7 +35,6 @@ public class SimulationLifecycleManagement {
 
 
     public void togglePause() {
-        System.out.println(this.isPaused);
         this.isPaused = !this.isPaused;
     }
 
@@ -55,8 +59,6 @@ public class SimulationLifecycleManagement {
      */
     public void render(){
         this.sceneManager.render();
-
-
     }
 
     /**
@@ -76,7 +78,20 @@ public class SimulationLifecycleManagement {
      */
 
     public void startGame() {
-        sceneManager.setScene("MainMenu");
+        // InputouputManger init this two = Keyboard.getInstance(); & AudioManager.getInstance();
+        InputOutputManager.getInstance();
+        // canvase manger is for UI
+        CanvasManager.getInstance();
+        // Scene Manger  - will have UI & Enity manger
+        SceneManager.getInstance();
+
+
+
+        // Setting the Starting scene to <>
+        SceneManager.getInstance().setScene("MainMeun");
+
+
+
     }
 
 

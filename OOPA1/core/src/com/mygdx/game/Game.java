@@ -15,21 +15,12 @@ import com.mygdx.game.Engine.audio.AudioAssetKey;
  */
 public class Game extends ApplicationAdapter {
 
-	/** Manages the SLM, including initialization, execution, and termination. */
-	private SimulationLifecycleManagement simulationLifecycleManagement;
-	private SceneManager sceneManager = SceneManager.getInstance();
-	private InputOutputManager inputOutputManager = InputOutputManager.getInstance();
-
-
 
 	/** Init the simulation lifecycle manger and pass in the SceneManager */
 	@Override
 	public void create() {
 		try {
-			simulationLifecycleManagement = SimulationLifecycleManagement.getInstance();
-			inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEFAULT_ONE, "SoundEffect/default.mp3" , true);
-			inputOutputManager.getAudioManager().loadMusicTrack(AudioAssetKey.DEFAULT_TWO, "SoundEffect/perfectNight.mp3" , true);
-			simulationLifecycleManagement.startGame();
+			SimulationLifecycleManagement.getInstance().startGame();
 		} catch (Exception e) {
 			Gdx.app.error("Game", "Error initializing game", e);
 			// Handle initialization error (e.g., log the error, attempt a safe fallback, etc.)
@@ -40,7 +31,7 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void render() {
 		try {
-			simulationLifecycleManagement.render();
+			SimulationLifecycleManagement.getInstance().render();
 			update(Gdx.graphics.getDeltaTime());
 		} catch (Exception e) {
 			Gdx.app.error("Game", "Error during rendering", e);
@@ -50,7 +41,7 @@ public class Game extends ApplicationAdapter {
 	/** Update SLM */
 	private void update(float deltaTime) {
 		try {
-			simulationLifecycleManagement.update(deltaTime);
+			SimulationLifecycleManagement.getInstance().update(deltaTime);
 		} catch (Exception e) {
 			Gdx.app.error("Game", "Error during update", e);
 			// Handle update error (e.g., log the error, try to recover if possible, etc.)
@@ -61,7 +52,7 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void dispose() {
 		try {
-			simulationLifecycleManagement.dispose();
+			SimulationLifecycleManagement.getInstance().dispose();
 		} catch (Exception e) {
 			Gdx.app.error("Game", "Error disposing resources", e);
 			// Handle disposal error (e.g., log the error, clean up as much as possible, etc.)
