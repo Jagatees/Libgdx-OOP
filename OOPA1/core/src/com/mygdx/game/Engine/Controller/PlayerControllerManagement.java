@@ -85,7 +85,7 @@ public class PlayerControllerManagement implements EntityController {
 	                    entityManager.getxCords(entity), entityManager.getyCords(entity),
 	                    entityManager.getWidth(entity), entityManager.getHeight(entity))) {
 	
-	                collisionManager.checkResponse(entityManager.getType(player), entityManager.getType(entity));
+	                collisionManager.checkResponse(player, entity);
 	                return true;
 	            }
         	}
@@ -100,7 +100,7 @@ public class PlayerControllerManagement implements EntityController {
 	                    entityManager.getxCords(otherPlayer), entityManager.getyCords(otherPlayer),
 	                    entityManager.getWidth(otherPlayer), entityManager.getHeight(otherPlayer))) {
 	
-	                collisionManager.checkResponse(entityManager.getType(player), entityManager.getType(otherPlayer));
+	                collisionManager.checkResponse(player, otherPlayer);
 	                return true;
 	            }
         	}

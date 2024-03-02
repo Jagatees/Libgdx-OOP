@@ -1,12 +1,19 @@
 package com.mygdx.game.Engine.Collision;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Engine.Entity.Entity;
+import com.mygdx.game.Engine.Entity.EntityManager;
 
 /**
  * Manages collision detection for entities within the game.
  * Provides methods to check for collisions and handle collision responses between entities.
  */
 public class CollisionManager {
+
+    private EntityManager entityManager = new EntityManager();
+
+
     /**
      * Checks if two rectangular entities intersect.
      * This method is a basic AABB (Axis-Aligned Bounding Box) collision check.
@@ -36,8 +43,12 @@ public class CollisionManager {
      * @param type The type of the first entity involved in the collision.
      * @param type1 The type of the second entity involved in the collision.
      */
-    public void checkResponse(Entity.EntityType type, Entity.EntityType type1) {
+    public void checkResponse(Entity type, Entity type1) {
         System.out.println("Entity " + type + " has Collided with Entity " + type1);
+
+        if (Entity.EntityType.PLAYER == entityManager.getType(type) &&  Entity.EntityType.H == entityManager.getType(type1)) {
+            entityManager.removeEntity(type1);
+        }
     }
 }
 

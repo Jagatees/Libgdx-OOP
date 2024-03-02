@@ -154,7 +154,7 @@ public class OptionCanvas implements Canvas {
                 InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
         });
-        
+
     }
 
 

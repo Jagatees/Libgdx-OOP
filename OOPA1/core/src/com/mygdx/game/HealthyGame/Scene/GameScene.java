@@ -40,7 +40,8 @@ public class GameScene extends TemplateScene {
     private Player pacman;
     private nonPlayer enemy;
     private nonPlayer boxPlayer;
-    private Player boxPlayer2;
+
+    private String WordOne = "HELLO";
 
 
     /**
@@ -53,20 +54,18 @@ public class GameScene extends TemplateScene {
         entityManager = new EntityManager();
 
         pacman = new Player("entity/pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
-        enemy = new nonPlayer("entity/greenGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.ENEMY, Entity.RenderType.SPRITE);
+        enemy = new nonPlayer("Words/H.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
 
         boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
-        boxPlayer2 = new Player(Color.BROWN, 400, 100, 10, Entity.EntityState.NULL, false, 50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
 
-        createWall("entity/wall.jpg", 0, 0, 8, 100, 0, true);
-        createWall("entity/wall.jpg", 100, 0, 12, 100, 0, false);
-        createWall("entity/wall.jpg", 100, 650, 12, 100, 0, false);
-        createWall("entity/wall.jpg", 1200, 0, 8, 100, 0, true);
+        createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
+        createWall("entity/wall.jpg", 0, -20, 30, 50, 0, false);
+        createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
+        createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
         entityManager.addEntity(boxPlayer);
-        entityManager.addEntity(boxPlayer2);
 
 
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement(pacman, entityManager, collisionManager);
@@ -74,13 +73,9 @@ public class GameScene extends TemplateScene {
 
         AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
         entityManager.setAIController(enemy, aiControlManagement);
-        entityManager.removeEntity(boxPlayer2);
 
         canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new GameCanvas());
-
-
-
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
@@ -122,7 +117,6 @@ public class GameScene extends TemplateScene {
     public void update(float delta) {
         entityManager.movement(pacman);
         entityManager.movement(enemy);
-        entityManager.movement(boxPlayer2);
 
         // Check if the game is paused and switch canvas accordingly
         if (SimulationLifecycleManagement.getInstance().isPaused() && !(canvasManager.getCurrentCanvas() instanceof OptionsCanvas)) {

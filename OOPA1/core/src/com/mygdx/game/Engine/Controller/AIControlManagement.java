@@ -155,7 +155,7 @@ public class AIControlManagement implements EntityController {
 	                    entityManager.getxCords(entity), entityManager.getyCords(entity),
 	                    entityManager.getWidth(entity), entityManager.getHeight(entity))) {
 	
-	                collisionManager.checkResponse(entityManager.getType(nonPlayer), entityManager.getType(entity));
+	                collisionManager.checkResponse(nonPlayer, entity);
 	                return true;
 	            }
         	}
@@ -169,7 +169,7 @@ public class AIControlManagement implements EntityController {
 	                    entityManager.getxCords(othernonPlayers), entityManager.getyCords(othernonPlayers),
 	                    entityManager.getWidth(othernonPlayers), entityManager.getHeight(othernonPlayers))) {
 	            	
-	                collisionManager.checkResponse(entityManager.getType(nonPlayer), entityManager.getType(othernonPlayers));
+	                collisionManager.checkResponse(nonPlayer, othernonPlayers);
 	                return true;
 	            }
         	}

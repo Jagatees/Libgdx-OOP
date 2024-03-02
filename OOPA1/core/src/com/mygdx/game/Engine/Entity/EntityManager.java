@@ -20,19 +20,19 @@ public class EntityManager {
     
     // Renders method for either SpriteBatch or ShapeRenderer
     public void render(SpriteBatch spriteBatch, ShapeRenderer shapeRenderer) {
-    	
-    	// Checks for each entry in the ArrayList whether they're SPRITE or SHAPE
-    	// Applies the rendering codes accordingly
+        // Iterate through entities and render only if not marked as removed
         for (Entity entity : entities) {
-            if (entity.getRenderType() == Entity.RenderType.SPRITE) {
-                entity.render(spriteBatch);
-                
-            } else if (entity.getRenderType() == Entity.RenderType.SHAPE) {
-                entity.render(shapeRenderer);
+            if (!entity.getisRemoved()) { // Check if the entity is not marked as removed
+                if (entity.getRenderType() == Entity.RenderType.SPRITE) {
+                    entity.render(spriteBatch);
+                } else if (entity.getRenderType() == Entity.RenderType.SHAPE) {
+                    entity.render(shapeRenderer);
+                }
             }
         }
     }
-    
+
+
     // Generic method to differentiate the entities of different types into different ArrayList
     public <T extends Entity> List<T> getEntitiesOfTypeList(Class<T> type) {
         List<T> matchingEntities = new ArrayList<>();
