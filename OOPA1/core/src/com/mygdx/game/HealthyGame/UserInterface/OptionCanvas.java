@@ -13,8 +13,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Canvas.UIElements;
+import com.mygdx.game.Engine.Config.LauncherConfig;
 import com.mygdx.game.Engine.Input.InputOutputManager;
-import com.mygdx.game.Engine.Input.Keyboard;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 
 /**
@@ -25,19 +25,31 @@ public class OptionCanvas implements Canvas {
 
     private Stage stage = new Stage(new ScreenViewport());
     String[] keyboardKeys = new String[26]; // 26 letters in the English alphabet
-
+    String[] screenResolutions = {
+            "640x480",   // VGA
+            "800x600",   // SVGA
+            "1024x768",  // XGA
+            "1280x720",  // HD
+            "1280x800",  // WXGA
+            "1366x768",  // Common laptop screen
+            "1440x900",  // WXGA+
+            "1600x900",  // HD+
+            "1920x1080", // FHD
+            "2560x1440", // QHD
+            "3840x2160", // 4K UHD
+            "7680x4320"  // 8K UHD
+    };
     public OptionCanvas() {
         Gdx.input.setInputProcessor(stage);
 
 
         for (int i = 0; i < 26; i++) {
-            // 65 is the ASCII code for 'A'
             keyboardKeys[i] = String.valueOf((char)(i + 65));
         }
 
 
-        UIElements.createLabel(stage, "OPTIONS", 600, 600, Color.RED);
-        UIElements.createTextButton(stage, "Back", 600, 450, 100, 50, Color.RED , new ChangeListener() {
+        UIElements.createLabel(stage, "OPTIONS", 600, 650, Color.RED);
+        UIElements.createTextButton(stage, "Back", 1100, 100, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
@@ -45,8 +57,8 @@ public class OptionCanvas implements Canvas {
         });
 
 
-        UIElements.createLabel(stage, "Music", 200, 600, Color.RED);
-        UIElements.SimpleSlider(stage, 0, 1, 300, 600, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
+        UIElements.createLabel(stage, "Music", 100, 600, Color.RED);
+        UIElements.SimpleSlider(stage, 0, 1, 200, 600, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Slider slider = (Slider) actor;
@@ -56,7 +68,7 @@ public class OptionCanvas implements Canvas {
         });
 
 
-        UIElements.createCheckBox(stage, "Turn BG_1 On/Off", 300, 550, true, new ChangeListener() {
+        UIElements.createCheckBox(stage, "Turn BG_1 On/Off", 420, 600, true, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("CheckBox is " + ((CheckBox)actor).isChecked());
@@ -69,37 +81,54 @@ public class OptionCanvas implements Canvas {
         });
 
 
-        UIElements.createLabel(stage, "MOVE_RIGHT", 200, 400, Color.RED);
+        UIElements.createLabel(stage, "Sound Effect", 100, 500, Color.RED);
+        UIElements.SimpleSlider(stage, 0, 1, 200, 500, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
 
-        UIElements.createDropdown(stage, keyboardKeys, 300, 400, new ChangeListener() {
+            }
+        });
+
+        UIElements.createCheckBox(stage, "Turn Sound Effect On/Off", 420, 500, true, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+            }
+        });
+
+
+
+        // Make Sure can not bind to the same key more then ones &  add a save button to save the keybinding
+
+        UIElements.createLabel(stage, "MOVE_RIGHT", 100, 400, Color.RED);
+
+        UIElements.createDropdown(stage, keyboardKeys, 200, 400, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
                 String selectedKey = selectBox.getSelected();
                 int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
                 InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_RIGHT", keycode);
-                System.out.println("MOVE_LEFT bound to: " + selectedKey);
                 InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
         });
 
 
-        UIElements.createLabel(stage, "MOVE_LEFT", 200, 300, Color.RED);
-        UIElements.createDropdown(stage, keyboardKeys, 300, 300, new ChangeListener() {
+        UIElements.createLabel(stage, "MOVE_LEFT", 100, 300, Color.RED);
+        UIElements.createDropdown(stage, keyboardKeys, 200, 300, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
                 String selectedKey = selectBox.getSelected();
                 int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
                 InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_LEFT", keycode);
-                System.out.println("MOVE_LEFT bound to: " + selectedKey);
                 InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
         });
 
 
-        UIElements.createLabel(stage, "MOVE_UP", 200, 200, Color.RED);
-        UIElements.createDropdown(stage, keyboardKeys, 300, 200, new ChangeListener() {
+        UIElements.createLabel(stage, "MOVE_UP", 100, 200, Color.RED);
+        UIElements.createDropdown(stage, keyboardKeys, 200, 200, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
@@ -113,8 +142,8 @@ public class OptionCanvas implements Canvas {
 
 
 
-        UIElements.createLabel(stage, "MOVE_DOWN", 200, 100, Color.RED);
-        UIElements.createDropdown(stage, keyboardKeys, 300, 100, new ChangeListener() {
+        UIElements.createLabel(stage, "MOVE_DOWN", 100, 100, Color.RED);
+        UIElements.createDropdown(stage, keyboardKeys, 200, 100, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
@@ -125,13 +154,7 @@ public class OptionCanvas implements Canvas {
                 InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
         });
-
-
-
-
-
-
-
+        
     }
 
 
