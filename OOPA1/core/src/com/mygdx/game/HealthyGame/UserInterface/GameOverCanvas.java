@@ -11,6 +11,7 @@ import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
+import com.mygdx.game.HealthyGame.Scene.MainMeunScene;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
@@ -28,8 +29,8 @@ public class GameOverCanvas implements Canvas {
         UIElements.createTextButton(stage, "Go back to start of game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-            SceneManager.getInstance().setScene("MainMeun");
-
+                SceneManager.getInstance().setScene("MainMeun");
+                CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
             }
         });
 

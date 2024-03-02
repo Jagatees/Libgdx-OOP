@@ -40,9 +40,6 @@ public class GameScene extends TemplateScene {
     private nonPlayer enemy;
     private nonPlayer boxPlayer;
 
-    private String WordOne = "HELLO";
-
-
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -63,6 +60,8 @@ public class GameScene extends TemplateScene {
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
+
+
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
         entityManager.addEntity(boxPlayer);
@@ -76,6 +75,8 @@ public class GameScene extends TemplateScene {
 
         canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
+
+
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {

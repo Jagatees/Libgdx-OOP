@@ -18,6 +18,7 @@ public class MainMeunScene extends TemplateScene {
      */
     public MainMeunScene() {
         CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
+
     }
 
     /**
