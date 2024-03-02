@@ -9,40 +9,54 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Canvas.UIElements;
-import com.mygdx.game.Engine.Scenes.SceneManager;
-import com.mygdx.game.HealthyGame.Scene.MainMeunScene;
+import com.mygdx.game.Engine.audio.AudioAssetKey;
+import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
+import com.mygdx.game.Engine.Input.InputOutputManager;
 
 /**
- * Defines the canvas for the main menu, including UI elements like buttons
- * for starting the game and exiting the application.
+ * Implements the Canvas interface to create a UI canvas for the game menu using scene2d UI elements.
  */
 public class GameCanvas implements Canvas {
 
-    private Stage stage = new Stage(new ScreenViewport());
+    private Stage stage;
+    private InputOutputManager inputOutputManager;
 
+    /**
+     * Constructs a GameCanvas with a reference to the SceneManager for scene transitions.
+     * Initializes UI components like buttons and sets their behavior.
+     *
+     */
     public GameCanvas() {
+
+        inputOutputManager = InputOutputManager.getInstance();
+
+        stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-
-        UIElements.createLabel(stage, "GAME TITLE", 600, 600, Color.RED);
-
-
-        UIElements.createTextButton(stage, "Close Game", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
+        UIElements.createTextButton(stage,  "Options", 1212, 650, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                SceneManager.getInstance().setScene("MainMeun");
-                CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
+
+                SimulationLifecycleManagement.getInstance().togglePause();
+                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEFAULT_TWO);
+                CanvasManager.getInstance().setCanvas(new OptionCanvas());
+
+            }
+        });
+
+        UIElements.createTextButton(stage, "End Game", 1212, 580, 50, 50, Color.RED , new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                SimulationLifecycleManagement.getInstance().closeGame();
+                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEFAULT_TWO);
             }
         });
 
 
-
     }
 
-
     /**
-     * Renders the current canvas if it is not null, passing along the delta time for frame-rate-independent rendering.
-     *
+     * Render the UI elements by drawing the stage and its actors.
      * @param delta The time in seconds since the last render call.
      */
     @Override
@@ -58,7 +72,6 @@ public class GameCanvas implements Canvas {
      */
     @Override
     public void update(float delta) {
-
     }
 
     /**

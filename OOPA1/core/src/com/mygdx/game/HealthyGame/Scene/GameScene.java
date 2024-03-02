@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.OptionsCanvas;
 import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
-import com.mygdx.game.Engine.Canvas.GameCanvas;
 import com.mygdx.game.Engine.Collision.CollisionManager;
 import com.mygdx.game.Engine.Entity.Entity;
 import com.mygdx.game.Engine.Entity.EntityManager;
@@ -16,10 +15,9 @@ import com.mygdx.game.Engine.Entity.Player;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
 import com.mygdx.game.Engine.Entity.nonPlayer;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
-import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
-import com.mygdx.game.Engine.audio.AudioAssetKey;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
+import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
+import com.mygdx.game.HealthyGame.UserInterface.OptionCanvas;
 
 
 /**
@@ -77,7 +75,7 @@ public class GameScene extends TemplateScene {
         entityManager.setAIController(enemy, aiControlManagement);
 
         canvasManager = CanvasManager.getInstance();
-        canvasManager.setCanvas(new GameCanvas());
+        canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
@@ -120,11 +118,10 @@ public class GameScene extends TemplateScene {
         entityManager.movement(pacman);
         entityManager.movement(enemy);
 
-        // Check if the game is paused and switch canvas accordingly
-        if (SimulationLifecycleManagement.getInstance().isPaused() && !(canvasManager.getCurrentCanvas() instanceof OptionsCanvas)) {
-            canvasManager.setCanvas(new OptionsCanvas());
+        if (SimulationLifecycleManagement.getInstance().isPaused() && !(canvasManager.getCurrentCanvas() instanceof OptionCanvas)) {
+            canvasManager.setCanvas(new OptionCanvas());
         } else if (!SimulationLifecycleManagement.getInstance().isPaused() && !(canvasManager.getCurrentCanvas() instanceof GameCanvas)) {
-            canvasManager.setCanvas(new GameCanvas());
+            canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
         }
     }
 

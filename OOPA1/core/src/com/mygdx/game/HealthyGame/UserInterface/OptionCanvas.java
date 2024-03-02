@@ -14,6 +14,7 @@ import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.Config.LauncherConfig;
+import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 
@@ -52,7 +53,13 @@ public class OptionCanvas implements Canvas {
         UIElements.createTextButton(stage, "Back", 1100, 100, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
+                if (SimulationLifecycleManagement.getInstance().isPaused() && CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
+                    SimulationLifecycleManagement.getInstance().togglePause();
+                }
+
+                if (CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
+                    CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
+                }
             }
         });
 

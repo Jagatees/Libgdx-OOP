@@ -38,7 +38,6 @@ public class SceneManager {
      * Sets the current scene, disposes of the existing scene if one is active,
      * and initializes the new scene.
      *
-     * @param scene The new scene to set as the current scene.
      */
     public void setScene(String sceneId) {
         Scene scene = scenes.get(sceneId);
