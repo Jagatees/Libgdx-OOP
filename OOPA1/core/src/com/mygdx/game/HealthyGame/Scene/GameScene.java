@@ -48,24 +48,20 @@ public class GameScene extends TemplateScene {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
-        entityManager = new EntityManager();
+        entityManager = EntityManager.getInstance();
 
         pacman = new Player("entity/pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("Words/H.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
 
         boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
-
         createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
         createWall("entity/wall.jpg", 0, -20, 30, 50, 0, false);
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
-
-
         entityManager.addEntity(pacman);
         entityManager.addEntity(enemy);
         entityManager.addEntity(boxPlayer);
-
 
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement(pacman, entityManager, collisionManager);
         entityManager.setPlayerController(pacman, playerControllerManagement);

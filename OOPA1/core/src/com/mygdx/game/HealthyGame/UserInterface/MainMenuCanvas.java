@@ -11,6 +11,7 @@ import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
+import com.mygdx.game.Engine.Entity.EntityManager;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
@@ -30,6 +31,7 @@ public class MainMenuCanvas implements Canvas {
             public void changed(ChangeEvent event, Actor actor) {
                 SceneManager.getInstance().setScene("Game");
                 CanvasManager.getInstance().setCanvas(new GameCanvas());
+                EntityManager.getInstance().setAllEntitiesRemoved(false);
 
             }
         });

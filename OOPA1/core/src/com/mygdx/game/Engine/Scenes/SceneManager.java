@@ -1,6 +1,7 @@
 package com.mygdx.game.Engine.Scenes;
 
 
+import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.HealthyGame.Scene.GameOverScene;
 import com.mygdx.game.HealthyGame.Scene.GameScene;
 import com.mygdx.game.HealthyGame.Scene.MainMeunScene;

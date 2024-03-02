@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Canvas.UIElements;
+import com.mygdx.game.Engine.Entity.Entity;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.HealthyGame.Scene.MainMeunScene;

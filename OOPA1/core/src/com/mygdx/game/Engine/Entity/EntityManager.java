@@ -3,6 +3,7 @@ package com.mygdx.game.Engine.Entity;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
@@ -11,11 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityManager {
+    private static EntityManager instance;
+    public static synchronized EntityManager getInstance() {
+        if (instance == null) {
+            instance = new EntityManager();
+        }
+        return instance;
+    }
     private List<Entity> entities = new ArrayList<>();
+    // private List<Entity> initialState = new ArrayList<>();
 
     // Method to append entity into ArrayList consisting of Entity type
     public void addEntity(Entity entity) {
         entities.add(entity);
+        // initialState.add(entity);
     }
     
     // Renders method for either SpriteBatch or ShapeRenderer
@@ -183,7 +193,7 @@ public class EntityManager {
     
     // Method to remove entity
     public void removeEntity(Entity entity) {
-    	entities.remove(entity);
+    	// entities.remove(entity); < To be removed / added to end of game maybe >
     	entity.setisRemoved(true);
     }
     
@@ -192,8 +202,14 @@ public class EntityManager {
     public boolean getisRemoved(Entity entity) {
     	return entity.getisRemoved();
     }
-    
-    
+
+    // Method to reset all entities' removal state
+    public void setAllEntitiesRemoved(boolean removeState) {
+        for (Entity entity : entities) {
+            entity.setisRemoved(removeState);
+        }
+    }
+
     // Methods to let EntityManager handle entities movement instead of controllers
     
     public void signalMoveEntity(Entity entity, int direction, float newCords) {
