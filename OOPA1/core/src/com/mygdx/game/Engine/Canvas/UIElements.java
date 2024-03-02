@@ -5,11 +5,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -23,6 +22,43 @@ public class UIElements {
 
     static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json")); // Ensure you have this skin file in your assets
 
+
+
+    public static SelectBox<String> createDropdown(Stage stage, String[] items, float x, float y, ChangeListener actionListener) {
+        // Create a SelectBox with the provided skin
+        SelectBox<String> selectBox = new SelectBox<>(skin);
+
+        // Set the items of the SelectBox
+        selectBox.setItems(items);
+
+        selectBox.setSize(100, 25);
+
+        // Set the position of the SelectBox
+        selectBox.setPosition(x, y);
+
+        // Add a ChangeListener to respond to item selection
+        selectBox.addListener(actionListener);
+
+        // Add the SelectBox to the stage
+        stage.addActor(selectBox);
+
+        return selectBox;
+    }
+
+    public static CheckBox createCheckBox(Stage stage, String text, float x, float y, boolean isChecked, ChangeListener actionListener) {
+        // Create a CheckBox with the provided skin and text
+        CheckBox checkBox = new CheckBox(text, skin);
+        checkBox.setPosition(x, y);
+        checkBox.setChecked(isChecked);
+
+        // Add a ChangeListener to react to check events
+        checkBox.addListener(actionListener);
+
+        // Add the CheckBox to the stage
+        stage.addActor(checkBox);
+
+        return checkBox;
+    }
 
     public static Slider SimpleSlider(Stage stage, float min, float max, float x ,float y, float initValue,ChangeListener actionListener) {
         // Create a Slider with min, max, step values and a vertical orientation flag.
