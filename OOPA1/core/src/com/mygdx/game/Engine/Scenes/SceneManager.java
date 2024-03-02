@@ -1,6 +1,7 @@
 package com.mygdx.game.Engine.Scenes;
 
 
+import com.mygdx.game.HealthyGame.Scene.GameScene;
 import com.mygdx.game.HealthyGame.Scene.MainMeunScene;
 
 import java.util.HashMap;
@@ -49,10 +50,11 @@ public class SceneManager {
             scenes.put(sceneId, scene);
         }
 
-        // Dispose of the current scene if one is active
-        if (currentScene != null) {
-            currentScene.dispose();
-        }
+//        Remove the nul setting somthing i still want to go back to the scene
+//        // Dispose of the current scene if one is active
+//        if (currentScene != null) {
+//            currentScene.dispose();
+//        }
 
         // Set the new scene and initialize it
         currentScene = scene;
@@ -109,6 +111,8 @@ public class SceneManager {
          switch (sceneId) {
              case "MainMeun":
                  return new MainMeunScene();
+             case "Game":
+                 return new GameScene();
          }
         return null; // Placeholder
     }

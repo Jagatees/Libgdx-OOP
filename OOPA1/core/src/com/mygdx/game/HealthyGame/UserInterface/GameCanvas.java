@@ -9,46 +9,31 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Canvas.UIElements;
-import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
+import com.mygdx.game.HealthyGame.Scene.MainMeunScene;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
  * for starting the game and exiting the application.
  */
-public class MainMenuCanvas implements Canvas {
+public class GameCanvas implements Canvas {
 
     private Stage stage = new Stage(new ScreenViewport());
 
-    public MainMenuCanvas() {
+    public GameCanvas() {
         Gdx.input.setInputProcessor(stage);
 
 
         UIElements.createLabel(stage, "GAME TITLE", 600, 600, Color.RED);
-        UIElements.createTextButton(stage, "Start Game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                SceneManager.getInstance().setScene("Game");
-                CanvasManager.getInstance().setCanvas(new GameCanvas());
 
-            }
-        });
-
-       UIElements.createTextButton(stage, "Options", 600, 350, 100 , 50, Color.RED , new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-              CanvasManager.getInstance().setCanvas(new OptionCanvas());
-
-            }
-        });
 
         UIElements.createTextButton(stage, "Close Game", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                SimulationLifecycleManagement.getInstance().closeGame();
+                SceneManager.getInstance().setScene("MainMeun");
+                CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
             }
         });
-
 
 
 
