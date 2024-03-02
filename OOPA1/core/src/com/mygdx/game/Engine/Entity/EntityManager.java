@@ -20,9 +20,8 @@ public class EntityManager {
     
     // Renders method for either SpriteBatch or ShapeRenderer
     public void render(SpriteBatch spriteBatch, ShapeRenderer shapeRenderer) {
-        // Iterate through entities and render only if not marked as removed
         for (Entity entity : entities) {
-            if (!entity.getisRemoved()) { // Check if the entity is not marked as removed
+            if (!entity.getisRemoved()) {
                 if (entity.getRenderType() == Entity.RenderType.SPRITE) {
                     entity.render(spriteBatch);
                 } else if (entity.getRenderType() == Entity.RenderType.SHAPE) {

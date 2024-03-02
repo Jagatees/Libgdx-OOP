@@ -19,6 +19,7 @@ import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
+import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 
 /**
@@ -42,6 +43,7 @@ public class GameScene extends TemplateScene {
     private nonPlayer boxPlayer;
 
     private String WordOne = "HELLO";
+
 
 
     /**

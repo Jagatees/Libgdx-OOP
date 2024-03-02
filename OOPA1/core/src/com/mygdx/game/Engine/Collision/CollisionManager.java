@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Engine.Entity.Entity;
 import com.mygdx.game.Engine.Entity.EntityManager;
+import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 /**
  * Manages collision detection for entities within the game.
@@ -45,9 +46,18 @@ public class CollisionManager {
      */
     public void checkResponse(Entity type, Entity type1) {
         System.out.println("Entity " + type + " has Collided with Entity " + type1);
+        HealthyGameLogic healthyGameLogic = new HealthyGameLogic();
+
 
         if (Entity.EntityType.PLAYER == entityManager.getType(type) &&  Entity.EntityType.H == entityManager.getType(type1)) {
             entityManager.removeEntity(type1);
+            healthyGameLogic.collectLetter('H');
+            healthyGameLogic.collectLetter('e');
+            healthyGameLogic.collectLetter('l');
+            healthyGameLogic.collectLetter('l');
+            healthyGameLogic.collectLetter('o');
+
+            System.out.println(healthyGameLogic.getScore());
         }
     }
 }
