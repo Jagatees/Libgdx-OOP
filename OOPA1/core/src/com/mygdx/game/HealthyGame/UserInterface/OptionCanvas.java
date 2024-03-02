@@ -69,9 +69,23 @@ public class OptionCanvas implements Canvas {
         });
 
 
-        UIElements.createLabel(stage, "Move Up", 200, 450, Color.RED);
+        UIElements.createLabel(stage, "MOVE_RIGHT", 200, 400, Color.RED);
 
-        UIElements.createDropdown(stage, keyboardKeys, 300, 450, new ChangeListener() {
+        UIElements.createDropdown(stage, keyboardKeys, 300, 400, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                SelectBox<String> selectBox = (SelectBox<String>) actor;
+                String selectedKey = selectBox.getSelected();
+                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
+                InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_RIGHT", keycode);
+                System.out.println("MOVE_LEFT bound to: " + selectedKey);
+                InputOutputManager.getInstance().getKeyboard().printKeyBindings();
+            }
+        });
+
+
+        UIElements.createLabel(stage, "MOVE_LEFT", 200, 300, Color.RED);
+        UIElements.createDropdown(stage, keyboardKeys, 300, 300, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
@@ -84,21 +98,36 @@ public class OptionCanvas implements Canvas {
         });
 
 
+        UIElements.createLabel(stage, "MOVE_UP", 200, 200, Color.RED);
+        UIElements.createDropdown(stage, keyboardKeys, 300, 200, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                SelectBox<String> selectBox = (SelectBox<String>) actor;
+                String selectedKey = selectBox.getSelected();
+                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
+                InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_UP", keycode);
+                System.out.println("MOVE_LEFT bound to: " + selectedKey);
+                InputOutputManager.getInstance().getKeyboard().printKeyBindings();
+            }
+        });
 
 
 
-//
-//
-//
-//        UIElements.createLabel(stage, "Move Down", 200, 400, Color.RED);
-//
-//
-//
-//        UIElements.createLabel(stage, "Move Right", 200, 350, Color.RED);
-//
-//
-//
-//        UIElements.createLabel(stage, "Move Left", 200, 300, Color.RED);
+        UIElements.createLabel(stage, "MOVE_DOWN", 200, 100, Color.RED);
+        UIElements.createDropdown(stage, keyboardKeys, 300, 100, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                SelectBox<String> selectBox = (SelectBox<String>) actor;
+                String selectedKey = selectBox.getSelected();
+                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
+                InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_DOWN", keycode);
+                System.out.println("MOVE_LEFT bound to: " + selectedKey);
+                InputOutputManager.getInstance().getKeyboard().printKeyBindings();
+            }
+        });
+
+
+
 
 
 
