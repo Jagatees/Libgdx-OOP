@@ -2,6 +2,7 @@ package com.mygdx.game.Engine.GameController;
 
 import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
 import com.mygdx.game.Engine.Entity.EntityManager;
@@ -9,6 +10,7 @@ import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
+import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 /**
  * Manages the lifecycle of the simulation or game, including starting, updating, rendering,
@@ -32,7 +34,6 @@ public class SimulationLifecycleManagement {
      */
     public SimulationLifecycleManagement() {
         sceneManager = SceneManager.getInstance();
-
     }
 
 
@@ -71,6 +72,11 @@ public class SimulationLifecycleManagement {
      */
     public void update(float dt){
         sceneManager.update(dt);
+
+        if (HealthyGameLogic.getInstance().getScore() > 10){
+            SceneManager.getInstance().setScene("GameOver");
+            HealthyGameLogic.getInstance().setScore(0);
+        }
     }
 
     /**

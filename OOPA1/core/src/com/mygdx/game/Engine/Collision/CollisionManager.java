@@ -46,7 +46,7 @@ public class CollisionManager {
      */
     public void checkResponse(Entity type, Entity type1) {
         System.out.println("Entity " + type + " has Collided with Entity " + type1);
-        HealthyGameLogic healthyGameLogic = new HealthyGameLogic();
+        HealthyGameLogic healthyGameLogic = HealthyGameLogic.getInstance();
 
 
         if (Entity.EntityType.PLAYER == entityManager.getType(type) &&  Entity.EntityType.H == entityManager.getType(type1)) {
@@ -60,9 +60,6 @@ public class CollisionManager {
 
             System.out.println(healthyGameLogic.getCurrentWord());
             System.out.println(healthyGameLogic.getScore());
-
-
-            System.out.println(healthyGameLogic.getCurrentWord());
 
         }
     }

@@ -1,6 +1,7 @@
 package com.mygdx.game.Engine.Scenes;
 
 
+import com.mygdx.game.HealthyGame.Scene.GameOverScene;
 import com.mygdx.game.HealthyGame.Scene.GameScene;
 import com.mygdx.game.HealthyGame.Scene.MainMeunScene;
 
@@ -112,6 +113,8 @@ public class SceneManager {
                  return new MainMeunScene();
              case "Game":
                  return new GameScene();
+             case "GameOver":
+                 return new GameOverScene();
          }
         return null; // Placeholder
     }

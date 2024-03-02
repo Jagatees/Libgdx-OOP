@@ -1,19 +1,33 @@
 package com.mygdx.game.HealthyGame.GameLogic;
 
+import com.mygdx.game.Engine.Scenes.SceneManager;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class HealthyGameLogic {
-    private List<String> words = Arrays.asList("Hello", "World", "OOP");
+    private List<String> words = Arrays.asList("hello");
     private String currentWord;
     private int score = 0;
     private StringBuilder collectedLetters = new StringBuilder();
+    private static HealthyGameLogic instance;
 
-    public HealthyGameLogic() {
+
+
+    // Private constructor to prevent instantiation
+    private HealthyGameLogic() {
         selectNewWord();
-        System.out.println(currentWord); // Print the selected word to the console for debugging
     }
+
+    // Public method to get the instance
+    public static synchronized HealthyGameLogic getInstance() {
+        if (instance == null) {
+            instance = new HealthyGameLogic();
+        }
+        return instance;
+    }
+
 
     // Selects a new word randomly from the list
     public void selectNewWord() {
@@ -60,4 +74,9 @@ public class HealthyGameLogic {
     public int getScore() {
         return score;
     }
+
+    public void setScore(int i) {
+        this.score = i;
+    }
+
 }
