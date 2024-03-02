@@ -51,13 +51,19 @@ public class CollisionManager {
 
         if (Entity.EntityType.PLAYER == entityManager.getType(type) &&  Entity.EntityType.H == entityManager.getType(type1)) {
             entityManager.removeEntity(type1);
-            healthyGameLogic.collectLetter('H');
+            healthyGameLogic.collectLetter('h');
             healthyGameLogic.collectLetter('e');
             healthyGameLogic.collectLetter('l');
             healthyGameLogic.collectLetter('l');
             healthyGameLogic.collectLetter('o');
 
+
+            System.out.println(healthyGameLogic.getCurrentWord());
             System.out.println(healthyGameLogic.getScore());
+
+
+            System.out.println(healthyGameLogic.getCurrentWord());
+
         }
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class HealthyGameLogic {
-    private List<String> words = Arrays.asList("Hello");
+    private List<String> words = Arrays.asList("Hello", "World", "OOP");
     private String currentWord;
     private int score = 0;
     private StringBuilder collectedLetters = new StringBuilder();
@@ -16,7 +16,7 @@ public class HealthyGameLogic {
     }
 
     // Selects a new word randomly from the list
-    private void selectNewWord() {
+    public void selectNewWord() {
         Random random = new Random();
         currentWord = words.get(random.nextInt(words.size()));
         collectedLetters.setLength(0); // Reset collected letters for the new word
@@ -31,12 +31,10 @@ public class HealthyGameLogic {
         }
     }
 
-    // Update the game score. Adjust scoring logic as needed.
     private void updateScore() {
-        score += 10; // For example, add 10 points for each correctly collected letter
+        score += 10;
     }
 
-    // Check if all letters of the current word have been collected
     private void checkWordCompletion() {
         // Convert collectedLetters StringBuilder to a sorted char array
         char[] collectedLettersSorted = collectedLetters.toString().toCharArray();
