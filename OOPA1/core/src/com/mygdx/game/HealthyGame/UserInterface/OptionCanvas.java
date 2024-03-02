@@ -53,10 +53,12 @@ public class OptionCanvas implements Canvas {
         UIElements.createTextButton(stage, "Back", 1100, 100, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                // When in Game
                 if (SimulationLifecycleManagement.getInstance().isPaused() && CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
                     SimulationLifecycleManagement.getInstance().togglePause();
                 }
 
+                // Outside Game Screen
                 if (CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
                     CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
                 }
