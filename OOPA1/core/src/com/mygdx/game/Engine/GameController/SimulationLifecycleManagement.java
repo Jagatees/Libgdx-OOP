@@ -1,12 +1,6 @@
 package com.mygdx.game.Engine.GameController;
 
-import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
-import com.mygdx.game.Engine.Canvas.CanvasManager;
-import com.mygdx.game.Engine.Collision.CollisionManager;
-import com.mygdx.game.Engine.Entity.EntityManager;
-import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
@@ -23,7 +17,7 @@ public class SimulationLifecycleManagement {
     private static SimulationLifecycleManagement instance;
     /** Manages the scenes within the game */
     private SceneManager sceneManager;
-    private boolean isPaused = false; // Pause flag
+    private boolean isPaused = false;
 
     public boolean isPaused() {
         return this.isPaused;
@@ -72,10 +66,9 @@ public class SimulationLifecycleManagement {
      */
     public void update(float dt){
         sceneManager.update(dt);
-
         if (HealthyGameLogic.getInstance().getScore() > 10){
-            SceneManager.getInstance().setScene("GameOver");
             HealthyGameLogic.getInstance().setScore(0);
+            SceneManager.getInstance().setScene("GameOver");
         }
     }
 
