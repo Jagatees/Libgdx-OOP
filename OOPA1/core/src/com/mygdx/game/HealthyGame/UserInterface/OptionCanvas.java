@@ -1,6 +1,7 @@
 package com.mygdx.game.HealthyGame.UserInterface;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,6 +14,7 @@ import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.Input.InputOutputManager;
+import com.mygdx.game.Engine.Input.Keyboard;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 
 /**
@@ -22,9 +24,16 @@ import com.mygdx.game.Engine.audio.AudioAssetKey;
 public class OptionCanvas implements Canvas {
 
     private Stage stage = new Stage(new ScreenViewport());
+    String[] keyboardKeys = new String[26]; // 26 letters in the English alphabet
 
     public OptionCanvas() {
         Gdx.input.setInputProcessor(stage);
+
+
+        for (int i = 0; i < 26; i++) {
+            // 65 is the ASCII code for 'A'
+            keyboardKeys[i] = String.valueOf((char)(i + 65));
+        }
 
 
         UIElements.createLabel(stage, "OPTIONS", 600, 600, Color.RED);
@@ -62,20 +71,20 @@ public class OptionCanvas implements Canvas {
 
         UIElements.createLabel(stage, "Move Up", 200, 450, Color.RED);
 
-
-        String[] keyboardKeys = new String[26]; // 26 letters in the English alphabet
-
-        for (int i = 0; i < 26; i++) {
-            // 65 is the ASCII code for 'A'
-            keyboardKeys[i] = String.valueOf((char)(i + 65));
-        }
-        SelectBox<String> myDropdown = UIElements.createDropdown(stage, keyboardKeys, 300, 450, new ChangeListener() {
+        UIElements.createDropdown(stage, keyboardKeys, 300, 450, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
-                System.out.println("Selected item: " + selectBox.getSelected());
+                String selectedKey = selectBox.getSelected();
+                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
+                InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_LEFT", keycode);
+                System.out.println("MOVE_LEFT bound to: " + selectedKey);
+                InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
         });
+
+
+
 
 
 //
@@ -95,6 +104,9 @@ public class OptionCanvas implements Canvas {
 
 
     }
+
+
+
 
 
     /**

@@ -3,6 +3,7 @@ package com.mygdx.game.Engine.Entity;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
+import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Input.Keyboard;
 
 public class Player extends Entity {
@@ -49,13 +50,13 @@ public class Player extends Entity {
 
     @Override
     public void userControlledMovement() {
-        if (Keyboard.getInstance().isKeyPressedBool(Input.Keys.RIGHT)) {
+        if (InputOutputManager.getInstance().getKeyboard().getInstance().isActionPressed("MOVE_RIGHT")) {
             getPlayerController().move(Input.Keys.RIGHT);
-        } else if (Keyboard.getInstance().isKeyPressedBool(Input.Keys.LEFT)) {
+        } else if (InputOutputManager.getInstance().getKeyboard().getInstance().isActionPressed("MOVE_LEFT")) {
             getPlayerController().move(Input.Keys.LEFT);
-        } else if (Keyboard.getInstance().isKeyPressedBool(Input.Keys.UP)) {
+        } else if (InputOutputManager.getInstance().getKeyboard().getInstance().isActionPressed("MOVE_UP")) {
             getPlayerController().move(Input.Keys.UP);
-        } else if (Keyboard.getInstance().isKeyPressedBool(Input.Keys.DOWN)) {
+        } else if (InputOutputManager.getInstance().getKeyboard().getInstance().isActionPressed("MOVE_DOWN")) {
             getPlayerController().move(Input.Keys.DOWN);
         }
     }
