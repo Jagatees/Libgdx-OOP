@@ -88,11 +88,8 @@ public class UIElements {
         pixmap.dispose();
         Drawable drawable = new TextureRegionDrawable(texture);
 
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.up = drawable;
-        style.font = defaultFont;
 
-        TextButton button = new TextButton(text, style);
+        TextButton button = new TextButton(text, skin);
         button.setPosition(x, y);
         button.addListener(actionListener);
 
@@ -126,7 +123,7 @@ public class UIElements {
         style.font = defaultFont;
         style.fontColor = fontColor;
 
-        Label label = new Label(text, style);
+        Label label = new Label(text, skin);
         label.setPosition(x, y);
 
         stage.addActor(label); // Automatically add the label to the stage

@@ -44,13 +44,7 @@ public class GameCanvas implements Canvas {
             }
         });
 
-        UIElements.createTextButton(stage, "End Game", 1212, 580, 50, 50, Color.RED , new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                SimulationLifecycleManagement.getInstance().closeGame();
-                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEFAULT_TWO);
-            }
-        });
+
 
 
     }
