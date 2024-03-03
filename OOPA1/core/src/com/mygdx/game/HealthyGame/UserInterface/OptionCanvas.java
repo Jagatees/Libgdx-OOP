@@ -26,20 +26,7 @@ public class OptionCanvas implements Canvas {
 
     private Stage stage = new Stage(new ScreenViewport());
     String[] keyboardKeys = new String[26]; // 26 letters in the English alphabet
-    String[] screenResolutions = {
-            "640x480",   // VGA
-            "800x600",   // SVGA
-            "1024x768",  // XGA
-            "1280x720",  // HD
-            "1280x800",  // WXGA
-            "1366x768",  // Common laptop screen
-            "1440x900",  // WXGA+
-            "1600x900",  // HD+
-            "1920x1080", // FHD
-            "2560x1440", // QHD
-            "3840x2160", // 4K UHD
-            "7680x4320"  // 8K UHD
-    };
+
     public OptionCanvas() {
         Gdx.input.setInputProcessor(stage);
 
@@ -56,10 +43,12 @@ public class OptionCanvas implements Canvas {
                 // When in Game
                 if (SimulationLifecycleManagement.getInstance().isPaused() && CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
                     SimulationLifecycleManagement.getInstance().togglePause();
+                    CanvasManager.getInstance().setCanvas(new GameCanvas());
+
                 }
 
                 // Outside Game Screen
-                if (CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
+                if (!SimulationLifecycleManagement.getInstance().isPaused() && CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
                     CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
                 }
             }

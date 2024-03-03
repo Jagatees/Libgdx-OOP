@@ -16,6 +16,7 @@ import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
 import com.mygdx.game.Engine.Entity.nonPlayer;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
+import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.OptionCanvas;
 
@@ -71,8 +72,6 @@ public class GameScene extends TemplateScene {
 
         canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
-
-
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
@@ -114,12 +113,6 @@ public class GameScene extends TemplateScene {
     public void update(float delta) {
         entityManager.movement(pacman);
         entityManager.movement(enemy);
-
-        if (SimulationLifecycleManagement.getInstance().isPaused() && !(canvasManager.getCurrentCanvas() instanceof OptionCanvas)) {
-            canvasManager.setCanvas(new OptionCanvas());
-        } else if (!SimulationLifecycleManagement.getInstance().isPaused() && !(canvasManager.getCurrentCanvas() instanceof GameCanvas)) {
-            canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
-        }
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.mygdx.game.Engine.GameController;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
@@ -66,10 +67,6 @@ public class SimulationLifecycleManagement {
      */
     public void update(float dt){
         sceneManager.update(dt);
-        if (HealthyGameLogic.getInstance().getScore() > 10){
-            HealthyGameLogic.getInstance().setScore(0);
-            SceneManager.getInstance().setScene("GameOver");
-        }
     }
 
     /**

@@ -36,11 +36,8 @@ public class GameCanvas implements Canvas {
         UIElements.createTextButton(stage,  "Options", 1212, 650, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
                 SimulationLifecycleManagement.getInstance().togglePause();
-                inputOutputManager.getAudioManager().stop(AudioAssetKey.DEFAULT_TWO);
                 CanvasManager.getInstance().setCanvas(new OptionCanvas());
-
             }
         });
 
