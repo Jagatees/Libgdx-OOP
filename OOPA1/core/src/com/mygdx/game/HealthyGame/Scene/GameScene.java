@@ -18,6 +18,7 @@ import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
+import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.OptionCanvas;
 
 
@@ -72,6 +73,10 @@ public class GameScene extends TemplateScene {
 
         canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
+
+
+
+
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
@@ -101,7 +106,12 @@ public class GameScene extends TemplateScene {
         canvasManager.render(delta);
         canvasManager.update(delta);
 
-
+        if (HealthyGameLogic.getInstance().getScore() > 10) {
+            System.out.println("switch canvas");
+            HealthyGameLogic.getInstance().setScore(0);
+            EntityManager.getInstance().setAllEntitiesRemoved(true);
+            CanvasManager.getInstance().setCanvas(new GameOverCanvas());
+        }
 
     }
 

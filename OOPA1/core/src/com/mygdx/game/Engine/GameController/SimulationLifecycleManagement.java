@@ -76,7 +76,7 @@ public class SimulationLifecycleManagement {
      */
 
     public void startGame() {
-        AudioManager.getInstance().loadMusicTrack(AudioAssetKey.BG_1, "SoundEffect/default.mp3", true);
+        AudioManager.getInstance().loadMusicTrack(AudioAssetKey.BG_1, "SoundEffect/smart.mp3", true);
 
         AudioManager.getInstance().play(AudioAssetKey.BG_1);
         AudioManager.getInstance().setVolume(AudioAssetKey.BG_1, 0.1f);
