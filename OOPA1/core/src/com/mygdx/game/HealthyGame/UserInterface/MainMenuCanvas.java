@@ -2,12 +2,15 @@ package com.mygdx.game.HealthyGame.UserInterface;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
+import com.mygdx.game.Engine.Canvas.ImageRenderer;
 import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
@@ -20,10 +23,12 @@ import com.mygdx.game.Engine.Entity.EntityManager;
 public class MainMenuCanvas implements Canvas {
 
     private Stage stage = new Stage(new ScreenViewport());
+    private SpriteBatch batch;
+    private Texture background;
+
 
     public MainMenuCanvas() {
         Gdx.input.setInputProcessor(stage);
-
 
         UIElements.createLabel(stage, "GAME TITLE", 600, 600, Color.RED);
         UIElements.createTextButton(stage, "Start Game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
@@ -52,6 +57,9 @@ public class MainMenuCanvas implements Canvas {
         });
 
 
+        batch = new SpriteBatch();
+        background = new Texture("background/bg-1.jpg");
+
 
 
     }
@@ -64,8 +72,15 @@ public class MainMenuCanvas implements Canvas {
      */
     @Override
     public void render(float delta) {
+        batch.begin();
+        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
+
+
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
+
+
     }
 
     /**
@@ -83,5 +98,7 @@ public class MainMenuCanvas implements Canvas {
      */
     @Override
     public void dispose() {
+        background.dispose();
+
     }
 }

@@ -3,6 +3,8 @@ package com.mygdx.game.HealthyGame.UserInterface;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -26,6 +28,10 @@ public class OptionCanvas implements Canvas {
 
     private Stage stage = new Stage(new ScreenViewport());
     String[] keyboardKeys = new String[26]; // 26 letters in the English alphabet
+
+    private SpriteBatch batch;
+    private Texture background;
+
 
     public OptionCanvas() {
         Gdx.input.setInputProcessor(stage);
@@ -153,6 +159,10 @@ public class OptionCanvas implements Canvas {
             }
         });
 
+        batch = new SpriteBatch();
+        background = new Texture("background/bg-1.jpg");
+
+
     }
 
 
@@ -166,6 +176,10 @@ public class OptionCanvas implements Canvas {
      */
     @Override
     public void render(float delta) {
+        batch.begin();
+        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
+
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
@@ -185,5 +199,7 @@ public class OptionCanvas implements Canvas {
      */
     @Override
     public void dispose() {
+        background.dispose();
+
     }
 }

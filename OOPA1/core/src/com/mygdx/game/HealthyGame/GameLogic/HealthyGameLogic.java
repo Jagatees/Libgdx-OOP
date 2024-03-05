@@ -7,12 +7,21 @@ import java.util.List;
 import java.util.Random;
 
 public class HealthyGameLogic {
-    private List<String> words = Arrays.asList("hello");
-    private String currentWord;
-    private int score = 0;
+    //IDK
     private StringBuilder collectedLetters = new StringBuilder();
+
+
+    // Singlateon for game logic
     private static HealthyGameLogic instance;
 
+    // String to store all the words
+    private List<String> words = Arrays.asList("hello");
+
+    // Game Score
+    private int score = 0;
+
+    // Current word for player to search
+    private String currentWord;
 
 
     // Private constructor to prevent instantiation
@@ -74,9 +83,14 @@ public class HealthyGameLogic {
     public int getScore() {
         return score;
     }
-
     public void setScore(int i) {
         this.score = i;
     }
+
+    public void restartScore(){
+        setScore(0);
+    }
+
+
 
 }

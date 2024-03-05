@@ -2,6 +2,8 @@ package com.mygdx.game.HealthyGame.UserInterface;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -21,6 +23,8 @@ import com.mygdx.game.HealthyGame.Scene.MainMeunScene;
 public class GameOverCanvas implements Canvas {
 
     private Stage stage = new Stage(new ScreenViewport());
+    private SpriteBatch batch;
+    private Texture background;
 
     public GameOverCanvas() {
         Gdx.input.setInputProcessor(stage);
@@ -43,7 +47,8 @@ public class GameOverCanvas implements Canvas {
             }
         });
 
-
+        batch = new SpriteBatch();
+        background = new Texture("background/bg-1.jpg");
 
 
     }
@@ -56,6 +61,10 @@ public class GameOverCanvas implements Canvas {
      */
     @Override
     public void render(float delta) {
+        batch.begin();
+        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
+
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
@@ -75,5 +84,6 @@ public class GameOverCanvas implements Canvas {
      */
     @Override
     public void dispose() {
+        background.dispose();
     }
 }
