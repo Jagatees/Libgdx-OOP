@@ -12,8 +12,6 @@ import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
  */
 public class CollisionManager {
 
-    private EntityManager entityManager = new EntityManager();
-
 
     /**
      * Checks if two rectangular entities intersect.
@@ -49,8 +47,8 @@ public class CollisionManager {
         HealthyGameLogic healthyGameLogic = HealthyGameLogic.getInstance();
 
 
-        if (Entity.EntityType.PLAYER == entityManager.getType(type) &&  Entity.EntityType.H == entityManager.getType(type1)) {
-            entityManager.removeEntity(type1);
+        if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type) &&  Entity.EntityType.H == EntityManager.getInstance().getType(type1)) {
+            EntityManager.getInstance().removeEntity(type1);
             healthyGameLogic.collectLetter('h');
             healthyGameLogic.collectLetter('e');
             healthyGameLogic.collectLetter('l');
