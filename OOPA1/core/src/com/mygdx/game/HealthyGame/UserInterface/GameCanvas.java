@@ -12,6 +12,7 @@ import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
+import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 /**
  * Implements the Canvas interface to create a UI canvas for the game menu using scene2d UI elements.
@@ -32,6 +33,9 @@ public class GameCanvas implements Canvas {
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+
+
+        UIElements.createLabel(stage, HealthyGameLogic.getInstance().getCurrentWord().toString(), 100, 100);
 
         UIElements.createTextButton(stage,  "Options", 1212, 650, 50, 50, Color.RED , new ChangeListener() {
             @Override

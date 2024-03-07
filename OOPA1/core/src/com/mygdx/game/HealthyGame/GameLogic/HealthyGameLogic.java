@@ -15,7 +15,7 @@ public class HealthyGameLogic {
     private static HealthyGameLogic instance;
 
     // String to store all the words
-    private List<String> words = Arrays.asList("hello");
+    private List<String> words = Arrays.asList("Cat" , "Puzzle",  "Cryptography", "Antidisestablishmentarianism");
 
     // Game Score
     private int score = 0;
