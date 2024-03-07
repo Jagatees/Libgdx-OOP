@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.OptionsCanvas;
+import com.mygdx.game.Engine.Config.LauncherConfig;
 import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
@@ -20,6 +21,10 @@ import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.OptionCanvas;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -41,6 +46,9 @@ public class GameScene extends TemplateScene {
     private Player pacman;
     private nonPlayer enemy;
     private nonPlayer boxPlayer;
+    private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
+    private nonPlayer tempEnemy;
+
 
 
     /**
@@ -74,6 +82,35 @@ public class GameScene extends TemplateScene {
         canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
 
+        String word = HealthyGameLogic.getInstance().getCurrentWord();
+
+        Random rand = new Random();
+
+        // Define the boundaries for the spawn locations.
+        int minX = 100; // Example minimum X coordinate
+        int maxX = 800; // Example maximum X coordinate
+        int minY = 100; // Example minimum Y coordinate
+        int maxY = 600; // Example maximum Y coordinate
+
+
+        for (int i = 0; i < word.length(); i++) {
+            // Generate random positions within the defined boundaries.
+            int x = rand.nextInt( maxX - minX + 1) + minX;
+            int y = rand.nextInt(maxY - minY + 1) + minY;
+
+            tempEnemy = new nonPlayer("Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
+                    50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
+
+            entityManager.addEntity(tempEnemy);
+            listNonPlayerEnemy.add(tempEnemy);
+        }
+
+        for (nonPlayer enemy : listNonPlayerEnemy) {
+            aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
+            entityManager.setAIController(enemy, aiControlManagement);
+        }
+
+
 
 
 
@@ -106,7 +143,7 @@ public class GameScene extends TemplateScene {
         canvasManager.render(delta);
         canvasManager.update(delta);
 
-        if (HealthyGameLogic.getInstance().getScore() > 10) {
+        if (HealthyGameLogic.getInstance().getScore() > HealthyGameLogic.getInstance().GetScoreGoal()) {
             System.out.println("switch canvas");
             HealthyGameLogic.getInstance().setScore(0);
             EntityManager.getInstance().setAllEntitiesRemoved(true);
@@ -123,6 +160,11 @@ public class GameScene extends TemplateScene {
     public void update(float delta) {
         entityManager.movement(pacman);
         entityManager.movement(enemy);
+
+        for (nonPlayer enemy : listNonPlayerEnemy) {
+            entityManager.movement(enemy);
+        }
+
     }
 
     /**

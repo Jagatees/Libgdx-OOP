@@ -43,17 +43,21 @@ public class CollisionManager {
      * @param type1 The type of the second entity involved in the collision.
      */
     public void checkResponse(Entity type, Entity type1) {
-        System.out.println("Entity " + type + " has Collided with Entity " + type1);
+//        System.out.println("Entity " + EntityManager.getInstance().getType(type) + " has Collided with Entity " + EntityManager.getInstance().getType(type1));
         HealthyGameLogic healthyGameLogic = HealthyGameLogic.getInstance();
 
 
-        if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type) &&  Entity.EntityType.H == EntityManager.getInstance().getType(type1)) {
-            EntityManager.getInstance().removeEntity(type1);
-            healthyGameLogic.collectLetter('h');
-            healthyGameLogic.collectLetter('e');
-            healthyGameLogic.collectLetter('l');
-            healthyGameLogic.collectLetter('l');
-            healthyGameLogic.collectLetter('o');
+        if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type) &&  Entity.EntityType.H == EntityManager.getInstance().getType(type1) || Entity.EntityType.H == EntityManager.getInstance().getType(type) &&  Entity.EntityType.PLAYER== EntityManager.getInstance().getType(type1)) {
+
+            if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type)) {
+                EntityManager.getInstance().removeEntity(type1);
+            } else {
+                EntityManager.getInstance().removeEntity(type);
+            }
+
+
+            healthyGameLogic.addScore(1);
+
 
 
             System.out.println(healthyGameLogic.getCurrentWord());

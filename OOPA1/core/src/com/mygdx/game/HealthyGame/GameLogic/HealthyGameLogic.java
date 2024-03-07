@@ -19,6 +19,8 @@ public class HealthyGameLogic {
 
     // Game Score
     private int score = 0;
+    private int goal = 0;
+
 
     // Current word for player to search
     private String currentWord;
@@ -27,6 +29,8 @@ public class HealthyGameLogic {
     // Private constructor to prevent instantiation
     private HealthyGameLogic() {
         selectNewWord();
+        score = 0;
+        goal = 3;
     }
 
     // Public method to get the instance
@@ -77,6 +81,18 @@ public class HealthyGameLogic {
     // Getter for the current word (to display in the game)
     public String getCurrentWord() {
         return currentWord;
+    }
+
+    public void addScore(int i) {
+        setScore(getScore() + i);
+    }
+
+    public void SetScoreGoal(int i) {
+       this.goal = i;
+    }
+
+    public int GetScoreGoal() {
+       return goal;
     }
 
     // Getter for the current score
