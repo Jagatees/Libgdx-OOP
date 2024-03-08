@@ -293,8 +293,7 @@ public abstract class Entity implements objectMovement {
          setRenderType(Entity.RenderType.SPRITE); // Default to SPRITE RenderType (logically correct)
          textureErrorHandling(fileName);
      }
-     
-    
+
     protected void textureErrorHandling(String fileName) {
     	try {
         	setTexture(new Texture(Gdx.files.internal(fileName)));

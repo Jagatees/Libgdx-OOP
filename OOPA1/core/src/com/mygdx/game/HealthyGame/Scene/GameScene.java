@@ -5,22 +5,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Engine.Canvas.OptionsCanvas;
-import com.mygdx.game.Engine.Config.LauncherConfig;
 import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
-import com.mygdx.game.Engine.Entity.Entity;
-import com.mygdx.game.Engine.Entity.EntityManager;
-import com.mygdx.game.Engine.Entity.Player;
+import com.mygdx.game.Engine.Entity.*;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
-import com.mygdx.game.Engine.Entity.nonPlayer;
-import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
-import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
-import com.mygdx.game.HealthyGame.UserInterface.OptionCanvas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +35,11 @@ public class GameScene extends TemplateScene {
 
 
     /** Game Entity */
-    private Player pacman;
-    private nonPlayer enemy;
-    private nonPlayer boxPlayer;
+    private Entity pacman;
+    private Entity enemy;
+    private Entity boxPlayer;
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
-    private nonPlayer tempEnemy;
+    private Entity tempEnemy;
 
 
 
@@ -59,11 +51,13 @@ public class GameScene extends TemplateScene {
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
         entityManager = EntityManager.getInstance();
+        EntityFactory entityFactory = new EntityFactory();
 
-        pacman = new Player("entity/pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
-        enemy = new nonPlayer("Words/H.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
+        enemy = entityFactory.getEntityByInput("nonPlayer", "Words/H.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
 
-        boxPlayer = new nonPlayer(Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+        pacman = entityFactory.getEntityByInput("Player", "entity/pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
+
+        boxPlayer = entityFactory.getEntityByInput("nonPlayer", Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
         createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
         createWall("entity/wall.jpg", 0, -20, 30, 50, 0, false);
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
@@ -73,11 +67,11 @@ public class GameScene extends TemplateScene {
         entityManager.addEntity(enemy);
         entityManager.addEntity(boxPlayer);
 
-        PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement(pacman, entityManager, collisionManager);
-        entityManager.setPlayerController(pacman, playerControllerManagement);
+        PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement((Player)pacman, entityManager, collisionManager);
+        entityManager.setPlayerController((Player)pacman, playerControllerManagement);
 
-        AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
-        entityManager.setAIController(enemy, aiControlManagement);
+        AIControlManagement aiControlManagement = new AIControlManagement((nonPlayer)enemy, entityManager, collisionManager);
+        entityManager.setAIController((nonPlayer)enemy, aiControlManagement);
 
         canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
@@ -98,22 +92,17 @@ public class GameScene extends TemplateScene {
             int x = rand.nextInt( maxX - minX + 1) + minX;
             int y = rand.nextInt(maxY - minY + 1) + minY;
 
-            tempEnemy = new nonPlayer("Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
+            tempEnemy = entityFactory.getEntityByInput("nonPlayer","Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
                     50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
 
             entityManager.addEntity(tempEnemy);
-            listNonPlayerEnemy.add(tempEnemy);
+            listNonPlayerEnemy.add((nonPlayer)tempEnemy);
         }
 
         for (nonPlayer enemy : listNonPlayerEnemy) {
             aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
             entityManager.setAIController(enemy, aiControlManagement);
         }
-
-
-
-
-
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
