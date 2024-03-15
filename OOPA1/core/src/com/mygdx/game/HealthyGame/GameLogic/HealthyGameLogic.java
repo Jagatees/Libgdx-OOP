@@ -15,7 +15,8 @@ public class HealthyGameLogic {
     private static HealthyGameLogic instance;
 
     // String to store all the words
-    private List<String> words = Arrays.asList("CAT");
+    // The word need to be in full caps
+    private List<String> words = Arrays.asList("EASY", "MEDIUM" , "HARD" );
 
     // Game Score
     private int score = 0;

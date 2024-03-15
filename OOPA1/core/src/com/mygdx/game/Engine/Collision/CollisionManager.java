@@ -60,16 +60,18 @@ public class CollisionManager {
         System.out.println("Type: " + typeEntityType + " Type2: " + type1EntityType);
 
 
-        if (HealthyGameLogic.getInstance().getScore() != healthyGameLogic.getCurrentWord().length()) {
+        if (HealthyGameLogic.getInstance().getScore() != word.length()) {
             // Make sure get the right letter first
             if (Objects.equals(type1EntityType.getLetter(), String.valueOf(HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()))) ||
-                    Objects.equals(typeEntityType.getLetter(), String.valueOf(HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()))))
+                    Objects.equals(typeEntityType.getLetter(), String.valueOf(HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()))
+
+                    ))
             {
                 System.out.println("it match");
 
                 // Check if one entity is PLAYER and the other is any letter from A to Z.
                 if ((typeEntityType == Entity.EntityType.PLAYER && type1EntityType.isLetter()) ||
-                        (type1EntityType == Entity.EntityType.PLAYER && typeEntityType.isLetter())) {
+                    (type1EntityType == Entity.EntityType.PLAYER && typeEntityType.isLetter())) {
 
                     // Increment score regardless of which entity is the PLAYER
                     healthyGameLogic.addScore(1);

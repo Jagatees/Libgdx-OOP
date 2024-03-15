@@ -73,10 +73,12 @@ public class GameScene extends TemplateScene {
         String word = HealthyGameLogic.getInstance().getCurrentWord();
 
         Random rand = new Random();
-        int minX = 400;
+        int minX = 300;
         int maxX = 800;
         int minY = 300;
         int maxY = 600;
+
+        System.out.println(word);
 
         for (int i = 0; i < word.length(); i++) {
             int x = rand.nextInt( maxX - minX + 1) + minX;
@@ -168,6 +170,7 @@ public class GameScene extends TemplateScene {
             }
 
 
+            System.out.println(entityType.toString());
             tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
                     50, 50, entityType, Entity.RenderType.SPRITE);
 
