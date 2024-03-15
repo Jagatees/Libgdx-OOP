@@ -15,6 +15,7 @@ import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Entity.EntityManager;
+import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
@@ -34,7 +35,7 @@ public class MainMenuCanvas implements Canvas {
         UIElements.createTextButton(stage, "Start Game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                SceneManager.getInstance().setScene("Game");
+                SceneManager.getInstance().setScene("EasyStage");
                 CanvasManager.getInstance().setCanvas(new GameCanvas());
                 EntityManager.getInstance().setAllEntitiesRemoved(false);
 
