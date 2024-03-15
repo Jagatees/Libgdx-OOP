@@ -37,6 +37,9 @@ public class GameScene extends TemplateScene {
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
     private Entity tempEnemy;
 
+    private Entity.EntityType entityType;
+
+
 
 
     /**
@@ -79,8 +82,94 @@ public class GameScene extends TemplateScene {
             int x = rand.nextInt( maxX - minX + 1) + minX;
             int y = rand.nextInt(maxY - minY + 1) + minY;
 
+            switch(String.valueOf(word.charAt(i))) {
+                case "A":
+                    entityType = Entity.EntityType.A;
+                    break;
+                case "B":
+                    entityType = Entity.EntityType.B;
+                    break;
+                case "C":
+                    entityType = Entity.EntityType.C;
+                    break;
+                case "D":
+                    entityType = Entity.EntityType.D;
+                    break;
+                case "E":
+                    entityType = Entity.EntityType.E;
+                    break;
+                case "F":
+                    entityType = Entity.EntityType.F;
+                    break;
+                case "G":
+                    entityType = Entity.EntityType.G;
+                    break;
+                case "H":
+                    entityType = Entity.EntityType.H;
+                    break;
+                case "I":
+                    entityType = Entity.EntityType.I;
+                    break;
+                case "J":
+                    entityType = Entity.EntityType.J;
+                    break;
+                case "K":
+                    entityType = Entity.EntityType.K;
+                    break;
+                case "L":
+                    entityType = Entity.EntityType.L;
+                    break;
+                case "M":
+                    entityType = Entity.EntityType.M;
+                    break;
+                case "N":
+                    entityType = Entity.EntityType.N;
+                    break;
+                case "O":
+                    entityType = Entity.EntityType.O;
+                    break;
+                case "P":
+                    entityType = Entity.EntityType.P;
+                    break;
+                case "Q":
+                    entityType = Entity.EntityType.Q;
+                    break;
+                case "R":
+                    entityType = Entity.EntityType.R;
+                    break;
+                case "S":
+                    entityType = Entity.EntityType.S;
+                    break;
+                case "T":
+                    entityType = Entity.EntityType.T;
+                    break;
+                case "U":
+                    entityType = Entity.EntityType.U;
+                    break;
+                case "V":
+                    entityType = Entity.EntityType.V;
+                    break;
+                case "W":
+                    entityType = Entity.EntityType.W;
+                    break;
+                case "X":
+                    entityType = Entity.EntityType.X;
+                    break;
+                case "Y":
+                    entityType = Entity.EntityType.Y;
+                    break;
+                case "Z":
+                    entityType = Entity.EntityType.Z;
+                    break;
+                // Optionally, you can have a default case if the input doesn't match any letter
+                default:
+                    // Handle an unexpected input
+                    break;
+            }
+
+
             tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
-                    50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
+                    50, 50, entityType, Entity.RenderType.SPRITE);
 
             entityManager.addEntity(tempEnemy);
             listNonPlayerEnemy.add((nonPlayer)tempEnemy);

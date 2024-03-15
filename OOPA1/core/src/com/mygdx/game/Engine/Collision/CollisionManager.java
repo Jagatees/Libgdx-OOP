@@ -46,6 +46,10 @@ public class CollisionManager {
      */
     public void checkResponse(Entity type, Entity type1) {
 
+
+        System.out.println("Type :" + EntityManager.getInstance().getType(type) + "Type2 :" + EntityManager.getInstance().getType(type1));
+
+
         if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type) &&  Entity.EntityType.H == EntityManager.getInstance().getType(type1)
                 || Entity.EntityType.H == EntityManager.getInstance().getType(type) &&  Entity.EntityType.PLAYER== EntityManager.getInstance().getType(type1)) {
             if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type)) {
