@@ -59,34 +59,42 @@ public class CollisionManager {
 
         System.out.println("Type: " + typeEntityType + " Type2: " + type1EntityType);
 
-        // Make sure get the right letter first
-        if (Objects.equals(type1EntityType.getLetter(), String.valueOf(HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(0))) ||
-                Objects.equals(typeEntityType.getLetter(), String.valueOf(HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(0))))
-        {
-            System.out.println("it match");
+
+        if (HealthyGameLogic.getInstance().getScore() != healthyGameLogic.getCurrentWord().length()) {
+            // Make sure get the right letter first
+            if (Objects.equals(type1EntityType.getLetter(), String.valueOf(HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()))) ||
+                    Objects.equals(typeEntityType.getLetter(), String.valueOf(HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()))))
+            {
+                System.out.println("it match");
+
+                // Check if one entity is PLAYER and the other is any letter from A to Z.
+                if ((typeEntityType == Entity.EntityType.PLAYER && type1EntityType.isLetter()) ||
+                        (type1EntityType == Entity.EntityType.PLAYER && typeEntityType.isLetter())) {
+
+                    // Increment score regardless of which entity is the PLAYER
+                    healthyGameLogic.addScore(1);
+
+                    // Remove the non-PLAYER entity
+                    if (typeEntityType == Entity.EntityType.PLAYER) {
+                        EntityManager.getInstance().removeEntity(type1);
+                    } else {
+                        EntityManager.getInstance().removeEntity(type);
+                    }
+
+                    // Output current score
+                    System.out.println("Current Score: " + HealthyGameLogic.getInstance().getScore());
+
+                    // Check score against current word length
+                    if (HealthyGameLogic.getInstance().getScore() != healthyGameLogic.getCurrentWord().length()) {
+                        System.out.println("Next Letter: " + HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()));
+                    }
+                }
+
         }
-        // Check if one entity is PLAYER and the other is any letter from A to Z.
-        if ((typeEntityType == Entity.EntityType.PLAYER && type1EntityType.isLetter()) ||
-                (type1EntityType == Entity.EntityType.PLAYER && typeEntityType.isLetter())) {
 
-            // Increment score regardless of which entity is the PLAYER
-            healthyGameLogic.addScore(1);
 
-            // Remove the non-PLAYER entity
-            if (typeEntityType == Entity.EntityType.PLAYER) {
-                EntityManager.getInstance().removeEntity(type1);
-            } else {
-                EntityManager.getInstance().removeEntity(type);
-            }
-
-            // Output current score
-            System.out.println("Current Score: " + HealthyGameLogic.getInstance().getScore());
-
-            // Check score against current word length
-            if (HealthyGameLogic.getInstance().getScore() != healthyGameLogic.getCurrentWord().length()) {
-                System.out.println("Next Letter: " + HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()));
-            }
         }
+
 
     }
 }
