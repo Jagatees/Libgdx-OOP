@@ -25,19 +25,14 @@ import java.util.Random;
  */
 public class GameScene extends TemplateScene {
 
-    /** Rendering */
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
 
-    /** Manager */
     private EntityManager entityManager;
     private CollisionManager collisionManager;
     private CanvasManager canvasManager;
 
-
-    /** Game Entity */
     private Entity pacman;
-    private Entity enemy;
     private Entity boxPlayer;
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
     private Entity tempEnemy;
@@ -54,26 +49,20 @@ public class GameScene extends TemplateScene {
         entityManager = EntityManager.getInstance();
         EntityFactory entityFactory = new EntityFactory();
 
-
-        enemy = entityFactory.getEntityByInput("nonPlayer", "Words/H.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
-
-        pacman = entityFactory.getEntityByInput("Player", "entity/pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
+        pacman = entityFactory.getEntityByInput("Player", "entity/pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
 
         boxPlayer = entityFactory.getEntityByInput("nonPlayer", Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+
         createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
         createWall("entity/wall.jpg", 0, -20, 30, 50, 0, false);
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
         entityManager.addEntity(pacman);
-        entityManager.addEntity(enemy);
         entityManager.addEntity(boxPlayer);
 
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement((Player)pacman, entityManager, collisionManager);
         entityManager.setPlayerController((Player)pacman, playerControllerManagement);
-
-        AIControlManagement aiControlManagement = new AIControlManagement((nonPlayer)enemy, entityManager, collisionManager);
-        entityManager.setAIController((nonPlayer)enemy, aiControlManagement);
 
         canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
@@ -81,20 +70,16 @@ public class GameScene extends TemplateScene {
         String word = HealthyGameLogic.getInstance().getCurrentWord();
 
         Random rand = new Random();
+        int minX = 400;
+        int maxX = 800;
+        int minY = 300;
+        int maxY = 600;
 
-        // Define the boundaries for the spawn locations.
-        int minX = 100; // Example minimum X coordinate
-        int maxX = 800; // Example maximum X coordinate
-        int minY = 100; // Example minimum Y coordinate
-        int maxY = 600; // Example maximum Y coordinate
-
-
-        for (int i = 1; i < word.length(); i++) {
-            // Generate random positions within the defined boundaries.
+        for (int i = 0; i < word.length(); i++) {
             int x = rand.nextInt( maxX - minX + 1) + minX;
             int y = rand.nextInt(maxY - minY + 1) + minY;
 
-            tempEnemy = entityFactory.getEntityByInput("nonPlayer","Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
+            tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
                     50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
 
             entityManager.addEntity(tempEnemy);
@@ -102,9 +87,20 @@ public class GameScene extends TemplateScene {
         }
 
         for (nonPlayer enemy : listNonPlayerEnemy) {
-            aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
+            AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
             entityManager.setAIController(enemy, aiControlManagement);
         }
+
+        // Reset the Player Position to Start at 100,100 x:y
+
+
+
+        // Debug Sout
+        System.out.println("Goal : " + HealthyGameLogic.getInstance().GetScoreGoal());
+        System.out.println("Current Word : " +HealthyGameLogic.getInstance().getCurrentWord());
+        System.out.println("Current Word length: " +HealthyGameLogic.getInstance().getCurrentWord().length());
+        System.out.println("Current Score : " + HealthyGameLogic.getInstance().getScore());
+        System.out.println("First letter of word : " + HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(0));
 
 
     }
@@ -151,8 +147,8 @@ public class GameScene extends TemplateScene {
      */
     @Override
     public void update(float delta) {
+        // Implementation adjusted to remove references to the removed 'enemy'
         entityManager.movement(pacman);
-        entityManager.movement(enemy);
 
         for (nonPlayer enemy : listNonPlayerEnemy) {
             entityManager.movement(enemy);

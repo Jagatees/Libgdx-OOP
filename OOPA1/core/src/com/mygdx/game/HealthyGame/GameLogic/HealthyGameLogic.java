@@ -15,7 +15,7 @@ public class HealthyGameLogic {
     private static HealthyGameLogic instance;
 
     // String to store all the words
-    private List<String> words = Arrays.asList("Hello");
+    private List<String> words = Arrays.asList("CAT");
 
     // Game Score
     private int score = 0;
@@ -28,8 +28,8 @@ public class HealthyGameLogic {
 
     // Private constructor to prevent instantiation
     private HealthyGameLogic() {
+        setScore(0);
         selectNewWord();
-        score = 0;
         SetScoreGoal(getCurrentWord().length());
     }
 
@@ -59,7 +59,7 @@ public class HealthyGameLogic {
     }
 
     private void updateScore() {
-        score += 10;
+        score += 1;
     }
 
     private void checkWordCompletion() {
@@ -77,6 +77,21 @@ public class HealthyGameLogic {
             selectNewWord(); // Select a new word for the next round
         }
     }
+
+
+
+
+    public char getFirstLetterOfCurrentWordSafely(int i) {
+        if (currentWord != null && !currentWord.isEmpty()) {
+            return currentWord.charAt(i);
+        } else {
+            // Return a default character or handle this scenario as needed
+            return '!'; // or any other default value
+        }
+    }
+
+
+
 
     // Getter for the current word (to display in the game)
     public String getCurrentWord() {

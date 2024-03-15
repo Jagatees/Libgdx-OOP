@@ -46,28 +46,24 @@ public class CollisionManager {
      */
     public void checkResponse(Entity type, Entity type1) {
 
-        // Debugging purpose
-        String currentWord = healthyGameLogic.getCurrentWord();
-        System.out.println(currentWord);
-        healthyGameLogic.addScore(1);
-
-
-
-
-        if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type) &&  Entity.EntityType.H == EntityManager.getInstance().getType(type1) || Entity.EntityType.H == EntityManager.getInstance().getType(type) &&  Entity.EntityType.PLAYER== EntityManager.getInstance().getType(type1)) {
+        if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type) &&  Entity.EntityType.H == EntityManager.getInstance().getType(type1)
+                || Entity.EntityType.H == EntityManager.getInstance().getType(type) &&  Entity.EntityType.PLAYER== EntityManager.getInstance().getType(type1)) {
             if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type)) {
+                healthyGameLogic.addScore(1);
                 EntityManager.getInstance().removeEntity(type1);
             } else {
+                healthyGameLogic.addScore(1);
                 EntityManager.getInstance().removeEntity(type);
             }
-
-
-
-
-
-
+            System.out.println("Current Score : " + HealthyGameLogic.getInstance().getScore());
+            if (HealthyGameLogic.getInstance().getScore() != healthyGameLogic.getCurrentWord().length()) {
+                System.out.println("Next Letter : " + HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()));
+            }
 
         }
+
+
+
     }
 }
 
