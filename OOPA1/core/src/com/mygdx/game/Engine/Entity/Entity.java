@@ -51,9 +51,23 @@ public abstract class Entity implements objectMovement {
         W,
         X,
         Y,
-        Z,
+        Z,;
+
+        // Method to check if the entity type is a letter
+        public boolean isLetter() {
+            return this.ordinal() >= A.ordinal() && this.ordinal() <= Z.ordinal();
+        }
+
+        public String getLetter() {
+            if (this.isLetter()) {
+                return this.name(); // This returns the name of the enum constant, which is the letter itself
+            } else {
+                return null; // Or any other appropriate value or action for non-letter types
+            }
+        }
 
     }
+
 
     public enum EntityState {
         NULL,
