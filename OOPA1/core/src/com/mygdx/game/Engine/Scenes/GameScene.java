@@ -53,6 +53,7 @@ public class GameScene extends TemplateScene {
 
 
 
+
         pacman = new Player("entity/pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
         enemy = new nonPlayer("entity/blueGhost.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.ENEMY, Entity.RenderType.SPRITE);
 

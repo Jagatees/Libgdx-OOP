@@ -10,6 +10,7 @@ import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
 import com.mygdx.game.Engine.Entity.*;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
+import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
@@ -53,6 +54,7 @@ public class GameScene extends TemplateScene {
         entityManager = EntityManager.getInstance();
         EntityFactory entityFactory = new EntityFactory();
 
+
         enemy = entityFactory.getEntityByInput("nonPlayer", "Words/H.png", 300, 100, 10, Entity.EntityState.NULL, true, false, 50, 50, Entity.EntityType.H, Entity.RenderType.SPRITE);
 
         pacman = entityFactory.getEntityByInput("Player", "entity/pacman.png", 150, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
@@ -87,7 +89,7 @@ public class GameScene extends TemplateScene {
         int maxY = 600; // Example maximum Y coordinate
 
 
-        for (int i = 0; i < word.length(); i++) {
+        for (int i = 1; i < word.length(); i++) {
             // Generate random positions within the defined boundaries.
             int x = rand.nextInt( maxX - minX + 1) + minX;
             int y = rand.nextInt(maxY - minY + 1) + minY;
@@ -103,6 +105,8 @@ public class GameScene extends TemplateScene {
             aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
             entityManager.setAIController(enemy, aiControlManagement);
         }
+
+
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
@@ -132,7 +136,7 @@ public class GameScene extends TemplateScene {
         canvasManager.render(delta);
         canvasManager.update(delta);
 
-        if (HealthyGameLogic.getInstance().getScore() > HealthyGameLogic.getInstance().GetScoreGoal()) {
+        if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().GetScoreGoal()) {
             System.out.println("switch canvas");
             HealthyGameLogic.getInstance().setScore(0);
             EntityManager.getInstance().setAllEntitiesRemoved(true);

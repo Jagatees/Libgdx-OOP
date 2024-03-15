@@ -12,6 +12,8 @@ import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
  */
 public class CollisionManager {
 
+    HealthyGameLogic healthyGameLogic = HealthyGameLogic.getInstance();
+
 
     /**
      * Checks if two rectangular entities intersect.
@@ -43,12 +45,16 @@ public class CollisionManager {
      * @param type1 The type of the second entity involved in the collision.
      */
     public void checkResponse(Entity type, Entity type1) {
-//        System.out.println("Entity " + EntityManager.getInstance().getType(type) + " has Collided with Entity " + EntityManager.getInstance().getType(type1));
-        HealthyGameLogic healthyGameLogic = HealthyGameLogic.getInstance();
+
+        // Debugging purpose
+        String currentWord = healthyGameLogic.getCurrentWord();
+        System.out.println(currentWord);
+        healthyGameLogic.addScore(1);
+
+
 
 
         if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type) &&  Entity.EntityType.H == EntityManager.getInstance().getType(type1) || Entity.EntityType.H == EntityManager.getInstance().getType(type) &&  Entity.EntityType.PLAYER== EntityManager.getInstance().getType(type1)) {
-
             if (Entity.EntityType.PLAYER == EntityManager.getInstance().getType(type)) {
                 EntityManager.getInstance().removeEntity(type1);
             } else {
@@ -56,12 +62,10 @@ public class CollisionManager {
             }
 
 
-            healthyGameLogic.addScore(1);
 
 
 
-            System.out.println(healthyGameLogic.getCurrentWord());
-            System.out.println(healthyGameLogic.getScore());
+
 
         }
     }
