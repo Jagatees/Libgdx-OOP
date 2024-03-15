@@ -91,10 +91,6 @@ public class GameScene extends TemplateScene {
             entityManager.setAIController(enemy, aiControlManagement);
         }
 
-        // Reset the Player Position to Start at 100,100 x:y
-
-
-
         // Debug Sout
         System.out.println("Goal : " + HealthyGameLogic.getInstance().GetScoreGoal());
         System.out.println("Current Word : " +HealthyGameLogic.getInstance().getCurrentWord());
@@ -135,7 +131,11 @@ public class GameScene extends TemplateScene {
         if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().GetScoreGoal()) {
             System.out.println("switch canvas");
             HealthyGameLogic.getInstance().setScore(0);
+
+            // Reset
             EntityManager.getInstance().setAllEntitiesRemoved(true);
+            EntityManager.getInstance().setxCords(pacman, 100);
+            EntityManager.getInstance().setyCords(pacman, 100);
             CanvasManager.getInstance().setCanvas(new GameOverCanvas());
         }
 
