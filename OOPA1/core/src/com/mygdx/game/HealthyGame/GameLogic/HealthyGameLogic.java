@@ -23,7 +23,7 @@ public class HealthyGameLogic {
 
     // String to store all the words
     // The word need to be in full caps
-    private List<String> easyWords = Arrays.asList("EASY", "MEDIUM" , "HARD" );
+    private List<String> easyWords = Arrays.asList("EASYONE", "EASYTWO" , "EASYTHREE" );
     private List<String> mediumWords = Arrays.asList("MEDIUMONE", "MEDIUMTWO" , "MEDIUMTHREE" );
 
     private List<String> hardWords = Arrays.asList("HARDONE", "HARDTWO" , "HARDTHREE" );

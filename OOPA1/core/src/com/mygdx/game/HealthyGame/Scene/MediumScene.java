@@ -251,6 +251,7 @@ public class MediumScene extends TemplateScene {
 
                 // Switch scene
                 HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.HARD);
+                HealthyGameLogic.getInstance().selectNewWord();
 
                 // !! Required to change to setCanvas
                 SceneManager.getInstance().setScene("HardStage");

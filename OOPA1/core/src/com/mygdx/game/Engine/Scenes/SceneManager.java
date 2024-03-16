@@ -2,8 +2,10 @@ package com.mygdx.game.Engine.Scenes;
 
 
 import com.mygdx.game.Engine.Entity.EntityManager;
+import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 import com.mygdx.game.HealthyGame.Scene.*;
 import com.mygdx.game.HealthyGame.Scene.GameScene;
+import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 
 import java.util.HashMap;
 import java.util.Map;
