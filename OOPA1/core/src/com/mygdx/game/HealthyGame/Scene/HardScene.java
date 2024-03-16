@@ -10,6 +10,7 @@ import com.mygdx.game.Engine.Collision.CollisionManager;
 import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
 import com.mygdx.game.Engine.Entity.*;
+import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
@@ -37,8 +38,6 @@ public class HardScene extends TemplateScene {
     private Entity tempEnemy;
 
     private Entity.EntityType entityType;
-
-    private boolean hardPassed;
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -218,24 +217,14 @@ public class HardScene extends TemplateScene {
         canvasManager.render(delta);
         canvasManager.update(delta);
 
-        if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().GetScoreGoal()) {
-            hardPassed = true;
-            HealthyGameLogic.getInstance().setScore(0);
-
-            // Reset
-            EntityManager.getInstance().setAllEntitiesRemoved(true);
-            EntityManager.getInstance().setxCords(pacman, 100);
-            EntityManager.getInstance().setyCords(pacman, 100);
-            CanvasManager.getInstance().setCanvas(new GameOverCanvas());
-            HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.HARD);
-        }
-
     }
 
     /**
      * Update method to process game logic updates based on the time since the last frame.
      * @param delta Time passed since the last frame, in seconds.
      */
+
+    boolean hardPassed;
     @Override
     public void update(float delta) {
         // Implementation adjusted to remove references to the removed 'enemy'
@@ -243,6 +232,21 @@ public class HardScene extends TemplateScene {
 
         for (nonPlayer enemy : listNonPlayerEnemy) {
             entityManager.movement(enemy);
+        }
+
+        if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().GetScoreGoal()) {
+            hardPassed = true;
+            HealthyGameLogic.getInstance().restartScore();
+
+            // Reset
+            EntityManager.getInstance().setAllEntitiesRemoved(true);
+            EntityManager.getInstance().setxCords(pacman, 100);
+            EntityManager.getInstance().setyCords(pacman, 100);
+            SceneManager.getInstance().setScene("GameOver");
+            CanvasManager.getInstance().setCanvas(new GameOverCanvas());
+
+            // Reset difficult after last stage
+            HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.EASY);
         }
 
     }

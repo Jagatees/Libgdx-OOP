@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
@@ -14,6 +15,7 @@ import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
+import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
 
@@ -40,8 +42,6 @@ public class GameScene extends TemplateScene {
     private Entity tempEnemy;
 
     private Entity.EntityType entityType;
-
-    private boolean easyPassed = false;
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -222,12 +222,30 @@ public class GameScene extends TemplateScene {
         canvasManager.render(delta);
         canvasManager.update(delta);
 
+    }
+
+    /**
+     * Update method to process game logic updates based on the time since the last frame.
+     * @param delta Time passed since the last frame, in seconds.
+     */
+
+    boolean easyPassed = false;
+    @Override
+    public void update(float delta) {
+
+        // Implementation adjusted to remove references to the removed 'enemy'
+        entityManager.movement(pacman);
+
+        for (nonPlayer enemy : listNonPlayerEnemy) {
+            entityManager.movement(enemy);
+        }
+
         if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().GetScoreGoal()) {
             easyPassed = true;
             HealthyGameLogic.Difficulty currentDifficulty = HealthyGameLogic.getInstance().getDifficulty();
 
             if (currentDifficulty == HealthyGameLogic.Difficulty.EASY && easyPassed) {
-                HealthyGameLogic.getInstance().setScore(0);
+                HealthyGameLogic.getInstance().restartScore();
 
                 // Reset
                 EntityManager.getInstance().setAllEntitiesRemoved(true);
@@ -238,27 +256,13 @@ public class GameScene extends TemplateScene {
                 HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.MEDIUM);
 
                 // !! Required to change to setCanvas
-                SceneManager.getInstance().setScene("MediumScene");
+                SceneManager.getInstance().setScene("MediumStage");
+//                CanvasManager.getInstance().setCanvas(new GameCanvas());
             }
 
             if (!easyPassed) {
                 CanvasManager.getInstance().setCanvas(new GameOverCanvas());
             }
-        }
-
-    }
-
-    /**
-     * Update method to process game logic updates based on the time since the last frame.
-     * @param delta Time passed since the last frame, in seconds.
-     */
-    @Override
-    public void update(float delta) {
-        // Implementation adjusted to remove references to the removed 'enemy'
-        entityManager.movement(pacman);
-
-        for (nonPlayer enemy : listNonPlayerEnemy) {
-            entityManager.movement(enemy);
         }
 
     }
