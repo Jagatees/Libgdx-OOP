@@ -5,19 +5,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Engine.Canvas.Canvas;
-import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
-import com.mygdx.game.Engine.Entity.*;
+import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
-import com.mygdx.game.Engine.Input.InputOutputManager;
+import com.mygdx.game.Engine.Entity.*;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
-import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
-import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +23,7 @@ import java.util.Random;
 /**
  * The GameScene file a like clone of the TemplateScene as that is the Base version
  */
-public class GameScene extends TemplateScene {
+public class HardScene extends TemplateScene {
 
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
@@ -46,7 +42,7 @@ public class GameScene extends TemplateScene {
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
      */
-    public GameScene() {
+    public HardScene() {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
@@ -72,7 +68,6 @@ public class GameScene extends TemplateScene {
         canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
 
         String word = HealthyGameLogic.getInstance().getCurrentWord();
-//        HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.EASY);
 
         Random rand = new Random();
         int minX = 300;
@@ -229,10 +224,9 @@ public class GameScene extends TemplateScene {
      * @param delta Time passed since the last frame, in seconds.
      */
 
-    boolean easyPassed = false;
+    boolean hardPassed;
     @Override
     public void update(float delta) {
-
         // Implementation adjusted to remove references to the removed 'enemy'
         entityManager.movement(pacman);
 
@@ -241,29 +235,18 @@ public class GameScene extends TemplateScene {
         }
 
         if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().GetScoreGoal()) {
-            easyPassed = true;
-            HealthyGameLogic.Difficulty currentDifficulty = HealthyGameLogic.getInstance().getDifficulty();
+            hardPassed = true;
+            HealthyGameLogic.getInstance().restartScore();
 
-            if (currentDifficulty == HealthyGameLogic.Difficulty.EASY && easyPassed) {
-                HealthyGameLogic.getInstance().restartScore();
+            // Reset
+            EntityManager.getInstance().setAllEntitiesRemoved(true);
+            EntityManager.getInstance().setxCords(pacman, 100);
+            EntityManager.getInstance().setyCords(pacman, 100);
+            SceneManager.getInstance().setScene("GameOver");
+            CanvasManager.getInstance().setCanvas(new GameOverCanvas());
 
-                // Reset
-                EntityManager.getInstance().setAllEntitiesRemoved(true);
-                EntityManager.getInstance().setxCords(pacman, 100);
-                EntityManager.getInstance().setyCords(pacman, 100);
-
-                // Switch scene
-                HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.MEDIUM);
-                HealthyGameLogic.getInstance().selectNewWord();
-
-                // !! Required to change to setCanvas
-                SceneManager.getInstance().setScene("MediumStage");
-//                CanvasManager.getInstance().setCanvas(new GameCanvas());
-            }
-
-            if (!easyPassed) {
-                CanvasManager.getInstance().setCanvas(new GameOverCanvas());
-            }
+            // Reset difficult after last stage
+            HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.EASY);
         }
 
     }

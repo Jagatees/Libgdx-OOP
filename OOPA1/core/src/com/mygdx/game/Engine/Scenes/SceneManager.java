@@ -2,9 +2,10 @@ package com.mygdx.game.Engine.Scenes;
 
 
 import com.mygdx.game.Engine.Entity.EntityManager;
-import com.mygdx.game.HealthyGame.Scene.GameOverScene;
+import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
+import com.mygdx.game.HealthyGame.Scene.*;
 import com.mygdx.game.HealthyGame.Scene.GameScene;
-import com.mygdx.game.HealthyGame.Scene.MainMeunScene;
+import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -112,8 +113,12 @@ public class SceneManager {
          switch (sceneId) {
              case "MainMeun":
                  return new MainMeunScene();
-             case "Game":
+             case "EasyStage":
                  return new GameScene();
+             case "MediumStage":
+                 return new MediumScene();
+             case "HardStage":
+                 return new HardScene();
              case "GameOver":
                  return new GameOverScene();
          }

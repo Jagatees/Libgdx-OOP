@@ -1,5 +1,6 @@
 package com.mygdx.game.HealthyGame.GameLogic;
 
+import com.mygdx.game.Engine.Scenes.GameScene;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 
 import java.util.Arrays;
@@ -8,6 +9,12 @@ import java.util.Random;
 
 public class HealthyGameLogic {
     //IDK
+    public enum Difficulty {
+        EASY, MEDIUM, HARD
+    }
+
+    private Difficulty currentDifficulty;
+
     private StringBuilder collectedLetters = new StringBuilder();
 
 
@@ -16,19 +23,29 @@ public class HealthyGameLogic {
 
     // String to store all the words
     // The word need to be in full caps
-    private List<String> words = Arrays.asList("EASY", "MEDIUM" , "HARD" );
+    private List<String> easyWords = Arrays.asList("EASYONE", "EASYTWO" , "EASYTHREE" );
+    private List<String> mediumWords = Arrays.asList("MEDIUMONE", "MEDIUMTWO" , "MEDIUMTHREE" );
+
+    private List<String> hardWords = Arrays.asList("HARDONE", "HARDTWO" , "HARDTHREE" );
 
     // Game Score
     private int score = 0;
     private int goal = 0;
 
-
     // Current word for player to search
     private String currentWord;
 
+    public Difficulty getDifficulty() {
+        return currentDifficulty;
+    }
+
+    public void setCurrentDifficulty(Difficulty difficulty) {
+        this.currentDifficulty = difficulty;
+    }
 
     // Private constructor to prevent instantiation
     private HealthyGameLogic() {
+        this.currentDifficulty = Difficulty.EASY;
         setScore(0);
         selectNewWord();
         SetScoreGoal(getCurrentWord().length());
@@ -46,7 +63,18 @@ public class HealthyGameLogic {
     // Selects a new word randomly from the list
     public void selectNewWord() {
         Random random = new Random();
-        currentWord = words.get(random.nextInt(words.size()));
+        if (currentDifficulty == Difficulty.EASY) {
+            currentWord = easyWords.get(random.nextInt(easyWords.size()));
+        }
+
+        else if (currentDifficulty == Difficulty.MEDIUM) {
+            currentWord = mediumWords.get(random.nextInt(mediumWords.size()));
+        }
+
+        else {
+            currentWord = hardWords.get(random.nextInt(hardWords.size()));
+        }
+
         collectedLetters.setLength(0); // Reset collected letters for the new word
     }
 

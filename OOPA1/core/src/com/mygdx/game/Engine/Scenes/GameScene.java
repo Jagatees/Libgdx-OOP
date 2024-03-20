@@ -41,7 +41,6 @@ public class GameScene extends TemplateScene {
     private nonPlayer boxPlayer;
     private Player boxPlayer2;
 
-
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
      */
