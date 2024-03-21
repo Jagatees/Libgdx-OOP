@@ -32,16 +32,12 @@ public class GameScene extends TemplateScene {
 
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
-
     private EntityManager entityManager;
     private CollisionManager collisionManager;
     private CanvasManager canvasManager;
-
     private Entity pacman;
     private Entity boxPlayer;
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
-    private Entity tempEnemy;
-
     private Entity.EntityType entityType;
 
     /**
@@ -61,11 +57,9 @@ public class GameScene extends TemplateScene {
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
-        // Spawn this randomly also after spawne nemy
+        // Spawn this randomly also after Spawn Enemy
         boxPlayer = entityFactory.getEntityByInput("nonPlayer", Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
         entityManager.addEntity(boxPlayer);
-
-
 
         entityManager.addEntity(pacman);
 

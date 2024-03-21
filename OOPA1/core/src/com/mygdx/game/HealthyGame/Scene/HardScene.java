@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
@@ -49,17 +50,18 @@ public class HardScene extends TemplateScene {
         entityManager = EntityManager.getInstance();
         EntityFactory entityFactory = new EntityFactory();
 
-        pacman = entityFactory.getEntityByInput("Player", "entity/pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
-
-        boxPlayer = entityFactory.getEntityByInput("nonPlayer", Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+        pacman = entityFactory.getEntityByInput("Player", "entity/bee.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
 
         createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
         createWall("entity/wall.jpg", 0, -20, 30, 50, 0, false);
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
-        entityManager.addEntity(pacman);
+        // Spawn this randomly also after Spawn Enemy
+        boxPlayer = entityFactory.getEntityByInput("nonPlayer", Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
         entityManager.addEntity(boxPlayer);
+
+        entityManager.addEntity(pacman);
 
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement((Player)pacman, entityManager, collisionManager);
         entityManager.setPlayerController((Player)pacman, playerControllerManagement);
@@ -70,109 +72,119 @@ public class HardScene extends TemplateScene {
         String word = HealthyGameLogic.getInstance().getCurrentWord();
 
         Random rand = new Random();
-        int minX = 300;
-        int maxX = 800;
-        int minY = 300;
-        int maxY = 600;
+        int minX = 40;
+        int maxX = 1210;
+        int minY = 40;
+        int maxY = 650;
 
-        System.out.println(word);
+        List<Rectangle> occupiedAreas = new ArrayList<>();
 
         for (int i = 0; i < word.length(); i++) {
-            int x = rand.nextInt( maxX - minX + 1) + minX;
-            int y = rand.nextInt(maxY - minY + 1) + minY;
+            int x, y;
+            boolean spawnSafe = false;
 
-            switch(String.valueOf(word.charAt(i))) {
-                case "A":
-                    entityType = Entity.EntityType.A;
-                    break;
-                case "B":
-                    entityType = Entity.EntityType.B;
-                    break;
-                case "C":
-                    entityType = Entity.EntityType.C;
-                    break;
-                case "D":
-                    entityType = Entity.EntityType.D;
-                    break;
-                case "E":
-                    entityType = Entity.EntityType.E;
-                    break;
-                case "F":
-                    entityType = Entity.EntityType.F;
-                    break;
-                case "G":
-                    entityType = Entity.EntityType.G;
-                    break;
-                case "H":
-                    entityType = Entity.EntityType.H;
-                    break;
-                case "I":
-                    entityType = Entity.EntityType.I;
-                    break;
-                case "J":
-                    entityType = Entity.EntityType.J;
-                    break;
-                case "K":
-                    entityType = Entity.EntityType.K;
-                    break;
-                case "L":
-                    entityType = Entity.EntityType.L;
-                    break;
-                case "M":
-                    entityType = Entity.EntityType.M;
-                    break;
-                case "N":
-                    entityType = Entity.EntityType.N;
-                    break;
-                case "O":
-                    entityType = Entity.EntityType.O;
-                    break;
-                case "P":
-                    entityType = Entity.EntityType.P;
-                    break;
-                case "Q":
-                    entityType = Entity.EntityType.Q;
-                    break;
-                case "R":
-                    entityType = Entity.EntityType.R;
-                    break;
-                case "S":
-                    entityType = Entity.EntityType.S;
-                    break;
-                case "T":
-                    entityType = Entity.EntityType.T;
-                    break;
-                case "U":
-                    entityType = Entity.EntityType.U;
-                    break;
-                case "V":
-                    entityType = Entity.EntityType.V;
-                    break;
-                case "W":
-                    entityType = Entity.EntityType.W;
-                    break;
-                case "X":
-                    entityType = Entity.EntityType.X;
-                    break;
-                case "Y":
-                    entityType = Entity.EntityType.Y;
-                    break;
-                case "Z":
-                    entityType = Entity.EntityType.Z;
-                    break;
-                // Optionally, you can have a default case if the input doesn't match any letter
-                default:
-                    // Handle an unexpected input
-                    break;
+            // Usage inside your loop
+            while (!spawnSafe) {
+                x = rand.nextInt(maxX - minX + 1) + minX;
+                y = rand.nextInt(maxY - minY + 1) + minY;
+                if (!isPointOccupied(x, y, occupiedAreas) && !isTooCloseToEntity(x, y, occupiedAreas, 10)) {
+                    // Spawn the entity
+                    spawnSafe = true;
+                    // Add the new occupied area to the list
+                    occupiedAreas.add(new Rectangle(x, y, 50, 50));
+
+                    switch(String.valueOf(word.charAt(i))) {
+                        case "A":
+                            entityType = Entity.EntityType.A;
+                            break;
+                        case "B":
+                            entityType = Entity.EntityType.B;
+                            break;
+                        case "C":
+                            entityType = Entity.EntityType.C;
+                            break;
+                        case "D":
+                            entityType = Entity.EntityType.D;
+                            break;
+                        case "E":
+                            entityType = Entity.EntityType.E;
+                            break;
+                        case "F":
+                            entityType = Entity.EntityType.F;
+                            break;
+                        case "G":
+                            entityType = Entity.EntityType.G;
+                            break;
+                        case "H":
+                            entityType = Entity.EntityType.H;
+                            break;
+                        case "I":
+                            entityType = Entity.EntityType.I;
+                            break;
+                        case "J":
+                            entityType = Entity.EntityType.J;
+                            break;
+                        case "K":
+                            entityType = Entity.EntityType.K;
+                            break;
+                        case "L":
+                            entityType = Entity.EntityType.L;
+                            break;
+                        case "M":
+                            entityType = Entity.EntityType.M;
+                            break;
+                        case "N":
+                            entityType = Entity.EntityType.N;
+                            break;
+                        case "O":
+                            entityType = Entity.EntityType.O;
+                            break;
+                        case "P":
+                            entityType = Entity.EntityType.P;
+                            break;
+                        case "Q":
+                            entityType = Entity.EntityType.Q;
+                            break;
+                        case "R":
+                            entityType = Entity.EntityType.R;
+                            break;
+                        case "S":
+                            entityType = Entity.EntityType.S;
+                            break;
+                        case "T":
+                            entityType = Entity.EntityType.T;
+                            break;
+                        case "U":
+                            entityType = Entity.EntityType.U;
+                            break;
+                        case "V":
+                            entityType = Entity.EntityType.V;
+                            break;
+                        case "W":
+                            entityType = Entity.EntityType.W;
+                            break;
+                        case "X":
+                            entityType = Entity.EntityType.X;
+                            break;
+                        case "Y":
+                            entityType = Entity.EntityType.Y;
+                            break;
+                        case "Z":
+                            entityType = Entity.EntityType.Z;
+                            break;
+                        // Optionally, you can have a default case if the input doesn't match any letter
+                        default:
+                            // Handle an unexpected input
+                            break;
+                    }
+
+                    Entity tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
+                            50, 50, entityType, Entity.RenderType.SPRITE);
+                    entityManager.addEntity(tempEnemy);
+                    listNonPlayerEnemy.add((nonPlayer)tempEnemy);
+
+                }
             }
-
-
-            System.out.println(entityType.toString());
-            tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
-                    50, 50, entityType, Entity.RenderType.SPRITE);
-
-            entityManager.addEntity(tempEnemy);
-            listNonPlayerEnemy.add((nonPlayer)tempEnemy);
         }
 
         for (nonPlayer enemy : listNonPlayerEnemy) {
@@ -180,14 +192,27 @@ public class HardScene extends TemplateScene {
             entityManager.setAIController(enemy, aiControlManagement);
         }
 
-        // Debug Sout
-        System.out.println("Goal : " + HealthyGameLogic.getInstance().getScoreGoal());
-        System.out.println("Current Word : " +HealthyGameLogic.getInstance().getCurrentWord());
-        System.out.println("Current Word length: " +HealthyGameLogic.getInstance().getCurrentWord().length());
-        System.out.println("Current Score : " + HealthyGameLogic.getInstance().getScore());
-        System.out.println("First letter of word : " + HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(0));
+    }
 
+    // Method to check if the given point is too close to any existing entity
+    private boolean isTooCloseToEntity(int x, int y, List<Rectangle> occupiedAreas, int minDistance) {
+        for (Rectangle area : occupiedAreas) {
+            double distance = Math.sqrt(Math.pow(x - area.getX(), 2) + Math.pow(y - area.getY(), 2));
+            if (distance < minDistance) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    // Method to check if a point is occupied by any entity
+    private boolean isPointOccupied(int x, int y, List<Rectangle> occupiedAreas) {
+        for (Rectangle area : occupiedAreas) {
+            if (area.contains(x, y)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
