@@ -3,6 +3,7 @@ package com.mygdx.game.Engine.Controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.Engine.Collision.CollisionManager;
+import com.mygdx.game.Engine.Entity.Entity;
 import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.Engine.Entity.Player;
 import com.mygdx.game.Engine.Entity.nonPlayer;

@@ -63,7 +63,7 @@ public class GameScene extends TemplateScene {
         collisionManager = new CollisionManager();
         entityManager = EntityManager.getInstance();
 
-        pacman = entityFactory.getEntityByInput("Player", "entity/pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
+        pacman = entityFactory.getEntityByInput("Player", "entity/bee.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
 
         createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
         createWall("entity/wall.jpg", 0, -20, 30, 50, 0, false);

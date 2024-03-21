@@ -12,7 +12,6 @@ public class EntityFactory {
     public Entity getEntityByInput(String gameEntityType, String tex, float xCords, float yCords, float speed, Entity.EntityState state, boolean isAI, float width, float height, Entity.EntityType entityType,
                                    Entity.RenderType renderType) {
 
-
         if (gameEntityType == null) {
             return null;
         } else if (gameEntityType.equalsIgnoreCase("Player")) {
