@@ -34,6 +34,24 @@ public class Keyboard {
 
     }
 
+    public int getKeyBindingForAction(String action) {
+        if (keyBindings.containsKey(action)) {
+            return keyBindings.get(action);
+        }
+        return -1; // Return an invalid keycode if the action is not found
+    }
+
+
+    public char convertLibGDXKeycodeToLetter(int keycode) {
+        // Check if keycode is within the range of A-Z keycodes
+        if (keycode >= Input.Keys.A && keycode <= Input.Keys.Z) {
+            return (char) ('A' + keycode - Input.Keys.A);
+        }
+        // Add similar conversion for lowercase letters if necessary
+        return 0; // Return 0 for invalid or non-letter keycodes
+    }
+
+
     public void setKeyBinding(String action, int keycode) {
         keyBindings.put(action, keycode);
     }

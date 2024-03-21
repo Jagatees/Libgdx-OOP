@@ -121,34 +121,56 @@ public class OptionCanvas implements Canvas {
 
 
 
-        // Make Sure can not bind to the same key more then ones &  add a save button to save the keybinding
+//         Make Sure can not bind to the same key more then ones &  add a save button to save the keybinding
+
+        String currentKeyBindingRight = "";
+        int currentKeycodeRight = InputOutputManager.getInstance().getKeyboard().getKeyBindingForAction("MOVE_RIGHT");
+        char currentKeyCharRight = InputOutputManager.getInstance().getKeyboard().convertLibGDXKeycodeToLetter(currentKeycodeRight);
+
+        if (currentKeyCharRight != 0) {
+            currentKeyBindingRight = String.valueOf(currentKeyCharRight);
+        }
 
         UIElements.createLabel(stage, "MOVE_RIGHT", 100, 400, Color.RED);
-
         UIElements.createDropdown(stage, keyboardKeys, 300, 400, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
                 String selectedKey = selectBox.getSelected();
-                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
+                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0));
                 InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_RIGHT", keycode);
                 InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
-        });
+        }, currentKeyBindingRight);
 
 
+        String currentKeyBindingLeft = "";
+        int currentKeycodeLeft = InputOutputManager.getInstance().getKeyboard().getKeyBindingForAction("MOVE_LEFT");
+        char currentKeyCharLeft = InputOutputManager.getInstance().getKeyboard().convertLibGDXKeycodeToLetter(currentKeycodeLeft);
+
+        if (currentKeyCharLeft != 0) {
+            currentKeyBindingLeft = String.valueOf(currentKeyCharLeft);
+        }
         UIElements.createLabel(stage, "MOVE_LEFT", 100, 300, Color.RED);
         UIElements.createDropdown(stage, keyboardKeys, 300, 300, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
                 String selectedKey = selectBox.getSelected();
-                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
+                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0));
                 InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_LEFT", keycode);
                 InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
-        });
+        }, currentKeyBindingLeft);
 
+
+        String currentKeyBindingUp = "";
+        int currentKeycodeUp = InputOutputManager.getInstance().getKeyboard().getKeyBindingForAction("MOVE_UP");
+        char currentKeyCharUp = InputOutputManager.getInstance().getKeyboard().convertLibGDXKeycodeToLetter(currentKeycodeUp);
+
+        if (currentKeyCharUp != 0) {
+            currentKeyBindingUp = String.valueOf(currentKeyCharUp);
+        }
 
         UIElements.createLabel(stage, "MOVE_UP", 100, 200, Color.RED);
         UIElements.createDropdown(stage, keyboardKeys, 300, 200, new ChangeListener() {
@@ -156,14 +178,21 @@ public class OptionCanvas implements Canvas {
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
                 String selectedKey = selectBox.getSelected();
-                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
+                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0));
                 InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_UP", keycode);
-                System.out.println("MOVE_LEFT bound to: " + selectedKey);
                 InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
-        });
+        }, currentKeyBindingUp);
 
 
+
+        String currentKeyBinding = ""; // This will store the string representation of the current key binding
+        int currentKeycode = InputOutputManager.getInstance().getKeyboard().getKeyBindingForAction("MOVE_DOWN");
+        char currentKeyChar = InputOutputManager.getInstance().getKeyboard().convertLibGDXKeycodeToLetter(currentKeycode);
+
+        if (currentKeyChar != 0) { // Assuming convertLibGDXKeycodeToLetter returns 0 for invalid keycodes
+            currentKeyBinding = String.valueOf(currentKeyChar);
+        }
 
         UIElements.createLabel(stage, "MOVE_DOWN", 100, 100, Color.RED);
         UIElements.createDropdown(stage, keyboardKeys, 300, 100, new ChangeListener() {
@@ -171,12 +200,12 @@ public class OptionCanvas implements Canvas {
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
                 String selectedKey = selectBox.getSelected();
-                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0)); // Convert the selected letter to LibGDX keycode
+                int keycode = InputOutputManager.getInstance().getKeyboard().convertLetterToLibGDXKeycode(selectedKey.charAt(0));
                 InputOutputManager.getInstance().getKeyboard().setKeyBinding("MOVE_DOWN", keycode);
                 System.out.println("MOVE_LEFT bound to: " + selectedKey);
                 InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
-        });
+        }, currentKeyBinding); // Add parameter or method to set the selected item based on currentKeyBinding
 
         // Set initial values for sliders and checkboxes
         AudioManager audioManager = InputOutputManager.getInstance().getAudioManager();

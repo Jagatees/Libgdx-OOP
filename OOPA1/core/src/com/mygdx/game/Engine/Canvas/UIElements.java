@@ -4,13 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -20,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import java.util.Arrays;
+
 public class UIElements {
 
     private static final BitmapFont defaultFont = new BitmapFont();
@@ -28,7 +26,7 @@ public class UIElements {
             "skin/qh/quantum-horizon-ui.json")); // Ensure you have this skin file in your assets
 
 
-    public static SelectBox<String> createDropdown(Stage stage, String[] items, float x, float y, ChangeListener actionListener) {
+    public static SelectBox<String> createDropdown(Stage stage, String[] items, float x, float y, ChangeListener actionListener, String currentKeyBinding) {
         // Create a SelectBox with the provided skin
         SelectBox<String> selectBox = new SelectBox<>(skin);
 
@@ -42,6 +40,10 @@ public class UIElements {
 
         // Add a ChangeListener to respond to item selection
         selectBox.addListener(actionListener);
+
+        if (currentKeyBinding != null && Arrays.asList(items).contains(currentKeyBinding)) {
+            selectBox.setSelected(currentKeyBinding);
+        }
 
         // Add the SelectBox to the stage
         stage.addActor(selectBox);
