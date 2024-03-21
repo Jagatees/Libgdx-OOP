@@ -76,17 +76,20 @@ public class OptionCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 CheckBox checkBox = (CheckBox) actor;
-                System.out.println("CheckBox is " + checkBox.isChecked());
                 if (!checkBox.isChecked()) {
+                    // If the checkbox is not checked, mute the volume and set the slider to 0
                     InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.BG_1, 0f);
-                    volumeSlider.setValue(0f); // Set slider to 0 when checkbox is unchecked
+                    volumeSlider.setValue(0f); // This will set the slider to 0
                 } else {
-                    float defaultVolume = 0.1f; // Define a default volume level when checkbox is checked
+                    // If the checkbox is checked, restore volume to a default value
+                    float defaultVolume = 0.1f; // Default volume can be set as desired
                     InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.BG_1, defaultVolume);
-                    volumeSlider.setValue(defaultVolume); // Update slider to the default volume
+                    volumeSlider.setValue(defaultVolume); // Update the slider to the default volume
                 }
+                System.out.println("CheckBox is " + checkBox.isChecked() + ", Volume set to " + volumeSlider.getValue());
             }
         });
+
 
 
         UIElements.createLabel(stage, "Sound", 100, 500, Color.RED);
