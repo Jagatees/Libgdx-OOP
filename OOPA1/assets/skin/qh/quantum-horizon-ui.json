@@ -154,9 +154,9 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 		name: white
 		color: pressed
 	}
-	button-over-c: {
-		name: button-pressed
-		color: color
+	"button-over-c": {
+		"name": "button-pressed",
+		"color": "white"
 	}
 	button-over-pressed-c: {
 		name: button-pressed
@@ -172,7 +172,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 			r: 1
 			g: 1
 			b: 1
-			a: 0
+			a: 1
 		}
 	}
 	radio-button-off-c: {

@@ -89,7 +89,7 @@ public class OptionCanvas implements Canvas {
         });
 
 
-        UIElements.createLabel(stage, "Sound Effect", 100, 500, Color.RED);
+        UIElements.createLabel(stage, "Sound", 100, 500, Color.RED);
         UIElements.SimpleSlider(stage, 0, 1, 200, 500, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -110,7 +110,7 @@ public class OptionCanvas implements Canvas {
 
         UIElements.createLabel(stage, "MOVE_RIGHT", 100, 400, Color.RED);
 
-        UIElements.createDropdown(stage, keyboardKeys, 200, 400, new ChangeListener() {
+        UIElements.createDropdown(stage, keyboardKeys, 300, 400, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
@@ -123,7 +123,7 @@ public class OptionCanvas implements Canvas {
 
 
         UIElements.createLabel(stage, "MOVE_LEFT", 100, 300, Color.RED);
-        UIElements.createDropdown(stage, keyboardKeys, 200, 300, new ChangeListener() {
+        UIElements.createDropdown(stage, keyboardKeys, 300, 300, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
@@ -136,7 +136,7 @@ public class OptionCanvas implements Canvas {
 
 
         UIElements.createLabel(stage, "MOVE_UP", 100, 200, Color.RED);
-        UIElements.createDropdown(stage, keyboardKeys, 200, 200, new ChangeListener() {
+        UIElements.createDropdown(stage, keyboardKeys, 300, 200, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
@@ -151,7 +151,7 @@ public class OptionCanvas implements Canvas {
 
 
         UIElements.createLabel(stage, "MOVE_DOWN", 100, 100, Color.RED);
-        UIElements.createDropdown(stage, keyboardKeys, 200, 100, new ChangeListener() {
+        UIElements.createDropdown(stage, keyboardKeys, 300, 100, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;

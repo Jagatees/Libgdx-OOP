@@ -31,7 +31,7 @@ public class MainMenuCanvas implements Canvas {
     public MainMenuCanvas() {
         Gdx.input.setInputProcessor(stage);
 
-        UIElements.createLabel(stage, "GAME TITLE", 600, 600, Color.RED);
+        UIElements.createLabel(stage, "Alphabet Chase", 600, 600, Color.RED);
         UIElements.createTextButton(stage, "Start Game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

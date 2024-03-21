@@ -37,7 +37,7 @@ public class GameCanvas implements Canvas {
 
         UIElements.createLabel(stage, HealthyGameLogic.getInstance().getCurrentWord().toString(), 100, 100);
 
-        UIElements.createTextButton(stage,  "Options", 1212, 650, 50, 50, Color.RED , new ChangeListener() {
+        UIElements.createTextButton(stage,  "Options", 1100, 650, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SimulationLifecycleManagement.getInstance().togglePause();
