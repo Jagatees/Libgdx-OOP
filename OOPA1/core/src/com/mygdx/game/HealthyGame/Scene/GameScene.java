@@ -20,9 +20,12 @@ import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
 
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 
 /**
@@ -36,9 +39,19 @@ public class GameScene extends TemplateScene {
     private CollisionManager collisionManager;
     private CanvasManager canvasManager;
     private Entity pacman;
-    private Entity boxPlayer;
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
     private Entity.EntityType entityType;
+    EntityFactory entityFactory = new EntityFactory();
+    private List<Rectangle> spawnLocations = new ArrayList<>();
+    // Spawn Enemy
+    Random rand = new Random();
+    int minX = 40;
+    int maxX = 1210;
+    int minY = 40;
+    int maxY = 650;
+
+    List<Rectangle> occupiedAreas = new ArrayList<>();
+
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -48,7 +61,6 @@ public class GameScene extends TemplateScene {
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
         entityManager = EntityManager.getInstance();
-        EntityFactory entityFactory = new EntityFactory();
 
         pacman = entityFactory.getEntityByInput("Player", "entity/bee.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
 
@@ -57,29 +69,19 @@ public class GameScene extends TemplateScene {
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
-        // Spawn this randomly also after Spawn Enemy
-        boxPlayer = entityFactory.getEntityByInput("nonPlayer", Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
-        entityManager.addEntity(boxPlayer);
-
+        spawnEntitiesRandomlyWithinBoundary(10 ,
+                minX, maxX, minY, maxY, Color.GRAY, 50, 50);
         entityManager.addEntity(pacman);
 
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement((Player)pacman, entityManager, collisionManager);
         entityManager.setPlayerController((Player)pacman, playerControllerManagement);
 
         canvasManager = CanvasManager.getInstance();
-        canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
 
         String word = HealthyGameLogic.getInstance().getCurrentWord();
 
 
-        // Spawn Enemy
-        Random rand = new Random();
-        int minX = 40;
-        int maxX = 1210;
-        int minY = 40;
-        int maxY = 650;
 
-        List<Rectangle> occupiedAreas = new ArrayList<>();
 
         for (int i = 0; i < word.length(); i++) {
             int x, y;
@@ -89,7 +91,10 @@ public class GameScene extends TemplateScene {
             while (!spawnSafe) {
                 x = rand.nextInt(maxX - minX + 1) + minX;
                 y = rand.nextInt(maxY - minY + 1) + minY;
-                if (!isPointOccupied(x, y, occupiedAreas) && !isTooCloseToEntity(x, y, occupiedAreas, 10)) {
+                if (!isPointOccupied(x, y, occupiedAreas)
+                        && !isTooCloseToEntity(x, y, occupiedAreas, 20)
+                        && !isPointOccupied(x, y, spawnLocations)
+                        && !isTooCloseToEntity(x, y, spawnLocations, 20)) {
                     // Spawn the entity
                     spawnSafe = true;
                     // Add the new occupied area to the list
@@ -200,16 +205,38 @@ public class GameScene extends TemplateScene {
      */
     @Override
     public void render() {
-
         ScreenUtils.clear((float) 0.8, (float) 0.8, (float) 0.8, 1);
         entityManager.render(batch, shapeRenderer);
-
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
         canvasManager.update(delta);
-
     }
 
+    public void spawnEntitiesRandomlyWithinBoundary(int numEntities, int minX, int maxX, int minY, int maxY, Color color, int width, int height) {
+        Random random = new Random();
+        Set<Point> occupiedLocations = new HashSet<>();
+
+        for (int i = 0; i < numEntities; i++) {
+            int spawnX;
+            int spawnY;
+            Point spawnLocation;
+
+            do {
+                spawnX = random.nextInt(maxX - minX) + minX; // Random X within boundary
+                spawnY = random.nextInt(maxY - minY) + minY; // Random Y within boundary
+                spawnLocation = new Point(spawnX, spawnY);
+            } while (occupiedLocations.contains(spawnLocation)); // Repeat until a non-occupied location is found
+
+            occupiedLocations.add(spawnLocation);
+
+            Entity entity = entityFactory.getEntityByInput("nonPlayer", color, spawnX, spawnY, 10, Entity.EntityState.NULL, false, false, width, height, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+            entityManager.addEntity(entity);
+            spawnLocations.add(new Rectangle(spawnX, spawnY, width, height));
+        }
+    }
+    public List<Rectangle> getSpawnLocations() {
+        return spawnLocations;
+    }
     /**
      * Update method to process game logic updates based on the time since the last frame.
      * @param delta Time passed since the last frame, in seconds.
