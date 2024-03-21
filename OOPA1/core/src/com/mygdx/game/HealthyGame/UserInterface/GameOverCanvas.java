@@ -14,6 +14,8 @@ import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.Entity.Entity;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
+import com.mygdx.game.Engine.audio.AudioAssetKey;
+import com.mygdx.game.Engine.audio.AudioManager;
 import com.mygdx.game.HealthyGame.Scene.MainMeunScene;
 
 /**
@@ -34,6 +36,7 @@ public class GameOverCanvas implements Canvas {
         UIElements.createTextButton(stage, "Go back to start of game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
                 SceneManager.getInstance().setScene("MainMeun");
                 CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
             }
@@ -43,7 +46,8 @@ public class GameOverCanvas implements Canvas {
         UIElements.createTextButton(stage, "Close Game", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-            SimulationLifecycleManagement.getInstance().closeGame();
+                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
+                SimulationLifecycleManagement.getInstance().closeGame();
             }
         });
 

@@ -1,5 +1,6 @@
 package com.mygdx.game.Engine.GameController;
 
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.Engine.Scenes.SceneManager;
@@ -76,6 +77,7 @@ public class SimulationLifecycleManagement {
      */
 
     public void startGame() {
+        AudioManager.getInstance().loadSoundEffect(AudioAssetKey.MOUSE_CLICK, "SoundEffect/mouseClick.mp3");
         AudioManager.getInstance().loadMusicTrack(AudioAssetKey.BG_1, "SoundEffect/smart.mp3", true);
 
         AudioManager.getInstance().play(AudioAssetKey.BG_1);

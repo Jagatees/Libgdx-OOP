@@ -12,6 +12,7 @@ import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
+import com.mygdx.game.Engine.audio.AudioManager;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 /**
@@ -40,6 +41,7 @@ public class GameCanvas implements Canvas {
         UIElements.createTextButton(stage,  "Options", 1100, 650, 50, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
                 SimulationLifecycleManagement.getInstance().togglePause();
                 CanvasManager.getInstance().setCanvas(new OptionCanvas());
             }

@@ -19,6 +19,7 @@ import com.mygdx.game.Engine.Config.LauncherConfig;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
+import com.mygdx.game.Engine.audio.AudioManager;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
@@ -40,14 +41,13 @@ public class OptionCanvas implements Canvas {
         for (int i = 0; i < 26; i++) {
             keyboardKeys[i] = String.valueOf((char)(i + 65));
         }
-
-
         UIElements.createLabel(stage, "OPTIONS", 600, 650, Color.RED);
         UIElements.createTextButton(stage, "Back", 1100, 100, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 // When in Game
                 if (SimulationLifecycleManagement.getInstance().isPaused() && CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
+                    AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
                     SimulationLifecycleManagement.getInstance().togglePause();
                     CanvasManager.getInstance().setCanvas(new GameCanvas());
 
@@ -55,6 +55,7 @@ public class OptionCanvas implements Canvas {
 
                 // Outside Game Screen
                 if (!SimulationLifecycleManagement.getInstance().isPaused() && CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
+                    AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
                     CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
                 }
             }
@@ -63,7 +64,7 @@ public class OptionCanvas implements Canvas {
 
         UIElements.createLabel(stage, "Music", 100, 600, Color.RED);
         // First, create the slider and keep a reference to it
-        Slider volumeSlider = UIElements.SimpleSlider(stage, 0, 1, 200, 600, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
+        Slider musicSlider  = UIElements.SimpleSlider(stage, 0, 1, 200, 600, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Slider slider = (Slider) actor;
@@ -72,37 +73,48 @@ public class OptionCanvas implements Canvas {
             }
         });
 
-        UIElements.createCheckBox(stage, "Turn BG_1 On/Off", 420, 600, true, new ChangeListener() {
+        CheckBox musicCheckBox = UIElements.createCheckBox(stage, "Turn BG_1 On/Off", 420, 600, true, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 CheckBox checkBox = (CheckBox) actor;
                 if (!checkBox.isChecked()) {
                     // If the checkbox is not checked, mute the volume and set the slider to 0
                     InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.BG_1, 0f);
-                    volumeSlider.setValue(0f); // This will set the slider to 0
+                    musicSlider.setValue(0f); // This will set the slider to 0
                 } else {
                     // If the checkbox is checked, restore volume to a default value
                     float defaultVolume = 0.1f; // Default volume can be set as desired
                     InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.BG_1, defaultVolume);
-                    volumeSlider.setValue(defaultVolume); // Update the slider to the default volume
+                    musicSlider.setValue(defaultVolume); // Update the slider to the default volume
                 }
-                System.out.println("CheckBox is " + checkBox.isChecked() + ", Volume set to " + volumeSlider.getValue());
             }
         });
 
 
 
         UIElements.createLabel(stage, "Sound", 100, 500, Color.RED);
-        UIElements.SimpleSlider(stage, 0, 1, 200, 500, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
+        Slider soundSlider = UIElements.SimpleSlider(stage, 0, 1, 200, 500, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                Slider slider = (Slider) actor;
+                InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.MOUSE_CLICK, slider.getValue());
             }
         });
 
-        UIElements.createCheckBox(stage, "Turn Sound Effect On/Off", 420, 500, true, new ChangeListener() {
+        CheckBox soundCheckBox = UIElements.createCheckBox(stage, "Turn Sound Effect On/Off", 420, 500, true, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                CheckBox checkBox = (CheckBox) actor;
+                if (!checkBox.isChecked()) {
+                    // If the checkbox is not checked, mute the volume and set the slider to 0
+                    InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.MOUSE_CLICK, 0f);
+                    soundSlider.setValue(0f); // This will set the slider to 0
+                } else {
+                    // If the checkbox is checked, restore volume to a default value
+                    float defaultVolume = 0.1f; // Default volume can be set as desired
+                    InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.MOUSE_CLICK, defaultVolume);
+                    soundSlider.setValue(defaultVolume); // Update the slider to the default volume
+                }
 
             }
         });
@@ -165,6 +177,14 @@ public class OptionCanvas implements Canvas {
                 InputOutputManager.getInstance().getKeyboard().printKeyBindings();
             }
         });
+
+        // Set initial values for sliders and checkboxes
+        AudioManager audioManager = InputOutputManager.getInstance().getAudioManager();
+        musicSlider.setValue(audioManager.getVolume(AudioAssetKey.BG_1));
+        musicCheckBox.setChecked(audioManager.getVolume(AudioAssetKey.BG_1) > 0);
+
+        soundSlider.setValue(audioManager.getVolume(AudioAssetKey.MOUSE_CLICK));
+        soundCheckBox.setChecked(audioManager.getVolume(AudioAssetKey.MOUSE_CLICK) > 0);
 
         batch = new SpriteBatch();
         background = new Texture("background/bg-1.jpg");

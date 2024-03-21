@@ -8,4 +8,5 @@ package com.mygdx.game.Engine.audio;
 public enum AudioAssetKey {
     BG_1,
     DEFAULT_TWO,
+    MOUSE_CLICK,
 }

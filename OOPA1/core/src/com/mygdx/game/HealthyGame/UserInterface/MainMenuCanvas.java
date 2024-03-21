@@ -15,6 +15,8 @@ import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Entity.EntityManager;
+import com.mygdx.game.Engine.audio.AudioAssetKey;
+import com.mygdx.game.Engine.audio.AudioManager;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 /**
@@ -35,6 +37,7 @@ public class MainMenuCanvas implements Canvas {
         UIElements.createTextButton(stage, "Start Game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
                 SceneManager.getInstance().setScene("EasyStage");
                 CanvasManager.getInstance().setCanvas(new GameCanvas());
                 EntityManager.getInstance().setAllEntitiesRemoved(false);
@@ -45,7 +48,8 @@ public class MainMenuCanvas implements Canvas {
        UIElements.createTextButton(stage, "Options", 600, 350, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-              CanvasManager.getInstance().setCanvas(new OptionCanvas());
+                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
+                CanvasManager.getInstance().setCanvas(new OptionCanvas());
 
             }
         });
@@ -53,6 +57,7 @@ public class MainMenuCanvas implements Canvas {
         UIElements.createTextButton(stage, "Close Game", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
                 SimulationLifecycleManagement.getInstance().closeGame();
             }
         });
