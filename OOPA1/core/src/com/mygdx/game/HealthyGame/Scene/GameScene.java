@@ -1,7 +1,10 @@
 package com.mygdx.game.HealthyGame.Scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -43,6 +46,13 @@ public class GameScene extends TemplateScene {
     private Entity tempEnemy;
 
     private Entity.EntityType entityType;
+    boolean easyPassed = false;
+    private EntityFactory entityFactory = new EntityFactory();
+    private Random rand = new Random();
+
+    // Camera
+    private OrthographicCamera camera;
+
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -52,7 +62,6 @@ public class GameScene extends TemplateScene {
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
         entityManager = EntityManager.getInstance();
-        EntityFactory entityFactory = new EntityFactory();
 
         pacman = entityFactory.getEntityByInput("Player", "entity/pacman.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
 
@@ -64,9 +73,6 @@ public class GameScene extends TemplateScene {
         // Spawn this randomly also after spawne nemy
         boxPlayer = entityFactory.getEntityByInput("nonPlayer", Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
         entityManager.addEntity(boxPlayer);
-
-
-
         entityManager.addEntity(pacman);
 
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement((Player)pacman, entityManager, collisionManager);
@@ -79,7 +85,6 @@ public class GameScene extends TemplateScene {
 
 
         // Spawn Enemy
-        Random rand = new Random();
         int minX = 40;
         int maxX = 1210;
         int minY = 40;
@@ -199,6 +204,11 @@ public class GameScene extends TemplateScene {
             AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
             entityManager.setAIController(enemy, aiControlManagement);
         }
+
+        // Initialize camera
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.update();
     }
 
     /**
@@ -206,13 +216,31 @@ public class GameScene extends TemplateScene {
      */
     @Override
     public void render() {
-
         ScreenUtils.clear((float) 0.8, (float) 0.8, (float) 0.8, 1);
         entityManager.render(batch, shapeRenderer);
 
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
         canvasManager.update(delta);
+
+        // Update camera
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
+
+        // Register an input processor to handle key events
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+                // Check if a specific key is pressed
+                if (keycode == Input.Keys.SPACE) {
+                    // Do something when SPACE key is pressed
+                    camera.rotate(180); // Rotate by 1 degree, adjust as needed
+                }
+
+                // Return true to indicate that the input was handled
+                return true;
+            }
+        });
 
     }
 
@@ -221,7 +249,6 @@ public class GameScene extends TemplateScene {
      * @param delta Time passed since the last frame, in seconds.
      */
 
-    boolean easyPassed = false;
     @Override
     public void update(float delta) {
 
@@ -248,9 +275,7 @@ public class GameScene extends TemplateScene {
                 HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.MEDIUM);
                 HealthyGameLogic.getInstance().selectNewWord();
 
-                // !! Required to change to setCanvas
                 SceneManager.getInstance().setScene("MediumStage");
-//                CanvasManager.getInstance().setCanvas(new GameCanvas());
             }
 
             if (!easyPassed) {
@@ -268,11 +293,6 @@ public class GameScene extends TemplateScene {
         batch.dispose();
         shapeRenderer.dispose();
         canvasManager.dispose();
-    }
-
-    @Override
-    public void create() {
-
     }
 
 
