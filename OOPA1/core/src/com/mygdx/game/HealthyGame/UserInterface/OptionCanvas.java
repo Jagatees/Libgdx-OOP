@@ -62,7 +62,8 @@ public class OptionCanvas implements Canvas {
 
 
         UIElements.createLabel(stage, "Music", 100, 600, Color.RED);
-        UIElements.SimpleSlider(stage, 0, 1, 200, 600, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
+        // First, create the slider and keep a reference to it
+        Slider volumeSlider = UIElements.SimpleSlider(stage, 0, 1, 200, 600, InputOutputManager.getInstance().getAudioManager().getVolume(AudioAssetKey.BG_1), new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Slider slider = (Slider) actor;
@@ -71,15 +72,18 @@ public class OptionCanvas implements Canvas {
             }
         });
 
-
         UIElements.createCheckBox(stage, "Turn BG_1 On/Off", 420, 600, true, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("CheckBox is " + ((CheckBox)actor).isChecked());
-                if (((CheckBox)actor).isChecked() == false) {
+                CheckBox checkBox = (CheckBox) actor;
+                System.out.println("CheckBox is " + checkBox.isChecked());
+                if (!checkBox.isChecked()) {
                     InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.BG_1, 0f);
-                }else if (((CheckBox)actor).isChecked() == true) {
-                    InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.BG_1, 0.1f);
+                    volumeSlider.setValue(0f); // Set slider to 0 when checkbox is unchecked
+                } else {
+                    float defaultVolume = 0.1f; // Define a default volume level when checkbox is checked
+                    InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.BG_1, defaultVolume);
+                    volumeSlider.setValue(defaultVolume); // Update slider to the default volume
                 }
             }
         });
