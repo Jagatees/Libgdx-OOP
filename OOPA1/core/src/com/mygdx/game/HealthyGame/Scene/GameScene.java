@@ -186,7 +186,7 @@ public class GameScene extends TemplateScene {
         }
 
         // Debug Sout
-        System.out.println("Goal : " + HealthyGameLogic.getInstance().GetScoreGoal());
+        System.out.println("Goal : " + HealthyGameLogic.getInstance().getScoreGoal());
         System.out.println("Current Word : " +HealthyGameLogic.getInstance().getCurrentWord());
         System.out.println("Current Word length: " +HealthyGameLogic.getInstance().getCurrentWord().length());
         System.out.println("Current Score : " + HealthyGameLogic.getInstance().getScore());
@@ -240,9 +240,9 @@ public class GameScene extends TemplateScene {
             entityManager.movement(enemy);
         }
 
-        if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().GetScoreGoal()) {
+        if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().getScoreGoal()) {
             easyPassed = true;
-            HealthyGameLogic.Difficulty currentDifficulty = HealthyGameLogic.getInstance().getDifficulty();
+            HealthyGameLogic.Difficulty currentDifficulty = HealthyGameLogic.getInstance().getCurrentDifficulty();
 
             if (currentDifficulty == HealthyGameLogic.Difficulty.EASY && easyPassed) {
                 HealthyGameLogic.getInstance().restartScore();
