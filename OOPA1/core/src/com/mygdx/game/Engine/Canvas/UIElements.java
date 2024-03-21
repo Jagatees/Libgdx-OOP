@@ -24,8 +24,8 @@ public class UIElements {
 
     private static final BitmapFont defaultFont = new BitmapFont();
 
-    static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json")); // Ensure you have this skin file in your assets
-
+    static Skin skin = new Skin(Gdx.files.internal(
+            "skin/qh/quantum-horizon-ui.json")); // Ensure you have this skin file in your assets
 
 
     public static SelectBox<String> createDropdown(Stage stage, String[] items, float x, float y, ChangeListener actionListener) {
