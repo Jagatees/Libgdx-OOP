@@ -55,7 +55,7 @@ public class MediumScene extends TemplateScene {
         entityManager = EntityManager.getInstance();
         EntityFactory entityFactory = new EntityFactory();
 
-        pacman = entityFactory.getEntityByInput("Player", "entity/bee.png", 100, 100, 10, Entity.EntityState.NULL, false,  50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
+        pacman = entityFactory.getEntityByInput("Player", "entity/bee.png", null, 100, 100, 10, Entity.EntityState.NULL, false, false,50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
 
         createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
         createWall("entity/wall.jpg", 0, -20, 30, 50, 0, false);
@@ -63,7 +63,7 @@ public class MediumScene extends TemplateScene {
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
         // Spawn this randomly also after Spawn Enemy
-        boxPlayer = entityFactory.getEntityByInput("nonPlayer", Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+        boxPlayer = entityFactory.getEntityByInput("nonPlayer", null, Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
         entityManager.addEntity(boxPlayer);
 
         entityManager.addEntity(pacman);
@@ -185,7 +185,7 @@ public class MediumScene extends TemplateScene {
                             break;
                     }
 
-                    Entity tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", x, y, 10, Entity.EntityState.NULL, true, false,
+                    Entity tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", null, x, y, 10, Entity.EntityState.NULL, true, false,
                             50, 50, entityType, Entity.RenderType.SPRITE);
                     entityManager.addEntity(tempEnemy);
                     listNonPlayerEnemy.add((nonPlayer)tempEnemy);
