@@ -257,18 +257,6 @@ public class HardScene extends TemplateScene {
 
         entityManager.render(batch, shapeRenderer);
 
-
-        // Use lightIntensity to simulate light conditions
-        Gdx.gl.glEnable(GL20.GL_BLEND);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(new Color(0, 0, 0, 1 - lightIntensity)); // Adjust alpha based on lightIntensity
-        shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        shapeRenderer.end();
-        Gdx.gl.glDisable(GL20.GL_BLEND);
-
-
-
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
         canvasManager.update(delta);
@@ -279,6 +267,15 @@ public class HardScene extends TemplateScene {
             CanvasManager.getInstance().setCanvas(new GameCanvas());
             previousScore = currentScore; // Update the previous score
         }
+
+        // Use lightIntensity to simulate light conditions
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(new Color(0, 0, 0, 1 - lightIntensity)); // Adjust alpha based on lightIntensity
+        shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
 
     }
 
