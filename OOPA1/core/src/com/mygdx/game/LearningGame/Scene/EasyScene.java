@@ -11,6 +11,7 @@ import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
 import com.mygdx.game.Engine.Entity.*;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
+import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
@@ -288,27 +289,32 @@ public class EasyScene extends TemplateScene {
         }
 
 
-
-        if (increasingIntensity) {
-            if (darknessDelayTimer > 0) {
-                // If we are in the delay phase, decrease the timer
-                darknessDelayTimer -= delta;
+        if (!SimulationLifecycleManagement.getInstance().isPaused()){
+            if (increasingIntensity) {
+                if (darknessDelayTimer > 0) {
+                    // If we are in the delay phase, decrease the timer
+                    darknessDelayTimer -= delta;
+                } else {
+                    // Once the delay is over, start increasing the light intensity
+                    lightIntensity += 0.1f * delta;
+                    if (lightIntensity >= 1) {
+                        lightIntensity = 1;
+                        increasingIntensity = false; // Prepare to decrease intensity next cycle
+                    }
+                }
             } else {
-                // Once the delay is over, start increasing the light intensity
-                lightIntensity += 0.1f * delta;
-                if (lightIntensity >= 1) {
-                    lightIntensity = 1;
-                    increasingIntensity = false; // Prepare to decrease intensity next cycle
+                lightIntensity -= 0.1f * delta; // Decrease light intensity
+                if (lightIntensity <= 0) {
+                    lightIntensity = 0;
+                    increasingIntensity = true; // Start increasing the intensity
+                    darknessDelayTimer = darknessDelayDuration; // Reset the delay timer
                 }
             }
         } else {
-            lightIntensity -= 0.1f * delta; // Decrease light intensity
-            if (lightIntensity <= 0) {
-                lightIntensity = 0;
-                increasingIntensity = true; // Start increasing the intensity
-                darknessDelayTimer = darknessDelayDuration; // Reset the delay timer
-            }
+            lightIntensity = 1f;
+
         }
+
 
     }
 

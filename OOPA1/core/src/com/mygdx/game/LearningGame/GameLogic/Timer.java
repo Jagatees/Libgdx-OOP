@@ -6,11 +6,13 @@ public class Timer {
     private long startTime;
     private long elapsedTime;
     private boolean isRunning;
+    private boolean isPaused;
 
     public Timer() {
         this.startTime = 0;
         this.elapsedTime = 0;
         this.isRunning = false;
+        this.isPaused = false;
     }
 
     public static Timer getInstance() {
@@ -22,7 +24,7 @@ public class Timer {
 
     // Adds a specified amount of time to the timer.
     public void addTime(long timeToAdd) {
-        if (isRunning) {
+        if (isRunning && !isPaused) {
             elapsedTime = System.currentTimeMillis() - startTime;
             elapsedTime += timeToAdd;
             startTime = System.currentTimeMillis() - elapsedTime;
@@ -33,15 +35,15 @@ public class Timer {
 
     // Example method to add 10 seconds to the timer
     public void addToTimer() {
-        long tenSecondsInMillis = 1 * 100;
+        long tenSecondsInMillis = 10 * 1000;
         addTime(tenSecondsInMillis);
     }
-
 
     public void start() {
         if (!isRunning) {
             startTime = System.currentTimeMillis() - elapsedTime;
             isRunning = true;
+            isPaused = false;
         }
     }
 
@@ -49,26 +51,27 @@ public class Timer {
         if (isRunning) {
             elapsedTime = System.currentTimeMillis() - startTime;
             isRunning = false;
+            isPaused = false;
         }
     }
 
     public void pause() {
-        if (isRunning) {
+        if (isRunning && !isPaused) {
             elapsedTime = System.currentTimeMillis() - startTime;
-            isRunning = false;
+            isPaused = true;
         }
     }
 
     public void resume() {
-        if (!isRunning) {
+        if (isRunning && isPaused) {
             startTime = System.currentTimeMillis() - elapsedTime;
-            isRunning = true;
+            isPaused = false;
         }
     }
 
     public String getTime() {
         long totalTimeMillis;
-        if (isRunning) {
+        if (isRunning && !isPaused) {
             totalTimeMillis = System.currentTimeMillis() - startTime;
         } else {
             totalTimeMillis = elapsedTime;

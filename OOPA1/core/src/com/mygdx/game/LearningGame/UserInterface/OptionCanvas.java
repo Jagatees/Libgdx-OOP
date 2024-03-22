@@ -18,6 +18,7 @@ import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
+import com.mygdx.game.LearningGame.GameLogic.Timer;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
@@ -49,6 +50,7 @@ public class OptionCanvas implements Canvas {
                 // When in Game
                 if (SimulationLifecycleManagement.getInstance().isPaused() && CanvasManager.getInstance().getCurrentCanvas() instanceof OptionCanvas) {
                     AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
+                    Timer.getInstance().resume();
                     SimulationLifecycleManagement.getInstance().togglePause();
                     CanvasManager.getInstance().setCanvas(new GameCanvas());
 
@@ -132,8 +134,8 @@ public class OptionCanvas implements Canvas {
             currentKeyBindingRight = String.valueOf(currentKeyCharRight);
         }
 
-        UIElements.createLabel(stage, "MOVE_RIGHT", 100, 400, Color.RED);
-        UIElements.createDropdown(stage, keyboardKeys, 300, 400, new ChangeListener() {
+        UIElements.createLabel(stage, "MOVE_RIGHT", 100, 100, Color.RED);
+        UIElements.createDropdown(stage, keyboardKeys, 300, 100, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
@@ -173,8 +175,8 @@ public class OptionCanvas implements Canvas {
             currentKeyBindingUp = String.valueOf(currentKeyCharUp);
         }
 
-        UIElements.createLabel(stage, "MOVE_UP", 100, 200, Color.RED);
-        UIElements.createDropdown(stage, keyboardKeys, 300, 200, new ChangeListener() {
+        UIElements.createLabel(stage, "MOVE_UP", 100, 400, Color.RED);
+        UIElements.createDropdown(stage, keyboardKeys, 300, 400, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;
@@ -195,8 +197,8 @@ public class OptionCanvas implements Canvas {
             currentKeyBinding = String.valueOf(currentKeyChar);
         }
 
-        UIElements.createLabel(stage, "MOVE_DOWN", 100, 100, Color.RED);
-        UIElements.createDropdown(stage, keyboardKeys, 300, 100, new ChangeListener() {
+        UIElements.createLabel(stage, "MOVE_DOWN", 100, 200, Color.RED);
+        UIElements.createDropdown(stage, keyboardKeys, 300, 200, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 SelectBox<String> selectBox = (SelectBox<String>) actor;

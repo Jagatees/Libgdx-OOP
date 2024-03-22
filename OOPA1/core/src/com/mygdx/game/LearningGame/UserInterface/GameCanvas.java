@@ -51,6 +51,7 @@ public class GameCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
+                Timer.getInstance().pause();
                 SimulationLifecycleManagement.getInstance().togglePause();
                 CanvasManager.getInstance().setCanvas(new OptionCanvas());
             }
