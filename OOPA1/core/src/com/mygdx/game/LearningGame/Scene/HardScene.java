@@ -44,7 +44,8 @@ public class HardScene extends TemplateScene {
 
     private Texture background;
 
-    private Entity sabotageCube;
+    private Entity sabotageCube1;
+    private Entity sabotageCube2;
 
     private float lightIntensity = 1f;
     private boolean increasingIntensity = false;
@@ -215,11 +216,17 @@ public class HardScene extends TemplateScene {
             entityManager.setAIController(enemy, aiControlManagement);
         }
 
-        /** Creation of sabotage cube (specific to hard stage) **/
-        sabotageCube = entityFactory.getEntityByInput("nonPlayer", null, Color.PURPLE, 350, 350, 40, Entity.EntityState.NULL, true, false, 150, 150, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
-        entityManager.addEntity(sabotageCube);
-        AIControlManagement sabotageCubeAIController = new AIControlManagement((nonPlayer) sabotageCube, entityManager, collisionManager);
-        entityManager.setAIController((nonPlayer) sabotageCube, sabotageCubeAIController);
+        /** Creation of 2x sabotage cube (specific to hard stage) **/
+
+        sabotageCube1 = entityFactory.getEntityByInput("nonPlayer", null, Color.PURPLE, 500, 400, 40, Entity.EntityState.NULL, true, false, 150, 150, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+        entityManager.addEntity(sabotageCube1);
+        AIControlManagement sabotageCube1AIController = new AIControlManagement((nonPlayer) sabotageCube1, entityManager, collisionManager);
+        entityManager.setAIController((nonPlayer) sabotageCube1, sabotageCube1AIController);
+
+        sabotageCube2 = entityFactory.getEntityByInput("nonPlayer", null, Color.PURPLE, 300, 300, 40, Entity.EntityState.NULL, true, false, 150, 150, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+        entityManager.addEntity(sabotageCube2);
+        AIControlManagement sabotageCube2AIController = new AIControlManagement((nonPlayer) sabotageCube2, entityManager, collisionManager);
+        entityManager.setAIController((nonPlayer) sabotageCube2, sabotageCube2AIController);
 
 
         background = new Texture("background/bg-6.jpg");
@@ -286,7 +293,8 @@ public class HardScene extends TemplateScene {
         // Implementation adjusted to remove references to the removed 'enemy'
         entityManager.movement(pacman);
 
-        entityManager.movement(sabotageCube);
+        entityManager.movement(sabotageCube1);
+        entityManager.movement(sabotageCube2);
 
         for (nonPlayer enemy : listNonPlayerEnemy) {
             entityManager.movement(enemy);
