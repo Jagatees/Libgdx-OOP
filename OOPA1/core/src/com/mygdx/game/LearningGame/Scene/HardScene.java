@@ -15,7 +15,7 @@ import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
-import com.mygdx.game.LearningGame.GameLogic.Timer;
+import com.mygdx.game.Engine.Timer.Timer;
 import com.mygdx.game.LearningGame.UserInterface.GameCanvas;
 import com.mygdx.game.LearningGame.UserInterface.GameOverCanvas;
 

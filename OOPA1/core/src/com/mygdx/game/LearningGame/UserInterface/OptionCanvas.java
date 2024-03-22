@@ -18,7 +18,7 @@ import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
-import com.mygdx.game.LearningGame.GameLogic.Timer;
+import com.mygdx.game.Engine.Timer.Timer;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons

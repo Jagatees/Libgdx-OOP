@@ -1,8 +1,6 @@
 package com.mygdx.game.LearningGame.Scene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -11,11 +9,10 @@ import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
 import com.mygdx.game.Engine.Entity.*;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
-import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
-import com.mygdx.game.LearningGame.GameLogic.Timer;
+import com.mygdx.game.Engine.Timer.Timer;
 import com.mygdx.game.LearningGame.UserInterface.GameCanvas;
 import com.mygdx.game.LearningGame.UserInterface.GameOverCanvas;
 

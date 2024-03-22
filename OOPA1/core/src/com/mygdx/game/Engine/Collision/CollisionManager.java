@@ -3,7 +3,7 @@ package com.mygdx.game.Engine.Collision;
 import com.mygdx.game.Engine.Entity.Entity;
 import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
-import com.mygdx.game.LearningGame.GameLogic.Timer;
+import com.mygdx.game.Engine.Timer.Timer;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package com.mygdx.game.LearningGame.GameLogic;
+package com.mygdx.game.Engine.Timer;
 
 public class Timer {
     private static Timer instance;

@@ -15,7 +15,7 @@ import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.audio.AudioManager;
 import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
-import com.mygdx.game.LearningGame.GameLogic.Timer;
+import com.mygdx.game.Engine.Timer.Timer;
 
 /**
  * Implements the Canvas interface to create a UI canvas for the game menu using scene2d UI elements.
