@@ -91,7 +91,7 @@ public class HardScene extends TemplateScene {
             while (!spawnSafe) {
                 x = rand.nextInt(maxX - minX + 1) + minX;
                 y = rand.nextInt(maxY - minY + 1) + minY;
-                if (!isPointOccupied(x, y, occupiedAreas) && !isTooCloseToEntity(x, y, occupiedAreas, 10)) {
+                if (!isPointOccupied(x, y, occupiedAreas) && !isTooCloseToEntity(x, y, occupiedAreas, 10) && !tooCloseToPlayer(x, y, pacman)) {
                     // Spawn the entity
                     spawnSafe = true;
                     // Add the new occupied area to the list
@@ -213,6 +213,19 @@ public class HardScene extends TemplateScene {
     private boolean isPointOccupied(int x, int y, List<Rectangle> occupiedAreas) {
         for (Rectangle area : occupiedAreas) {
             if (area.contains(x, y)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean tooCloseToPlayer(int x, int y, Entity player) {
+        if (player != null) {
+            float playerX = EntityManager.getInstance().getxCords(player);
+            float playerY = EntityManager.getInstance().getxCords(player);
+            double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+            float minDistance = EntityManager.getInstance().getWidth(player) + 20; // Adjust the buffer distance as needed
+            if (distance < minDistance) {
                 return true;
             }
         }

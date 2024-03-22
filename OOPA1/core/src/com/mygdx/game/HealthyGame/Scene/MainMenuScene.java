@@ -7,7 +7,7 @@ import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
 
 
-public class MainMeunScene extends TemplateScene {
+public class MainMenuScene extends TemplateScene {
 
     /** Rendering */
     private SpriteBatch batch = new SpriteBatch();
@@ -16,7 +16,7 @@ public class MainMeunScene extends TemplateScene {
     /**
      * Constructor for MainScene. Initializes the canvas manager and sets up the main menu canvas.
      */
-    public MainMeunScene() {
+    public MainMenuScene() {
         CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
 
     }

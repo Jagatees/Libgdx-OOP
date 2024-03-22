@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  * The GameScene file a like clone of the TemplateScene as that is the Base version
  */
-public class GameScene extends TemplateScene {
+public class EasyScene extends TemplateScene {
 
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
@@ -56,7 +56,7 @@ public class GameScene extends TemplateScene {
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
      */
-    public GameScene() {
+    public EasyScene() {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
@@ -94,7 +94,8 @@ public class GameScene extends TemplateScene {
                 if (!isPointOccupied(x, y, occupiedAreas)
                         && !isTooCloseToEntity(x, y, occupiedAreas, 20)
                         && !isPointOccupied(x, y, spawnLocations)
-                        && !isTooCloseToEntity(x, y, spawnLocations, 20)) {
+                        && !isTooCloseToEntity(x, y, spawnLocations, 20)
+                        && !tooCloseToPlayer(x, y, pacman)) {
                     // Spawn the entity
                     spawnSafe = true;
                     // Add the new occupied area to the list
@@ -319,8 +320,21 @@ public class GameScene extends TemplateScene {
         }
         return false;
     }
+    private boolean tooCloseToPlayer(int x, int y, Entity player) {
+        if (player != null) {
+            float playerX = EntityManager.getInstance().getxCords(player);
+            float playerY = EntityManager.getInstance().getxCords(player);
+            double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
+            float minDistance = EntityManager.getInstance().getWidth(player) + 20; // Adjust the buffer distance as needed
+            if (distance < minDistance) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
+
+    private void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
         int x = startX;
         int y = startY;
         for (int i = 0; i < segments; i++) {
