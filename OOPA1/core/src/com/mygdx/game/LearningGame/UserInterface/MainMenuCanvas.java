@@ -34,8 +34,8 @@ public class MainMenuCanvas implements Canvas {
     public MainMenuCanvas() {
         Gdx.input.setInputProcessor(stage);
 
-        UIElements.createLabel(stage, "Alphabet Chase", 600, 600, Color.RED);
-        UIElements.createTextButton(stage, "Start Game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
+        UIElements.createLabel(stage, "Alphabet Chase", 550, 600, Color.RED);
+        UIElements.createTextButton(stage, "Start Game", 500, 450, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
@@ -46,7 +46,7 @@ public class MainMenuCanvas implements Canvas {
             }
         });
 
-        UIElements.createTextButton(stage, "Instruction", 600, 350, 100 , 50, Color.RED , new ChangeListener() {
+        UIElements.createTextButton(stage, "Instruction", 500, 350, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
@@ -56,7 +56,7 @@ public class MainMenuCanvas implements Canvas {
         });
 
 
-        UIElements.createTextButton(stage, "Options", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
+        UIElements.createTextButton(stage, "Options", 525, 250, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
@@ -65,7 +65,7 @@ public class MainMenuCanvas implements Canvas {
             }
         });
 
-        UIElements.createTextButton(stage, "Close Game", 600, 150, 100 , 50, Color.RED , new ChangeListener() {
+        UIElements.createTextButton(stage, "Close Game", 500, 150, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);

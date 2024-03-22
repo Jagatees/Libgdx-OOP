@@ -47,7 +47,7 @@ public class GameCanvas implements Canvas {
         // Create the timer label and store its reference
         timerLabel = UIElements.createLabel(stage, "", 80, 620, Color.RED);
 
-        UIElements.createTextButton(stage, "Options", 1100, 650, 50, 50, Color.RED, new ChangeListener() {
+        UIElements.createTextButton(stage, "Options", 1075, 650, 50, 50, Color.RED, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
