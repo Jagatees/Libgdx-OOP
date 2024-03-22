@@ -43,6 +43,8 @@ public class HardScene extends TemplateScene {
 
     private Texture background;
 
+    private Entity sabotageCube;
+
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
      */
@@ -201,11 +203,18 @@ public class HardScene extends TemplateScene {
             }
         }
 
-        /** Assignemnt of AI Controller for some non-player entities **/
+        /** Assignment of AI Controller for some non-player entities **/
         for (nonPlayer enemy : listNonPlayerEnemy) {
             AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
             entityManager.setAIController(enemy, aiControlManagement);
         }
+
+        /** Creation of sabotage cube (specific to hard stage) **/
+        sabotageCube = entityFactory.getEntityByInput("nonPlayer", null, Color.PURPLE, 350, 350, 40, Entity.EntityState.NULL, true, false, 150, 150, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+        entityManager.addEntity(sabotageCube);
+        AIControlManagement sabotageCubeAIController = new AIControlManagement((nonPlayer) sabotageCube, entityManager, collisionManager);
+        entityManager.setAIController((nonPlayer) sabotageCube, sabotageCubeAIController);
+
 
         background = new Texture("background/bg-6.jpg");
     }
@@ -260,6 +269,8 @@ public class HardScene extends TemplateScene {
     public void update(float delta) {
         // Implementation adjusted to remove references to the removed 'enemy'
         entityManager.movement(pacman);
+
+        entityManager.movement(sabotageCube);
 
         for (nonPlayer enemy : listNonPlayerEnemy) {
             entityManager.movement(enemy);
