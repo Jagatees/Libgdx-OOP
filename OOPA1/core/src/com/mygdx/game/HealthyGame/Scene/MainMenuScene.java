@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
+import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
+import com.mygdx.game.HealthyGame.UserInterface.OptionCanvas;
 
 
 public class MainMenuScene extends TemplateScene {
@@ -17,13 +19,12 @@ public class MainMenuScene extends TemplateScene {
      * Constructor for MainScene. Initializes the canvas manager and sets up the main menu canvas.
      */
     public MainMenuScene() {
-        CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
-
+        CanvasManager.getInstance().setCanvas(new GameOverCanvas());
     }
 
     /**
      * Updates the state of the scene. Typically called each frame.
-     * @param delta Time since the last frame in seconds.
+     * @param delta Time since the last frame ikrin seconds.
      */
     @Override
     public void update(float delta) {

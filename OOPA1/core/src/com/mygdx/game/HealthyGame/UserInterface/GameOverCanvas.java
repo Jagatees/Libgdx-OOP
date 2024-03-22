@@ -16,6 +16,7 @@ import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
+import com.mygdx.game.HealthyGame.GameLogic.Timer;
 import com.mygdx.game.HealthyGame.Scene.MainMenuScene;
 
 /**
@@ -32,9 +33,10 @@ public class GameOverCanvas implements Canvas {
         Gdx.input.setInputProcessor(stage);
 
 
-        UIElements.createLabel(stage, "Game Over", 600, 600, Color.RED);
+        UIElements.createLabel(stage, "Your Time :" + Timer.getInstance().getTime(), 500, 500, Color.RED);
 
-        UIElements.createTextButton(stage, "Close Game", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
+        UIElements.createLabel(stage, "Game Over", 550, 400, Color.RED);
+        UIElements.createTextButton(stage, "Close Game", 520, 320, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
