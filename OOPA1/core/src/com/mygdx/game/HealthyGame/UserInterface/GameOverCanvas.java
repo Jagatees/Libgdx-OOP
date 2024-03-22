@@ -33,14 +33,6 @@ public class GameOverCanvas implements Canvas {
 
 
         UIElements.createLabel(stage, "Game Over", 600, 600, Color.RED);
-        UIElements.createTextButton(stage, "Go back to start of game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
-                SceneManager.getInstance().setScene("MainMeun");
-                CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
-            }
-        });
 
 
         UIElements.createTextButton(stage, "Close Game", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
