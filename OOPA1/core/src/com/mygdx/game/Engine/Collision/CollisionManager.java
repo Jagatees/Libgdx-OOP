@@ -38,10 +38,11 @@ public class CollisionManager {
         Entity.EntityType entityType2 = EntityManager.getInstance().getType(entity2);
 
         String word = learningGameLogic.getCurrentWord();
+        char expectedLetter = learningGameLogic.getFirstLetterOfCurrentWordSafely(learningGameLogic.getScore());
 
         if (learningGameLogic.getScore() != word.length()) {
-            if (Objects.equals(entityType2.getLetter(), String.valueOf(learningGameLogic.getFirstLetterOfCurrentWordSafely(learningGameLogic.getScore()))) ||
-                    Objects.equals(entityType1.getLetter(), String.valueOf(learningGameLogic.getFirstLetterOfCurrentWordSafely(learningGameLogic.getScore())))) {
+            if (Objects.equals(entityType2.getLetter(), String.valueOf(expectedLetter)) ||
+                    Objects.equals(entityType1.getLetter(), String.valueOf(expectedLetter))) {
 
                 if ((entityType1 == Entity.EntityType.PLAYER && entityType2.isLetter()) ||
                         (entityType2 == Entity.EntityType.PLAYER && entityType1.isLetter())) {
@@ -59,14 +60,16 @@ public class CollisionManager {
                     System.out.println("Current Score: " + learningGameLogic.getScore());
 
                     if (learningGameLogic.getScore() != learningGameLogic.getCurrentWord().length()) {
-                        System.out.println("Next Letter: " + learningGameLogic.getFirstLetterOfCurrentWordSafely(learningGameLogic.getScore()));
+                        System.out.println("Next Letter: " + expectedLetter);
                     }
                 }
             } else {
+                // Wrong letter hit
                 System.out.println("Add time");
                 Timer.getInstance().addToTimer();
             }
         }
     }
+
 }
 
