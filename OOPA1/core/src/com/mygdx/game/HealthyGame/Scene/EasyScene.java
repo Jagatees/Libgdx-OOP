@@ -72,8 +72,6 @@ public class EasyScene extends TemplateScene {
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
-//        spawnEntitiesRandomlyWithinBoundary(10 ,
-//                minX, maxX, minY, maxY, Color.GRAY, 50, 50);
         entityManager.addEntity(pacman);
 
         /** Assignment of player controller for created player **/
@@ -86,23 +84,31 @@ public class EasyScene extends TemplateScene {
         String word = HealthyGameLogic.getInstance().getCurrentWord();
 
         for (int i = 0; i < word.length(); i++) {
-            int x, y;
-            boolean spawnSafe = false;
+            boolean charOverlap = true;
 
-            // Usage inside your loop
-            while (!spawnSafe) {
-                x = rand.nextInt(maxX - minX + 1) + minX;
-                y = rand.nextInt(maxY - minY + 1) + minY;
-                if (!isPointOccupied(x, y, occupiedAreas)
-                        && !isTooCloseToEntity(x, y, occupiedAreas, 20)
-                        && !isPointOccupied(x, y, spawnLocations)
-                        && !isTooCloseToEntity(x, y, spawnLocations, 20)
-                        && !tooCloseToPlayer(x, y, pacman)) {
-                    // Spawn the entity
-                    spawnSafe = true;
-                    // Add the new occupied area to the list
-                    occupiedAreas.add(new Rectangle(x, y, 50, 50));
+            /** while charOverlap is true, generate a random pair of x and y coordinates */
+            while (charOverlap) {
+                Random rand = new Random();
+                int charX = rand.nextInt(maxX - minX + 1) + minX;
+                int charY = rand.nextInt(maxY - minY + 1) + minY;
 
+                /** Checks against all entities that have been added for their x and y pos **/
+                for (Entity entity : entityManager.getAllEntities()) {
+                    float entityX = EntityManager.getInstance().getxCords(entity);
+                    float entityY = EntityManager.getInstance().getyCords(entity);
+
+                    /** Gives about +- 50 padding/margin to check **/
+                    if (Math.abs(charX - entityX) <= 50 && Math.abs(charY - entityY) <= 50) {
+                        charOverlap = true; // Break and try another set of x and y
+                        break;
+                    }
+
+                    else {
+                        charOverlap = false;
+                    }
+                }
+
+                if (!charOverlap) {
                     /** Checks for the character of the current index of word, and sets entityType to the EntityType of character found **/
                     switch(String.valueOf(word.charAt(i))) {
                         case "A":
@@ -189,11 +195,10 @@ public class EasyScene extends TemplateScene {
                     }
 
                     /** Create letters nonPlayer AI objects via entity factory **/
-                    Entity tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", null, x, y, 10, Entity.EntityState.NULL, true, false,
+                    Entity tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", null, charX, charY, 10, Entity.EntityState.NULL, true, false,
                             50, 50, entityType, Entity.RenderType.SPRITE);
                     entityManager.addEntity(tempEnemy);
                     listNonPlayerEnemy.add((nonPlayer)tempEnemy);
-
                 }
             }
         }
@@ -228,36 +233,6 @@ public class EasyScene extends TemplateScene {
         }
 
     }
-
-    public void spawnEntitiesRandomlyWithinBoundary(int numEntities, int minX, int maxX, int minY, int maxY, Color color, int width, int height) {
-        Random random = new Random();
-        Set<Point> occupiedLocations = new HashSet<>();
-
-        for (int i = 0; i < numEntities; i++) {
-            int spawnX;
-            int spawnY;
-            Point spawnLocation;
-
-            do {
-                spawnX = random.nextInt(maxX - minX) + minX; // Random X within boundary
-                spawnY = random.nextInt(maxY - minY) + minY; // Random Y within boundary
-                spawnLocation = new Point(spawnX, spawnY);
-            } while (occupiedLocations.contains(spawnLocation)); // Repeat until a non-occupied location is found
-
-            occupiedLocations.add(spawnLocation);
-
-            Entity entity = entityFactory.getEntityByInput("nonPlayer", null, color, spawnX, spawnY, 10, Entity.EntityState.NULL, false, false, width, height, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
-            entityManager.addEntity(entity);
-            spawnLocations.add(new Rectangle(spawnX, spawnY, width, height));
-        }
-    }
-    public List<Rectangle> getSpawnLocations() {
-        return spawnLocations;
-    }
-    /**
-     * Update method to process game logic updates based on the time since the last frame.
-     * @param delta Time passed since the last frame, in seconds.
-     */
 
     boolean easyPassed = false;
     @Override

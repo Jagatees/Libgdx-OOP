@@ -37,7 +37,6 @@ public class HardScene extends TemplateScene {
     private CanvasManager canvasManager;
 
     private Entity pacman;
-    private Entity boxPlayer;
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
     private Entity tempEnemy;
 
@@ -65,10 +64,6 @@ public class HardScene extends TemplateScene {
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
-        /** Creation of non-player entity which is not an AI via entity factory **/
-        boxPlayer = entityFactory.getEntityByInput("nonPlayer", null, Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
-        entityManager.addEntity(boxPlayer);
-
         entityManager.addEntity(pacman);
 
         /** Assignment of player controller for created player **/
@@ -81,28 +76,37 @@ public class HardScene extends TemplateScene {
         /** Performs various checks to ensure that non-player entities are not spawned on top of objects that have already spawned **/
         String word = HealthyGameLogic.getInstance().getCurrentWord();
 
-        Random rand = new Random();
         int minX = 40;
         int maxX = 1210;
         int minY = 40;
         int maxY = 650;
 
-        List<Rectangle> occupiedAreas = new ArrayList<>();
-
         for (int i = 0; i < word.length(); i++) {
-            int x, y;
-            boolean spawnSafe = false;
+            boolean charOverlap = true;
 
-            // Usage inside your loop
-            while (!spawnSafe) {
-                x = rand.nextInt(maxX - minX + 1) + minX;
-                y = rand.nextInt(maxY - minY + 1) + minY;
-                if (!isPointOccupied(x, y, occupiedAreas) && !isTooCloseToEntity(x, y, occupiedAreas, 10) && !tooCloseToPlayer(x, y, pacman)) {
-                    // Spawn the entity
-                    spawnSafe = true;
-                    // Add the new occupied area to the list
-                    occupiedAreas.add(new Rectangle(x, y, 50, 50));
+            /** while charOverlap is true, generate a random pair of x and y coordinates */
+            while (charOverlap) {
+                Random rand = new Random();
+                int charX = rand.nextInt(maxX - minX + 1) + minX;
+                int charY = rand.nextInt(maxY - minY + 1) + minY;
 
+                /** Checks against all entities that have been added for their x and y pos **/
+                for (Entity entity : entityManager.getAllEntities()) {
+                    float entityX = EntityManager.getInstance().getxCords(entity);
+                    float entityY = EntityManager.getInstance().getyCords(entity);
+
+                    /** Gives about +- 50 padding/margin to check **/
+                    if (Math.abs(charX - entityX) <= 50 && Math.abs(charY - entityY) <= 50) {
+                        charOverlap = true; // Break and try another set of x and y
+                        break;
+                    }
+
+                    else {
+                        charOverlap = false;
+                    }
+                }
+
+                if (!charOverlap) {
                     /** Checks for the character of the current index of word, and sets entityType to the EntityType of character found **/
                     switch(String.valueOf(word.charAt(i))) {
                         case "A":
@@ -189,11 +193,10 @@ public class HardScene extends TemplateScene {
                     }
 
                     /** Create letters nonPlayer AI objects via entity factory **/
-                    Entity tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", null, x, y, 10, Entity.EntityState.NULL, true, false,
+                    Entity tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", null, charX, charY, 10, Entity.EntityState.NULL, true, false,
                             50, 50, entityType, Entity.RenderType.SPRITE);
                     entityManager.addEntity(tempEnemy);
                     listNonPlayerEnemy.add((nonPlayer)tempEnemy);
-
                 }
             }
         }
@@ -204,41 +207,6 @@ public class HardScene extends TemplateScene {
             entityManager.setAIController(enemy, aiControlManagement);
         }
 
-    }
-
-    // Method to check if the given point is too close to any existing entity
-    private boolean isTooCloseToEntity(int x, int y, List<Rectangle> occupiedAreas, int minDistance) {
-        for (Rectangle area : occupiedAreas) {
-            double distance = Math.sqrt(Math.pow(x - area.getX(), 2) + Math.pow(y - area.getY(), 2));
-            if (distance < minDistance) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Method to check if a point is occupied by any entity
-    private boolean isPointOccupied(int x, int y, List<Rectangle> occupiedAreas) {
-        for (Rectangle area : occupiedAreas) {
-            if (area.contains(x, y)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /** Method to return boolean value based on checks if x and y are too close to player object **/
-    private boolean tooCloseToPlayer(int x, int y, Entity player) {
-        if (player != null) {
-            float playerX = EntityManager.getInstance().getxCords(player);
-            float playerY = EntityManager.getInstance().getxCords(player);
-            double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
-            float minDistance = EntityManager.getInstance().getWidth(player) + 20; // Adjust the buffer distance as needed
-            if (distance < minDistance) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
