@@ -234,7 +234,7 @@ public class OptionCanvas implements Canvas {
         soundCheckBox.setChecked(audioManager.getVolume(AudioAssetKey.MOUSE_CLICK) > 0);
 
         batch = new SpriteBatch();
-        background = new Texture("background/bg-1.jpg");
+        background = new Texture("background/bg-1.png");
 
 
     }

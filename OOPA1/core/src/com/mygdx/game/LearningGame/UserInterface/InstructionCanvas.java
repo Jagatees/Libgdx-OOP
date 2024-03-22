@@ -42,7 +42,7 @@ public class InstructionCanvas implements Canvas {
         });
 
         batch = new SpriteBatch();
-        background = new Texture("background/bg-1.jpg");
+        background = new Texture("background/bg-1.png");
     }
 
 
