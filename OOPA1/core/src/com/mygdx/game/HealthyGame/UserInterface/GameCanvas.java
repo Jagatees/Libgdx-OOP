@@ -36,6 +36,11 @@ public class GameCanvas implements Canvas {
         Gdx.input.setInputProcessor(stage);
 
 
+
+        UIElements.createLabel(stage, "Next Letter to collect :" +
+                        HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()),
+                500, 400);
+
         UIElements.createLabel(stage, "Word to Get :" +
                         HealthyGameLogic.getInstance().getCurrentWord().toString(),
                 500, 600);

@@ -267,7 +267,7 @@ public class GameScene extends TemplateScene {
 
                 // Switch scene
                 HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.MEDIUM);
-                HealthyGameLogic.getInstance().selectNewWord();
+//                HealthyGameLogic.getInstance().selectNewWord();
                 HealthyGameLogic.getInstance().setScoreGoal(HealthyGameLogic.getInstance().getCurrentWordLength());
 
 

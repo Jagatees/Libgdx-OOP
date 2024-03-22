@@ -86,7 +86,7 @@ public class HealthyGameLogic {
 
         if (Arrays.equals(collectedLettersSorted, currentWordSorted)) {
             System.out.println("Word completed: " + currentWord);
-//            selectNewWord(); // Select a new word
+            selectNewWord(); // Select a new word
         }
     }
 
