@@ -203,11 +203,16 @@ public class EntityManager {
     	return entity.getisRemoved();
     }
 
-    // Method to reset all entities' removal state
+    // Method to reset all entities' removal state (simply hides them)
     public void setAllEntitiesRemoved(boolean removeState) {
         for (Entity entity : entities) {
             entity.setisRemoved(removeState);
         }
+    }
+
+    // Offically removes all entities from the entties list
+    public void removeAllEntitiesCompletely() {
+        entities.clear();
     }
 
     // Methods to let EntityManager handle entities movement instead of controllers

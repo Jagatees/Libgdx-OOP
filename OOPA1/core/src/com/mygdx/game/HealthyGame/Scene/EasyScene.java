@@ -186,6 +186,7 @@ public class EasyScene extends TemplateScene {
                             break;
                     }
 
+                    /** Create letters nonPlayer AI objects via entity factory **/
                     Entity tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", null, x, y, 10, Entity.EntityState.NULL, true, false,
                             50, 50, entityType, Entity.RenderType.SPRITE);
                     entityManager.addEntity(tempEnemy);
@@ -328,6 +329,8 @@ public class EasyScene extends TemplateScene {
         }
         return false;
     }
+
+    /** Method to return boolean value based on checks if x and y are too close to player object **/
     private boolean tooCloseToPlayer(int x, int y, Entity player) {
         if (player != null) {
             float playerX = EntityManager.getInstance().getxCords(player);

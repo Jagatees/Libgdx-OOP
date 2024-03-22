@@ -54,6 +54,7 @@ public class HardScene extends TemplateScene {
         entityManager = EntityManager.getInstance();
         EntityFactory entityFactory = new EntityFactory();
 
+        /** Creation of player entity via entity factory **/
         pacman = entityFactory.getEntityByInput("Player", "entity/bee.png", null, 100, 100, 10, Entity.EntityState.NULL, false, false,50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
 
         createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
@@ -61,18 +62,20 @@ public class HardScene extends TemplateScene {
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
-        // Spawn this randomly also after Spawn Enemy
+        /** Creation of non-player entity which is not an AI via entity factory **/
         boxPlayer = entityFactory.getEntityByInput("nonPlayer", null, Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
         entityManager.addEntity(boxPlayer);
 
         entityManager.addEntity(pacman);
 
+        /** Assignment of player controller for created player **/
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement((Player)pacman, entityManager, collisionManager);
         entityManager.setPlayerController((Player)pacman, playerControllerManagement);
 
         canvasManager = CanvasManager.getInstance();
         canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
 
+        /** Performs various checks to ensure that non-player entities are not spawned on top of objects that have already spawned **/
         String word = HealthyGameLogic.getInstance().getCurrentWord();
 
         Random rand = new Random();
@@ -97,6 +100,7 @@ public class HardScene extends TemplateScene {
                     // Add the new occupied area to the list
                     occupiedAreas.add(new Rectangle(x, y, 50, 50));
 
+                    /** Checks for the character of the current index of word, and sets entityType to the EntityType of character found **/
                     switch(String.valueOf(word.charAt(i))) {
                         case "A":
                             entityType = Entity.EntityType.A;
@@ -176,12 +180,12 @@ public class HardScene extends TemplateScene {
                         case "Z":
                             entityType = Entity.EntityType.Z;
                             break;
-                        // Optionally, you can have a default case if the input doesn't match any letter
+                        /** Defaults to breaking the loop, should a case not be found **/
                         default:
-                            // Handle an unexpected input
                             break;
                     }
 
+                    /** Create letters nonPlayer AI objects via entity factory **/
                     Entity tempEnemy = entityFactory.getEntityByInput("nonPlayer", "Words/" + String.valueOf(word.charAt(i)) + ".png", null, x, y, 10, Entity.EntityState.NULL, true, false,
                             50, 50, entityType, Entity.RenderType.SPRITE);
                     entityManager.addEntity(tempEnemy);
@@ -191,6 +195,7 @@ public class HardScene extends TemplateScene {
             }
         }
 
+        /** Assignemnt of AI Controller for some non-player entities **/
         for (nonPlayer enemy : listNonPlayerEnemy) {
             AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
             entityManager.setAIController(enemy, aiControlManagement);
@@ -219,6 +224,7 @@ public class HardScene extends TemplateScene {
         return false;
     }
 
+    /** Method to return boolean value based on checks if x and y are too close to player object **/
     private boolean tooCloseToPlayer(int x, int y, Entity player) {
         if (player != null) {
             float playerX = EntityManager.getInstance().getxCords(player);
@@ -276,19 +282,23 @@ public class HardScene extends TemplateScene {
             entityManager.movement(enemy);
         }
 
-
+        /** Constantly checks if current score has met the goal **/
         if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().getScoreGoal() ) {
             hardPassed = true;
+            /** Restarts the score to prepare for next stage (if exists) **/
             HealthyGameLogic.getInstance().restartScore();
 
-            // Reset
+            /** Resets entities **/
             EntityManager.getInstance().setAllEntitiesRemoved(true);
             EntityManager.getInstance().setxCords(pacman, 100);
             EntityManager.getInstance().setyCords(pacman, 100);
+
+            /** Transition to game over scene since game is over **/
             SceneManager.getInstance().setScene("GameOver");
             CanvasManager.getInstance().setCanvas(new GameOverCanvas());
-
-
+            
+            /** Frees memory at end of game **/
+            EntityManager.getInstance().removeAllEntitiesCompletely();
         }
 
     }
