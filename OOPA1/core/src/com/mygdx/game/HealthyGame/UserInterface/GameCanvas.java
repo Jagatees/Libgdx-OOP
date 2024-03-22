@@ -36,14 +36,14 @@ public class GameCanvas implements Canvas {
         Gdx.input.setInputProcessor(stage);
 
 
-        UIElements.createLabel(stage, "Next Letter : " +
-                        HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()),
-                500, 500, Color.RED);
 
+        UIElements.createLabel(stage, "Objective",80, 670, Color.RED);
         UIElements.createLabel(stage, "Current Word : " +
                         HealthyGameLogic.getInstance().getCurrentWord(),
-                600, 650, Color.RED);
-
+                80, 650, Color.RED);
+        UIElements.createLabel(stage, "Next Letter : " +
+                        HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()),
+                80, 630, Color.RED);
 
         UIElements.createTextButton(stage,  "Options", 1100, 650, 50, 50, Color.RED , new ChangeListener() {
             @Override
@@ -53,10 +53,6 @@ public class GameCanvas implements Canvas {
                 CanvasManager.getInstance().setCanvas(new OptionCanvas());
             }
         });
-
-
-
-
     }
 
     /**
