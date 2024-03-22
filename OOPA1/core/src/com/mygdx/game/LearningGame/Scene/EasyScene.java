@@ -1,6 +1,8 @@
 package com.mygdx.game.LearningGame.Scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -42,7 +44,9 @@ public class EasyScene extends TemplateScene {
     private Texture background;
 
     private int previousScore = LearningGameLogic.getInstance().getScore();
-
+    private boolean lightsOn = true;
+    private float lightToggleTimer = 0f;
+    private final float lightToggleInterval = 2f; // Change lights every 2 seconds
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -209,8 +213,19 @@ public class EasyScene extends TemplateScene {
         batch.begin();
         batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
-
         entityManager.render(batch, shapeRenderer);
+
+        // If the lights are off, overlay a semi-transparent black texture to simulate darkness
+        if (!lightsOn) {
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(new Color(0, 0, 0, 0.2f)); // Darken the scene; adjust alpha for desired darkness
+            shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            shapeRenderer.end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
+        }
+
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
         canvasManager.update(delta);
@@ -271,6 +286,17 @@ public class EasyScene extends TemplateScene {
                 CanvasManager.getInstance().setCanvas(new GameOverCanvas());
             }
         }
+
+
+
+        lightToggleTimer += delta; // Increment the timer by the elapsed time since last frame
+
+        // Check if it's time to toggle the light state
+        if (lightToggleTimer >= lightToggleInterval) {
+            lightsOn = !lightsOn; // Toggle the lights
+            lightToggleTimer = 0f; // Reset the timer
+        }
+
 
     }
 

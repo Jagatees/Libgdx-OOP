@@ -20,6 +20,23 @@ public class Timer {
         return instance;
     }
 
+    // Adds a specified amount of time to the timer.
+    public void addTime(long timeToAdd) {
+        if (isRunning) {
+            elapsedTime = System.currentTimeMillis() - startTime;
+            elapsedTime += timeToAdd;
+            startTime = System.currentTimeMillis() - elapsedTime;
+        } else {
+            elapsedTime += timeToAdd;
+        }
+    }
+
+    // Example method to add 10 seconds to the timer
+    public void addToTimer() {
+        long tenSecondsInMillis = 1 * 100;
+        addTime(tenSecondsInMillis);
+    }
+
 
     public void start() {
         if (!isRunning) {

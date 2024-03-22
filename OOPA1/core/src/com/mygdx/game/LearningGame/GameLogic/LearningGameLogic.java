@@ -10,7 +10,6 @@ import java.util.Random;
  */
 public class LearningGameLogic {
     public enum Difficulty {
-
         /** List of Words to use according to difficulty **/
         EASY(Arrays.asList("EASYONE", "EASYTWO", "EASYTHREE")),
         MEDIUM(Arrays.asList("MEDIUMONE", "MEDIUMTWO", "MEDIUMTHREE")),

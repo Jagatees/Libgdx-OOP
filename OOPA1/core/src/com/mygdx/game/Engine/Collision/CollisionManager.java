@@ -3,6 +3,7 @@ package com.mygdx.game.Engine.Collision;
 import com.mygdx.game.Engine.Entity.Entity;
 import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
+import com.mygdx.game.LearningGame.GameLogic.Timer;
 
 import java.util.Objects;
 
@@ -61,9 +62,7 @@ public class CollisionManager {
         if (LearningGameLogic.getInstance().getScore() != word.length()) {
             // Make sure get the right letter first
             if (Objects.equals(type1EntityType.getLetter(), String.valueOf(LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()))) ||
-                    Objects.equals(typeEntityType.getLetter(), String.valueOf(LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()))
-
-                    ))
+                    Objects.equals(typeEntityType.getLetter(), String.valueOf(LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()))))
             {
 //                System.out.println("it match");
 
@@ -91,7 +90,10 @@ public class CollisionManager {
                     }
                 }
 
-        }
+        } else {
+                System.out.println("add time");
+                Timer.getInstance().addToTimer();
+            }
 
 
         }
