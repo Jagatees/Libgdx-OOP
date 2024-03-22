@@ -10,79 +10,42 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
-import com.mygdx.game.Engine.Canvas.ImageRenderer;
 import com.mygdx.game.Engine.Canvas.UIElements;
+import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
-import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
-
-
-// Beta build
-
-/**
- * Defines the canvas for the main menu, including UI elements like buttons
- * for starting the game and exiting the application.
- */
-public class MainMenuCanvas implements Canvas {
+public class InstructionCanvas implements Canvas {
 
     private Stage stage = new Stage(new ScreenViewport());
     private SpriteBatch batch;
     private Texture background;
 
 
-    public MainMenuCanvas() {
+    public InstructionCanvas() {
         Gdx.input.setInputProcessor(stage);
 
-        UIElements.createLabel(stage, "Alphabet Chase", 600, 600, Color.RED);
-        UIElements.createTextButton(stage, "Start Game", 600, 450, 100, 50, Color.RED , new ChangeListener() {
+        UIElements.createLabel(stage, "Instruction Page", 600, 600, Color.RED);
+
+        UIElements.createLabel(stage, "Use 'WASD' To Move Around", 400, 500, Color.RED);
+        UIElements.createLabel(stage, "Look at top Left to see your objective", 400, 480, Color.RED);
+        UIElements.createLabel(stage, "Try to Complete all 3 Stage & Get the Fastest Time", 400, 460, Color.RED);
+
+
+
+
+        UIElements.createTextButton(stage, "Back", 1100, 100, 100, 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
-                SceneManager.getInstance().setScene("EasyStage");
-                CanvasManager.getInstance().setCanvas(new GameCanvas());
-                EntityManager.getInstance().setAllEntitiesRemoved(false);
-
+                CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
             }
         });
-
-        UIElements.createTextButton(stage, "Instruction", 600, 350, 100 , 50, Color.RED , new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
-                CanvasManager.getInstance().setCanvas(new InstructionCanvas());
-
-            }
-        });
-
-
-        UIElements.createTextButton(stage, "Options", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
-                CanvasManager.getInstance().setCanvas(new OptionCanvas());
-
-            }
-        });
-
-        UIElements.createTextButton(stage, "Close Game", 600, 150, 100 , 50, Color.RED , new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
-                SimulationLifecycleManagement.getInstance().closeGame();
-            }
-        });
-
-
 
         batch = new SpriteBatch();
         background = new Texture("background/bg-1.jpg");
-
-
-
     }
 
 
