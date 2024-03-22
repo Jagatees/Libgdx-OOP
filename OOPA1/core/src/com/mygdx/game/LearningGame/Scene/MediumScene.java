@@ -232,7 +232,7 @@ public class MediumScene extends TemplateScene {
             }
         }
 
-        /** Assignemnt of AI Controller for some non-player entities **/
+        /** Assignment of AI Controller for some non-player entities **/
         for (nonPlayer enemy : listNonPlayerEnemy) {
             AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
             entityManager.setAIController(enemy, aiControlManagement);
