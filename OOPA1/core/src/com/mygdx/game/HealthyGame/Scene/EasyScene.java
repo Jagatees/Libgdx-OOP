@@ -51,6 +51,7 @@ public class EasyScene extends TemplateScene {
     int maxY = 650;
 
     List<Rectangle> occupiedAreas = new ArrayList<>();
+    private int previousScore = HealthyGameLogic.getInstance().getScore();
 
 
     /**
@@ -213,8 +214,13 @@ public class EasyScene extends TemplateScene {
         canvasManager.render(delta);
         canvasManager.update(delta);
 
-        // create a timer then update this only when the score is increate then do not allows
-        CanvasManager.getInstance().setCanvas(new GameCanvas());
+
+        int currentScore = HealthyGameLogic.getInstance().getScore();
+        if (currentScore != previousScore) {
+            // Do something when the score changes
+            CanvasManager.getInstance().setCanvas(new GameCanvas());
+            previousScore = currentScore; // Update the previous score
+        }
 
     }
 

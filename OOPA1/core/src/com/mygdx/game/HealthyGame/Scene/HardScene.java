@@ -15,6 +15,7 @@ import com.mygdx.game.Engine.Entity.*;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
+import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class HardScene extends TemplateScene {
     private Entity tempEnemy;
 
     private Entity.EntityType entityType;
+    private int previousScore = HealthyGameLogic.getInstance().getScore();
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -258,6 +260,13 @@ public class HardScene extends TemplateScene {
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
         canvasManager.update(delta);
+
+        int currentScore = HealthyGameLogic.getInstance().getScore();
+        if (currentScore != previousScore) {
+            // Do something when the score changes
+            CanvasManager.getInstance().setCanvas(new GameCanvas());
+            previousScore = currentScore; // Update the previous score
+        }
 
     }
 

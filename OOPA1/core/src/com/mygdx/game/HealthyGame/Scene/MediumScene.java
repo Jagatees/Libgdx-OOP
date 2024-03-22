@@ -42,6 +42,7 @@ public class MediumScene extends TemplateScene {
     private Entity.EntityType entityType;
 
     EntityFactory entityFactory = new EntityFactory();
+    private int previousScore = HealthyGameLogic.getInstance().getScore();
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -262,6 +263,13 @@ public class MediumScene extends TemplateScene {
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
         canvasManager.update(delta);
+
+        int currentScore = HealthyGameLogic.getInstance().getScore();
+        if (currentScore != previousScore) {
+            // Do something when the score changes
+            CanvasManager.getInstance().setCanvas(new GameCanvas());
+            previousScore = currentScore; // Update the previous score
+        }
 
     }
 
