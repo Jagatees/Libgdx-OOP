@@ -19,6 +19,10 @@ import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
+
+
+// Beta build
+
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
  * for starting the game and exiting the application.
