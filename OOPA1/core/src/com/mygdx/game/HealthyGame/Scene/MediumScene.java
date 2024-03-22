@@ -45,6 +45,7 @@ public class MediumScene extends TemplateScene {
      * Constructor for GameScene, initializes game components, entities, and managers.
      */
     public MediumScene() {
+        HealthyGameLogic.getInstance().setScore(0);
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();

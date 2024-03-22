@@ -44,6 +44,8 @@ public class HardScene extends TemplateScene {
      * Constructor for GameScene, initializes game components, entities, and managers.
      */
     public HardScene() {
+        HealthyGameLogic.getInstance().setScore(0);
+
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();

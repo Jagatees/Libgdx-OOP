@@ -57,7 +57,7 @@ public class CollisionManager {
         Entity.EntityType typeEntityType = EntityManager.getInstance().getType(type);
         Entity.EntityType type1EntityType = EntityManager.getInstance().getType(type1);
 
-        System.out.println("Type: " + typeEntityType + " Type2: " + type1EntityType);
+//        System.out.println("Type: " + typeEntityType + " Type2: " + type1EntityType);
 
 
         if (HealthyGameLogic.getInstance().getScore() != word.length()) {
@@ -67,7 +67,7 @@ public class CollisionManager {
 
                     ))
             {
-                System.out.println("it match");
+//                System.out.println("it match");
 
                 // Check if one entity is PLAYER and the other is any letter from A to Z.
                 if ((typeEntityType == Entity.EntityType.PLAYER && type1EntityType.isLetter()) ||

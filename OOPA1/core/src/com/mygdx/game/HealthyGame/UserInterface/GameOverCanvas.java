@@ -34,7 +34,6 @@ public class GameOverCanvas implements Canvas {
 
         UIElements.createLabel(stage, "Game Over", 600, 600, Color.RED);
 
-
         UIElements.createTextButton(stage, "Close Game", 600, 250, 100 , 50, Color.RED , new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

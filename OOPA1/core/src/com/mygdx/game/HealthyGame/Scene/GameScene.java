@@ -69,8 +69,8 @@ public class GameScene extends TemplateScene {
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
-        spawnEntitiesRandomlyWithinBoundary(10 ,
-                minX, maxX, minY, maxY, Color.GRAY, 50, 50);
+//        spawnEntitiesRandomlyWithinBoundary(10 ,
+//                minX, maxX, minY, maxY, Color.GRAY, 50, 50);
         entityManager.addEntity(pacman);
 
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement((Player)pacman, entityManager, collisionManager);
