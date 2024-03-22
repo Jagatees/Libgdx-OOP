@@ -15,6 +15,7 @@ import com.mygdx.game.Engine.Entity.*;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
+import com.mygdx.game.HealthyGame.GameLogic.Timer;
 import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
 
@@ -308,6 +309,9 @@ public class HardScene extends TemplateScene {
             
             /** Frees memory at end of game **/
             EntityManager.getInstance().removeAllEntitiesCompletely();
+
+            Timer.getInstance().stop();
+            System.out.println(Timer.getInstance().getTime());
         }
 
     }

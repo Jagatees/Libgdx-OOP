@@ -16,6 +16,7 @@ import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
+import com.mygdx.game.HealthyGame.GameLogic.Timer;
 import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
 import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
@@ -214,6 +215,9 @@ public class EasyScene extends TemplateScene {
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
         canvasManager.update(delta);
+
+
+        System.out.println(Timer.getInstance().getTime());
 
 
         int currentScore = HealthyGameLogic.getInstance().getScore();

@@ -17,11 +17,9 @@ public class HealthyGameLogic {
         HARD(Arrays.asList("HARDONE", "HARDTWO", "HARDTHREE"));
 
         private final List<String> words;
-
         Difficulty(List<String> words) {
             this.words = words;
         }
-
         public List<String> getWords() {
             return words;
         }
@@ -38,6 +36,7 @@ public class HealthyGameLogic {
     /** Set difficulty to EASY at the start of the game & selects a word from easy word list **/
 
     private HealthyGameLogic() {
+        Timer.getInstance().start();
         this.currentDifficulty = Difficulty.EASY;
         selectNewWord();
         setScoreGoal(currentWord.length());
