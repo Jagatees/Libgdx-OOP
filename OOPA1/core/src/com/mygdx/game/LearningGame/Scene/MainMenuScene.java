@@ -1,14 +1,13 @@
-package com.mygdx.game.HealthyGame.Scene;
+package com.mygdx.game.LearningGame.Scene;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
-import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
-import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
+import com.mygdx.game.LearningGame.UserInterface.MainMenuCanvas;
 
 
-public class GameOverScene extends TemplateScene {
+public class MainMenuScene extends TemplateScene {
 
     /** Rendering */
     private SpriteBatch batch = new SpriteBatch();
@@ -17,13 +16,13 @@ public class GameOverScene extends TemplateScene {
     /**
      * Constructor for MainScene. Initializes the canvas manager and sets up the main menu canvas.
      */
-    public GameOverScene() {
-        CanvasManager.getInstance().setCanvas(new GameOverCanvas());
+    public MainMenuScene() {
+        CanvasManager.getInstance().setCanvas(new MainMenuCanvas());
     }
 
     /**
      * Updates the state of the scene. Typically called each frame.
-     * @param delta Time since the last frame in seconds.
+     * @param delta Time since the last frame ikrin seconds.
      */
     @Override
     public void update(float delta) {

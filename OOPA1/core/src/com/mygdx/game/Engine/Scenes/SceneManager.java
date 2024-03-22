@@ -1,11 +1,8 @@
 package com.mygdx.game.Engine.Scenes;
 
 
-import com.mygdx.game.Engine.Entity.EntityManager;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
-import com.mygdx.game.HealthyGame.Scene.*;
-import com.mygdx.game.HealthyGame.Scene.EasyScene;
-import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
+import com.mygdx.game.LearningGame.Scene.*;
+import com.mygdx.game.LearningGame.Scene.EasyScene;
 
 import java.util.HashMap;
 import java.util.Map;

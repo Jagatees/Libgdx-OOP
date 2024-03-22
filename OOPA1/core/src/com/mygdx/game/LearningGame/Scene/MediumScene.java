@@ -1,12 +1,10 @@
-package com.mygdx.game.HealthyGame.Scene;
+package com.mygdx.game.LearningGame.Scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
 import com.mygdx.game.Engine.Controller.AIControlManagement;
@@ -14,9 +12,9 @@ import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
 import com.mygdx.game.Engine.Entity.*;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
-import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
-import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
+import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
+import com.mygdx.game.LearningGame.UserInterface.GameCanvas;
+import com.mygdx.game.LearningGame.UserInterface.GameOverCanvas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +38,7 @@ public class MediumScene extends TemplateScene {
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
 
     private Entity.EntityType entityType;
-    private int previousScore = HealthyGameLogic.getInstance().getScore();
+    private int previousScore = LearningGameLogic.getInstance().getScore();
 
     private Texture background;
 
@@ -48,7 +46,7 @@ public class MediumScene extends TemplateScene {
      * Constructor for GameScene, initializes game components, entities, and managers.
      */
     public MediumScene() {
-        HealthyGameLogic.getInstance().restartScore();
+        LearningGameLogic.getInstance().restartScore();
 
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
@@ -109,11 +107,11 @@ public class MediumScene extends TemplateScene {
         entityManager.setPlayerController((Player)pacman, playerControllerManagement);
 
         canvasManager = CanvasManager.getInstance();
-        canvasManager.setCanvas(new com.mygdx.game.HealthyGame.UserInterface.GameCanvas());
+        canvasManager.setCanvas(new com.mygdx.game.LearningGame.UserInterface.GameCanvas());
 
 
         /** Performs various checks to ensure that non-player entities are not spawned on top of objects that have already spawned **/
-        String word = HealthyGameLogic.getInstance().getCurrentWord();
+        String word = LearningGameLogic.getInstance().getCurrentWord();
 
         for (int i = 0; i < word.length(); i++) {
             boolean charOverlap = true;
@@ -274,7 +272,7 @@ public class MediumScene extends TemplateScene {
         canvasManager.render(delta);
         canvasManager.update(delta);
 
-        int currentScore = HealthyGameLogic.getInstance().getScore();
+        int currentScore = LearningGameLogic.getInstance().getScore();
         if (currentScore != previousScore) {
             // Do something when the score changes
             CanvasManager.getInstance().setCanvas(new GameCanvas());
@@ -300,13 +298,13 @@ public class MediumScene extends TemplateScene {
         }
 
         /** Constantly checks if current score has met the goal **/
-        if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().getScoreGoal()) {
+        if (LearningGameLogic.getInstance().getScore() >= LearningGameLogic.getInstance().getScoreGoal()) {
             mediumPassed = true;
-            HealthyGameLogic.Difficulty currentDifficulty = HealthyGameLogic.getInstance().getCurrentDifficulty();
+            LearningGameLogic.Difficulty currentDifficulty = LearningGameLogic.getInstance().getCurrentDifficulty();
 
-            if (currentDifficulty == HealthyGameLogic.Difficulty.MEDIUM && mediumPassed) {
+            if (currentDifficulty == LearningGameLogic.Difficulty.MEDIUM && mediumPassed) {
                 /** Restarts the score to prepare for next stage **/
-                HealthyGameLogic.getInstance().restartScore();
+                LearningGameLogic.getInstance().restartScore();
 
                 /** Resets entities **/
 //                EntityManager.getInstance().setAllEntitiesRemoved(true);
@@ -314,9 +312,9 @@ public class MediumScene extends TemplateScene {
                 EntityManager.getInstance().setyCords(pacman, 100);
 
                 /** Changes the difficulty of the stage, selects a new word from the new difficulty word list **/
-                HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.HARD);
-                HealthyGameLogic.getInstance().selectNewWord();
-                HealthyGameLogic.getInstance().setScoreGoal(HealthyGameLogic.getInstance().getCurrentWordLength());
+                LearningGameLogic.getInstance().setCurrentDifficulty(LearningGameLogic.Difficulty.HARD);
+                LearningGameLogic.getInstance().selectNewWord();
+                LearningGameLogic.getInstance().setScoreGoal(LearningGameLogic.getInstance().getCurrentWordLength());
 
                 EntityManager.getInstance().removeAllEntitiesCompletely();
 

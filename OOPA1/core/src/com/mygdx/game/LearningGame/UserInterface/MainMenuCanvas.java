@@ -1,4 +1,4 @@
-package com.mygdx.game.HealthyGame.UserInterface;
+package com.mygdx.game.LearningGame.UserInterface;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -10,15 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
-import com.mygdx.game.Engine.Canvas.ImageRenderer;
 import com.mygdx.game.Engine.Canvas.UIElements;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
-
 
 
 // Beta build

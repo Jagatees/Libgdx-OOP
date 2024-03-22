@@ -1,7 +1,6 @@
-package com.mygdx.game.HealthyGame.UserInterface;
+package com.mygdx.game.LearningGame.UserInterface;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,12 +14,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Engine.Canvas.Canvas;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Canvas.UIElements;
-import com.mygdx.game.Engine.Config.LauncherConfig;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons

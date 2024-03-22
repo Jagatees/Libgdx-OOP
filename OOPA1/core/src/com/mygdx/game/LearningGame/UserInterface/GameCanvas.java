@@ -1,4 +1,4 @@
-package com.mygdx.game.HealthyGame.UserInterface;
+package com.mygdx.game.LearningGame.UserInterface;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -14,8 +14,8 @@ import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.audio.AudioManager;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
-import com.mygdx.game.HealthyGame.GameLogic.Timer;
+import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
+import com.mygdx.game.LearningGame.GameLogic.Timer;
 
 /**
  * Implements the Canvas interface to create a UI canvas for the game menu using scene2d UI elements.
@@ -38,10 +38,10 @@ public class GameCanvas implements Canvas {
 
         UIElements.createLabel(stage, "Objective", 80, 670, Color.RED);
         UIElements.createLabel(stage, "Current Word : " +
-                        HealthyGameLogic.getInstance().getCurrentWord(),
+                        LearningGameLogic.getInstance().getCurrentWord(),
                 80, 650, Color.RED);
         UIElements.createLabel(stage, "Next Letter : " +
-                        HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()),
+                        LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()),
                 80, 630, Color.RED);
 
         // Create the timer label and store its reference

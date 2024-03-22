@@ -1,12 +1,9 @@
 package com.mygdx.game.Engine.GameController;
 
-import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.Engine.Entity.EntityManager;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 /**
  * Manages the lifecycle of the simulation or game, including starting, updating, rendering,

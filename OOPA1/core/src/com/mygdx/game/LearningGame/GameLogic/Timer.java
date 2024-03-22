@@ -1,4 +1,4 @@
-package com.mygdx.game.HealthyGame.GameLogic;
+package com.mygdx.game.LearningGame.GameLogic;
 
 public class Timer {
     private static Timer instance;

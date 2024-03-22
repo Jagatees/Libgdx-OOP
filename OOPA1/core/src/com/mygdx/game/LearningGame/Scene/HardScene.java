@@ -1,66 +1,58 @@
-package com.mygdx.game.HealthyGame.Scene;
+package com.mygdx.game.LearningGame.Scene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Engine.Canvas.Canvas;
-import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
-import com.mygdx.game.Engine.Entity.*;
+import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
-import com.mygdx.game.Engine.Input.InputOutputManager;
+import com.mygdx.game.Engine.Entity.*;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
-import com.mygdx.game.HealthyGame.GameLogic.Timer;
-import com.mygdx.game.HealthyGame.UserInterface.GameCanvas;
-import com.mygdx.game.HealthyGame.UserInterface.GameOverCanvas;
-import com.mygdx.game.HealthyGame.UserInterface.MainMenuCanvas;
+import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
+import com.mygdx.game.LearningGame.GameLogic.Timer;
+import com.mygdx.game.LearningGame.UserInterface.GameCanvas;
+import com.mygdx.game.LearningGame.UserInterface.GameOverCanvas;
 
-import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 
 /**
  * The GameScene file a like clone of the TemplateScene as that is the Base version
  */
-public class EasyScene extends TemplateScene {
+public class HardScene extends TemplateScene {
 
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
+
     private EntityManager entityManager;
     private CollisionManager collisionManager;
     private CanvasManager canvasManager;
+
     private Entity pacman;
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
+
     private Entity.EntityType entityType;
-    EntityFactory entityFactory = new EntityFactory();
-    int minX = 40;
-    int maxX = 1210;
-    int minY = 40;
-    int maxY = 650;
+    private int previousScore = LearningGameLogic.getInstance().getScore();
+
     private Texture background;
-
-    private int previousScore = HealthyGameLogic.getInstance().getScore();
-
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
      */
-    public EasyScene() {
+    public HardScene() {
+        LearningGameLogic.getInstance().restartScore();
+
+
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
         entityManager = EntityManager.getInstance();
+        EntityFactory entityFactory = new EntityFactory();
 
         /** Creation of player entity via entity factory **/
         pacman = entityFactory.getEntityByInput("Player", "entity/bee.png", null, 100, 100, 10, Entity.EntityState.NULL, false, false,50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
@@ -77,9 +69,15 @@ public class EasyScene extends TemplateScene {
         entityManager.setPlayerController((Player)pacman, playerControllerManagement);
 
         canvasManager = CanvasManager.getInstance();
+        canvasManager.setCanvas(new com.mygdx.game.LearningGame.UserInterface.GameCanvas());
 
         /** Performs various checks to ensure that non-player entities are not spawned on top of objects that have already spawned **/
-        String word = HealthyGameLogic.getInstance().getCurrentWord();
+        String word = LearningGameLogic.getInstance().getCurrentWord();
+
+        int minX = 40;
+        int maxX = 1210;
+        int minY = 40;
+        int maxY = 650;
 
         for (int i = 0; i < word.length(); i++) {
             boolean charOverlap = true;
@@ -207,7 +205,21 @@ public class EasyScene extends TemplateScene {
             entityManager.setAIController(enemy, aiControlManagement);
         }
 
-        background = new Texture("background/bg-2.jpg");
+        background = new Texture("background/bg-6.jpg");
+    }
+
+    public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
+        int x = startX;
+        int y = startY;
+        for (int i = 0; i < segments; i++) {
+            nonPlayer wallSegment = new nonPlayer(spritePath, x, y, 0, Entity.EntityState.NULL, false, true, segmentSize, segmentSize, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
+            entityManager.addEntity(wallSegment);
+            if (vertical) {
+                y += segmentSize + spacing; // Move down for the next segment if vertical
+            } else {
+                x += segmentSize + spacing; // Move right for the next segment if horizontal
+            }
+        }
     }
 
     /**
@@ -220,15 +232,12 @@ public class EasyScene extends TemplateScene {
         batch.end();
 
         entityManager.render(batch, shapeRenderer);
+
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
         canvasManager.update(delta);
 
-
-        System.out.println(Timer.getInstance().getTime());
-
-
-        int currentScore = HealthyGameLogic.getInstance().getScore();
+        int currentScore = LearningGameLogic.getInstance().getScore();
         if (currentScore != previousScore) {
             // Do something when the score changes
             CanvasManager.getInstance().setCanvas(new GameCanvas());
@@ -237,10 +246,14 @@ public class EasyScene extends TemplateScene {
 
     }
 
-    boolean easyPassed = false;
+    /**
+     * Update method to process game logic updates based on the time since the last frame.
+     * @param delta Time passed since the last frame, in seconds.
+     */
+
+    boolean hardPassed;
     @Override
     public void update(float delta) {
-
         // Implementation adjusted to remove references to the removed 'enemy'
         entityManager.movement(pacman);
 
@@ -248,37 +261,25 @@ public class EasyScene extends TemplateScene {
             entityManager.movement(enemy);
         }
 
-
         /** Constantly checks if current score has met the goal **/
-        if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().getScoreGoal()) {
-            easyPassed = true;
-            HealthyGameLogic.Difficulty currentDifficulty = HealthyGameLogic.getInstance().getCurrentDifficulty();
+        if (LearningGameLogic.getInstance().getScore() >= LearningGameLogic.getInstance().getScoreGoal() ) {
+            hardPassed = true;
+            /** Restarts the score to prepare for next stage (if exists) **/
+            LearningGameLogic.getInstance().restartScore();
 
-            if (currentDifficulty == HealthyGameLogic.Difficulty.EASY && easyPassed) {
-                /** Restarts the score to prepare for next stage **/
-                HealthyGameLogic.getInstance().restartScore();
+            /** Resets entities **/
+//            EntityManager.getInstance().setAllEntitiesRemoved(true);
+            EntityManager.getInstance().setxCords(pacman, 100);
+            EntityManager.getInstance().setyCords(pacman, 100);
 
-                /** Resets entities **/
-                EntityManager.getInstance().setxCords(pacman, 100);
-                EntityManager.getInstance().setyCords(pacman, 100);
+            /** Transition to game over scene since game is over **/
+            SceneManager.getInstance().setScene("GameOver");
+            CanvasManager.getInstance().setCanvas(new GameOverCanvas());
+            
+            /** Frees memory at end of game **/
+            EntityManager.getInstance().removeAllEntitiesCompletely();
 
-                /** Changes the difficulty of the stage, selects a new word from the new difficulty word list **/
-                HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.MEDIUM);
-                HealthyGameLogic.getInstance().selectNewWord();
-                HealthyGameLogic.getInstance().setScoreGoal(HealthyGameLogic.getInstance().getCurrentWordLength());
-
-                EntityManager.getInstance().removeAllEntitiesCompletely();
-
-                /** Transitions into another scene to introduce more "difficulty-specific" elements (i.e. blocks/spikes/etc.) **/
-                SceneManager.getInstance().setScene("MediumStage");
-
-
-            }
-
-            /** Transition to game over scene since player did not pass this stage **/
-            if (!easyPassed) {
-                CanvasManager.getInstance().setCanvas(new GameOverCanvas());
-            }
+            Timer.getInstance().stop();
         }
 
     }
@@ -297,20 +298,6 @@ public class EasyScene extends TemplateScene {
     @Override
     public void create() {
 
-    }
-
-    private void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
-        int x = startX;
-        int y = startY;
-        for (int i = 0; i < segments; i++) {
-            nonPlayer wallSegment = new nonPlayer(spritePath, x, y, 0, Entity.EntityState.NULL, false, true, segmentSize, segmentSize, Entity.EntityType.NULL, Entity.RenderType.SPRITE);
-            entityManager.addEntity(wallSegment);
-            if (vertical) {
-                y += segmentSize + spacing; // Move down for the next segment if vertical
-            } else {
-                x += segmentSize + spacing; // Move right for the next segment if horizontal
-            }
-        }
     }
 
 }

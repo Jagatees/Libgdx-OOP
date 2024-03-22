@@ -1,14 +1,14 @@
-package com.mygdx.game.HealthyGame.GameLogic;
+package com.mygdx.game.LearningGame.GameLogic;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 /**
- * Singleton class for managing the logic of a healthy-themed game.
+ * Singleton class for managing the logic of a learning-themed game.
  * Controls the game's difficulty, word selection, and scoring.
  */
-public class HealthyGameLogic {
+public class LearningGameLogic {
     public enum Difficulty {
 
         /** List of Words to use according to difficulty **/
@@ -26,7 +26,7 @@ public class HealthyGameLogic {
     }
 
     private static final char DEFAULT_CHAR = '!'; // Default character when current word is invalid
-    private static volatile HealthyGameLogic instance;
+    private static volatile LearningGameLogic instance;
     private Difficulty currentDifficulty;
     private StringBuilder collectedLetters = new StringBuilder();
     private String currentWord;
@@ -35,18 +35,18 @@ public class HealthyGameLogic {
 
     /** Set difficulty to EASY at the start of the game & selects a word from easy word list **/
 
-    private HealthyGameLogic() {
+    private LearningGameLogic() {
         Timer.getInstance().start();
         this.currentDifficulty = Difficulty.EASY;
         selectNewWord();
         setScoreGoal(currentWord.length());
     }
 
-    public static HealthyGameLogic getInstance() {
+    public static LearningGameLogic getInstance() {
         if (instance == null) {
-            synchronized (HealthyGameLogic.class) {
+            synchronized (LearningGameLogic.class) {
                 if (instance == null) {
-                    instance = new HealthyGameLogic();
+                    instance = new LearningGameLogic();
                 }
             }
         }

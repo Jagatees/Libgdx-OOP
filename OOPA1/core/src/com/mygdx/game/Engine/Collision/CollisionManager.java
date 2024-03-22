@@ -1,10 +1,8 @@
 package com.mygdx.game.Engine.Collision;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Engine.Entity.Entity;
 import com.mygdx.game.Engine.Entity.EntityManager;
-import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
+import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
 
 import java.util.Objects;
 
@@ -14,7 +12,7 @@ import java.util.Objects;
  */
 public class CollisionManager {
 
-    HealthyGameLogic healthyGameLogic = HealthyGameLogic.getInstance();
+    LearningGameLogic learningGameLogic = LearningGameLogic.getInstance();
 
 
     /**
@@ -52,7 +50,7 @@ public class CollisionManager {
 
         // get current word
 
-        String word = healthyGameLogic.getCurrentWord();
+        String word = learningGameLogic.getCurrentWord();
 
         Entity.EntityType typeEntityType = EntityManager.getInstance().getType(type);
         Entity.EntityType type1EntityType = EntityManager.getInstance().getType(type1);
@@ -60,10 +58,10 @@ public class CollisionManager {
 //        System.out.println("Type: " + typeEntityType + " Type2: " + type1EntityType);
 
 
-        if (HealthyGameLogic.getInstance().getScore() != word.length()) {
+        if (LearningGameLogic.getInstance().getScore() != word.length()) {
             // Make sure get the right letter first
-            if (Objects.equals(type1EntityType.getLetter(), String.valueOf(HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()))) ||
-                    Objects.equals(typeEntityType.getLetter(), String.valueOf(HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()))
+            if (Objects.equals(type1EntityType.getLetter(), String.valueOf(LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()))) ||
+                    Objects.equals(typeEntityType.getLetter(), String.valueOf(LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()))
 
                     ))
             {
@@ -74,7 +72,7 @@ public class CollisionManager {
                     (type1EntityType == Entity.EntityType.PLAYER && typeEntityType.isLetter())) {
 
                     // Increment score regardless of which entity is the PLAYER
-                    healthyGameLogic.addScore(1);
+                    learningGameLogic.addScore(1);
 
                     // Remove the non-PLAYER entity
                     if (typeEntityType == Entity.EntityType.PLAYER) {
@@ -83,13 +81,13 @@ public class CollisionManager {
                         EntityManager.getInstance().removeEntity(type);
                     }
 
-                    System.out.println("Current Difficulty: " + HealthyGameLogic.getInstance().getCurrentDifficulty());
-                    System.out.println("Current Current Word: " + HealthyGameLogic.getInstance().getCurrentWord());
-                    System.out.println("Current Score: " + HealthyGameLogic.getInstance().getScore());
+                    System.out.println("Current Difficulty: " + LearningGameLogic.getInstance().getCurrentDifficulty());
+                    System.out.println("Current Current Word: " + LearningGameLogic.getInstance().getCurrentWord());
+                    System.out.println("Current Score: " + LearningGameLogic.getInstance().getScore());
 
                     // Check score against current word length
-                    if (HealthyGameLogic.getInstance().getScore() != healthyGameLogic.getCurrentWord().length()) {
-                        System.out.println("Next Letter: " + HealthyGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(HealthyGameLogic.getInstance().getScore()));
+                    if (LearningGameLogic.getInstance().getScore() != learningGameLogic.getCurrentWord().length()) {
+                        System.out.println("Next Letter: " + LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()));
                     }
                 }
 
