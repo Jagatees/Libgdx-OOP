@@ -62,6 +62,7 @@ public class EasyScene extends TemplateScene {
         collisionManager = new CollisionManager();
         entityManager = EntityManager.getInstance();
 
+        /** Creation of player entity via entity factory **/
         pacman = entityFactory.getEntityByInput("Player", "entity/bee.png", null, 100, 100, 10, Entity.EntityState.NULL, false, false,50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
 
         createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
@@ -73,15 +74,14 @@ public class EasyScene extends TemplateScene {
 //                minX, maxX, minY, maxY, Color.GRAY, 50, 50);
         entityManager.addEntity(pacman);
 
+        /** Assignment of player controller for created player **/
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement((Player)pacman, entityManager, collisionManager);
         entityManager.setPlayerController((Player)pacman, playerControllerManagement);
 
         canvasManager = CanvasManager.getInstance();
 
+        /** Performs various checks to ensure that non-player entities are not spawned on top of objects that have already spawned **/
         String word = HealthyGameLogic.getInstance().getCurrentWord();
-
-
-
 
         for (int i = 0; i < word.length(); i++) {
             int x, y;
@@ -101,6 +101,7 @@ public class EasyScene extends TemplateScene {
                     // Add the new occupied area to the list
                     occupiedAreas.add(new Rectangle(x, y, 50, 50));
 
+                    /** Checks for the character of the current index of word, and sets entityType to the EntityType of character found **/
                     switch(String.valueOf(word.charAt(i))) {
                         case "A":
                             entityType = Entity.EntityType.A;
@@ -180,9 +181,8 @@ public class EasyScene extends TemplateScene {
                         case "Z":
                             entityType = Entity.EntityType.Z;
                             break;
-                        // Optionally, you can have a default case if the input doesn't match any letter
+                        /** Defaults to breaking the loop, should a case not be found **/
                         default:
-                            // Handle an unexpected input
                             break;
                     }
 
@@ -195,6 +195,7 @@ public class EasyScene extends TemplateScene {
             }
         }
 
+        /** Assignemnt of AI Controller for some non-player entities **/
         for (nonPlayer enemy : listNonPlayerEnemy) {
             AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
             entityManager.setAIController(enemy, aiControlManagement);
@@ -258,28 +259,32 @@ public class EasyScene extends TemplateScene {
             entityManager.movement(enemy);
         }
 
+
+        /** Constantly checks if current score has met the goal **/
         if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().getScoreGoal()) {
             easyPassed = true;
             HealthyGameLogic.Difficulty currentDifficulty = HealthyGameLogic.getInstance().getCurrentDifficulty();
 
             if (currentDifficulty == HealthyGameLogic.Difficulty.EASY && easyPassed) {
+                /** Restarts the score to prepare for next stage **/
                 HealthyGameLogic.getInstance().restartScore();
 
-                // Reset
+                /** Resets entities **/
                 EntityManager.getInstance().setAllEntitiesRemoved(true);
                 EntityManager.getInstance().setxCords(pacman, 100);
                 EntityManager.getInstance().setyCords(pacman, 100);
 
-                // Switch scene
+                /** Changes the difficulty of the stage, selects a new word from the new difficulty word list **/
                 HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.MEDIUM);
                 HealthyGameLogic.getInstance().selectNewWord();
                 HealthyGameLogic.getInstance().setScoreGoal(HealthyGameLogic.getInstance().getCurrentWordLength());
 
-
+                /** Transitions into another scene to introduce more "difficulty-specific" elements (i.e. blocks/spikes/etc.) **/
                 SceneManager.getInstance().setScene("MediumStage");
 
             }
 
+            /** Transition to game over scene since player did not pass this stage **/
             if (!easyPassed) {
                 CanvasManager.getInstance().setCanvas(new GameOverCanvas());
             }
