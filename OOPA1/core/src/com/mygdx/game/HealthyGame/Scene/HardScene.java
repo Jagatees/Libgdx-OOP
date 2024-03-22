@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Collision.CollisionManager;
@@ -45,6 +46,7 @@ public class HardScene extends TemplateScene {
      */
     public HardScene() {
         HealthyGameLogic.getInstance().setScore(0);
+
 
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
@@ -261,7 +263,8 @@ public class HardScene extends TemplateScene {
             entityManager.movement(enemy);
         }
 
-        if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().getScoreGoal()) {
+
+        if (HealthyGameLogic.getInstance().getScore() >= HealthyGameLogic.getInstance().getScoreGoal() ) {
             hardPassed = true;
             HealthyGameLogic.getInstance().restartScore();
 
@@ -272,8 +275,7 @@ public class HardScene extends TemplateScene {
             SceneManager.getInstance().setScene("GameOver");
             CanvasManager.getInstance().setCanvas(new GameOverCanvas());
 
-            // Reset difficult after last stage
-            HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.EASY);
+
         }
 
     }

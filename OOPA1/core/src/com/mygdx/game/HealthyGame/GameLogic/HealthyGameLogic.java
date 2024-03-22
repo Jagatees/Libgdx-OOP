@@ -65,6 +65,14 @@ public class HealthyGameLogic {
         }
     }
 
+    public int getCurrentWordLength() {
+        if (currentWord != null) {
+            return currentWord.length();
+        } else {
+            return 0; // Return 0 if there's no current word selected
+        }
+    }
+
     private void updateScore() {
         score += 1;
     }
@@ -78,7 +86,7 @@ public class HealthyGameLogic {
 
         if (Arrays.equals(collectedLettersSorted, currentWordSorted)) {
             System.out.println("Word completed: " + currentWord);
-            selectNewWord(); // Select a new word
+//            selectNewWord(); // Select a new word
         }
     }
 

@@ -83,7 +83,8 @@ public class CollisionManager {
                         EntityManager.getInstance().removeEntity(type);
                     }
 
-                    // Output current score
+                    System.out.println("Current Difficulty: " + HealthyGameLogic.getInstance().getCurrentDifficulty());
+                    System.out.println("Current Current Word: " + HealthyGameLogic.getInstance().getCurrentWord());
                     System.out.println("Current Score: " + HealthyGameLogic.getInstance().getScore());
 
                     // Check score against current word length

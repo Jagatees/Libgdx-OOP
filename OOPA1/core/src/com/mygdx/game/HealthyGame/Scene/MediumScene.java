@@ -46,6 +46,10 @@ public class MediumScene extends TemplateScene {
      */
     public MediumScene() {
         HealthyGameLogic.getInstance().setScore(0);
+
+
+
+
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         collisionManager = new CollisionManager();
@@ -284,6 +288,9 @@ public class MediumScene extends TemplateScene {
 
                 // !! Required to change to setCanvas
                 SceneManager.getInstance().setScene("HardStage");
+                HealthyGameLogic.getInstance().selectNewWord();
+                HealthyGameLogic.getInstance().setScoreGoal(HealthyGameLogic.getInstance().getCurrentWordLength());
+
 //                CanvasManager.getInstance().setCanvas(new GameCanvas());
             }
 
