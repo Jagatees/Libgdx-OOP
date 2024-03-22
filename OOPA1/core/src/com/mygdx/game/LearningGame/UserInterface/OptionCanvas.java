@@ -31,8 +31,8 @@ public class OptionCanvas implements Canvas {
 
     private SpriteBatch batch;
     private Texture background;
-
-
+    CheckBox musicCheckBox;
+    CheckBox soundCheckBox;
     public OptionCanvas() {
         Gdx.input.setInputProcessor(stage);
 
@@ -71,12 +71,20 @@ public class OptionCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Slider slider = (Slider) actor;
-                System.out.println("Slider Value: " + slider.getValue());
-                InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.BG_1, slider.getValue());
+                float sliderValue = slider.getValue();
+                System.out.println("Slider Value: " + sliderValue);
+                InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.BG_1, sliderValue);
+
+                // If slider value is zero, uncheck the checkbox
+                if (sliderValue == 0f) {
+                    musicCheckBox.setChecked(false);
+                } else {
+                    musicCheckBox.setChecked(true);
+                }
             }
         });
 
-        CheckBox musicCheckBox = UIElements.createCheckBox(stage, "Turn BG_1 On/Off", 420, 600, true, new ChangeListener() {
+         musicCheckBox = UIElements.createCheckBox(stage, "Turn BG_1 On/Off", 420, 600, true, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 CheckBox checkBox = (CheckBox) actor;
@@ -100,11 +108,18 @@ public class OptionCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Slider slider = (Slider) actor;
-                InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.MOUSE_CLICK, slider.getValue());
+                float sliderValue = slider.getValue();
+                InputOutputManager.getInstance().getAudioManager().setVolume(AudioAssetKey.MOUSE_CLICK, sliderValue);
+                if (sliderValue == 0f) {
+                    soundCheckBox.setChecked(false);
+                } else {
+                    soundCheckBox.setChecked(true);
+                }
+
             }
         });
 
-        CheckBox soundCheckBox = UIElements.createCheckBox(stage, "Turn Sound Effect On/Off", 420, 500, true, new ChangeListener() {
+         soundCheckBox = UIElements.createCheckBox(stage, "Turn Sound Effect On/Off", 420, 500, true, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 CheckBox checkBox = (CheckBox) actor;
