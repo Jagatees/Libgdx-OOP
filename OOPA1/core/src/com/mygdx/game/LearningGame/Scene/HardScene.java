@@ -11,6 +11,7 @@ import com.mygdx.game.Engine.Collision.CollisionManager;
 import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
 import com.mygdx.game.Engine.Entity.*;
+import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Scenes.SceneManager;
 import com.mygdx.game.Engine.Scenes.TemplateScene;
 import com.mygdx.game.LearningGame.GameLogic.LearningGameLogic;
@@ -44,6 +45,11 @@ public class HardScene extends TemplateScene {
     private Texture background;
 
     private Entity sabotageCube;
+
+    private float lightIntensity = 1f;
+    private boolean increasingIntensity = false;
+    private float darknessDelayTimer = 0f;
+    private final float darknessDelayDuration = 0.5f;
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -245,6 +251,16 @@ public class HardScene extends TemplateScene {
         entityManager.render(batch, shapeRenderer);
 
 
+        // Use lightIntensity to simulate light conditions
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(new Color(0, 0, 0, 1 - lightIntensity)); // Adjust alpha based on lightIntensity
+        shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+
+
 
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
@@ -295,6 +311,33 @@ public class HardScene extends TemplateScene {
             EntityManager.getInstance().removeAllEntitiesCompletely();
 
             Timer.getInstance().stop();
+        }
+
+
+        if (!SimulationLifecycleManagement.getInstance().isPaused()){
+            if (increasingIntensity) {
+                if (darknessDelayTimer > 0) {
+                    // If we are in the delay phase, decrease the timer
+                    darknessDelayTimer -= delta;
+                } else {
+                    // Once the delay is over, start increasing the light intensity
+                    lightIntensity += 0.1f * delta;
+                    if (lightIntensity >= 1) {
+                        lightIntensity = 1;
+                        increasingIntensity = false; // Prepare to decrease intensity next cycle
+                    }
+                }
+            } else {
+                lightIntensity -= 0.1f * delta; // Decrease light intensity
+                if (lightIntensity <= 0) {
+                    lightIntensity = 0;
+                    increasingIntensity = true; // Start increasing the intensity
+                    darknessDelayTimer = darknessDelayDuration; // Reset the delay timer
+                }
+            }
+        } else {
+            lightIntensity = 1f;
+
         }
 
     }
