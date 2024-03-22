@@ -2,6 +2,7 @@ package com.mygdx.game.HealthyGame.Scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -37,12 +38,11 @@ public class MediumScene extends TemplateScene {
     private Entity pacman;
     private Entity boxPlayer;
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
-    private Entity tempEnemy;
 
     private Entity.EntityType entityType;
-
-    EntityFactory entityFactory = new EntityFactory();
     private int previousScore = HealthyGameLogic.getInstance().getScore();
+
+    private Texture background;
 
     /**
      * Constructor for GameScene, initializes game components, entities, and managers.
@@ -241,6 +241,7 @@ public class MediumScene extends TemplateScene {
             entityManager.setAIController(enemy, aiControlManagement);
         }
 
+        background = new Texture("background/bg-5.jpg");
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
@@ -263,7 +264,10 @@ public class MediumScene extends TemplateScene {
     @Override
     public void render() {
 
-        ScreenUtils.clear((float) 0.8, (float) 0.8, (float) 0.8, 1);
+        batch.begin();
+        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
+
         entityManager.render(batch, shapeRenderer);
 
         float delta = Gdx.graphics.getDeltaTime();
@@ -335,6 +339,7 @@ public class MediumScene extends TemplateScene {
     @Override
     public void dispose() {
         batch.dispose();
+        background.dispose();
         shapeRenderer.dispose();
         canvasManager.dispose();
     }

@@ -2,6 +2,7 @@ package com.mygdx.game.HealthyGame.Scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -43,15 +44,12 @@ public class EasyScene extends TemplateScene {
     private List<nonPlayer> listNonPlayerEnemy = new ArrayList<>();
     private Entity.EntityType entityType;
     EntityFactory entityFactory = new EntityFactory();
-    private List<Rectangle> spawnLocations = new ArrayList<>();
-    // Spawn Enemy
-    Random rand = new Random();
     int minX = 40;
     int maxX = 1210;
     int minY = 40;
     int maxY = 650;
+    private Texture background;
 
-    List<Rectangle> occupiedAreas = new ArrayList<>();
     private int previousScore = HealthyGameLogic.getInstance().getScore();
 
 
@@ -208,6 +206,8 @@ public class EasyScene extends TemplateScene {
             AIControlManagement aiControlManagement = new AIControlManagement(enemy, entityManager, collisionManager);
             entityManager.setAIController(enemy, aiControlManagement);
         }
+
+        background = new Texture("background/bg-2.jpg");
     }
 
     /**
@@ -215,7 +215,10 @@ public class EasyScene extends TemplateScene {
      */
     @Override
     public void render() {
-        ScreenUtils.clear((float) 0.8, (float) 0.8, (float) 0.8, 1);
+        batch.begin();
+        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
+
         entityManager.render(batch, shapeRenderer);
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
@@ -256,7 +259,6 @@ public class EasyScene extends TemplateScene {
                 HealthyGameLogic.getInstance().restartScore();
 
                 /** Resets entities **/
-//                EntityManager.getInstance().setAllEntitiesRemoved(true);
                 EntityManager.getInstance().setxCords(pacman, 100);
                 EntityManager.getInstance().setyCords(pacman, 100);
 
@@ -287,6 +289,7 @@ public class EasyScene extends TemplateScene {
     @Override
     public void dispose() {
         batch.dispose();
+        background.dispose();
         shapeRenderer.dispose();
         canvasManager.dispose();
     }
@@ -295,43 +298,6 @@ public class EasyScene extends TemplateScene {
     public void create() {
 
     }
-
-
-    // Method to check if the given point is too close to any existing entity
-    private boolean isTooCloseToEntity(int x, int y, List<Rectangle> occupiedAreas, int minDistance) {
-        for (Rectangle area : occupiedAreas) {
-            double distance = Math.sqrt(Math.pow(x - area.getX(), 2) + Math.pow(y - area.getY(), 2));
-            if (distance < minDistance) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Method to check if a point is occupied by any entity
-    private boolean isPointOccupied(int x, int y, List<Rectangle> occupiedAreas) {
-        for (Rectangle area : occupiedAreas) {
-            if (area.contains(x, y)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /** Method to return boolean value based on checks if x and y are too close to player object **/
-    private boolean tooCloseToPlayer(int x, int y, Entity player) {
-        if (player != null) {
-            float playerX = EntityManager.getInstance().getxCords(player);
-            float playerY = EntityManager.getInstance().getxCords(player);
-            double distance = Math.sqrt(Math.pow(x - playerX, 2) + Math.pow(y - playerY, 2));
-            float minDistance = EntityManager.getInstance().getWidth(player) + 20; // Adjust the buffer distance as needed
-            if (distance < minDistance) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     private void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
         int x = startX;
