@@ -20,6 +20,7 @@ import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
 import com.mygdx.game.Engine.Input.InputOutputManager;
 import com.mygdx.game.Engine.audio.AudioAssetKey;
 import com.mygdx.game.Engine.audio.AudioManager;
+import com.mygdx.game.HealthyGame.GameLogic.HealthyGameLogic;
 
 /**
  * Defines the canvas for the main menu, including UI elements like buttons
@@ -37,10 +38,13 @@ public class OptionCanvas implements Canvas {
     public OptionCanvas() {
         Gdx.input.setInputProcessor(stage);
 
-
         for (int i = 0; i < 26; i++) {
             keyboardKeys[i] = String.valueOf((char)(i + 65));
         }
+
+
+
+
         UIElements.createLabel(stage, "OPTIONS", 600, 650, Color.RED);
         UIElements.createTextButton(stage, "Back", 1100, 100, 100, 50, Color.RED , new ChangeListener() {
             @Override

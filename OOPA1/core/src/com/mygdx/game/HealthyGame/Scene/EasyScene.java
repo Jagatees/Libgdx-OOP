@@ -211,6 +211,10 @@ public class EasyScene extends TemplateScene {
         float delta = Gdx.graphics.getDeltaTime();
         canvasManager.render(delta);
         canvasManager.update(delta);
+
+        // create a timer then update this only when the score is increate then do not allows
+        CanvasManager.getInstance().setCanvas(new GameCanvas());
+
     }
 
     public void spawnEntitiesRandomlyWithinBoundary(int numEntities, int minX, int maxX, int minY, int maxY, Color color, int width, int height) {
@@ -268,13 +272,12 @@ public class EasyScene extends TemplateScene {
 
                 // Switch scene
                 HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.MEDIUM);
-//                HealthyGameLogic.getInstance().selectNewWord();
+                HealthyGameLogic.getInstance().selectNewWord();
                 HealthyGameLogic.getInstance().setScoreGoal(HealthyGameLogic.getInstance().getCurrentWordLength());
 
 
-                // !! Required to change to setCanvas
                 SceneManager.getInstance().setScene("MediumStage");
-//                CanvasManager.getInstance().setCanvas(new GameCanvas());
+
             }
 
             if (!easyPassed) {
