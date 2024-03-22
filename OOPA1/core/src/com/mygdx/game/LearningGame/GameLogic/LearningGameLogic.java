@@ -32,7 +32,6 @@ public class LearningGameLogic {
     private int score = 0;
     private int goal = 0;
 
-    /** Set difficulty to EASY at the start of the game & selects a word from easy word list **/
 
     private LearningGameLogic() {
         Timer.getInstance().start();
