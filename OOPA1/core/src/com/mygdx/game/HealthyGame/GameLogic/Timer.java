@@ -49,11 +49,18 @@ public class Timer {
         }
     }
 
-    public long getTime() {
+    public String getTime() {
+        long totalTimeMillis;
         if (isRunning) {
-            return System.currentTimeMillis() - startTime;
+            totalTimeMillis = System.currentTimeMillis() - startTime;
         } else {
-            return elapsedTime;
+            totalTimeMillis = elapsedTime;
         }
+
+        long seconds = totalTimeMillis / 1000;
+        long minutes = seconds / 60;
+        seconds %= 60;
+
+        return String.format("%02d:%02d", minutes, seconds);
     }
 }

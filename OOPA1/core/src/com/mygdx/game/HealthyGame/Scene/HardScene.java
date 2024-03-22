@@ -311,7 +311,6 @@ public class HardScene extends TemplateScene {
             EntityManager.getInstance().removeAllEntitiesCompletely();
 
             Timer.getInstance().stop();
-            System.out.println(Timer.getInstance().getTime());
         }
 
     }
