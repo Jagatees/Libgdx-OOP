@@ -56,7 +56,8 @@ public class MediumScene extends TemplateScene {
 
         /** Creation of player entity via entity factory **/
         pacman = entityFactory.getEntityByInput("Player", "entity/bee.png", null, 100, 100, 10, Entity.EntityState.NULL, false, false,50, 50, Entity.EntityType.PLAYER, Entity.RenderType.SPRITE);
-
+        entityManager.addEntity(pacman);
+        
         createWall("entity/wall.jpg", -20, 0, 15, 50, 0, true);
         createWall("entity/wall.jpg", 0, -20, 30, 50, 0, false);
         createWall("entity/wall.jpg", 0, 700, 30, 50, 0, false);
@@ -99,8 +100,6 @@ public class MediumScene extends TemplateScene {
                 }
             }
         }
-
-        entityManager.addEntity(pacman);
 
         /** Assignment of player controller for created player **/
         PlayerControllerManagement playerControllerManagement = new PlayerControllerManagement((Player)pacman, entityManager, collisionManager);
