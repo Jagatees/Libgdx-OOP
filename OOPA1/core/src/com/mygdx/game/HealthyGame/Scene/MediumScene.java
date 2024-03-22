@@ -65,8 +65,42 @@ public class MediumScene extends TemplateScene {
         createWall("entity/wall.jpg", 1260, 0, 15, 50, 0, true);
 
         /** Creation of non-player entity which is not an AI via entity factory **/
-        boxPlayer = entityFactory.getEntityByInput("nonPlayer", null, Color.GRAY, 200, 200, 10, Entity.EntityState.NULL, false, false,  50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
-        entityManager.addEntity(boxPlayer);
+
+        int minX = 40;
+        int maxX = 1210;
+        int minY = 40;
+        int maxY = 650;
+
+        /** Spawns 10 obstructions (grey boxes) **/
+        for (int i = 0; i < 10; i++) {
+            boolean overlap = true;
+
+            while (overlap) {
+                Random rand = new Random();
+                int randomX = rand.nextInt(maxX - minX + 1) + minX;
+                int randomY = rand.nextInt(maxY - minY + 1) + minY;
+
+                for (Entity entity : entityManager.getAllEntities()) {
+                    float entityX = EntityManager.getInstance().getxCords(entity);
+                    float entityY = EntityManager.getInstance().getyCords(entity);
+
+                    /** Gives about +- 20 padding/margin to check **/
+                    if (Math.abs(randomX - entityX) <= 50 && Math.abs(randomY - entityY) <= 50) {
+                        overlap = true; // Overlap detected, retry random position
+                        break;
+                    }
+
+                    else {
+                        overlap = false;
+                    }
+                }
+
+                if (!overlap) {
+                    boxPlayer = entityFactory.getEntityByInput("nonPlayer", null, Color.GRAY, randomX, randomY, 10, Entity.EntityState.NULL, false, false, 50, 50, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+                    entityManager.addEntity(boxPlayer);
+                }
+            }
+        }
 
         entityManager.addEntity(pacman);
 
@@ -82,10 +116,6 @@ public class MediumScene extends TemplateScene {
         String word = HealthyGameLogic.getInstance().getCurrentWord();
 
         Random rand = new Random();
-        int minX = 40;
-        int maxX = 1210;
-        int minY = 40;
-        int maxY = 650;
 
         List<Rectangle> occupiedAreas = new ArrayList<>();
 
@@ -240,6 +270,10 @@ public class MediumScene extends TemplateScene {
         return false;
     }
 
+//    private boolean isTooClose(Entity entity, float minDistance) {
+//        for (Entity exisitingEntity : entityManager.get)
+//    }
+
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
         int x = startX;
@@ -303,7 +337,7 @@ public class MediumScene extends TemplateScene {
                 HealthyGameLogic.getInstance().restartScore();
 
                 /** Resets entities **/
-                EntityManager.getInstance().setAllEntitiesRemoved(true);
+//                EntityManager.getInstance().setAllEntitiesRemoved(true);
                 EntityManager.getInstance().setxCords(pacman, 100);
                 EntityManager.getInstance().setyCords(pacman, 100);
 
@@ -311,6 +345,8 @@ public class MediumScene extends TemplateScene {
                 HealthyGameLogic.getInstance().setCurrentDifficulty(HealthyGameLogic.Difficulty.HARD);
                 HealthyGameLogic.getInstance().selectNewWord();
                 HealthyGameLogic.getInstance().setScoreGoal(HealthyGameLogic.getInstance().getCurrentWordLength());
+
+                EntityManager.getInstance().removeAllEntitiesCompletely();
 
                 /** Transitions into another scene to introduce more "difficulty-specific" elements (i.e. blocks/spikes/etc.) **/
                 SceneManager.getInstance().setScene("HardStage");

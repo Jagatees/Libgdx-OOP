@@ -277,7 +277,7 @@ public class EasyScene extends TemplateScene {
                 HealthyGameLogic.getInstance().restartScore();
 
                 /** Resets entities **/
-                EntityManager.getInstance().setAllEntitiesRemoved(true);
+//                EntityManager.getInstance().setAllEntitiesRemoved(true);
                 EntityManager.getInstance().setxCords(pacman, 100);
                 EntityManager.getInstance().setyCords(pacman, 100);
 
@@ -286,8 +286,11 @@ public class EasyScene extends TemplateScene {
                 HealthyGameLogic.getInstance().selectNewWord();
                 HealthyGameLogic.getInstance().setScoreGoal(HealthyGameLogic.getInstance().getCurrentWordLength());
 
+                EntityManager.getInstance().removeAllEntitiesCompletely();
+
                 /** Transitions into another scene to introduce more "difficulty-specific" elements (i.e. blocks/spikes/etc.) **/
                 SceneManager.getInstance().setScene("MediumStage");
+
 
             }
 

@@ -63,14 +63,6 @@ public class HealthyGameLogic {
         collectedLetters.setLength(0); // Reset collected letters
     }
 
-    public void collectLetter(char letter) {
-        if (currentWord.contains(String.valueOf(letter))) {
-            collectedLetters.append(letter);
-            updateScore();
-            checkWordCompletion();
-        }
-    }
-
     /** Gets the current selected word length - to be used for checking if user collected all the letters length required **/
     public int getCurrentWordLength() {
         if (currentWord != null) {
@@ -85,19 +77,6 @@ public class HealthyGameLogic {
         score += 1;
     }
 
-
-    private void checkWordCompletion() {
-        char[] collectedLettersSorted = collectedLetters.toString().toCharArray();
-        Arrays.sort(collectedLettersSorted);
-
-        char[] currentWordSorted = currentWord.toCharArray();
-        Arrays.sort(currentWordSorted);
-
-        if (Arrays.equals(collectedLettersSorted, currentWordSorted)) {
-            System.out.println("Word completed: " + currentWord);
-            selectNewWord(); // Select a new word
-        }
-    }
 
     /** Returns the current letter for the selected word **/
     public char getFirstLetterOfCurrentWordSafely(int index) {

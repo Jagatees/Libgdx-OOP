@@ -3,7 +3,6 @@ package com.mygdx.game.Engine.Entity;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.Engine.Canvas.CanvasManager;
 import com.mygdx.game.Engine.Controller.AIControlManagement;
 import com.mygdx.game.Engine.Controller.PlayerControllerManagement;
 import com.mygdx.game.Engine.GameController.SimulationLifecycleManagement;
@@ -61,6 +60,11 @@ public class EntityManager {
             }
         }
         return null;
+    }
+
+    /** Getter to retrieve all entities, regardless of type **/
+    public List<Entity> getAllEntities() {
+        return entities;
     }
     
     

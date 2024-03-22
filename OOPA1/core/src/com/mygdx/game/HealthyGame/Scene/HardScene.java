@@ -47,7 +47,7 @@ public class HardScene extends TemplateScene {
      * Constructor for GameScene, initializes game components, entities, and managers.
      */
     public HardScene() {
-        HealthyGameLogic.getInstance().setScore(0);
+        HealthyGameLogic.getInstance().restartScore();
 
 
         batch = new SpriteBatch();
@@ -298,7 +298,7 @@ public class HardScene extends TemplateScene {
             HealthyGameLogic.getInstance().restartScore();
 
             /** Resets entities **/
-            EntityManager.getInstance().setAllEntitiesRemoved(true);
+//            EntityManager.getInstance().setAllEntitiesRemoved(true);
             EntityManager.getInstance().setxCords(pacman, 100);
             EntityManager.getInstance().setyCords(pacman, 100);
 
