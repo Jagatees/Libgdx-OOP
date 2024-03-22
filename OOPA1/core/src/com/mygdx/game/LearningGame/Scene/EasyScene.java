@@ -197,7 +197,7 @@ public class EasyScene extends TemplateScene {
             entityManager.setAIController(enemy, aiControlManagement);
         }
 
-        background = new Texture("background/bg-2.jpg");
+        background = new Texture("background/bg-5.jpg");
     }
 
     /**

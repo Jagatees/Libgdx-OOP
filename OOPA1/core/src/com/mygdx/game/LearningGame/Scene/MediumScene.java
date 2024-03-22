@@ -238,7 +238,7 @@ public class MediumScene extends TemplateScene {
             entityManager.setAIController(enemy, aiControlManagement);
         }
 
-        background = new Texture("background/bg-5.jpg");
+        background = new Texture("background/bg-3.jpg");
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {

@@ -229,7 +229,7 @@ public class HardScene extends TemplateScene {
         entityManager.setAIController((nonPlayer) sabotageCube2, sabotageCube2AIController);
 
 
-        background = new Texture("background/bg-6.jpg");
+        background = new Texture("background/bg-2.jpg");
     }
 
     public void createWall(String spritePath, int startX, int startY, int segments, int segmentSize, int spacing, boolean vertical) {
