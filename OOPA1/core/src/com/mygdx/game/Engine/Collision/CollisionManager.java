@@ -13,21 +13,12 @@ import java.util.Objects;
  */
 public class CollisionManager {
 
-    LearningGameLogic learningGameLogic = LearningGameLogic.getInstance();
-
+    private LearningGameLogic learningGameLogic = LearningGameLogic.getInstance();
 
     /**
      * Checks if two rectangular entities intersect.
      * This method is a basic AABB (Axis-Aligned Bounding Box) collision check.
      *
-     * @param x1 The x-coordinate of the first entity's bottom-left corner.
-     * @param y1 The y-coordinate of the first entity's bottom-left corner.
-     * @param width1 The width of the first entity.
-     * @param height1 The height of the first entity.
-     * @param x2 The x-coordinate of the second entity's bottom-left corner.
-     * @param y2 The y-coordinate of the second entity's bottom-left corner.
-     * @param width2 The width of the second entity.
-     * @param height2 The height of the second entity.
      * @return true if the entities intersect, false otherwise.
      */
     public boolean checkCollision(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2) {
@@ -41,65 +32,41 @@ public class CollisionManager {
      * Handles the response to a collision between two entities based on their types.
      * This method can be expanded to include specific collision handling logic
      * depending on the types of entities involved.
-     *
-     * @param type The type of the first entity involved in the collision.
-     * @param type1 The type of the second entity involved in the collision.
      */
-    public void checkResponse(Entity type, Entity type1) {
-
-
-
-        // get current word
+    public void checkResponse(Entity entity1, Entity entity2) {
+        Entity.EntityType entityType1 = EntityManager.getInstance().getType(entity1);
+        Entity.EntityType entityType2 = EntityManager.getInstance().getType(entity2);
 
         String word = learningGameLogic.getCurrentWord();
 
-        Entity.EntityType typeEntityType = EntityManager.getInstance().getType(type);
-        Entity.EntityType type1EntityType = EntityManager.getInstance().getType(type1);
+        if (learningGameLogic.getScore() != word.length()) {
+            if (Objects.equals(entityType2.getLetter(), String.valueOf(learningGameLogic.getFirstLetterOfCurrentWordSafely(learningGameLogic.getScore()))) ||
+                    Objects.equals(entityType1.getLetter(), String.valueOf(learningGameLogic.getFirstLetterOfCurrentWordSafely(learningGameLogic.getScore())))) {
 
-//        System.out.println("Type: " + typeEntityType + " Type2: " + type1EntityType);
+                if ((entityType1 == Entity.EntityType.PLAYER && entityType2.isLetter()) ||
+                        (entityType2 == Entity.EntityType.PLAYER && entityType1.isLetter())) {
 
-
-        if (LearningGameLogic.getInstance().getScore() != word.length()) {
-            // Make sure get the right letter first
-            if (Objects.equals(type1EntityType.getLetter(), String.valueOf(LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()))) ||
-                    Objects.equals(typeEntityType.getLetter(), String.valueOf(LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()))))
-            {
-//                System.out.println("it match");
-
-                // Check if one entity is PLAYER and the other is any letter from A to Z.
-                if ((typeEntityType == Entity.EntityType.PLAYER && type1EntityType.isLetter()) ||
-                    (type1EntityType == Entity.EntityType.PLAYER && typeEntityType.isLetter())) {
-
-                    // Increment score regardless of which entity is the PLAYER
                     learningGameLogic.addScore(1);
 
-                    // Remove the non-PLAYER entity
-                    if (typeEntityType == Entity.EntityType.PLAYER) {
-                        EntityManager.getInstance().removeEntity(type1);
+                    if (entityType1 == Entity.EntityType.PLAYER) {
+                        EntityManager.getInstance().removeEntity(entity2);
                     } else {
-                        EntityManager.getInstance().removeEntity(type);
+                        EntityManager.getInstance().removeEntity(entity1);
                     }
 
-                    System.out.println("Current Difficulty: " + LearningGameLogic.getInstance().getCurrentDifficulty());
-                    System.out.println("Current Current Word: " + LearningGameLogic.getInstance().getCurrentWord());
-                    System.out.println("Current Score: " + LearningGameLogic.getInstance().getScore());
+                    System.out.println("Current Difficulty: " + learningGameLogic.getCurrentDifficulty());
+                    System.out.println("Current Word: " + learningGameLogic.getCurrentWord());
+                    System.out.println("Current Score: " + learningGameLogic.getScore());
 
-                    // Check score against current word length
-                    if (LearningGameLogic.getInstance().getScore() != learningGameLogic.getCurrentWord().length()) {
-                        System.out.println("Next Letter: " + LearningGameLogic.getInstance().getFirstLetterOfCurrentWordSafely(LearningGameLogic.getInstance().getScore()));
+                    if (learningGameLogic.getScore() != learningGameLogic.getCurrentWord().length()) {
+                        System.out.println("Next Letter: " + learningGameLogic.getFirstLetterOfCurrentWordSafely(learningGameLogic.getScore()));
                     }
                 }
-
-        } else {
-                System.out.println("add time");
+            } else {
+                System.out.println("Add time");
                 Timer.getInstance().addToTimer();
             }
-
-
         }
-
-
     }
 }
-
 

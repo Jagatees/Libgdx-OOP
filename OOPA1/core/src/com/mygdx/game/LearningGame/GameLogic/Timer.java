@@ -35,7 +35,7 @@ public class Timer {
 
     // Example method to add 10 seconds to the timer
     public void addToTimer() {
-        long tenSecondsInMillis = 10 * 1000;
+        long tenSecondsInMillis = 1 * 100;
         addTime(tenSecondsInMillis);
     }
 
