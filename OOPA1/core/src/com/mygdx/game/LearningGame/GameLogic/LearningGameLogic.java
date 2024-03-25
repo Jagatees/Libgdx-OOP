@@ -12,10 +12,12 @@ import java.util.Random;
  */
 public class LearningGameLogic {
     public enum Difficulty {
-        /** List of Words to use according to difficulty **/
-        EASY(Arrays.asList("EASYONE", "EASYTWO", "EASYTHREE")),
-        MEDIUM(Arrays.asList("MEDIUMONE", "MEDIUMTWO", "MEDIUMTHREE")),
-        HARD(Arrays.asList("HARDONE", "HARDTWO", "HARDTHREE"));
+        EASY(Arrays.asList("DOG", "CAT", "BALL", "BOOK", "HOUSE",
+                "TREE", "SUN", "RED", "RUN", "HAPPY")),
+        MEDIUM(Arrays.asList("ADVENTURE", "COURAGE", "MYSTERY", "HARMONY", "CHALLENGE",
+                "INNOVATION", "SERENITY", "PERSISTENCE", "TRANQUILITY", "RESILIENCE")),
+        HARD(Arrays.asList("EXTRAPOLATE", "DISCOMBOBULATE", "PERSPICACIOUS", "OBFUSCATE", "ANTEDILUVIAN",
+                "PERNICIOUS", "MELLIFLUOUS", "DISQUISITION", "CIRCUMLOCUTION", "EXACERBATE"));
 
         private final List<String> words;
         Difficulty(List<String> words) {
