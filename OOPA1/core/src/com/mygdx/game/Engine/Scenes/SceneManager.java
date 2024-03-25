@@ -108,7 +108,7 @@ public class SceneManager {
         // Implement scene creation logic here
         // Example:
          switch (sceneId) {
-             case "MainMeun":
+             case "MainMenu":
                  return new MainMenuScene();
              case "GameStage":
                  return new GameScene();

@@ -80,7 +80,7 @@ public class SimulationLifecycleManagement {
         AudioManager.getInstance().play(AudioAssetKey.BG_1);
         AudioManager.getInstance().setVolume(AudioAssetKey.BG_1, 0.1f);
 
-        SceneManager.getInstance().setScene("MainMeun");
+        SceneManager.getInstance().setScene("MainMenu");
     }
 
 
