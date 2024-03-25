@@ -39,7 +39,7 @@ public class MainMenuCanvas implements Canvas {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 AudioManager.getInstance().play(AudioAssetKey.MOUSE_CLICK);
-                SceneManager.getInstance().setScene("EasyStage");
+                SceneManager.getInstance().setScene("GameStage");
                 CanvasManager.getInstance().setCanvas(new GameCanvas());
                 EntityManager.getInstance().setAllEntitiesRemoved(false);
 

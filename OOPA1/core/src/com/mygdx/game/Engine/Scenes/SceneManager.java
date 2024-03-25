@@ -110,7 +110,7 @@ public class SceneManager {
          switch (sceneId) {
              case "MainMeun":
                  return new MainMenuScene();
-             case "EasyStage":
+             case "GameStage":
                  return new GameScene();
              case "HardStage":
                  return new HardScene();

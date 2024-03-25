@@ -124,7 +124,7 @@ public class GameScene extends TemplateScene {
                 LearningGameLogic.getInstance().setScoreGoal(LearningGameLogic.getInstance().getCurrentWordLength());
 
                 /** Stage with more medium difficulty now **/
-                SceneManager.getInstance().setScene("EasyStage");
+                SceneManager.getInstance().setScene("GameStage");
                 restartGame = true;
 
                 /** Reset Entities **/
@@ -143,7 +143,7 @@ public class GameScene extends TemplateScene {
                 LearningGameLogic.getInstance().setScoreGoal(LearningGameLogic.getInstance().getCurrentWordLength());
 
                 /** Stage with more hard difficulty now **/
-                SceneManager.getInstance().setScene("EasyStage");
+                SceneManager.getInstance().setScene("GameStage");
                 restartGame = true;
 
                 /** Reset Entities **/
