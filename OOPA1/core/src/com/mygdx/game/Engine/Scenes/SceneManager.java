@@ -2,7 +2,7 @@ package com.mygdx.game.Engine.Scenes;
 
 
 import com.mygdx.game.LearningGame.Scene.*;
-import com.mygdx.game.LearningGame.Scene.EasyScene;
+import com.mygdx.game.LearningGame.Scene.GameScene;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -111,9 +111,7 @@ public class SceneManager {
              case "MainMeun":
                  return new MainMenuScene();
              case "EasyStage":
-                 return new EasyScene();
-             case "MediumStage":
-                 return new MediumScene();
+                 return new GameScene();
              case "HardStage":
                  return new HardScene();
              case "GameOver":
