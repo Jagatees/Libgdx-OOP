@@ -42,9 +42,11 @@ public class CollisionHandler {
                     }
                 }
             } else {
-                // Wrong letter hit
-                System.out.println("Add time");
-                Timer.getInstance().addToTimer();
+                if (entityType1 != Entity.EntityType.SABO_BOX && entityType2 != Entity.EntityType.SABO_BOX) {
+                    // Wrong letter hit
+                    System.out.println("Add time");
+                    Timer.getInstance().addToTimer();
+                }
             }
         }
     }

@@ -734,12 +734,12 @@ public class GameScene extends TemplateScene {
 
         /** Creation of 2x sabotage cube (specific to hard stage) **/
 
-        sabotageCube1 = entityFactory.getEntityByInput("nonPlayer", null, Color.PURPLE, 600, 400, 70, Entity.EntityState.NULL, true, false, 150, 150, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+        sabotageCube1 = entityFactory.getEntityByInput("nonPlayer", null, Color.PURPLE, 600, 400, 70, Entity.EntityState.NULL, true, false, 150, 150, Entity.EntityType.SABO_BOX, Entity.RenderType.SHAPE);
         entityManager.addEntity(sabotageCube1);
         AIControlManagement sabotageCube1AIController = new AIControlManagement((nonPlayer) sabotageCube1, entityManager, collisionManager);
         entityManager.setAIController((nonPlayer) sabotageCube1, sabotageCube1AIController);
 
-        sabotageCube2 = entityFactory.getEntityByInput("nonPlayer", null, Color.PURPLE, 300, 300, 70, Entity.EntityState.NULL, true, false, 150, 150, Entity.EntityType.OBJECT, Entity.RenderType.SHAPE);
+        sabotageCube2 = entityFactory.getEntityByInput("nonPlayer", null, Color.PURPLE, 300, 300, 70, Entity.EntityState.NULL, true, false, 150, 150, Entity.EntityType.SABO_BOX, Entity.RenderType.SHAPE);
         entityManager.addEntity(sabotageCube2);
         AIControlManagement sabotageCube2AIController = new AIControlManagement((nonPlayer) sabotageCube2, entityManager, collisionManager);
         entityManager.setAIController((nonPlayer) sabotageCube2, sabotageCube2AIController);

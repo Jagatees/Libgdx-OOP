@@ -51,7 +51,8 @@ public abstract class Entity implements objectMovement {
         W,
         X,
         Y,
-        Z,;
+        Z,
+        SABO_BOX;
 
         // Method to check if the entity type is a letter
         public boolean isLetter() {
