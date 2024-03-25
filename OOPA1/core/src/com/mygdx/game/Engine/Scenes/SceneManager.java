@@ -112,8 +112,6 @@ public class SceneManager {
                  return new MainMenuScene();
              case "GameStage":
                  return new GameScene();
-             case "HardStage":
-                 return new HardScene();
              case "GameOver":
                  return new GameOverScene();
          }
